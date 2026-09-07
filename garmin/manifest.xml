@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<iq:manifest xmlns:iq="http://www.garmin.com/xml/connectiq" version="3">
+    <iq:application entry="MeckApp" id="b106696dd08743b2b37339a4f352ee1a" launcherIcon="@Drawables.LauncherIcon" minApiLevel="3.1.0" name="@Strings.AppName" type="watch-app" version="0.1.0">
+        <iq:products>
+            <iq:product id="fenix7s"/>
+        </iq:products>
+        <iq:permissions>
+            <iq:uses-permission id="BluetoothLowEnergy"/>
+        </iq:permissions>
+        <iq:languages>
+            <iq:language>eng</iq:language>
+        </iq:languages>
+        <iq:barrels/>
+    </iq:application>
+</iq:manifest>

@@ -1,0 +1,8 @@
+# Connect IQ build output
+garmin/bin/
+garmin/*.prg
+garmin/*.prg.debug.xml
+spike/bin/
+spike/*.prg
+spike/*.prg.debug.xml
+.DS_Store
