@@ -1,0 +1,830 @@
+using Toybox.BluetoothLowEnergy as Ble;
+using Toybox.Lang;
+using Toybox.System;
+using Toybox.Timer;
+using Toybox.Time;
+using Toybox.StringUtil;
+using Toybox.Math;
+
+// Protocol codes. Standard MeshCore companion codes plus the Meck watch
+// extensions (MECK_WATCH_EXT). All layouts verified against Meck's MyMesh.cpp.
+module Proto {
+    const CMD_APP_START            = 1;
+    const CMD_SEND_CHANNEL_TXT_MSG = 3;
+    const CMD_SYNC_NEXT_MESSAGE    = 10;
+    const CMD_GET_BATT_AND_STORAGE = 20;
+    const CMD_DEVICE_QUERY         = 22;
+    const CMD_GET_CHANNEL          = 31;
+    const CMD_SEND_TRACE_PATH      = 36;
+    const CMD_SET_FLOOD_SCOPE_KEY  = 54;
+    const CMD_MECK_HELLO           = 0x70;
+    const CMD_MECK_GET_CANNED      = 0x71;
+    const CMD_MECK_GET_SENT_TRACK  = 0x72;
+    const CMD_MECK_GET_SCOPE       = 0x73;
+    const CMD_MECK_DISCOVER_START  = 0x74;
+    const CMD_MECK_DISCOVER_GET    = 0x75;
+
+    const RESP_OK                  = 0;
+    const RESP_ERR                 = 1;
+    const RESP_SELF_INFO           = 5;
+    const RESP_SENT                = 6;
+    const RESP_CHANNEL_MSG         = 8;
+    const RESP_NO_MORE_MESSAGES    = 10;
+    const RESP_BATT_AND_STORAGE    = 12;
+    const RESP_DEVICE_INFO         = 13;
+    const RESP_CHANNEL_MSG_V3      = 17;
+    const RESP_CHANNEL_INFO        = 18;
+    const RESP_MECK_INFO           = 0x60;
+    const RESP_MECK_CANNED         = 0x61;
+    const RESP_MECK_SENT_TRACK     = 0x62;
+    const RESP_MECK_CHANNEL_MSG    = 0x63;
+    const RESP_MECK_SCOPE          = 0x64;
+    const RESP_MECK_DISCOVER       = 0x65;
+    const PUSH_MSG_WAITING         = 0x83;
+    const PUSH_TRACE_DATA          = 0x89;
+
+    const SLICE_MAX                = 19;   // payload bytes per 20-byte packet after the tag
+}
+
+// Owns the Bluetooth connection to the node and speaks the companion
+// protocol over it. Commands go out one at a time through a queue; every
+// non-push reply completes the command in flight and releases the next.
+class NodeLink extends Ble.BleDelegate {
+
+    var _svcUuid;
+    var _rxUuid;      // node RX: we write commands here
+    var _txUuid;      // node TX: node notifies replies here
+    var _device = null;
+    var _rxChar = null;
+    var _txChar = null;
+    var _ready = false;       // notifications on, link usable
+    var _subscribing = false;
+
+    var _rxBuf = null;        // slice reassembly (null = not mid-frame)
+    var _q = [];              // queued command frames (ByteArray)
+    var _inflight = null;     // frame awaiting its reply
+    var _txSlices = null;     // remaining slices of the frame being written
+    var _writeBusy = false;
+    var _awaitEnc = false;    // write refused for security; retry after encryption
+    var _syncPending = false; // node signalled messages waiting
+    var _scopeReq = {};       // scope idx -> true once requested
+
+    function initialize() {
+        BleDelegate.initialize();
+        _svcUuid = Ble.stringToUuid("6E400001-B5A3-F393-E0A9-E50E24DCCA9E");
+        _rxUuid  = Ble.stringToUuid("6E400002-B5A3-F393-E0A9-E50E24DCCA9E");
+        _txUuid  = Ble.stringToUuid("6E400003-B5A3-F393-E0A9-E50E24DCCA9E");
+    }
+
+    // ---------------------------------------------------------------- lifecycle
+
+    function start() {
+        Ble.setDelegate(self);
+        gModel.setStatus("Registering...");
+        try {
+            Ble.registerProfile({
+                :uuid => _svcUuid,
+                :characteristics => [
+                    {:uuid => _txUuid, :descriptors => [Ble.cccdUuid()]},
+                    {:uuid => _rxUuid}
+                ]
+            });
+        } catch (ex) {
+            gModel.setStatus("Profile failed");
+        }
+    }
+
+    function shutdown() {
+        gSched.cancel("timeout");
+        gSched.cancel("rescan");
+        gSched.cancel("heard1");
+        gSched.cancel("heard2");
+        Ble.setScanState(Ble.SCAN_STATE_OFF);
+        if (_device != null) {
+            Ble.unpairDevice(_device);
+        }
+    }
+
+    function onProfileRegister(uuid, status) {
+        if (status == Ble.STATUS_SUCCESS) {
+            startScan();
+        } else {
+            gModel.setStatus("Profile err " + status);
+        }
+    }
+
+    function startScan() {
+        gModel.setStatus("Scanning...");
+        Ble.setScanState(Ble.SCAN_STATE_SCANNING);
+    }
+
+    function onScanResults(scanResults) {
+        if (_device != null) {
+            return;
+        }
+        for (var r = scanResults.next(); r != null; r = scanResults.next()) {
+            var sr = r as Ble.ScanResult;
+            if (matches(sr)) {
+                var nm = sr.getDeviceName();
+                gModel.setStatus("Found " + (nm == null ? "node" : nm));
+                Ble.setScanState(Ble.SCAN_STATE_OFF);
+                try {
+                    _device = Ble.pairDevice(sr);
+                } catch (ex) {
+                    gModel.setStatus("Connect failed");
+                }
+                return;
+            }
+        }
+    }
+
+    function matches(r) {
+        var nm = r.getDeviceName();
+        if (nm != null && nm.find("MeshCore-") == 0) {
+            return true;
+        }
+        var it = r.getServiceUuids();
+        for (var u = it.next(); u != null; u = it.next()) {
+            if (u.equals(_svcUuid)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function onConnectedStateChanged(device, state) {
+        if (state == Ble.CONNECTION_STATE_CONNECTED) {
+            gModel.setStatus("Connected");
+            _device = device;
+            subscribe();
+        } else if (state == Ble.CONNECTION_STATE_DISCONNECTED) {
+            gModel.setStatus("Disconnected");
+            gModel.connected = false;
+            _device = null;
+            _rxChar = null;
+            _txChar = null;
+            _ready = false;
+            _subscribing = false;
+            _inflight = null;
+            _txSlices = null;
+            _writeBusy = false;
+            _awaitEnc = false;
+            _q = [];
+            _rxBuf = null;
+            gSched.cancel("timeout");
+            gSched.after(2000, "rescan", method(:startScan));
+        } else {
+            gModel.setStatus("Conn state " + state);
+        }
+    }
+
+    function onEncryptionStatus(device, status) {
+        if (status == Ble.STATUS_SUCCESS) {
+            if (!_ready) {
+                subscribe();
+            } else if (_awaitEnc && _inflight != null) {
+                _awaitEnc = false;
+                writeFrame(_inflight);
+            }
+        } else {
+            gModel.setStatus("Encrypt err " + status);
+        }
+    }
+
+    // Turn on notifications from the node's TX characteristic. Called once on
+    // connect; called again after encryption only if the first attempt failed.
+    function subscribe() {
+        if (_ready || _subscribing || _device == null) {
+            return;
+        }
+        var svc = _device.getService(_svcUuid);
+        if (svc == null) {
+            gModel.setStatus("No UART service");
+            return;
+        }
+        _txChar = svc.getCharacteristic(_txUuid);
+        _rxChar = svc.getCharacteristic(_rxUuid);
+        if (_txChar == null || _rxChar == null) {
+            gModel.setStatus("Chars missing");
+            return;
+        }
+        var cccd = _txChar.getDescriptor(Ble.cccdUuid());
+        if (cccd == null) {
+            gModel.setStatus("CCCD missing");
+            return;
+        }
+        _subscribing = true;
+        try {
+            cccd.requestWrite([0x01, 0x00]b);
+        } catch (ex) {
+            _subscribing = false;
+            gModel.setStatus("Notify req failed");
+        }
+    }
+
+    function onDescriptorWrite(descriptor, status) {
+        _subscribing = false;
+        if (status == Ble.STATUS_SUCCESS) {
+            _ready = true;
+            gModel.connected = true;
+            beginSession();
+        } else {
+            // 18/19 = needs pairing; onEncryptionStatus will retry subscribe()
+            gModel.setStatus("Pairing...");
+        }
+    }
+
+    // ---------------------------------------------------------------- session
+
+    function beginSession() {
+        gModel.setStatus("Handshake...");
+        _q = [];
+        _inflight = null;
+        enqueue([Proto.CMD_DEVICE_QUERY, 3]b);
+        // APP_START: [1][7 reserved]["MeckWatch"]
+        enqueue([Proto.CMD_APP_START, 0, 0, 0, 0, 0, 0, 0,
+                 0x4D, 0x65, 0x63, 0x6B, 0x57, 0x61, 0x74, 0x63, 0x68]b);
+        enqueue([Proto.CMD_MECK_HELLO, 1]b);
+        // Clear any scope a phone app left set on the node, so watch sends use
+        // the channel's own region (then the device default) like node-typed ones.
+        enqueue([Proto.CMD_SET_FLOOD_SCOPE_KEY, 0]b);
+        pump();
+    }
+
+    function enqueue(frame) {
+        _q.add(frame);
+        pump();
+    }
+
+    // Send the next command if nothing is in flight.
+    function pump() {
+        if (!_ready || _inflight != null || _writeBusy) {
+            return;
+        }
+        if (_q.size() == 0) {
+            if (_syncPending) {
+                _syncPending = false;
+                _q.add([Proto.CMD_SYNC_NEXT_MESSAGE]b);
+            } else {
+                return;
+            }
+        }
+        _inflight = _q[0];
+        _q = _q.slice(1, _q.size());
+        writeFrame(_inflight);
+        gSched.after(5000, "timeout", method(:onTimeout));
+    }
+
+    function onTimeout() {
+        if (_inflight != null) {
+            System.println("[link] timeout on cmd " + _inflight[0]);
+            _inflight = null;
+            _txSlices = null;
+            _writeBusy = false;
+            pump();
+        }
+    }
+
+    // Write one frame. Frames longer than a packet go as tagged slices
+    // (F0 first, F1 middle, F2 last); short ones go untagged.
+    function writeFrame(frame) {
+        if (frame.size() <= Proto.SLICE_MAX) {
+            _txSlices = null;
+            writeChunk(frame);
+            return;
+        }
+        var first = null;
+        var rest = [];
+        var off = 0;
+        while (off < frame.size()) {
+            var n = frame.size() - off;
+            if (n > Proto.SLICE_MAX) {
+                n = Proto.SLICE_MAX;
+            }
+            var last = (off + n >= frame.size());
+            var tag = (off == 0) ? 0xF0 : (last ? 0xF2 : 0xF1);
+            var chunk = [tag]b;
+            chunk = chunk.addAll(frame.slice(off, off + n));
+            if (first == null) {
+                first = chunk;
+            } else {
+                rest.add(chunk);
+            }
+            off += n;
+        }
+        _txSlices = rest;
+        writeChunk(first);
+    }
+
+    function writeChunk(bytes) {
+        _writeBusy = true;
+        try {
+            _rxChar.requestWrite(bytes, {:writeType => Ble.WRITE_TYPE_WITH_RESPONSE});
+        } catch (ex) {
+            _writeBusy = false;
+            gModel.setStatus("Write failed");
+        }
+    }
+
+    function onCharacteristicWrite(characteristic, status) {
+        _writeBusy = false;
+        if (status == Ble.STATUS_SUCCESS) {
+            if (_txSlices != null && _txSlices.size() > 0) {
+                var next = _txSlices[0];
+                _txSlices = _txSlices.slice(1, _txSlices.size());
+                writeChunk(next);
+            }
+            return;
+        }
+        if (status == 18 || status == 19) {
+            // Not yet encrypted: the watch pairs now; retry after onEncryptionStatus.
+            _awaitEnc = true;
+            _txSlices = null;
+            gModel.setStatus("Pairing...");
+            return;
+        }
+        System.println("[link] write status " + status);
+        _inflight = null;
+        _txSlices = null;
+        gSched.cancel("timeout");
+        pump();
+    }
+
+    // ---------------------------------------------------------------- receive
+
+    function onCharacteristicChanged(characteristic, value) {
+        if (value == null || value.size() < 1) {
+            return;
+        }
+        var tag = value[0];
+        if (tag >= 0xF0 && tag <= 0xF3) {
+            try {
+                if (tag == 0xF0 || tag == 0xF3) {
+                    _rxBuf = []b;
+                }
+                if (_rxBuf == null) {
+                    return;
+                }
+                _rxBuf = _rxBuf.addAll(value.slice(1, value.size()));
+                if (tag == 0xF2 || tag == 0xF3) {
+                    var frame = _rxBuf;
+                    _rxBuf = null;
+                    handleFrame(frame);
+                }
+            } catch (ex) {
+                _rxBuf = null;
+            }
+            return;
+        }
+        handleFrame(value);
+    }
+
+    function handleFrame(f) {
+        var code = f[0];
+        if (code >= 0x80) {
+            if (code == Proto.PUSH_MSG_WAITING) {
+                _syncPending = true;
+                pump();
+            } else if (code == Proto.PUSH_TRACE_DATA) {
+                parseTraceResult(f);
+            }
+            return;   // other pushes ignored
+        }
+        // A reply: it completes whatever is in flight.
+        gSched.cancel("timeout");
+        var cmd = (_inflight != null) ? _inflight[0] : -1;
+        _inflight = null;
+
+        if (code == Proto.RESP_DEVICE_INFO) {
+            // [13][fw_code][max_contacts/2][max_channels][pin:4][build:12][manufacturer:40][fw version:20]
+            if (f.size() > 3) {
+                gModel.maxChannels = f[3];
+            }
+            if (f.size() >= 60) {
+                gModel.manufacturer = bytesToString(f, 20, 40);
+            }
+            if (f.size() >= 80) {
+                gModel.fwVersion = bytesToString(f, 60, 20);
+            }
+        } else if (code == Proto.RESP_SELF_INFO) {
+            if (f.size() > 58) {
+                gModel.nodeName = bytesToString(f, 58, f.size() - 58);
+            }
+            gModel.setStatus("Node: " + gModel.nodeName);
+        } else if (code == Proto.RESP_MECK_INFO) {
+            var slots = (f.size() > 2) ? f[2] : 10;
+            if (f.size() > 3) {
+                gModel.bph = f[3];
+            }
+            for (var c = 0; c < gModel.maxChannels; c++) {
+                _q.add([Proto.CMD_GET_CHANNEL, c]b);
+            }
+            for (var s = 0; s < slots; s++) {
+                _q.add([Proto.CMD_MECK_GET_CANNED, s]b);
+            }
+            _q.add([Proto.CMD_GET_BATT_AND_STORAGE]b);
+            _syncPending = true;   // runs after the queue drains
+        } else if (code == Proto.RESP_CHANNEL_INFO) {
+            if (f.size() >= 34) {
+                var nm = bytesToString(f, 2, 32);
+                if (nm.length() > 0) {
+                    gModel.channels.add({:idx => f[1], :name => nm});
+                }
+            }
+        } else if (code == Proto.RESP_MECK_CANNED) {
+            if (f.size() > 2) {
+                gModel.canned.add(bytesToString(f, 2, f.size() - 2));
+            }
+        } else if (code == Proto.RESP_MECK_SCOPE) {
+            if (f.size() >= 2) {
+                var sn = (f.size() > 2) ? bytesToString(f, 2, f.size() - 2) : "";
+                gModel.scopes.put(f[1], sn);
+            }
+        } else if (code == Proto.RESP_MECK_CHANNEL_MSG
+                   || code == Proto.RESP_CHANNEL_MSG_V3
+                   || code == Proto.RESP_CHANNEL_MSG) {
+            parseChannelMsg(f, code);
+            _syncPending = true;   // ask for the next one
+        } else if (code == Proto.RESP_NO_MORE_MESSAGES) {
+            _syncPending = false;
+            gModel.setStatus("Synced");
+        } else if (code == Proto.RESP_MECK_SENT_TRACK) {
+            parseSentTrack(f);
+        } else if (code == Proto.RESP_MECK_DISCOVER) {
+            parseDiscover(f);
+        } else if (code == Proto.RESP_BATT_AND_STORAGE) {
+            // [12][millivolts:2 LE][storage used:4][storage total:4]
+            if (f.size() >= 3) {
+                gModel.nodeMv = f.decodeNumber(Lang.NUMBER_FORMAT_UINT16, {:offset => 1, :endianness => Lang.ENDIAN_LITTLE});
+            }
+        } else if (code == Proto.RESP_OK) {
+            if (cmd == Proto.CMD_SEND_CHANNEL_TXT_MSG) {
+                gModel.showToast("Sent!");
+                _q.add([Proto.CMD_MECK_GET_SENT_TRACK, 0]b);   // learn the fingerprint
+                // Echoes from repeaters arrive over the next few seconds.
+                gSched.after(4000, "heard1", method(:refreshSentTrack));
+                gSched.after(10000, "heard2", method(:refreshSentTrack));
+            }
+        } else if (code == Proto.RESP_ERR) {
+            System.println("[link] err " + ((f.size() > 1) ? f[1] : 0) + " for cmd " + cmd);
+        }
+        WatchUi.requestUpdate();
+        pump();
+    }
+
+    // Rich frame 0x63: [snr*4][scope][path_len][ch][txt][ts:4][path bytes][text]
+    // V3 frame 17:     [snr*4][res][res][ch][path_len][txt][ts:4][text]
+    // V1 frame 8:      [ch][path_len][txt][ts:4][text]
+    function parseChannelMsg(f, code) {
+        var snr = 0;
+        var scope = 0xFF;
+        var ch;
+        var pathLen;
+        var ts;
+        var path = null;
+        var textOff;
+        if (code == Proto.RESP_MECK_CHANNEL_MSG) {
+            if (f.size() < 10) { return; }
+            snr = toSigned(f[1]);
+            scope = f[2];
+            pathLen = f[3];
+            ch = f[4];
+            ts = u32le(f, 6);
+            var plen = (pathLen != 0xFF) ? pathLen : 0;
+            if (plen > 0 && 10 + plen <= f.size()) {
+                path = f.slice(10, 10 + plen);
+            }
+            textOff = 10 + plen;
+        } else if (code == Proto.RESP_CHANNEL_MSG_V3) {
+            if (f.size() < 10) { return; }
+            snr = toSigned(f[1]);
+            ch = f[4];
+            pathLen = f[5];
+            ts = u32le(f, 7);
+            textOff = 11;
+        } else {
+            if (f.size() < 7) { return; }
+            ch = f[1];
+            pathLen = f[2];
+            ts = u32le(f, 4);
+            textOff = 8;
+        }
+        var text = (textOff < f.size()) ? bytesToString(f, textOff, f.size() - textOff) : "";
+        text = flatten(text);
+        var sender = "";
+        var body = text;
+        var sep = text.find(": ");
+        if (sep != null) {
+            sender = text.substring(0, sep);
+            body = text.substring(sep + 2, text.length());
+        }
+        var sent = (gModel.nodeName.length() > 0 && sender.equals(gModel.nodeName));
+        var m = {
+            :ch => ch, :sender => sender, :text => body, :ts => ts,
+            :hops => pathLen, :path => path, :snr => snr, :scope => scope,
+            :sent => sent, :fp => null, :heard => null,
+            :rx => Time.now().value()
+        };
+        gModel.addMessage(ch, m, !sent);
+        if (scope < 0xFE && !gModel.scopes.hasKey(scope) && !_scopeReq.hasKey(scope)) {
+            _scopeReq.put(scope, true);
+            _q.add([Proto.CMD_MECK_GET_SCOPE, scope]b);
+        }
+    }
+
+    // 0x62: [n][active][fp*12][repeats][bph][count][hash*bph*count][snr*count]
+    function parseSentTrack(f) {
+        if (f.size() < 3 || f[2] == 0) {
+            return;
+        }
+        if (f.size() < 18) {
+            return;
+        }
+        var fp = f.slice(3, 15);
+        var repeats = f[15];
+        var bph = f[16];
+        var count = f[17];
+        var hashes = [];
+        var snrs = [];
+        var off = 18;
+        for (var i = 0; i < count; i++) {
+            if (off + bph <= f.size()) {
+                hashes.add(f.slice(off, off + bph));
+            }
+            off += bph;
+        }
+        for (var j = 0; j < count; j++) {
+            if (off < f.size()) {
+                snrs.add(toSigned(f[off]));
+            }
+            off++;
+        }
+        var heard = {:repeats => repeats, :bph => bph, :hashes => hashes, :snrs => snrs};
+        // Attach to the sent message with this fingerprint, or to the most
+        // recent sent message that has none yet (the one we just sent).
+        var keys = gModel.msgs.keys();
+        var newest = null;
+        for (var k = 0; k < keys.size(); k++) {
+            var a = gModel.msgs.get(keys[k]);
+            for (var x = a.size() - 1; x >= 0; x--) {
+                var m = a[x];
+                if (!m.get(:sent)) { continue; }
+                var mfp = m.get(:fp);
+                if (mfp != null && bytesEqual(mfp, fp)) {
+                    m.put(:heard, heard);
+                    heardToast(m, heard);
+                    WatchUi.requestUpdate();
+                    return;
+                }
+                if (mfp == null && (newest == null || m.get(:rx) > newest.get(:rx))) {
+                    newest = m;
+                }
+            }
+        }
+        if (newest != null) {
+            newest.put(:fp, fp);
+            newest.put(:heard, heard);
+            heardToast(newest, heard);
+            WatchUi.requestUpdate();
+        }
+    }
+
+    // "Heard by N" for a message sent in the last 20 seconds, once echoes exist.
+    function heardToast(m, heard) {
+        var n = heard.get(:hashes).size();
+        if (n > 0 && (Time.now().value() - m.get(:rx)) <= 20) {
+            gModel.showToast("Heard by " + n);
+        }
+    }
+
+    // ---------------------------------------------------------------- actions
+
+    // Send text on a channel. Recorded locally at once; fingerprint and
+    // Heard-by arrive via the sent-track query after the node says OK.
+    function sendChannelText(chIdx, text) {
+        if (!_ready) {
+            gModel.setStatus("Not connected");
+            return;
+        }
+        var ts = Time.now().value();
+        var frame = [Proto.CMD_SEND_CHANNEL_TXT_MSG, 0, chIdx, 0, 0, 0, 0]b;
+        frame.encodeNumber(ts, Lang.NUMBER_FORMAT_UINT32, {:offset => 3, :endianness => Lang.ENDIAN_LITTLE});
+        frame = frame.addAll(stringToBytes(text));
+        var m = {
+            :ch => chIdx, :sender => gModel.nodeName, :text => text, :ts => ts,
+            :hops => 0xFF, :path => null, :snr => 0, :scope => 0xFF,
+            :sent => true, :fp => null, :heard => null, :rx => ts
+        };
+        gModel.addMessage(chIdx, m, false);
+        _q.add([Proto.CMD_SET_FLOOD_SCOPE_KEY, 0]b);   // node picks channel region / default
+        enqueue(frame);
+    }
+
+    // Drop the link and start again (Settings > Reconnect).
+    function reconnect() {
+        gSched.cancel("rescan");
+        Ble.setScanState(Ble.SCAN_STATE_OFF);
+        if (_device != null) {
+            Ble.unpairDevice(_device);   // triggers onConnectedStateChanged(DISCONNECTED) -> rescan
+        } else {
+            startScan();
+        }
+    }
+
+    // Node battery refresh (home screen, once a minute).
+    function requestBattery() {
+        if (_ready) {
+            enqueue([Proto.CMD_GET_BATT_AND_STORAGE]b);
+        }
+    }
+
+    // ---- Discover ----
+    var _discBusy = false;    // a poll round (entries 0..count-1) is in progress
+
+    function discoverStart() {
+        if (!_ready) {
+            gModel.setStatus("Not connected");
+            return;
+        }
+        gModel.discovered = [];
+        gModel.discoverCount = 0;
+        gModel.discoverActive = true;
+        _q.add([Proto.CMD_MECK_DISCOVER_START]b);
+        discoverPoll();
+    }
+
+    // One round: entry 0 carries active/count; each entry queues the next.
+    function discoverPoll() {
+        if (!_ready || _discBusy) {
+            return;
+        }
+        _discBusy = true;
+        enqueue([Proto.CMD_MECK_DISCOVER_GET, 0]b);
+    }
+
+    // 0x65: [n][active][count] then, if n < count: [type][snr*4][path_len][known][pubkey:2][name]
+    function parseDiscover(f) {
+        if (f.size() < 4) { _discBusy = false; return; }
+        var n = f[1];
+        gModel.discoverActive = (f[2] != 0);
+        var count = f[3];
+        gModel.discoverCount = count;
+        if (n < count && f.size() >= 10) {
+            var e = {
+                :type => f[4], :snr => toSigned(f[5]), :hops => f[6], :known => (f[7] != 0),
+                :prefix => f.slice(8, 10),
+                :name => (f.size() > 10) ? bytesToString(f, 10, f.size() - 10) : ""
+            };
+            while (gModel.discovered.size() <= n) {
+                gModel.discovered.add(null);
+            }
+            gModel.discovered[n] = e;
+        }
+        if (gModel.discovered.size() > count) {
+            gModel.discovered = gModel.discovered.slice(0, count);
+        }
+        if (n + 1 < count) {
+            _q.add([Proto.CMD_MECK_DISCOVER_GET, n + 1]b);
+        } else {
+            _discBusy = false;
+        }
+        WatchUi.requestUpdate();
+    }
+
+    // ---- Trace ----
+    // path: ByteArray of hashes; bph: 1 or 2 bytes per hop. Standard command:
+    // [36][tag:4][auth:4][flags][path...] with flags low bits = hash width code.
+    function sendTrace(path, bph) {
+        if (!_ready) {
+            gModel.setStatus("Not connected");
+            return false;
+        }
+        var tag = (Math.rand() & 0x7FFFFFFF) | 1;
+        var auth = (Math.rand() & 0x7FFFFFFF) | 1;
+        var frame = [Proto.CMD_SEND_TRACE_PATH, 0, 0, 0, 0, 0, 0, 0, 0, (bph == 2) ? 1 : 0]b;
+        frame.encodeNumber(tag, Lang.NUMBER_FORMAT_UINT32, {:offset => 1, :endianness => Lang.ENDIAN_LITTLE});
+        frame.encodeNumber(auth, Lang.NUMBER_FORMAT_UINT32, {:offset => 5, :endianness => Lang.ENDIAN_LITTLE});
+        frame = frame.addAll(path);
+        gModel.trace = {:state => :running, :tag => tag, :sentAt => Time.now().value(),
+                        :bph => bph, :hashes => [], :snrs => [], :final => 0, :ms => 0};
+        enqueue(frame);
+        return true;
+    }
+
+    // 0x89: [res][path_len][flags][tag:4][auth:4][hashes:path_len][snrs:hops][final snr]
+    function parseTraceResult(f) {
+        if (f.size() < 12) { return; }
+        var t = gModel.trace;
+        if (t == null) { return; }
+        var pathLen = f[2];
+        var sz = f[3] & 0x03;
+        var tag = u32le(f, 4);
+        if (tag != t.get(:tag)) { return; }   // not ours
+        var bph = 1 << sz;
+        var hops = (sz > 0) ? (pathLen >> sz) : pathLen;
+        var off = 12;
+        var hashes = [];
+        for (var i = 0; i < hops && off + bph <= f.size(); i++) {
+            hashes.add(f.slice(off, off + bph));
+            off += bph;
+        }
+        var snrs = [];
+        for (var j = 0; j < hops && off < f.size(); j++) {
+            snrs.add(toSigned(f[off]));
+            off++;
+        }
+        var fin = (off < f.size()) ? toSigned(f[off]) : 0;
+        t.put(:state, :done);
+        t.put(:hashes, hashes);
+        t.put(:snrs, snrs);
+        t.put(:final, fin);
+        t.put(:ms, (Time.now().value() - t.get(:sentAt)) * 1000);
+        WatchUi.requestUpdate();
+    }
+
+    // Refresh Heard-by for recent sends (tracking slots 0..3).
+    function refreshSentTrack() {
+        if (!_ready) {
+            return;
+        }
+        for (var n = 0; n < 4; n++) {
+            _q.add([Proto.CMD_MECK_GET_SENT_TRACK, n]b);
+        }
+        pump();
+    }
+
+    // ---------------------------------------------------------------- helpers
+
+    function u32le(f, off) {
+        return f.decodeNumber(Lang.NUMBER_FORMAT_UINT32, {:offset => off, :endianness => Lang.ENDIAN_LITTLE});
+    }
+
+    // Replace line breaks with spaces: Garmin draws "\n" as a real line break,
+    // which would paint one message across several rows.
+    function flatten(s) {
+        var i = s.find("\n");
+        while (i != null) {
+            s = s.substring(0, i) + " " + s.substring(i + 1, s.length());
+            i = s.find("\n");
+        }
+        i = s.find("\r");
+        while (i != null) {
+            s = s.substring(0, i) + " " + s.substring(i + 1, s.length());
+            i = s.find("\r");
+        }
+        return s;
+    }
+
+    function toSigned(b) {
+        return (b > 127) ? b - 256 : b;
+    }
+
+    function bytesEqual(a, b) {
+        if (a.size() != b.size()) { return false; }
+        for (var i = 0; i < a.size(); i++) {
+            if (a[i] != b[i]) { return false; }
+        }
+        return true;
+    }
+
+    // UTF-8 bytes (NUL-padded allowed) -> String
+    function bytesToString(f, off, len) {
+        var end = off + len;
+        if (end > f.size()) { end = f.size(); }
+        while (end > off && f[end - 1] == 0) { end--; }
+        if (end <= off) { return ""; }
+        var ba = f.slice(off, end);
+        try {
+            var s = StringUtil.convertEncodedString(ba, {
+                :fromRepresentation => StringUtil.REPRESENTATION_BYTE_ARRAY,
+                :toRepresentation => StringUtil.REPRESENTATION_STRING_PLAIN_TEXT
+            });
+            if (s != null) { return s; }
+        } catch (ex) {
+        }
+        var out = "";
+        for (var i = 0; i < ba.size(); i++) {
+            var c = ba[i];
+            if (c >= 32 && c < 127) { out = out + c.toChar().toString(); }
+        }
+        return out;
+    }
+
+    function stringToBytes(s) {
+        try {
+            var ba = StringUtil.convertEncodedString(s, {
+                :fromRepresentation => StringUtil.REPRESENTATION_STRING_PLAIN_TEXT,
+                :toRepresentation => StringUtil.REPRESENTATION_BYTE_ARRAY
+            });
+            if (ba != null) { return ba; }
+        } catch (ex) {
+        }
+        var out = []b;
+        var chars = s.toCharArray();
+        for (var i = 0; i < chars.size(); i++) {
+            var v = chars[i].toNumber();
+            if (v < 128) { out = out.addAll([v]b); }
+        }
+        return out;
+    }
+}

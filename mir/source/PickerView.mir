@@ -1,0 +1,1263 @@
+[ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc"; @line = 1; @symbol_usingdef<0> = [Toybox,1,6,12]; @symbol_usingdef<1> = [WatchUi,1,13,20]; ]
+using Toybox.WatchUi;
+[ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc"; @line = 2; @symbol_usingdef<0> = [Toybox,2,6,12]; @symbol_usingdef<1> = [Graphics,2,13,21]; ]
+using Toybox.Graphics;
+[ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc"; @line = 6; @symbol_classdef = [PickerView,6,6,16]; @symbol_extends<0> = [WatchUi,6,25,32]; @symbol_extends<1> = [View,6,33,37]; ]
+class PickerView extends WatchUi.View {
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc"; @line = 6; ]
+    <init> {
+    }
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc"; @line = 6; ]
+    static
+    <init> {
+    }
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc"; @line = 8; @position = 8; @symbol_vardef = [_sel,8,8,12]; ]
+    var _sel = 0;
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc"; @line = 9; @position = 8; @symbol_vardef = [_top,9,8,12]; ]
+    var _top = 0;
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc"; @line = 10; @position = 8; @symbol_vardef = [_rows,10,8,13]; ]
+    var _rows = 1;
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc"; @line = 11; @position = 8; @symbol_vardef = [_y0,11,8,11]; ]
+    var _y0 = 50;
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc"; @line = 12; @position = 8; @symbol_vardef = [_rowH,12,8,13]; ]
+    var _rowH = 18;
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc"; @line = 14; @symbol_functiondef = [initialize,14,13,23]; ]
+    function initialize() as Void {
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_14_26_16_4_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 15 8 ]
+        symbol [ View %tmp.2 15 8 12 ];
+        %tmp.2 = getv ? :View;
+        symbol [ initialize %tmp.3 15 13 23 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_14_26_16_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc"; @line = 18; @symbol_functiondef = [onUpdate,18,13,21]; @symbol_param<0> = [dc,18,22,24]; ]
+    function onUpdate(dc) {
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_18_26_57_4_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 19 8 ]
+        %tmp.1 = lgetv %dc;
+        symbol [ dc %tmp.1 19 8 10 ];
+        symbol [ setColor %tmp.2 19 11 19 ];
+        %tmp.2 = getv function %tmp.1 :setColor;
+        symbol [ Graphics %tmp.3 19 20 28 ];
+        %tmp.3 = getm $.Toybox.Graphics;
+        symbol [ COLOR_WHITE %tmp.4 19 29 40 ];
+        %tmp.4 = getv %tmp.3 :COLOR_WHITE;
+        symbol [ Graphics %tmp.5 19 42 50 ];
+        %tmp.5 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.6 19 51 62 ];
+        %tmp.6 = getv %tmp.5 :COLOR_BLACK;
+        invoke %tmp.1 %tmp.2(%tmp.4, %tmp.6);
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 20 8 ]
+        %tmp.7 = lgetv %dc;
+        symbol [ dc %tmp.7 20 8 10 ];
+        symbol [ clear %tmp.8 20 11 16 ];
+        %tmp.8 = getv function %tmp.7 :clear;
+        invoke %tmp.7 %tmp.8();
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 21 8 ]
+        symbol [ Draw %tmp.10 21 14 18 ];
+        %tmp.10 = getv ? :Draw;
+        symbol [ header %tmp.11 21 19 25 ];
+        %tmp.11 = getv function %tmp.10 :header;
+        %tmp.12 = lgetv %dc;
+        symbol [ dc %tmp.12 21 26 28 ];
+        %tmp.13 = "Channels";
+        %tmp.14 = true;
+        %tmp.15 = invoke %tmp.10 %tmp.11(%tmp.12, %tmp.13, %tmp.14);
+        symbol [ _y0 ? 21 8 11 ];
+        putv self :_y0 %tmp.15;
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 22 8 ]
+        symbol [ Draw %tmp.17 22 16 20 ];
+        %tmp.17 = getv ? :Draw;
+        symbol [ rowHeight %tmp.18 22 21 30 ];
+        %tmp.18 = getv function %tmp.17 :rowHeight;
+        %tmp.19 = lgetv %dc;
+        symbol [ dc %tmp.19 22 31 33 ];
+        %tmp.20 = invoke %tmp.17 %tmp.18(%tmp.19);
+        symbol [ _rowH ? 22 8 13 ];
+        putv self :_rowH %tmp.20;
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 23 8 ]
+        %tmp.21 = 196;
+        symbol [ _y0 %tmp.23 23 23 26 ];
+        %tmp.23 = getv ? :_y0;
+        %tmp.24 = sub %tmp.21 %tmp.23;
+        symbol [ _rowH %tmp.26 23 30 35 ];
+        %tmp.26 = getv ? :_rowH;
+        %tmp.27 = div %tmp.24 %tmp.26;
+        symbol [ _rows ? 23 8 13 ];
+        putv self :_rows %tmp.27;
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 24 8 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_24_8_24_36_if_stmt:
+        symbol [ _rows %tmp.29 24 12 17 ];
+        %tmp.29 = getv ? :_rows;
+        %tmp.30 = 1;
+        %tmp.31 = lt %tmp.29 %tmp.30;
+        bf %tmp.31 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_24_8_24_36_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_24_8_24_36_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_24_23_24_36_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 24 25 ]
+        %tmp.32 = 1;
+        symbol [ _rows ? 24 25 30 ];
+        putv self :_rows %tmp.32;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_24_23_24_36_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_24_8_24_36_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_24_8_24_36_if_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 26 8 ]
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_18_26_57_4_start" "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_18_26_57_4_stop" ]
+        %chans.1 = local;
+        symbol [ chans %chans.1 26 12 17 ];
+        symbol [ gModel %tmp.34 26 20 26 ];
+        %tmp.34 = getv ? :gModel;
+        symbol [ channels %tmp.35 26 27 35 ];
+        %tmp.35 = getv %tmp.34 :channels;
+        lputv %chans.1 %tmp.35;
+        symbol [ chans %chans.1 26 12 17 ];
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 27 8 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_27_8_30_8_if_stmt:
+        %tmp.36 = lgetv %chans.1;
+        symbol [ chans %tmp.36 27 12 17 ];
+        symbol [ size %tmp.37 27 18 22 ];
+        %tmp.37 = getv function %tmp.36 :size;
+        %tmp.38 = invoke %tmp.36 %tmp.37();
+        %tmp.39 = 0;
+        %tmp.40 = eq %tmp.38 %tmp.39;
+        bf %tmp.40 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_27_8_30_8_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_27_8_30_8_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_27_31_30_8_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 28 12 ]
+        %tmp.41 = lgetv %dc;
+        symbol [ dc %tmp.41 28 12 14 ];
+        symbol [ setColor %tmp.42 28 15 23 ];
+        %tmp.42 = getv function %tmp.41 :setColor;
+        symbol [ Graphics %tmp.43 28 24 32 ];
+        %tmp.43 = getm $.Toybox.Graphics;
+        symbol [ COLOR_LT_GRAY %tmp.44 28 33 46 ];
+        %tmp.44 = getv %tmp.43 :COLOR_LT_GRAY;
+        symbol [ Graphics %tmp.45 28 48 56 ];
+        %tmp.45 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.46 28 57 74 ];
+        %tmp.46 = getv %tmp.45 :COLOR_TRANSPARENT;
+        invoke %tmp.41 %tmp.42(%tmp.44, %tmp.46);
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 29 12 ]
+        %tmp.47 = lgetv %dc;
+        symbol [ dc %tmp.47 29 12 14 ];
+        symbol [ drawText %tmp.48 29 15 23 ];
+        %tmp.48 = getv function %tmp.47 :drawText;
+        symbol [ Draw %tmp.50 29 24 28 ];
+        %tmp.50 = getv ? :Draw;
+        symbol [ CX %tmp.51 29 29 31 ];
+        %tmp.51 = getv %tmp.50 :CX;
+        symbol [ _y0 %tmp.53 29 33 36 ];
+        %tmp.53 = getv ? :_y0;
+        %tmp.54 = 20;
+        %tmp.55 = add %tmp.53 %tmp.54;
+        symbol [ Draw %tmp.57 29 43 47 ];
+        %tmp.57 = getv ? :Draw;
+        symbol [ FONT %tmp.58 29 48 52 ];
+        %tmp.58 = getv %tmp.57 :FONT;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_29_54_29_88_begin:
+        symbol [ gModel %tmp.60 29 54 60 ];
+        %tmp.60 = getv ? :gModel;
+        symbol [ connected %tmp.61 29 61 70 ];
+        %tmp.61 = getv %tmp.60 :connected;
+        bf %tmp.61 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_29_54_29_88_else_false;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_29_54_29_88_true:
+        %tmp.62 = "Loading...";
+        push %tmp.62;
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_29_54_29_88_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_29_54_29_88_else_false:
+        %tmp.63 = "No node yet";
+        push %tmp.63;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_29_54_29_88_end:
+        %tmp.64 = phi [%tmp.61 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_29_54_29_88_begin] [%tmp.62 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_29_54_29_88_true] [%tmp.63 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_29_54_29_88_else_false] [%tmp.64 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_29_54_29_88_end];
+        symbol [ Graphics %tmp.65 29 103 111 ];
+        %tmp.65 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.66 29 112 131 ];
+        %tmp.66 = getv %tmp.65 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.47 %tmp.48(%tmp.51, %tmp.55, %tmp.58, %tmp.64, %tmp.66);
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_27_31_30_8_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_27_8_30_8_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_27_8_30_8_if_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 31 8 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_31_8_31_86_if_stmt:
+        symbol [ _sel %tmp.68 31 12 16 ];
+        %tmp.68 = getv ? :_sel;
+        %tmp.69 = lgetv %chans.1;
+        symbol [ chans %tmp.69 31 20 25 ];
+        symbol [ size %tmp.70 31 26 30 ];
+        %tmp.70 = getv function %tmp.69 :size;
+        %tmp.71 = invoke %tmp.69 %tmp.70();
+        %tmp.72 = gte %tmp.68 %tmp.71;
+        bf %tmp.72 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_31_8_31_86_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_31_8_31_86_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_31_34_31_86_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 31 36 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_31_43_31_83_begin:
+        %tmp.73 = lgetv %chans.1;
+        symbol [ chans %tmp.73 31 44 49 ];
+        symbol [ size %tmp.74 31 50 54 ];
+        %tmp.74 = getv function %tmp.73 :size;
+        %tmp.75 = invoke %tmp.73 %tmp.74();
+        %tmp.76 = 0;
+        %tmp.77 = gt %tmp.75 %tmp.76;
+        bf %tmp.77 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_31_43_31_83_else_false;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_31_43_31_83_true:
+        %tmp.78 = lgetv %chans.1;
+        symbol [ chans %tmp.78 31 64 69 ];
+        symbol [ size %tmp.79 31 70 74 ];
+        %tmp.79 = getv function %tmp.78 :size;
+        %tmp.80 = invoke %tmp.78 %tmp.79();
+        %tmp.81 = 1;
+        %tmp.82 = sub %tmp.80 %tmp.81;
+        push %tmp.82;
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_31_43_31_83_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_31_43_31_83_else_false:
+        %tmp.83 = 0;
+        push %tmp.83;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_31_43_31_83_end:
+        %tmp.84 = phi [%tmp.77 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_31_43_31_83_begin] [%tmp.82 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_31_43_31_83_true] [%tmp.83 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_31_43_31_83_else_false] [%tmp.84 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_31_43_31_83_end];
+        symbol [ _sel ? 31 36 40 ];
+        putv self :_sel %tmp.84;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_31_34_31_86_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_31_8_31_86_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_31_8_31_86_if_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 32 8 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_32_8_32_40_if_stmt:
+        symbol [ _sel %tmp.86 32 12 16 ];
+        %tmp.86 = getv ? :_sel;
+        symbol [ _top %tmp.88 32 19 23 ];
+        %tmp.88 = getv ? :_top;
+        %tmp.89 = lt %tmp.86 %tmp.88;
+        bf %tmp.89 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_32_8_32_40_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_32_8_32_40_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_32_25_32_40_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 32 27 ]
+        symbol [ _sel %tmp.91 32 34 38 ];
+        %tmp.91 = getv ? :_sel;
+        symbol [ _top ? 32 27 31 ];
+        putv self :_top %tmp.91;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_32_25_32_40_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_32_8_32_40_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_32_8_32_40_if_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 33 8 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_33_8_33_61_if_stmt:
+        symbol [ _sel %tmp.93 33 12 16 ];
+        %tmp.93 = getv ? :_sel;
+        symbol [ _top %tmp.95 33 20 24 ];
+        %tmp.95 = getv ? :_top;
+        symbol [ _rows %tmp.97 33 27 32 ];
+        %tmp.97 = getv ? :_rows;
+        %tmp.98 = add %tmp.95 %tmp.97;
+        %tmp.99 = gte %tmp.93 %tmp.98;
+        bf %tmp.99 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_33_8_33_61_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_33_8_33_61_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_33_34_33_61_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 33 36 ]
+        symbol [ _sel %tmp.101 33 43 47 ];
+        %tmp.101 = getv ? :_sel;
+        symbol [ _rows %tmp.103 33 50 55 ];
+        %tmp.103 = getv ? :_rows;
+        %tmp.104 = sub %tmp.101 %tmp.103;
+        %tmp.105 = 1;
+        %tmp.106 = add %tmp.104 %tmp.105;
+        symbol [ _top ? 33 36 40 ];
+        putv self :_top %tmp.106;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_33_34_33_61_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_33_8_33_61_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_33_8_33_61_if_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 35 8 ]
+        for @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_35_8_55_8_for_test @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_35_8_55_8_for_incr @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_35_8_55_8_for_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_35_8_55_8_for_init:
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_35_8_55_8_for_begin" "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_35_8_55_8_for_end" ]
+        %r.2 = local;
+        symbol [ r %r.2 35 17 18 ];
+        %tmp.107 = 0;
+        lputv %r.2 %tmp.107;
+        symbol [ r %r.2 35 17 18 ];
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_35_8_55_8_for_test:
+        %tmp.108 = lgetv %r.2;
+        symbol [ r %tmp.108 35 24 25 ];
+        symbol [ _rows %tmp.110 35 28 33 ];
+        %tmp.110 = getv ? :_rows;
+        %tmp.111 = lt %tmp.108 %tmp.110;
+        bf %tmp.111 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_35_8_55_8_for_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_35_8_55_8_for_begin:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_35_40_55_8_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 36 12 ]
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_35_40_55_8_start" "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_35_40_55_8_stop" ]
+        %i.3 = local;
+        symbol [ i %i.3 36 16 17 ];
+        symbol [ _top %tmp.113 36 20 24 ];
+        %tmp.113 = getv ? :_top;
+        %tmp.114 = lgetv %r.2;
+        symbol [ r %tmp.114 36 27 28 ];
+        %tmp.115 = add %tmp.113 %tmp.114;
+        lputv %i.3 %tmp.115;
+        symbol [ i %i.3 36 16 17 ];
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 37 12 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_37_12_37_44_if_stmt:
+        %tmp.116 = lgetv %i.3;
+        symbol [ i %tmp.116 37 16 17 ];
+        %tmp.117 = lgetv %chans.1;
+        symbol [ chans %tmp.117 37 21 26 ];
+        symbol [ size %tmp.118 37 27 31 ];
+        %tmp.118 = getv function %tmp.117 :size;
+        %tmp.119 = invoke %tmp.117 %tmp.118();
+        %tmp.120 = gte %tmp.116 %tmp.119;
+        bf %tmp.120 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_37_12_37_44_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_37_12_37_44_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_37_35_37_44_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 37 37 ]
+        goto break @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_35_8_55_8_for_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_37_35_37_44_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_37_12_37_44_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_37_12_37_44_if_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 38 12 ]
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_35_40_55_8_start" "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_35_40_55_8_stop" ]
+        %y.4 = local;
+        symbol [ y %y.4 38 16 17 ];
+        symbol [ _y0 %tmp.122 38 20 23 ];
+        %tmp.122 = getv ? :_y0;
+        %tmp.123 = lgetv %r.2;
+        symbol [ r %tmp.123 38 26 27 ];
+        symbol [ _rowH %tmp.125 38 30 35 ];
+        %tmp.125 = getv ? :_rowH;
+        %tmp.126 = mul %tmp.123 %tmp.125;
+        %tmp.127 = add %tmp.122 %tmp.126;
+        lputv %y.4 %tmp.127;
+        symbol [ y %y.4 38 16 17 ];
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 39 12 ]
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_35_40_55_8_start" "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_35_40_55_8_stop" ]
+        %name.5 = local;
+        symbol [ name %name.5 39 16 20 ];
+        %tmp.128 = lgetv %chans.1;
+        symbol [ chans %tmp.128 39 23 28 ];
+        %tmp.129 = lgetv %i.3;
+        symbol [ i %tmp.129 39 29 30 ];
+        %tmp.130 = agetv %tmp.128 %tmp.129;
+        symbol [ get %tmp.131 39 32 35 ];
+        %tmp.131 = getv function %tmp.130 :get;
+        %tmp.133 = const :name;
+        symbol [ name %tmp.133 39 37 41 const ];
+        %tmp.134 = invoke %tmp.130 %tmp.131(%tmp.133);
+        lputv %name.5 %tmp.134;
+        symbol [ name %name.5 39 16 20 ];
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 40 12 ]
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_35_40_55_8_start" "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_35_40_55_8_stop" ]
+        %n.6 = local;
+        symbol [ n %n.6 40 16 17 ];
+        symbol [ gModel %tmp.136 40 20 26 ];
+        %tmp.136 = getv ? :gModel;
+        symbol [ unreadFor %tmp.137 40 27 36 ];
+        %tmp.137 = getv function %tmp.136 :unreadFor;
+        %tmp.138 = lgetv %chans.1;
+        symbol [ chans %tmp.138 40 37 42 ];
+        %tmp.139 = lgetv %i.3;
+        symbol [ i %tmp.139 40 43 44 ];
+        %tmp.140 = agetv %tmp.138 %tmp.139;
+        symbol [ get %tmp.141 40 46 49 ];
+        %tmp.141 = getv function %tmp.140 :get;
+        %tmp.143 = const :idx;
+        symbol [ idx %tmp.143 40 51 54 const ];
+        %tmp.144 = invoke %tmp.140 %tmp.141(%tmp.143);
+        %tmp.145 = invoke %tmp.136 %tmp.137(%tmp.144);
+        lputv %n.6 %tmp.145;
+        symbol [ n %n.6 40 16 17 ];
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 41 12 ]
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_35_40_55_8_start" "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_35_40_55_8_stop" ]
+        %badge.7 = local;
+        symbol [ badge %badge.7 41 16 21 ];
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_41_24_41_45_begin:
+        %tmp.146 = lgetv %n.6;
+        symbol [ n %tmp.146 41 25 26 ];
+        %tmp.147 = 0;
+        %tmp.148 = gt %tmp.146 %tmp.147;
+        bf %tmp.148 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_41_24_41_45_else_false;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_41_24_41_45_true:
+        %tmp.149 = "";
+        %tmp.150 = lgetv %n.6;
+        symbol [ n %tmp.150 41 40 41 ];
+        %tmp.151 = add %tmp.149 %tmp.150;
+        push %tmp.151;
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_41_24_41_45_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_41_24_41_45_else_false:
+        %tmp.152 = "";
+        push %tmp.152;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_41_24_41_45_end:
+        %tmp.153 = phi [%tmp.148 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_41_24_41_45_begin] [%tmp.151 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_41_24_41_45_true] [%tmp.152 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_41_24_41_45_else_false] [%tmp.153 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_41_24_41_45_end];
+        lputv %badge.7 %tmp.153;
+        symbol [ badge %badge.7 41 16 21 ];
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 42 12 ]
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_35_40_55_8_start" "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_35_40_55_8_stop" ]
+        %badgeW.8 = local;
+        symbol [ badgeW %badgeW.8 42 16 22 ];
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_42_25_42_83_begin:
+        %tmp.154 = lgetv %n.6;
+        symbol [ n %tmp.154 42 26 27 ];
+        %tmp.155 = 0;
+        %tmp.156 = gt %tmp.154 %tmp.155;
+        bf %tmp.156 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_42_25_42_83_else_false;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_42_25_42_83_true:
+        %tmp.157 = lgetv %dc;
+        symbol [ dc %tmp.157 42 35 37 ];
+        symbol [ getTextWidthInPixels %tmp.158 42 38 58 ];
+        %tmp.158 = getv function %tmp.157 :getTextWidthInPixels;
+        %tmp.159 = lgetv %badge.7;
+        symbol [ badge %tmp.159 42 59 64 ];
+        symbol [ Draw %tmp.161 42 66 70 ];
+        %tmp.161 = getv ? :Draw;
+        symbol [ FONT %tmp.162 42 71 75 ];
+        %tmp.162 = getv %tmp.161 :FONT;
+        %tmp.163 = invoke %tmp.157 %tmp.158(%tmp.159, %tmp.162);
+        %tmp.164 = 6;
+        %tmp.165 = add %tmp.163 %tmp.164;
+        push %tmp.165;
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_42_25_42_83_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_42_25_42_83_else_false:
+        %tmp.166 = 0;
+        push %tmp.166;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_42_25_42_83_end:
+        %tmp.167 = phi [%tmp.156 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_42_25_42_83_begin] [%tmp.165 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_42_25_42_83_true] [%tmp.166 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_42_25_42_83_else_false] [%tmp.167 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_42_25_42_83_end];
+        lputv %badgeW.8 %tmp.167;
+        symbol [ badgeW %badgeW.8 42 16 22 ];
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 43 12 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_43_12_49_12_if_stmt:
+        %tmp.168 = lgetv %i.3;
+        symbol [ i %tmp.168 43 16 17 ];
+        symbol [ _sel %tmp.170 43 21 25 ];
+        %tmp.170 = getv ? :_sel;
+        %tmp.171 = eq %tmp.168 %tmp.170;
+        bf %tmp.171 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_43_12_49_12_if_else_false;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_43_12_49_12_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_43_27_47_12_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 44 16 ]
+        %tmp.172 = lgetv %dc;
+        symbol [ dc %tmp.172 44 16 18 ];
+        symbol [ setColor %tmp.173 44 19 27 ];
+        %tmp.173 = getv function %tmp.172 :setColor;
+        symbol [ Graphics %tmp.174 44 28 36 ];
+        %tmp.174 = getm $.Toybox.Graphics;
+        symbol [ COLOR_GREEN %tmp.175 44 37 48 ];
+        %tmp.175 = getv %tmp.174 :COLOR_GREEN;
+        symbol [ Graphics %tmp.176 44 50 58 ];
+        %tmp.176 = getm $.Toybox.Graphics;
+        symbol [ COLOR_GREEN %tmp.177 44 59 70 ];
+        %tmp.177 = getv %tmp.176 :COLOR_GREEN;
+        invoke %tmp.172 %tmp.173(%tmp.175, %tmp.177);
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 45 16 ]
+        %tmp.178 = lgetv %dc;
+        symbol [ dc %tmp.178 45 16 18 ];
+        symbol [ fillRectangle %tmp.179 45 19 32 ];
+        %tmp.179 = getv function %tmp.178 :fillRectangle;
+        symbol [ Draw %tmp.181 45 33 37 ];
+        %tmp.181 = getv ? :Draw;
+        symbol [ X %tmp.182 45 38 39 ];
+        %tmp.182 = getv %tmp.181 :X;
+        %tmp.183 = lgetv %y.4;
+        symbol [ y %tmp.183 45 41 42 ];
+        symbol [ Draw %tmp.185 45 44 48 ];
+        %tmp.185 = getv ? :Draw;
+        symbol [ W %tmp.186 45 49 50 ];
+        %tmp.186 = getv %tmp.185 :W;
+        symbol [ _rowH %tmp.188 45 52 57 ];
+        %tmp.188 = getv ? :_rowH;
+        invoke %tmp.178 %tmp.179(%tmp.182, %tmp.183, %tmp.186, %tmp.188);
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 46 16 ]
+        %tmp.189 = lgetv %dc;
+        symbol [ dc %tmp.189 46 16 18 ];
+        symbol [ setColor %tmp.190 46 19 27 ];
+        %tmp.190 = getv function %tmp.189 :setColor;
+        symbol [ Graphics %tmp.191 46 28 36 ];
+        %tmp.191 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.192 46 37 48 ];
+        %tmp.192 = getv %tmp.191 :COLOR_BLACK;
+        symbol [ Graphics %tmp.193 46 50 58 ];
+        %tmp.193 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.194 46 59 76 ];
+        %tmp.194 = getv %tmp.193 :COLOR_TRANSPARENT;
+        invoke %tmp.189 %tmp.190(%tmp.192, %tmp.194);
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_43_27_47_12_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_43_12_49_12_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_43_12_49_12_if_else_false:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_47_19_49_12_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 48 16 ]
+        %tmp.195 = lgetv %dc;
+        symbol [ dc %tmp.195 48 16 18 ];
+        symbol [ setColor %tmp.196 48 19 27 ];
+        %tmp.196 = getv function %tmp.195 :setColor;
+        symbol [ Graphics %tmp.197 48 28 36 ];
+        %tmp.197 = getm $.Toybox.Graphics;
+        symbol [ COLOR_WHITE %tmp.198 48 37 48 ];
+        %tmp.198 = getv %tmp.197 :COLOR_WHITE;
+        symbol [ Graphics %tmp.199 48 50 58 ];
+        %tmp.199 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.200 48 59 76 ];
+        %tmp.200 = getv %tmp.199 :COLOR_TRANSPARENT;
+        invoke %tmp.195 %tmp.196(%tmp.198, %tmp.200);
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_47_19_49_12_stop:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_43_12_49_12_if_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 50 12 ]
+        %tmp.201 = lgetv %dc;
+        symbol [ dc %tmp.201 50 12 14 ];
+        symbol [ drawText %tmp.202 50 15 23 ];
+        %tmp.202 = getv function %tmp.201 :drawText;
+        symbol [ Draw %tmp.204 50 24 28 ];
+        %tmp.204 = getv ? :Draw;
+        symbol [ X %tmp.205 50 29 30 ];
+        %tmp.205 = getv %tmp.204 :X;
+        %tmp.206 = 2;
+        %tmp.207 = add %tmp.205 %tmp.206;
+        %tmp.208 = lgetv %y.4;
+        symbol [ y %tmp.208 50 36 37 ];
+        symbol [ Draw %tmp.210 50 39 43 ];
+        %tmp.210 = getv ? :Draw;
+        symbol [ FONT %tmp.211 50 44 48 ];
+        %tmp.211 = getv %tmp.210 :FONT;
+        symbol [ Draw %tmp.213 50 50 54 ];
+        %tmp.213 = getv ? :Draw;
+        symbol [ ellipsize %tmp.214 50 55 64 ];
+        %tmp.214 = getv function %tmp.213 :ellipsize;
+        %tmp.215 = lgetv %dc;
+        symbol [ dc %tmp.215 50 65 67 ];
+        %tmp.216 = lgetv %name.5;
+        symbol [ name %tmp.216 50 69 73 ];
+        symbol [ Draw %tmp.218 50 75 79 ];
+        %tmp.218 = getv ? :Draw;
+        symbol [ W %tmp.219 50 80 81 ];
+        %tmp.219 = getv %tmp.218 :W;
+        %tmp.220 = 4;
+        %tmp.221 = sub %tmp.219 %tmp.220;
+        %tmp.222 = lgetv %badgeW.8;
+        symbol [ badgeW %tmp.222 50 88 94 ];
+        %tmp.223 = sub %tmp.221 %tmp.222;
+        %tmp.224 = invoke %tmp.213 %tmp.214(%tmp.215, %tmp.216, %tmp.223);
+        symbol [ Graphics %tmp.225 50 97 105 ];
+        %tmp.225 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_LEFT %tmp.226 50 106 123 ];
+        %tmp.226 = getv %tmp.225 :TEXT_JUSTIFY_LEFT;
+        invoke %tmp.201 %tmp.202(%tmp.207, %tmp.208, %tmp.211, %tmp.224, %tmp.226);
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 51 12 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_51_12_54_12_if_stmt:
+        %tmp.227 = lgetv %n.6;
+        symbol [ n %tmp.227 51 16 17 ];
+        %tmp.228 = 0;
+        %tmp.229 = gt %tmp.227 %tmp.228;
+        bf %tmp.229 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_51_12_54_12_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_51_12_54_12_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_51_23_54_12_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 52 16 ]
+        %tmp.230 = lgetv %dc;
+        symbol [ dc %tmp.230 52 16 18 ];
+        symbol [ setColor %tmp.231 52 19 27 ];
+        %tmp.231 = getv function %tmp.230 :setColor;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_52_28_52_74_begin:
+        %tmp.232 = lgetv %i.3;
+        symbol [ i %tmp.232 52 29 30 ];
+        symbol [ _sel %tmp.234 52 34 38 ];
+        %tmp.234 = getv ? :_sel;
+        %tmp.235 = eq %tmp.232 %tmp.234;
+        bf %tmp.235 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_52_28_52_74_else_false;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_52_28_52_74_true:
+        symbol [ Graphics %tmp.236 52 42 50 ];
+        %tmp.236 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.237 52 51 62 ];
+        %tmp.237 = getv %tmp.236 :COLOR_BLACK;
+        push %tmp.237;
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_52_28_52_74_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_52_28_52_74_else_false:
+        symbol [ Graphics %tmp.238 52 65 73 ];
+        %tmp.238 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLUE %tmp.239 52 74 84 ];
+        %tmp.239 = getv %tmp.238 :COLOR_BLUE;
+        push %tmp.239;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_52_28_52_74_end:
+        %tmp.240 = phi [%tmp.235 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_52_28_52_74_begin] [%tmp.237 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_52_28_52_74_true] [%tmp.239 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_52_28_52_74_else_false] [%tmp.240 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_52_28_52_74_end];
+        symbol [ Graphics %tmp.241 52 86 94 ];
+        %tmp.241 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.242 52 95 112 ];
+        %tmp.242 = getv %tmp.241 :COLOR_TRANSPARENT;
+        invoke %tmp.230 %tmp.231(%tmp.240, %tmp.242);
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 53 16 ]
+        %tmp.243 = lgetv %dc;
+        symbol [ dc %tmp.243 53 16 18 ];
+        symbol [ drawText %tmp.244 53 19 27 ];
+        %tmp.244 = getv function %tmp.243 :drawText;
+        symbol [ Draw %tmp.246 53 28 32 ];
+        %tmp.246 = getv ? :Draw;
+        symbol [ X %tmp.247 53 33 34 ];
+        %tmp.247 = getv %tmp.246 :X;
+        symbol [ Draw %tmp.249 53 37 41 ];
+        %tmp.249 = getv ? :Draw;
+        symbol [ W %tmp.250 53 42 43 ];
+        %tmp.250 = getv %tmp.249 :W;
+        %tmp.251 = add %tmp.247 %tmp.250;
+        %tmp.252 = 2;
+        %tmp.253 = sub %tmp.251 %tmp.252;
+        %tmp.254 = lgetv %y.4;
+        symbol [ y %tmp.254 53 49 50 ];
+        symbol [ Draw %tmp.256 53 52 56 ];
+        %tmp.256 = getv ? :Draw;
+        symbol [ FONT %tmp.257 53 57 61 ];
+        %tmp.257 = getv %tmp.256 :FONT;
+        %tmp.258 = lgetv %badge.7;
+        symbol [ badge %tmp.258 53 63 68 ];
+        symbol [ Graphics %tmp.259 53 70 78 ];
+        %tmp.259 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_RIGHT %tmp.260 53 79 97 ];
+        %tmp.260 = getv %tmp.259 :TEXT_JUSTIFY_RIGHT;
+        invoke %tmp.243 %tmp.244(%tmp.253, %tmp.254, %tmp.257, %tmp.258, %tmp.260);
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_51_23_54_12_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_51_12_54_12_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_51_12_54_12_if_end:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_35_40_55_8_stop:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_35_8_55_8_for_incr:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 35 ]
+        %tmp.263 = lgetv %r.2;
+        symbol [ r %tmp.263 35 35 36 ];
+        %tmp.264 = add %tmp.263 1;
+        lputv %r.2 %tmp.264;
+        symbol [ r %r.2 35 35 36 ];
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_35_8_55_8_for_test;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_35_8_55_8_for_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 56 8 ]
+        symbol [ Draw %tmp.266 56 8 12 ];
+        %tmp.266 = getv ? :Draw;
+        symbol [ footer %tmp.267 56 13 19 ];
+        %tmp.267 = getv function %tmp.266 :footer;
+        %tmp.268 = lgetv %dc;
+        symbol [ dc %tmp.268 56 20 22 ];
+        symbol [ gModel %tmp.270 56 24 30 ];
+        %tmp.270 = getv ? :gModel;
+        symbol [ status %tmp.271 56 31 37 ];
+        %tmp.271 = getv %tmp.270 :status;
+        invoke %tmp.266 %tmp.267(%tmp.268, %tmp.271);
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_18_26_57_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc"; @line = 59; @symbol_functiondef = [move,59,13,17]; @symbol_param<0> = [d,59,18,19]; ]
+    function move(d) {
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_59_21_66_4_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 60 8 ]
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_59_21_66_4_start" "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_59_21_66_4_stop" ]
+        %n.1 = local;
+        symbol [ n %n.1 60 12 13 ];
+        symbol [ gModel %tmp.2 60 16 22 ];
+        %tmp.2 = getv ? :gModel;
+        symbol [ channels %tmp.3 60 23 31 ];
+        %tmp.3 = getv %tmp.2 :channels;
+        symbol [ size %tmp.4 60 32 36 ];
+        %tmp.4 = getv function %tmp.3 :size;
+        %tmp.5 = invoke %tmp.3 %tmp.4();
+        lputv %n.1 %tmp.5;
+        symbol [ n %n.1 60 12 13 ];
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 61 8 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_61_8_61_30_if_stmt:
+        %tmp.6 = lgetv %n.1;
+        symbol [ n %tmp.6 61 12 13 ];
+        %tmp.7 = 0;
+        %tmp.8 = eq %tmp.6 %tmp.7;
+        bf %tmp.8 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_61_8_61_30_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_61_8_61_30_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_61_20_61_30_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 61 22 ]
+        ret ?;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_61_20_61_30_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_61_8_61_30_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_61_8_61_30_if_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 62 8 ]
+        symbol [ _sel %tmp.10 62 15 19 ];
+        %tmp.10 = getv ? :_sel;
+        %tmp.11 = lgetv %d;
+        symbol [ d %tmp.11 62 22 23 ];
+        %tmp.12 = add %tmp.10 %tmp.11;
+        symbol [ _sel ? 62 8 12 ];
+        putv self :_sel %tmp.12;
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 63 8 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_63_8_63_38_if_stmt:
+        symbol [ _sel %tmp.14 63 12 16 ];
+        %tmp.14 = getv ? :_sel;
+        %tmp.15 = 0;
+        %tmp.16 = lt %tmp.14 %tmp.15;
+        bf %tmp.16 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_63_8_63_38_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_63_8_63_38_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_63_22_63_38_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 63 24 ]
+        %tmp.17 = lgetv %n.1;
+        symbol [ n %tmp.17 63 31 32 ];
+        %tmp.18 = 1;
+        %tmp.19 = sub %tmp.17 %tmp.18;
+        symbol [ _sel ? 63 24 28 ];
+        putv self :_sel %tmp.19;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_63_22_63_38_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_63_8_63_38_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_63_8_63_38_if_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 64 8 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_64_8_64_35_if_stmt:
+        symbol [ _sel %tmp.21 64 12 16 ];
+        %tmp.21 = getv ? :_sel;
+        %tmp.22 = lgetv %n.1;
+        symbol [ n %tmp.22 64 20 21 ];
+        %tmp.23 = gte %tmp.21 %tmp.22;
+        bf %tmp.23 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_64_8_64_35_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_64_8_64_35_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_64_23_64_35_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 64 25 ]
+        %tmp.24 = 0;
+        symbol [ _sel ? 64 25 29 ];
+        putv self :_sel %tmp.24;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_64_23_64_35_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_64_8_64_35_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_64_8_64_35_if_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 65 8 ]
+        symbol [ WatchUi %tmp.25 65 8 15 ];
+        %tmp.25 = getm $.Toybox.WatchUi;
+        symbol [ requestUpdate %tmp.26 65 16 29 ];
+        %tmp.26 = getv function %tmp.25 :requestUpdate;
+        invoke %tmp.25 %tmp.26();
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_59_21_66_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc"; @line = 68; @symbol_functiondef = [page,68,13,17]; @symbol_param<0> = [d,68,18,19]; ]
+    function page(d) {
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_68_21_78_4_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 69 8 ]
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_68_21_78_4_start" "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_68_21_78_4_stop" ]
+        %n.1 = local;
+        symbol [ n %n.1 69 12 13 ];
+        symbol [ gModel %tmp.2 69 16 22 ];
+        %tmp.2 = getv ? :gModel;
+        symbol [ channels %tmp.3 69 23 31 ];
+        %tmp.3 = getv %tmp.2 :channels;
+        symbol [ size %tmp.4 69 32 36 ];
+        %tmp.4 = getv function %tmp.3 :size;
+        %tmp.5 = invoke %tmp.3 %tmp.4();
+        lputv %n.1 %tmp.5;
+        symbol [ n %n.1 69 12 13 ];
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 70 8 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_70_8_70_30_if_stmt:
+        %tmp.6 = lgetv %n.1;
+        symbol [ n %tmp.6 70 12 13 ];
+        %tmp.7 = 0;
+        %tmp.8 = eq %tmp.6 %tmp.7;
+        bf %tmp.8 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_70_8_70_30_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_70_8_70_30_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_70_20_70_30_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 70 22 ]
+        ret ?;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_70_20_70_30_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_70_8_70_30_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_70_8_70_30_if_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 71 8 ]
+        symbol [ _top %tmp.10 71 15 19 ];
+        %tmp.10 = getv ? :_top;
+        %tmp.11 = lgetv %d;
+        symbol [ d %tmp.11 71 22 23 ];
+        symbol [ _rows %tmp.13 71 26 31 ];
+        %tmp.13 = getv ? :_rows;
+        %tmp.14 = mul %tmp.11 %tmp.13;
+        %tmp.15 = add %tmp.10 %tmp.14;
+        symbol [ _top ? 71 8 12 ];
+        putv self :_top %tmp.15;
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 72 8 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_72_8_72_34_if_stmt:
+        symbol [ _top %tmp.17 72 12 16 ];
+        %tmp.17 = getv ? :_top;
+        %tmp.18 = 0;
+        %tmp.19 = lt %tmp.17 %tmp.18;
+        bf %tmp.19 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_72_8_72_34_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_72_8_72_34_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_72_22_72_34_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 72 24 ]
+        %tmp.20 = 0;
+        symbol [ _top ? 72 24 28 ];
+        putv self :_top %tmp.20;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_72_22_72_34_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_72_8_72_34_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_72_8_72_34_if_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 73 8 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_73_8_73_42_if_stmt:
+        symbol [ _top %tmp.22 73 12 16 ];
+        %tmp.22 = getv ? :_top;
+        %tmp.23 = lgetv %n.1;
+        symbol [ n %tmp.23 73 19 20 ];
+        %tmp.24 = 1;
+        %tmp.25 = sub %tmp.23 %tmp.24;
+        %tmp.26 = gt %tmp.22 %tmp.25;
+        bf %tmp.26 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_73_8_73_42_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_73_8_73_42_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_73_26_73_42_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 73 28 ]
+        %tmp.27 = lgetv %n.1;
+        symbol [ n %tmp.27 73 35 36 ];
+        %tmp.28 = 1;
+        %tmp.29 = sub %tmp.27 %tmp.28;
+        symbol [ _top ? 73 28 32 ];
+        putv self :_top %tmp.29;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_73_26_73_42_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_73_8_73_42_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_73_8_73_42_if_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 74 8 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_74_8_74_40_if_stmt:
+        symbol [ _sel %tmp.31 74 12 16 ];
+        %tmp.31 = getv ? :_sel;
+        symbol [ _top %tmp.33 74 19 23 ];
+        %tmp.33 = getv ? :_top;
+        %tmp.34 = lt %tmp.31 %tmp.33;
+        bf %tmp.34 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_74_8_74_40_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_74_8_74_40_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_74_25_74_40_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 74 27 ]
+        symbol [ _top %tmp.36 74 34 38 ];
+        %tmp.36 = getv ? :_top;
+        symbol [ _sel ? 74 27 31 ];
+        putv self :_sel %tmp.36;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_74_25_74_40_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_74_8_74_40_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_74_8_74_40_if_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 75 8 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_75_8_75_61_if_stmt:
+        symbol [ _sel %tmp.38 75 12 16 ];
+        %tmp.38 = getv ? :_sel;
+        symbol [ _top %tmp.40 75 20 24 ];
+        %tmp.40 = getv ? :_top;
+        symbol [ _rows %tmp.42 75 27 32 ];
+        %tmp.42 = getv ? :_rows;
+        %tmp.43 = add %tmp.40 %tmp.42;
+        %tmp.44 = gte %tmp.38 %tmp.43;
+        bf %tmp.44 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_75_8_75_61_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_75_8_75_61_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_75_34_75_61_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 75 36 ]
+        symbol [ _top %tmp.46 75 43 47 ];
+        %tmp.46 = getv ? :_top;
+        symbol [ _rows %tmp.48 75 50 55 ];
+        %tmp.48 = getv ? :_rows;
+        %tmp.49 = add %tmp.46 %tmp.48;
+        %tmp.50 = 1;
+        %tmp.51 = sub %tmp.49 %tmp.50;
+        symbol [ _sel ? 75 36 40 ];
+        putv self :_sel %tmp.51;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_75_34_75_61_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_75_8_75_61_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_75_8_75_61_if_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 76 8 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_76_8_76_39_if_stmt:
+        symbol [ _sel %tmp.53 76 12 16 ];
+        %tmp.53 = getv ? :_sel;
+        %tmp.54 = lgetv %n.1;
+        symbol [ n %tmp.54 76 20 21 ];
+        %tmp.55 = gte %tmp.53 %tmp.54;
+        bf %tmp.55 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_76_8_76_39_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_76_8_76_39_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_76_23_76_39_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 76 25 ]
+        %tmp.56 = lgetv %n.1;
+        symbol [ n %tmp.56 76 32 33 ];
+        %tmp.57 = 1;
+        %tmp.58 = sub %tmp.56 %tmp.57;
+        symbol [ _sel ? 76 25 29 ];
+        putv self :_sel %tmp.58;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_76_23_76_39_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_76_8_76_39_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_76_8_76_39_if_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 77 8 ]
+        symbol [ WatchUi %tmp.59 77 8 15 ];
+        %tmp.59 = getm $.Toybox.WatchUi;
+        symbol [ requestUpdate %tmp.60 77 16 29 ];
+        %tmp.60 = getv function %tmp.59 :requestUpdate;
+        invoke %tmp.59 %tmp.60();
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_68_21_78_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc"; @line = 80; @symbol_functiondef = [rowAt,80,13,18]; @symbol_param<0> = [y,80,19,20]; ]
+    function rowAt(y) {
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_80_22_86_4_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 81 8 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_81_8_81_34_if_stmt:
+        %tmp.1 = lgetv %y;
+        symbol [ y %tmp.1 81 12 13 ];
+        symbol [ _y0 %tmp.3 81 16 19 ];
+        %tmp.3 = getv ? :_y0;
+        %tmp.4 = lt %tmp.1 %tmp.3;
+        bf %tmp.4 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_81_8_81_34_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_81_8_81_34_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_81_21_81_34_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 81 23 ]
+        %tmp.5 = -1;
+        ret %tmp.5;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_81_21_81_34_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_81_8_81_34_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_81_8_81_34_if_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 82 8 ]
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_80_22_86_4_start" "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_80_22_86_4_stop" ]
+        %r.1 = local;
+        symbol [ r %r.1 82 12 13 ];
+        %tmp.6 = lgetv %y;
+        symbol [ y %tmp.6 82 17 18 ];
+        symbol [ _y0 %tmp.8 82 21 24 ];
+        %tmp.8 = getv ? :_y0;
+        %tmp.9 = sub %tmp.6 %tmp.8;
+        symbol [ _rowH %tmp.11 82 28 33 ];
+        %tmp.11 = getv ? :_rowH;
+        %tmp.12 = div %tmp.9 %tmp.11;
+        lputv %r.1 %tmp.12;
+        symbol [ r %r.1 82 12 13 ];
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 83 8 ]
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_80_22_86_4_start" "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_80_22_86_4_stop" ]
+        %i.2 = local;
+        symbol [ i %i.2 83 12 13 ];
+        symbol [ _top %tmp.14 83 16 20 ];
+        %tmp.14 = getv ? :_top;
+        %tmp.15 = lgetv %r.1;
+        symbol [ r %tmp.15 83 23 24 ];
+        %tmp.16 = add %tmp.14 %tmp.15;
+        lputv %i.2 %tmp.16;
+        symbol [ i %i.2 83 12 13 ];
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 84 8 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_84_8_84_68_if_stmt:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_84_12_84_52_begin:
+        %tmp.17 = lgetv %r.1;
+        symbol [ r %tmp.17 84 12 13 ];
+        symbol [ _rows %tmp.19 84 17 22 ];
+        %tmp.19 = getv ? :_rows;
+        %tmp.20 = gte %tmp.17 %tmp.19;
+        bt %tmp.20 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_84_8_84_68_if_true;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_84_26_84_52_false:
+        %tmp.21 = lgetv %i.2;
+        symbol [ i %tmp.21 84 26 27 ];
+        symbol [ gModel %tmp.23 84 31 37 ];
+        %tmp.23 = getv ? :gModel;
+        symbol [ channels %tmp.24 84 38 46 ];
+        %tmp.24 = getv %tmp.23 :channels;
+        symbol [ size %tmp.25 84 47 51 ];
+        %tmp.25 = getv function %tmp.24 :size;
+        %tmp.26 = invoke %tmp.24 %tmp.25();
+        %tmp.27 = gte %tmp.21 %tmp.26;
+        push %tmp.27;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_84_26_84_52_end:
+        %tmp.28 = phi [%tmp.20 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_84_12_84_52_begin] [%tmp.27 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_84_26_84_52_false] [%tmp.28 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_84_26_84_52_end];
+        bf %tmp.28 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_84_8_84_68_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_84_8_84_68_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_84_55_84_68_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 84 57 ]
+        %tmp.29 = -1;
+        ret %tmp.29;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_84_55_84_68_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_84_8_84_68_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_84_8_84_68_if_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 85 8 ]
+        %tmp.30 = lgetv %i.2;
+        symbol [ i %tmp.30 85 15 16 ];
+        ret %tmp.30;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_80_22_86_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc"; @line = 88; @symbol_functiondef = [open,88,13,17]; ]
+    function open() {
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_88_20_94_4_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 89 8 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_89_8_93_8_if_stmt:
+        symbol [ _sel %tmp.2 89 12 16 ];
+        %tmp.2 = getv ? :_sel;
+        symbol [ gModel %tmp.4 89 19 25 ];
+        %tmp.4 = getv ? :gModel;
+        symbol [ channels %tmp.5 89 26 34 ];
+        %tmp.5 = getv %tmp.4 :channels;
+        symbol [ size %tmp.6 89 35 39 ];
+        %tmp.6 = getv function %tmp.5 :size;
+        %tmp.7 = invoke %tmp.5 %tmp.6();
+        %tmp.8 = lt %tmp.2 %tmp.7;
+        bf %tmp.8 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_89_8_93_8_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_89_8_93_8_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_89_43_93_8_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 90 12 ]
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_89_43_93_8_start" "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_89_43_93_8_stop" ]
+        %idx.1 = local;
+        symbol [ idx %idx.1 90 16 19 ];
+        symbol [ gModel %tmp.10 90 22 28 ];
+        %tmp.10 = getv ? :gModel;
+        symbol [ channels %tmp.11 90 29 37 ];
+        %tmp.11 = getv %tmp.10 :channels;
+        symbol [ _sel %tmp.13 90 38 42 ];
+        %tmp.13 = getv ? :_sel;
+        %tmp.14 = agetv %tmp.11 %tmp.13;
+        symbol [ get %tmp.15 90 44 47 ];
+        %tmp.15 = getv function %tmp.14 :get;
+        %tmp.17 = const :idx;
+        symbol [ idx %tmp.17 90 49 52 const ];
+        %tmp.18 = invoke %tmp.14 %tmp.15(%tmp.17);
+        lputv %idx.1 %tmp.18;
+        symbol [ idx %idx.1 90 16 19 ];
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 91 12 ]
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_89_43_93_8_start" "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_89_43_93_8_stop" ]
+        %v.2 = local;
+        symbol [ v %v.2 91 16 17 ];
+        symbol [ ChannelView %tmp.22 91 24 35 ];
+        %tmp.22 = getv ? :ChannelView;
+        %tmp.23 = lgetv %idx.1;
+        symbol [ idx %tmp.23 91 36 39 ];
+        %tmp.19 = newc %tmp.22 (%tmp.23);
+        lputv %v.2 %tmp.19;
+        symbol [ v %v.2 91 16 17 ];
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 92 12 ]
+        symbol [ WatchUi %tmp.24 92 12 19 ];
+        %tmp.24 = getm $.Toybox.WatchUi;
+        symbol [ pushView %tmp.25 92 20 28 ];
+        %tmp.25 = getv function %tmp.24 :pushView;
+        %tmp.26 = lgetv %v.2;
+        symbol [ v %tmp.26 92 29 30 ];
+        symbol [ ChannelDelegate %tmp.30 92 36 51 ];
+        %tmp.30 = getv ? :ChannelDelegate;
+        %tmp.31 = lgetv %v.2;
+        symbol [ v %tmp.31 92 52 53 ];
+        %tmp.27 = newc %tmp.30 (%tmp.31);
+        symbol [ WatchUi %tmp.32 92 56 63 ];
+        %tmp.32 = getm $.Toybox.WatchUi;
+        symbol [ SLIDE_LEFT %tmp.33 92 64 74 ];
+        %tmp.33 = getv %tmp.32 :SLIDE_LEFT;
+        invoke %tmp.24 %tmp.25(%tmp.26, %tmp.27, %tmp.33);
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_89_43_93_8_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_89_8_93_8_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_89_8_93_8_if_end:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_88_20_94_4_stop:
+    }
+}
+[ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc"; @line = 97; @symbol_classdef = [PickerDelegate,97,6,20]; @symbol_extends<0> = [WatchUi,97,29,36]; @symbol_extends<1> = [BehaviorDelegate,97,37,53]; ]
+class PickerDelegate extends WatchUi.BehaviorDelegate {
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc"; @line = 97; ]
+    <init> {
+    }
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc"; @line = 97; ]
+    static
+    <init> {
+    }
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc"; @line = 98; @position = 8; @symbol_vardef = [_v,98,8,10]; ]
+    var _v;
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc"; @line = 100; @symbol_functiondef = [initialize,100,13,23]; @symbol_param<0> = [v,100,24,25]; ]
+    function initialize(v) as Void {
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_100_27_103_4_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 101 8 ]
+        symbol [ BehaviorDelegate %tmp.2 101 8 24 ];
+        %tmp.2 = getv ? :BehaviorDelegate;
+        symbol [ initialize %tmp.3 101 25 35 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 102 8 ]
+        %tmp.4 = lgetv %v;
+        symbol [ v %tmp.4 102 13 14 ];
+        symbol [ _v ? 102 8 10 ];
+        putv self :_v %tmp.4;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_100_27_103_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc"; @line = 105; @symbol_functiondef = [onNextPage,105,13,23]; ]
+    function onNextPage() {
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_105_26_105_53_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 105 28 ]
+        symbol [ _v %tmp.2 105 28 30 ];
+        %tmp.2 = getv ? :_v;
+        symbol [ move %tmp.3 105 31 35 ];
+        %tmp.3 = getv function %tmp.2 :move;
+        %tmp.4 = 1;
+        invoke %tmp.2 %tmp.3(%tmp.4);
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 105 40 ]
+        %tmp.5 = true;
+        ret %tmp.5;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_105_26_105_53_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc"; @line = 106; @symbol_functiondef = [onPreviousPage,106,13,27]; ]
+    function onPreviousPage() {
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_106_30_106_58_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 106 32 ]
+        symbol [ _v %tmp.2 106 32 34 ];
+        %tmp.2 = getv ? :_v;
+        symbol [ move %tmp.3 106 35 39 ];
+        %tmp.3 = getv function %tmp.2 :move;
+        %tmp.4 = -1;
+        invoke %tmp.2 %tmp.3(%tmp.4);
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 106 45 ]
+        %tmp.5 = true;
+        ret %tmp.5;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_106_30_106_58_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc"; @line = 108; @symbol_functiondef = [onKey,108,13,18]; @symbol_param<0> = [evt,108,19,22]; ]
+    function onKey(evt) {
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_108_24_114_4_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 109 8 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_109_8_112_8_if_stmt:
+        %tmp.1 = lgetv %evt;
+        symbol [ evt %tmp.1 109 12 15 ];
+        symbol [ getKey %tmp.2 109 16 22 ];
+        %tmp.2 = getv function %tmp.1 :getKey;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        symbol [ WatchUi %tmp.4 109 28 35 ];
+        %tmp.4 = getm $.Toybox.WatchUi;
+        symbol [ KEY_ENTER %tmp.5 109 36 45 ];
+        %tmp.5 = getv %tmp.4 :KEY_ENTER;
+        %tmp.6 = eq %tmp.3 %tmp.5;
+        bf %tmp.6 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_109_8_112_8_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_109_8_112_8_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_109_47_112_8_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 110 12 ]
+        symbol [ _v %tmp.8 110 12 14 ];
+        %tmp.8 = getv ? :_v;
+        symbol [ open %tmp.9 110 15 19 ];
+        %tmp.9 = getv function %tmp.8 :open;
+        invoke %tmp.8 %tmp.9();
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 111 12 ]
+        %tmp.10 = true;
+        ret %tmp.10;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_109_47_112_8_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_109_8_112_8_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_109_8_112_8_if_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 113 8 ]
+        %tmp.11 = false;
+        ret %tmp.11;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_108_24_114_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc"; @line = 116; @symbol_functiondef = [onBack,116,13,19]; ]
+    function onBack() {
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_116_22_119_4_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 117 8 ]
+        symbol [ WatchUi %tmp.1 117 8 15 ];
+        %tmp.1 = getm $.Toybox.WatchUi;
+        symbol [ popView %tmp.2 117 16 23 ];
+        %tmp.2 = getv function %tmp.1 :popView;
+        symbol [ WatchUi %tmp.3 117 24 31 ];
+        %tmp.3 = getm $.Toybox.WatchUi;
+        symbol [ SLIDE_RIGHT %tmp.4 117 32 43 ];
+        %tmp.4 = getv %tmp.3 :SLIDE_RIGHT;
+        invoke %tmp.1 %tmp.2(%tmp.4);
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 118 8 ]
+        %tmp.5 = true;
+        ret %tmp.5;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_116_22_119_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc"; @line = 121; @symbol_functiondef = [onTap,121,13,18]; @symbol_param<0> = [evt,121,19,22]; ]
+    function onTap(evt) {
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_121_24_129_4_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 122 8 ]
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_121_24_129_4_start" "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_121_24_129_4_stop" ]
+        %c.1 = local;
+        symbol [ c %c.1 122 12 13 ];
+        %tmp.1 = lgetv %evt;
+        symbol [ evt %tmp.1 122 16 19 ];
+        symbol [ getCoordinates %tmp.2 122 20 34 ];
+        %tmp.2 = getv function %tmp.1 :getCoordinates;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        lputv %c.1 %tmp.3;
+        symbol [ c %c.1 122 12 13 ];
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 123 8 ]
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_121_24_129_4_start" "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_121_24_129_4_stop" ]
+        %i.2 = local;
+        symbol [ i %i.2 123 12 13 ];
+        symbol [ _v %tmp.5 123 16 18 ];
+        %tmp.5 = getv ? :_v;
+        symbol [ rowAt %tmp.6 123 19 24 ];
+        %tmp.6 = getv function %tmp.5 :rowAt;
+        %tmp.7 = lgetv %c.1;
+        symbol [ c %tmp.7 123 25 26 ];
+        %tmp.8 = 1;
+        %tmp.9 = agetv %tmp.7 %tmp.8;
+        %tmp.10 = invoke %tmp.5 %tmp.6(%tmp.9);
+        lputv %i.2 %tmp.10;
+        symbol [ i %i.2 123 12 13 ];
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 124 8 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_124_8_127_8_if_stmt:
+        %tmp.11 = lgetv %i.2;
+        symbol [ i %tmp.11 124 12 13 ];
+        %tmp.12 = 0;
+        %tmp.13 = gte %tmp.11 %tmp.12;
+        bf %tmp.13 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_124_8_127_8_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_124_8_127_8_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_124_20_127_8_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 125 12 ]
+        symbol [ _v %tmp.14 125 12 14 ];
+        %tmp.14 = getv self :_v;
+        %tmp.15 = lgetv %i.2;
+        symbol [ i %tmp.15 125 22 23 ];
+        symbol [ _sel ? 125 15 19 ];
+        putv %tmp.14 :_sel %tmp.15;
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 126 12 ]
+        symbol [ _v %tmp.17 126 12 14 ];
+        %tmp.17 = getv ? :_v;
+        symbol [ open %tmp.18 126 15 19 ];
+        %tmp.18 = getv function %tmp.17 :open;
+        invoke %tmp.17 %tmp.18();
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_124_20_127_8_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_124_8_127_8_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_124_8_127_8_if_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 128 8 ]
+        %tmp.19 = true;
+        ret %tmp.19;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_121_24_129_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc"; @line = 131; @symbol_functiondef = [onSwipe,131,13,20]; @symbol_param<0> = [evt,131,21,24]; ]
+    function onSwipe(evt) {
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_131_26_136_4_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 132 8 ]
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_131_26_136_4_start" "_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_131_26_136_4_stop" ]
+        %d.1 = local;
+        symbol [ d %d.1 132 12 13 ];
+        %tmp.1 = lgetv %evt;
+        symbol [ evt %tmp.1 132 16 19 ];
+        symbol [ getDirection %tmp.2 132 20 32 ];
+        %tmp.2 = getv function %tmp.1 :getDirection;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        lputv %d.1 %tmp.3;
+        symbol [ d %d.1 132 12 13 ];
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 133 8 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_133_8_133_62_if_stmt:
+        %tmp.4 = lgetv %d.1;
+        symbol [ d %tmp.4 133 12 13 ];
+        symbol [ WatchUi %tmp.5 133 17 24 ];
+        %tmp.5 = getm $.Toybox.WatchUi;
+        symbol [ SWIPE_UP %tmp.6 133 25 33 ];
+        %tmp.6 = getv %tmp.5 :SWIPE_UP;
+        %tmp.7 = eq %tmp.4 %tmp.6;
+        bf %tmp.7 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_133_8_133_62_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_133_8_133_62_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_133_35_133_62_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 133 37 ]
+        symbol [ _v %tmp.9 133 37 39 ];
+        %tmp.9 = getv ? :_v;
+        symbol [ page %tmp.10 133 40 44 ];
+        %tmp.10 = getv function %tmp.9 :page;
+        %tmp.11 = 1;
+        invoke %tmp.9 %tmp.10(%tmp.11);
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 133 49 ]
+        %tmp.12 = true;
+        ret %tmp.12;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_133_35_133_62_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_133_8_133_62_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_133_8_133_62_if_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 134 8 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_134_8_134_65_if_stmt:
+        %tmp.13 = lgetv %d.1;
+        symbol [ d %tmp.13 134 12 13 ];
+        symbol [ WatchUi %tmp.14 134 17 24 ];
+        %tmp.14 = getm $.Toybox.WatchUi;
+        symbol [ SWIPE_DOWN %tmp.15 134 25 35 ];
+        %tmp.15 = getv %tmp.14 :SWIPE_DOWN;
+        %tmp.16 = eq %tmp.13 %tmp.15;
+        bf %tmp.16 @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_134_8_134_65_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_134_8_134_65_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_134_37_134_65_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 134 39 ]
+        symbol [ _v %tmp.18 134 39 41 ];
+        %tmp.18 = getv ? :_v;
+        symbol [ page %tmp.19 134 42 46 ];
+        %tmp.19 = getv function %tmp.18 :page;
+        %tmp.20 = -1;
+        invoke %tmp.18 %tmp.19(%tmp.20);
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 134 52 ]
+        %tmp.21 = true;
+        ret %tmp.21;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_134_37_134_65_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_134_8_134_65_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_134_8_134_65_if_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc" 135 8 ]
+        %tmp.22 = false;
+        ret %tmp.22;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_PickerView_mc_131_26_136_4_stop:
+    }
+}
+[ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/PickerView.mc"; @line = 1; ]
+<init> {
+}

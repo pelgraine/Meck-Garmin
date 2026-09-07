@@ -1,0 +1,612 @@
+[ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc"; @line = 1; @symbol_usingdef<0> = [Toybox,1,6,12]; @symbol_usingdef<1> = [Timer,1,13,18]; ]
+using Toybox.Timer;
+[ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc"; @line = 2; @symbol_usingdef<0> = [Toybox,2,6,12]; @symbol_usingdef<1> = [System,2,13,19]; ]
+using Toybox.System;
+[ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc"; @line = 3; @symbol_usingdef<0> = [Toybox,3,6,12]; @symbol_usingdef<1> = [Lang,3,13,17]; ]
+using Toybox.Lang;
+[ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc"; @line = 12; @symbol_classdef = [Sched,12,6,11]; ]
+class Sched {
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc"; @line = 12; ]
+    <init> {
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 15 8 ]
+        %tmp.1 = newa 0;
+        putv self :_entries %tmp.1;
+    }
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc"; @line = 12; ]
+    static
+    <init> {
+    }
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc"; @line = 14; @position = 8; @symbol_vardef = [_timer,14,8,14]; ]
+    var _timer;
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc"; @line = 15; @position = 8; @symbol_vardef = [_entries,15,8,16]; ]
+    var _entries;
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc"; @line = 17; @symbol_functiondef = [initialize,17,13,23]; ]
+    function initialize() as Void {
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_17_26_19_4_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 18 8 ]
+        symbol [ Timer %tmp.3 18 21 26 ];
+        %tmp.3 = getm $.Toybox.Timer;
+        symbol [ Timer %tmp.4 18 27 32 ];
+        %tmp.4 = getv function ? %tmp.3 :Timer;
+        %tmp.1 = newc %tmp.4 ();
+        symbol [ _timer ? 18 8 14 ];
+        putv self :_timer %tmp.1;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_17_26_19_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc"; @line = 21; @symbol_functiondef = [after,21,13,18]; @symbol_param<0> = [ms,21,19,21]; @symbol_param<1> = [id,21,23,25]; @symbol_param<2> = [cb,21,27,29]; ]
+    function after(ms, id, cb) {
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_21_31_25_4_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 22 8 ]
+        %tmp.1 = self;
+        symbol [ cancel %tmp.2 22 8 14 ];
+        %tmp.2 = getv function %tmp.1 :cancel;
+        %tmp.3 = lgetv %id;
+        symbol [ id %tmp.3 22 15 17 ];
+        invoke %tmp.1 %tmp.2(%tmp.3);
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 23 8 ]
+        symbol [ _entries %tmp.5 23 8 16 ];
+        %tmp.5 = getv ? :_entries;
+        symbol [ add %tmp.6 23 17 20 ];
+        %tmp.6 = getv function %tmp.5 :add;
+        %tmp.7 = newd 4;
+        %tmp.9 = const :id;
+        symbol [ id %tmp.9 23 23 25 const ];
+        %tmp.10 = lgetv %id;
+        symbol [ id %tmp.10 23 29 31 ];
+        %tmp.11 = dup %tmp.7;
+        %tmp.12 = aputv %tmp.11 %tmp.9 %tmp.10;
+        %tmp.14 = const :due;
+        symbol [ due %tmp.14 23 34 37 const ];
+        symbol [ System %tmp.15 23 41 47 ];
+        %tmp.15 = getm $.Toybox.System;
+        symbol [ getTimer %tmp.16 23 48 56 ];
+        %tmp.16 = getv function %tmp.15 :getTimer;
+        %tmp.17 = invoke %tmp.15 %tmp.16();
+        %tmp.18 = lgetv %ms;
+        symbol [ ms %tmp.18 23 61 63 ];
+        %tmp.19 = add %tmp.17 %tmp.18;
+        %tmp.20 = dup %tmp.12;
+        %tmp.21 = aputv %tmp.20 %tmp.14 %tmp.19;
+        %tmp.23 = const :period;
+        symbol [ period %tmp.23 23 66 72 const ];
+        %tmp.24 = 0;
+        %tmp.25 = dup %tmp.21;
+        %tmp.26 = aputv %tmp.25 %tmp.23 %tmp.24;
+        %tmp.28 = const :cb;
+        symbol [ cb %tmp.28 23 80 82 const ];
+        %tmp.29 = lgetv %cb;
+        symbol [ cb %tmp.29 23 86 88 ];
+        %tmp.30 = dup %tmp.26;
+        %tmp.31 = aputv %tmp.30 %tmp.28 %tmp.29;
+        invoke %tmp.5 %tmp.6(%tmp.31);
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 24 8 ]
+        %tmp.32 = self;
+        symbol [ arm %tmp.33 24 8 11 ];
+        %tmp.33 = getv function %tmp.32 :arm;
+        invoke %tmp.32 %tmp.33();
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_21_31_25_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc"; @line = 27; @symbol_functiondef = [every,27,13,18]; @symbol_param<0> = [ms,27,19,21]; @symbol_param<1> = [id,27,23,25]; @symbol_param<2> = [cb,27,27,29]; ]
+    function every(ms, id, cb) {
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_27_31_31_4_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 28 8 ]
+        %tmp.1 = self;
+        symbol [ cancel %tmp.2 28 8 14 ];
+        %tmp.2 = getv function %tmp.1 :cancel;
+        %tmp.3 = lgetv %id;
+        symbol [ id %tmp.3 28 15 17 ];
+        invoke %tmp.1 %tmp.2(%tmp.3);
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 29 8 ]
+        symbol [ _entries %tmp.5 29 8 16 ];
+        %tmp.5 = getv ? :_entries;
+        symbol [ add %tmp.6 29 17 20 ];
+        %tmp.6 = getv function %tmp.5 :add;
+        %tmp.7 = newd 4;
+        %tmp.9 = const :id;
+        symbol [ id %tmp.9 29 23 25 const ];
+        %tmp.10 = lgetv %id;
+        symbol [ id %tmp.10 29 29 31 ];
+        %tmp.11 = dup %tmp.7;
+        %tmp.12 = aputv %tmp.11 %tmp.9 %tmp.10;
+        %tmp.14 = const :due;
+        symbol [ due %tmp.14 29 34 37 const ];
+        symbol [ System %tmp.15 29 41 47 ];
+        %tmp.15 = getm $.Toybox.System;
+        symbol [ getTimer %tmp.16 29 48 56 ];
+        %tmp.16 = getv function %tmp.15 :getTimer;
+        %tmp.17 = invoke %tmp.15 %tmp.16();
+        %tmp.18 = lgetv %ms;
+        symbol [ ms %tmp.18 29 61 63 ];
+        %tmp.19 = add %tmp.17 %tmp.18;
+        %tmp.20 = dup %tmp.12;
+        %tmp.21 = aputv %tmp.20 %tmp.14 %tmp.19;
+        %tmp.23 = const :period;
+        symbol [ period %tmp.23 29 66 72 const ];
+        %tmp.24 = lgetv %ms;
+        symbol [ ms %tmp.24 29 76 78 ];
+        %tmp.25 = dup %tmp.21;
+        %tmp.26 = aputv %tmp.25 %tmp.23 %tmp.24;
+        %tmp.28 = const :cb;
+        symbol [ cb %tmp.28 29 81 83 const ];
+        %tmp.29 = lgetv %cb;
+        symbol [ cb %tmp.29 29 87 89 ];
+        %tmp.30 = dup %tmp.26;
+        %tmp.31 = aputv %tmp.30 %tmp.28 %tmp.29;
+        invoke %tmp.5 %tmp.6(%tmp.31);
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 30 8 ]
+        %tmp.32 = self;
+        symbol [ arm %tmp.33 30 8 11 ];
+        %tmp.33 = getv function %tmp.32 :arm;
+        invoke %tmp.32 %tmp.33();
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_27_31_31_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc"; @line = 33; @symbol_functiondef = [cancel,33,13,19]; @symbol_param<0> = [id,33,20,22]; ]
+    function cancel(id) {
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_33_24_42_4_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 34 8 ]
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_33_24_42_4_start" "_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_33_24_42_4_stop" ]
+        %keep.1 = local;
+        symbol [ keep %keep.1 34 12 16 ];
+        %tmp.1 = newa 0;
+        lputv %keep.1 %tmp.1;
+        symbol [ keep %keep.1 34 12 16 ];
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 35 8 ]
+        for @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_35_8_39_8_for_test @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_35_8_39_8_for_incr @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_35_8_39_8_for_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_35_8_39_8_for_init:
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_35_8_39_8_for_begin" "_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_35_8_39_8_for_end" ]
+        %i.2 = local;
+        symbol [ i %i.2 35 17 18 ];
+        %tmp.2 = 0;
+        lputv %i.2 %tmp.2;
+        symbol [ i %i.2 35 17 18 ];
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_35_8_39_8_for_test:
+        %tmp.3 = lgetv %i.2;
+        symbol [ i %tmp.3 35 24 25 ];
+        symbol [ _entries %tmp.5 35 28 36 ];
+        %tmp.5 = getv ? :_entries;
+        symbol [ size %tmp.6 35 37 41 ];
+        %tmp.6 = getv function %tmp.5 :size;
+        %tmp.7 = invoke %tmp.5 %tmp.6();
+        %tmp.8 = lt %tmp.3 %tmp.7;
+        bf %tmp.8 @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_35_8_39_8_for_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_35_8_39_8_for_begin:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_35_50_39_8_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 36 12 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_36_12_38_12_if_stmt:
+        symbol [ _entries %tmp.10 36 17 25 ];
+        %tmp.10 = getv ? :_entries;
+        %tmp.11 = lgetv %i.2;
+        symbol [ i %tmp.11 36 26 27 ];
+        %tmp.12 = agetv %tmp.10 %tmp.11;
+        symbol [ get %tmp.13 36 29 32 ];
+        %tmp.13 = getv function %tmp.12 :get;
+        %tmp.15 = const :id;
+        symbol [ id %tmp.15 36 34 36 const ];
+        %tmp.16 = invoke %tmp.12 %tmp.13(%tmp.15);
+        symbol [ equals %tmp.17 36 38 44 ];
+        %tmp.17 = getv function %tmp.16 :equals;
+        %tmp.18 = lgetv %id;
+        symbol [ id %tmp.18 36 45 47 ];
+        %tmp.19 = invoke %tmp.16 %tmp.17(%tmp.18);
+        %tmp.20 = not %tmp.19;
+        bf %tmp.20 @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_36_12_38_12_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_36_12_38_12_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_36_50_38_12_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 37 16 ]
+        %tmp.21 = lgetv %keep.1;
+        symbol [ keep %tmp.21 37 16 20 ];
+        symbol [ add %tmp.22 37 21 24 ];
+        %tmp.22 = getv function %tmp.21 :add;
+        symbol [ _entries %tmp.24 37 25 33 ];
+        %tmp.24 = getv ? :_entries;
+        %tmp.25 = lgetv %i.2;
+        symbol [ i %tmp.25 37 34 35 ];
+        %tmp.26 = agetv %tmp.24 %tmp.25;
+        invoke %tmp.21 %tmp.22(%tmp.26);
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_36_50_38_12_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_36_12_38_12_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_36_12_38_12_if_end:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_35_50_39_8_stop:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_35_8_39_8_for_incr:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 35 ]
+        %tmp.29 = lgetv %i.2;
+        symbol [ i %tmp.29 35 45 46 ];
+        %tmp.30 = add %tmp.29 1;
+        lputv %i.2 %tmp.30;
+        symbol [ i %i.2 35 45 46 ];
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_35_8_39_8_for_test;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_35_8_39_8_for_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 40 8 ]
+        %tmp.31 = lgetv %keep.1;
+        symbol [ keep %tmp.31 40 19 23 ];
+        symbol [ _entries ? 40 8 16 ];
+        putv self :_entries %tmp.31;
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 41 8 ]
+        %tmp.32 = self;
+        symbol [ arm %tmp.33 41 8 11 ];
+        %tmp.33 = getv function %tmp.32 :arm;
+        invoke %tmp.32 %tmp.33();
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_33_24_42_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc"; @line = 45; @symbol_functiondef = [arm,45,13,16]; ]
+    function arm() {
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_45_19_61_4_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 46 8 ]
+        symbol [ _timer %tmp.2 46 8 14 ];
+        %tmp.2 = getv ? :_timer;
+        symbol [ stop %tmp.3 46 15 19 ];
+        %tmp.3 = getv function %tmp.2 :stop;
+        invoke %tmp.2 %tmp.3();
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 47 8 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_47_8_49_8_if_stmt:
+        symbol [ _entries %tmp.5 47 12 20 ];
+        %tmp.5 = getv ? :_entries;
+        symbol [ size %tmp.6 47 21 25 ];
+        %tmp.6 = getv function %tmp.5 :size;
+        %tmp.7 = invoke %tmp.5 %tmp.6();
+        %tmp.8 = 0;
+        %tmp.9 = eq %tmp.7 %tmp.8;
+        bf %tmp.9 @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_47_8_49_8_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_47_8_49_8_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_47_34_49_8_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 48 12 ]
+        ret ?;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_47_34_49_8_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_47_8_49_8_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_47_8_49_8_if_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 50 8 ]
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_45_19_61_4_start" "_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_45_19_61_4_stop" ]
+        %now.1 = local;
+        symbol [ now %now.1 50 12 15 ];
+        symbol [ System %tmp.10 50 18 24 ];
+        %tmp.10 = getm $.Toybox.System;
+        symbol [ getTimer %tmp.11 50 25 33 ];
+        %tmp.11 = getv function %tmp.10 :getTimer;
+        %tmp.12 = invoke %tmp.10 %tmp.11();
+        lputv %now.1 %tmp.12;
+        symbol [ now %now.1 50 12 15 ];
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 51 8 ]
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_45_19_61_4_start" "_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_45_19_61_4_stop" ]
+        %next.2 = local;
+        symbol [ next %next.2 51 12 16 ];
+        %tmp.13 = -1;
+        lputv %next.2 %tmp.13;
+        symbol [ next %next.2 51 12 16 ];
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 52 8 ]
+        for @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_52_8_57_8_for_test @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_52_8_57_8_for_incr @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_52_8_57_8_for_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_52_8_57_8_for_init:
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_52_8_57_8_for_begin" "_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_52_8_57_8_for_end" ]
+        %i.3 = local;
+        symbol [ i %i.3 52 17 18 ];
+        %tmp.14 = 0;
+        lputv %i.3 %tmp.14;
+        symbol [ i %i.3 52 17 18 ];
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_52_8_57_8_for_test:
+        %tmp.15 = lgetv %i.3;
+        symbol [ i %tmp.15 52 24 25 ];
+        symbol [ _entries %tmp.17 52 28 36 ];
+        %tmp.17 = getv ? :_entries;
+        symbol [ size %tmp.18 52 37 41 ];
+        %tmp.18 = getv function %tmp.17 :size;
+        %tmp.19 = invoke %tmp.17 %tmp.18();
+        %tmp.20 = lt %tmp.15 %tmp.19;
+        bf %tmp.20 @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_52_8_57_8_for_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_52_8_57_8_for_begin:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_52_50_57_8_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 53 12 ]
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_52_50_57_8_start" "_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_52_50_57_8_stop" ]
+        %d.4 = local;
+        symbol [ d %d.4 53 16 17 ];
+        symbol [ _entries %tmp.22 53 20 28 ];
+        %tmp.22 = getv ? :_entries;
+        %tmp.23 = lgetv %i.3;
+        symbol [ i %tmp.23 53 29 30 ];
+        %tmp.24 = agetv %tmp.22 %tmp.23;
+        symbol [ get %tmp.25 53 32 35 ];
+        %tmp.25 = getv function %tmp.24 :get;
+        %tmp.27 = const :due;
+        symbol [ due %tmp.27 53 37 40 const ];
+        %tmp.28 = invoke %tmp.24 %tmp.25(%tmp.27);
+        %tmp.29 = lgetv %now.1;
+        symbol [ now %tmp.29 53 44 47 ];
+        %tmp.30 = sub %tmp.28 %tmp.29;
+        lputv %d.4 %tmp.30;
+        symbol [ d %d.4 53 16 17 ];
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 54 12 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_54_12_56_12_if_stmt:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_54_16_54_32_begin:
+        %tmp.31 = lgetv %next.2;
+        symbol [ next %tmp.31 54 16 20 ];
+        %tmp.32 = 0;
+        %tmp.33 = lt %tmp.31 %tmp.32;
+        bt %tmp.33 @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_54_12_56_12_if_true;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_54_28_54_32_false:
+        %tmp.34 = lgetv %d.4;
+        symbol [ d %tmp.34 54 28 29 ];
+        %tmp.35 = lgetv %next.2;
+        symbol [ next %tmp.35 54 32 36 ];
+        %tmp.36 = lt %tmp.34 %tmp.35;
+        push %tmp.36;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_54_28_54_32_end:
+        %tmp.37 = phi [%tmp.33 @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_54_16_54_32_begin] [%tmp.36 @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_54_28_54_32_false] [%tmp.37 @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_54_28_54_32_end];
+        bf %tmp.37 @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_54_12_56_12_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_54_12_56_12_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_54_38_56_12_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 55 16 ]
+        %tmp.38 = lgetv %d.4;
+        symbol [ d %tmp.38 55 23 24 ];
+        lputv %next.2 %tmp.38;
+        symbol [ next %next.2 55 16 20 ];
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_54_38_56_12_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_54_12_56_12_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_54_12_56_12_if_end:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_52_50_57_8_stop:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_52_8_57_8_for_incr:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 52 ]
+        %tmp.41 = lgetv %i.3;
+        symbol [ i %tmp.41 52 45 46 ];
+        %tmp.42 = add %tmp.41 1;
+        lputv %i.3 %tmp.42;
+        symbol [ i %i.3 52 45 46 ];
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_52_8_57_8_for_test;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_52_8_57_8_for_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 58 8 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_58_8_58_36_if_stmt:
+        %tmp.43 = lgetv %next.2;
+        symbol [ next %tmp.43 58 12 16 ];
+        %tmp.44 = 20;
+        %tmp.45 = lt %tmp.43 %tmp.44;
+        bf %tmp.45 @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_58_8_58_36_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_58_8_58_36_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_58_23_58_36_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 58 25 ]
+        %tmp.46 = 20;
+        lputv %next.2 %tmp.46;
+        symbol [ next %next.2 58 25 29 ];
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_58_23_58_36_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_58_8_58_36_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_58_8_58_36_if_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 59 8 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_59_8_59_40_if_stmt:
+        %tmp.47 = lgetv %next.2;
+        symbol [ next %tmp.47 59 12 16 ];
+        %tmp.48 = 5000;
+        %tmp.49 = gt %tmp.47 %tmp.48;
+        bf %tmp.49 @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_59_8_59_40_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_59_8_59_40_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_59_25_59_40_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 59 27 ]
+        %tmp.50 = 5000;
+        lputv %next.2 %tmp.50;
+        symbol [ next %next.2 59 27 31 ];
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_59_25_59_40_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_59_8_59_40_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_59_8_59_40_if_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 60 8 ]
+        symbol [ _timer %tmp.52 60 8 14 ];
+        %tmp.52 = getv ? :_timer;
+        symbol [ start %tmp.53 60 15 20 ];
+        %tmp.53 = getv function %tmp.52 :start;
+        %tmp.54 = self;
+        symbol [ method %tmp.55 60 21 27 ];
+        %tmp.55 = getv function %tmp.54 :method;
+        %tmp.57 = const :fire;
+        symbol [ fire %tmp.57 60 29 33 const ];
+        %tmp.58 = invoke %tmp.54 %tmp.55(%tmp.57);
+        %tmp.59 = lgetv %next.2;
+        symbol [ next %tmp.59 60 36 40 ];
+        %tmp.60 = false;
+        invoke %tmp.52 %tmp.53(%tmp.58, %tmp.59, %tmp.60);
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_45_19_61_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc"; @line = 63; @symbol_functiondef = [fire,63,13,17]; ]
+    function fire() {
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_63_20_84_4_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 64 8 ]
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_63_20_84_4_start" "_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_63_20_84_4_stop" ]
+        %now.1 = local;
+        symbol [ now %now.1 64 12 15 ];
+        symbol [ System %tmp.1 64 18 24 ];
+        %tmp.1 = getm $.Toybox.System;
+        symbol [ getTimer %tmp.2 64 25 33 ];
+        %tmp.2 = getv function %tmp.1 :getTimer;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        lputv %now.1 %tmp.3;
+        symbol [ now %now.1 64 12 15 ];
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 65 8 ]
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_63_20_84_4_start" "_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_63_20_84_4_stop" ]
+        %run.2 = local;
+        symbol [ run %run.2 65 12 15 ];
+        %tmp.4 = newa 0;
+        lputv %run.2 %tmp.4;
+        symbol [ run %run.2 65 12 15 ];
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 66 8 ]
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_63_20_84_4_start" "_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_63_20_84_4_stop" ]
+        %keep.3 = local;
+        symbol [ keep %keep.3 66 12 16 ];
+        %tmp.5 = newa 0;
+        lputv %keep.3 %tmp.5;
+        symbol [ keep %keep.3 66 12 16 ];
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 67 8 ]
+        for @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_67_8_78_8_for_test @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_67_8_78_8_for_incr @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_67_8_78_8_for_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_67_8_78_8_for_init:
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_67_8_78_8_for_begin" "_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_67_8_78_8_for_end" ]
+        %i.4 = local;
+        symbol [ i %i.4 67 17 18 ];
+        %tmp.6 = 0;
+        lputv %i.4 %tmp.6;
+        symbol [ i %i.4 67 17 18 ];
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_67_8_78_8_for_test:
+        %tmp.7 = lgetv %i.4;
+        symbol [ i %tmp.7 67 24 25 ];
+        symbol [ _entries %tmp.9 67 28 36 ];
+        %tmp.9 = getv ? :_entries;
+        symbol [ size %tmp.10 67 37 41 ];
+        %tmp.10 = getv function %tmp.9 :size;
+        %tmp.11 = invoke %tmp.9 %tmp.10();
+        %tmp.12 = lt %tmp.7 %tmp.11;
+        bf %tmp.12 @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_67_8_78_8_for_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_67_8_78_8_for_begin:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_67_50_78_8_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 68 12 ]
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_67_50_78_8_start" "_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_67_50_78_8_stop" ]
+        %e.5 = local;
+        symbol [ e %e.5 68 16 17 ];
+        symbol [ _entries %tmp.14 68 20 28 ];
+        %tmp.14 = getv ? :_entries;
+        %tmp.15 = lgetv %i.4;
+        symbol [ i %tmp.15 68 29 30 ];
+        %tmp.16 = agetv %tmp.14 %tmp.15;
+        lputv %e.5 %tmp.16;
+        symbol [ e %e.5 68 16 17 ];
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 69 12 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_69_12_77_12_if_stmt:
+        %tmp.17 = lgetv %e.5;
+        symbol [ e %tmp.17 69 16 17 ];
+        symbol [ get %tmp.18 69 18 21 ];
+        %tmp.18 = getv function %tmp.17 :get;
+        %tmp.20 = const :due;
+        symbol [ due %tmp.20 69 23 26 const ];
+        %tmp.21 = invoke %tmp.17 %tmp.18(%tmp.20);
+        %tmp.22 = lgetv %now.1;
+        symbol [ now %tmp.22 69 31 34 ];
+        %tmp.23 = lte %tmp.21 %tmp.22;
+        bf %tmp.23 @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_69_12_77_12_if_else_false;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_69_12_77_12_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_69_36_75_12_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 70 16 ]
+        %tmp.24 = lgetv %run.2;
+        symbol [ run %tmp.24 70 16 19 ];
+        symbol [ add %tmp.25 70 20 23 ];
+        %tmp.25 = getv function %tmp.24 :add;
+        %tmp.26 = lgetv %e.5;
+        symbol [ e %tmp.26 70 24 25 ];
+        invoke %tmp.24 %tmp.25(%tmp.26);
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 71 16 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_71_16_74_16_if_stmt:
+        %tmp.27 = lgetv %e.5;
+        symbol [ e %tmp.27 71 20 21 ];
+        symbol [ get %tmp.28 71 22 25 ];
+        %tmp.28 = getv function %tmp.27 :get;
+        %tmp.30 = const :period;
+        symbol [ period %tmp.30 71 27 33 const ];
+        %tmp.31 = invoke %tmp.27 %tmp.28(%tmp.30);
+        %tmp.32 = 0;
+        %tmp.33 = gt %tmp.31 %tmp.32;
+        bf %tmp.33 @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_71_16_74_16_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_71_16_74_16_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_71_40_74_16_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 72 20 ]
+        %tmp.34 = lgetv %e.5;
+        symbol [ e %tmp.34 72 20 21 ];
+        symbol [ put %tmp.35 72 22 25 ];
+        %tmp.35 = getv function %tmp.34 :put;
+        %tmp.37 = const :due;
+        symbol [ due %tmp.37 72 27 30 const ];
+        %tmp.38 = lgetv %now.1;
+        symbol [ now %tmp.38 72 32 35 ];
+        %tmp.39 = lgetv %e.5;
+        symbol [ e %tmp.39 72 38 39 ];
+        symbol [ get %tmp.40 72 40 43 ];
+        %tmp.40 = getv function %tmp.39 :get;
+        %tmp.42 = const :period;
+        symbol [ period %tmp.42 72 45 51 const ];
+        %tmp.43 = invoke %tmp.39 %tmp.40(%tmp.42);
+        %tmp.44 = add %tmp.38 %tmp.43;
+        invoke %tmp.34 %tmp.35(%tmp.37, %tmp.44);
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 73 20 ]
+        %tmp.45 = lgetv %keep.3;
+        symbol [ keep %tmp.45 73 20 24 ];
+        symbol [ add %tmp.46 73 25 28 ];
+        %tmp.46 = getv function %tmp.45 :add;
+        %tmp.47 = lgetv %e.5;
+        symbol [ e %tmp.47 73 29 30 ];
+        invoke %tmp.45 %tmp.46(%tmp.47);
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_71_40_74_16_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_71_16_74_16_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_71_16_74_16_if_end:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_69_36_75_12_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_69_12_77_12_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_69_12_77_12_if_else_false:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_75_19_77_12_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 76 16 ]
+        %tmp.48 = lgetv %keep.3;
+        symbol [ keep %tmp.48 76 16 20 ];
+        symbol [ add %tmp.49 76 21 24 ];
+        %tmp.49 = getv function %tmp.48 :add;
+        %tmp.50 = lgetv %e.5;
+        symbol [ e %tmp.50 76 25 26 ];
+        invoke %tmp.48 %tmp.49(%tmp.50);
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_75_19_77_12_stop:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_69_12_77_12_if_end:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_67_50_78_8_stop:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_67_8_78_8_for_incr:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 67 ]
+        %tmp.53 = lgetv %i.4;
+        symbol [ i %tmp.53 67 45 46 ];
+        %tmp.54 = add %tmp.53 1;
+        lputv %i.4 %tmp.54;
+        symbol [ i %i.4 67 45 46 ];
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_67_8_78_8_for_test;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_67_8_78_8_for_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 79 8 ]
+        %tmp.55 = lgetv %keep.3;
+        symbol [ keep %tmp.55 79 19 23 ];
+        symbol [ _entries ? 79 8 16 ];
+        putv self :_entries %tmp.55;
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 80 8 ]
+        for @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_80_8_82_8_for_test @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_80_8_82_8_for_incr @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_80_8_82_8_for_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_80_8_82_8_for_init:
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_80_8_82_8_for_begin" "_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_80_8_82_8_for_end" ]
+        %r.6 = local;
+        symbol [ r %r.6 80 17 18 ];
+        %tmp.56 = 0;
+        lputv %r.6 %tmp.56;
+        symbol [ r %r.6 80 17 18 ];
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_80_8_82_8_for_test:
+        %tmp.57 = lgetv %r.6;
+        symbol [ r %tmp.57 80 24 25 ];
+        %tmp.58 = lgetv %run.2;
+        symbol [ run %tmp.58 80 28 31 ];
+        symbol [ size %tmp.59 80 32 36 ];
+        %tmp.59 = getv function %tmp.58 :size;
+        %tmp.60 = invoke %tmp.58 %tmp.59();
+        %tmp.61 = lt %tmp.57 %tmp.60;
+        bf %tmp.61 @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_80_8_82_8_for_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_80_8_82_8_for_begin:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_80_45_82_8_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 81 12 ]
+        %tmp.62 = lgetv %run.2;
+        symbol [ run %tmp.62 81 12 15 ];
+        %tmp.63 = lgetv %r.6;
+        symbol [ r %tmp.63 81 16 17 ];
+        %tmp.64 = agetv %tmp.62 %tmp.63;
+        symbol [ get %tmp.65 81 19 22 ];
+        %tmp.65 = getv function %tmp.64 :get;
+        %tmp.67 = const :cb;
+        symbol [ cb %tmp.67 81 24 26 const ];
+        %tmp.68 = invoke %tmp.64 %tmp.65(%tmp.67);
+        symbol [ invoke %tmp.69 81 28 34 ];
+        %tmp.69 = getv function %tmp.68 :invoke;
+        invoke %tmp.68 %tmp.69();
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_80_45_82_8_stop:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_80_8_82_8_for_incr:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 80 ]
+        %tmp.72 = lgetv %r.6;
+        symbol [ r %tmp.72 80 40 41 ];
+        %tmp.73 = add %tmp.72 1;
+        lputv %r.6 %tmp.73;
+        symbol [ r %r.6 80 40 41 ];
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_80_8_82_8_for_test;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_80_8_82_8_for_end:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc" 83 8 ]
+        %tmp.74 = self;
+        symbol [ arm %tmp.75 83 8 11 ];
+        %tmp.75 = getv function %tmp.74 :arm;
+        invoke %tmp.74 %tmp.75();
+_Users_elizabethseabrooke_Documents_meck_garmin_source_Sched_mc_63_20_84_4_stop:
+    }
+}
+[ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/Sched.mc"; @line = 1; ]
+<init> {
+}

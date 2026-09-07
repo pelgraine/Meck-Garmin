@@ -1,0 +1,115 @@
+[ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/MeckApp.mc"; @line = 1; @symbol_usingdef<0> = [Toybox,1,6,12]; @symbol_usingdef<1> = [Application,1,13,24]; ]
+using Toybox.Application;
+[ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/MeckApp.mc"; @line = 2; @symbol_usingdef<0> = [Toybox,2,6,12]; @symbol_usingdef<1> = [WatchUi,2,13,20]; ]
+using Toybox.WatchUi;
+[ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/MeckApp.mc"; @line = 5; @position = 4; @symbol_vardef = [gModel,5,4,10]; ]
+var gModel = null;
+[ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/MeckApp.mc"; @line = 6; @position = 4; @symbol_vardef = [gLink,6,4,9]; ]
+var gLink = null;
+[ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/MeckApp.mc"; @line = 7; @position = 4; @symbol_vardef = [gSched,7,4,10]; ]
+var gSched = null;
+[ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/MeckApp.mc"; @line = 9; @symbol_classdef = [MeckApp,9,6,13]; @symbol_extends<0> = [Application,9,22,33]; @symbol_extends<1> = [AppBase,9,34,41]; ]
+class MeckApp extends Application.AppBase {
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/MeckApp.mc"; @line = 9; ]
+    <init> {
+    }
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/MeckApp.mc"; @line = 9; ]
+    static
+    <init> {
+    }
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/MeckApp.mc"; @line = 11; @symbol_functiondef = [initialize,11,13,23]; ]
+    function initialize() as Void {
+_Users_elizabethseabrooke_Documents_meck_garmin_source_MeckApp_mc_11_26_13_4_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/MeckApp.mc" 12 8 ]
+        symbol [ AppBase %tmp.2 12 8 15 ];
+        %tmp.2 = getv ? :AppBase;
+        symbol [ initialize %tmp.3 12 16 26 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+_Users_elizabethseabrooke_Documents_meck_garmin_source_MeckApp_mc_11_26_13_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/MeckApp.mc"; @line = 15; @symbol_functiondef = [onStart,15,13,20]; @symbol_param<0> = [state,15,21,26]; ]
+    function onStart(state) {
+_Users_elizabethseabrooke_Documents_meck_garmin_source_MeckApp_mc_15_28_20_4_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/MeckApp.mc" 16 8 ]
+        symbol [ Sched %tmp.4 16 21 26 ];
+        %tmp.4 = getv ? :Sched;
+        %tmp.1 = newc %tmp.4 ();
+        symbol [ gSched ? 16 8 14 ];
+        putv self :gSched %tmp.1;
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/MeckApp.mc" 17 8 ]
+        symbol [ Model %tmp.8 17 21 26 ];
+        %tmp.8 = getv ? :Model;
+        %tmp.5 = newc %tmp.8 ();
+        symbol [ gModel ? 17 8 14 ];
+        putv self :gModel %tmp.5;
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/MeckApp.mc" 18 8 ]
+        symbol [ NodeLink %tmp.12 18 20 28 ];
+        %tmp.12 = getv ? :NodeLink;
+        %tmp.9 = newc %tmp.12 ();
+        symbol [ gLink ? 18 8 13 ];
+        putv self :gLink %tmp.9;
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/MeckApp.mc" 19 8 ]
+        symbol [ gLink %tmp.14 19 8 13 ];
+        %tmp.14 = getv ? :gLink;
+        symbol [ start %tmp.15 19 14 19 ];
+        %tmp.15 = getv function %tmp.14 :start;
+        invoke %tmp.14 %tmp.15();
+_Users_elizabethseabrooke_Documents_meck_garmin_source_MeckApp_mc_15_28_20_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/MeckApp.mc"; @line = 22; @symbol_functiondef = [onStop,22,13,19]; @symbol_param<0> = [state,22,20,25]; ]
+    function onStop(state) {
+_Users_elizabethseabrooke_Documents_meck_garmin_source_MeckApp_mc_22_27_26_4_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/MeckApp.mc" 23 8 ]
+_Users_elizabethseabrooke_Documents_meck_garmin_source_MeckApp_mc_23_8_25_8_if_stmt:
+        symbol [ gLink %tmp.2 23 12 17 ];
+        %tmp.2 = getv ? :gLink;
+        %tmp.3 = null;
+        %tmp.4 = ne %tmp.2 %tmp.3;
+        bf %tmp.4 @_Users_elizabethseabrooke_Documents_meck_garmin_source_MeckApp_mc_23_8_25_8_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_MeckApp_mc_23_8_25_8_if_true:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_MeckApp_mc_23_27_25_8_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/MeckApp.mc" 24 12 ]
+        symbol [ gLink %tmp.6 24 12 17 ];
+        %tmp.6 = getv ? :gLink;
+        %tmp.7 = as %tmp.6 { (!Null) };
+        symbol [ shutdown %tmp.8 24 18 26 ];
+        %tmp.8 = getv function %tmp.7 :shutdown;
+        invoke %tmp.7 %tmp.8();
+_Users_elizabethseabrooke_Documents_meck_garmin_source_MeckApp_mc_23_27_25_8_stop:
+        goto @_Users_elizabethseabrooke_Documents_meck_garmin_source_MeckApp_mc_23_8_25_8_if_end;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_MeckApp_mc_23_8_25_8_if_end:
+_Users_elizabethseabrooke_Documents_meck_garmin_source_MeckApp_mc_22_27_26_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/MeckApp.mc"; @line = 28; @symbol_functiondef = [getInitialView,28,13,27]; ]
+    function getInitialView() {
+_Users_elizabethseabrooke_Documents_meck_garmin_source_MeckApp_mc_28_30_31_4_start:
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/MeckApp.mc" 29 8 ]
+        [ "_Users_elizabethseabrooke_Documents_meck_garmin_source_MeckApp_mc_28_30_31_4_start" "_Users_elizabethseabrooke_Documents_meck_garmin_source_MeckApp_mc_28_30_31_4_stop" ]
+        %v.1 = local;
+        symbol [ v %v.1 29 12 13 ];
+        symbol [ HomeView %tmp.4 29 20 28 ];
+        %tmp.4 = getv ? :HomeView;
+        %tmp.1 = newc %tmp.4 ();
+        lputv %v.1 %tmp.1;
+        symbol [ v %v.1 29 12 13 ];
+[ "/Users/elizabethseabrooke/Documents/meck-garmin/source/MeckApp.mc" 30 8 ]
+        %tmp.5 = newa 2;
+        %tmp.6 = lgetv %v.1;
+        symbol [ v %tmp.6 30 16 17 ];
+        %tmp.7 = dup %tmp.5;
+        %tmp.8 = aputv %tmp.7 0 %tmp.6;
+        symbol [ HomeDelegate %tmp.12 30 23 35 ];
+        %tmp.12 = getv ? :HomeDelegate;
+        %tmp.13 = lgetv %v.1;
+        symbol [ v %tmp.13 30 36 37 ];
+        %tmp.9 = newc %tmp.12 (%tmp.13);
+        %tmp.14 = dup %tmp.8;
+        %tmp.15 = aputv %tmp.14 1 %tmp.9;
+        ret %tmp.15;
+_Users_elizabethseabrooke_Documents_meck_garmin_source_MeckApp_mc_28_30_31_4_stop:
+    }
+}
+[ @file = "/Users/elizabethseabrooke/Documents/meck-garmin/source/MeckApp.mc"; @line = 1; ]
+<init> {
+}

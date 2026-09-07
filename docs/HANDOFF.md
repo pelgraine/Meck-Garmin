@@ -113,6 +113,12 @@ Behaviour:
 - `CMD_SEND_TRACE_PATH 36 [tag:4][auth:4][flags][path bytes]`; flags & 3 = hash width code (0 = 1 byte, 1 = 2 bytes). Reply `RESP_CODE_SENT 6`. Result `PUSH_CODE_TRACE_DATA 0x89 [res][path_len][flags][tag:4][auth:4][hashes][snr per hop][final snr]`.
 - `CMD_GET_BATT_AND_STORAGE 20` -> `12 [mV:2][used:4][total:4]`.
 - Hash byte order in typed paths: as written ("3601" = 0x36 0x01).
+- Region scope on sends: the node keeps `send_scope`, set by phone apps via
+  `CMD_SET_FLOOD_SCOPE_KEY 54`, which outranks the channel's own region and
+  persists in RAM. A stale phone value made a watch send go out unscoped.
+  The app clears it (`[54][0]`) at session start and before every send, so
+  the node falls to channel region, then device default, as for node-typed
+  messages.
 
 ## 4. Garmin / Connect IQ facts established
 
@@ -130,6 +136,12 @@ Behaviour:
   encryption, 100 bond fail.
 - Emoji render from the system font (the node name's seedling drew from
   the first scan result). No emoji picker is wanted.
+- Input: claiming `onSelect` in a BehaviorDelegate makes the watch deliver
+  screen taps as Start presses, so `onTap` never sees coordinates. Read
+  Start via `onKey` (`WatchUi.KEY_ENTER`) instead; taps then reach `onTap`.
+- Timers: the watch caps concurrent `Timer.Timer` objects ("Too Many
+  Timers Error" on send when the link, toast and a screen each held one).
+  The app now has exactly one timer, wrapped by `Sched.mc`.
 - Monkey C compiler quirks hit: indexing a literal-empty array is a
   compile error even if a loop fills it (keep the first element separately);
   start concatenations with a string; casts `as Ble.ScanResult` needed on
@@ -160,13 +172,16 @@ Screens and controls (fenix 7S, touch + five buttons):
   right-aligned with "..." and the node name; Up/Down highlight and
   auto-marquee long lines; Start pauses the marquee; hold Up (Menu) or
   hold a line opens the path overlay; Down past the newest message
-  highlights the compose bar; swipe pages history ("-N" in the header).
+  highlights the compose bar; hold Up on the bar opens the canned list;
+  swipe pages history ("-N" in the header).
 - Path overlay (Meck Watch layout): "N hops, B-byte" / "Direct", "Rx:
   time", hop hashes wrapped by whole tokens, region bottom-left, [Reply]
   bottom-right; sent messages show Heard-by with hash and SNR and [Again].
 - Compose: channel name top; single-line draft with Send at its right;
+  Up opens the canned list, Down inserts a space, Start sends;
   QWERTY rows 20-22 x 36 px in the wide middle band; mode key lower /
-  UPPER / 123; delete; Cnd (canned list, draft as prefix) and space at
+  UPPER / 123 (30px wide, out to the circle edge); delete (likewise);
+  Cnd (canned list, draft as prefix) and space at
   the bottom. 133-character cap.
 - Canned: list, tap or Start sends. Reply prefills "@[sender] ".
 - Discover: starts a scan on open, polls once a second while active;
