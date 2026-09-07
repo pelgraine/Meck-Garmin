@@ -1,6 +1,7 @@
 using Toybox.WatchUi;
 using Toybox.System;
 using Toybox.Timer;
+using Toybox.Application;
 
 // Everything the screens draw comes from here. The link fills it in; the
 // views read it. Messages are kept per channel, oldest first, capped.
@@ -27,16 +28,16 @@ class Model {
     var discoverActive = false;
     var discoverCount = 0;
     var trace = null;            // current trace: {:state, :tag, :sentAt, :bph, :hashes, :snrs, :final, :ms}
-    var _toastTimer = null;
+    var favs = [];               // favourite contacts: {:type, :last, :pubkey, :name}
+    var favCount = 0;
+    var names = {};              // pubkey prefix hex -> contact name (resolved by the node)
+    var admin = null;            // repeater session: {:pubkey, :prefix, :name, :state, :sentAt}
+    var cli = null;              // last CLI command: {:cmd, :label, :state, :text, :sentAt}
 
     // Meck-style toast: shown centred for 2.5 seconds.
     function showToast(t) {
         toast = t;
-        if (_toastTimer == null) {
-            _toastTimer = new Timer.Timer();
-        }
-        _toastTimer.stop();
-        _toastTimer.start(method(:clearToast), 2500, false);
+        gSched.after(2500, "toast", method(:clearToast));
         WatchUi.requestUpdate();
     }
 
@@ -98,6 +99,30 @@ class Model {
             t += msgs.get(ks[i]).size();
         }
         return t;
+    }
+
+    // ---- repeater admin ----
+    function adminResult(ok) {
+        if (admin == null) { return; }
+        admin.put(:state, ok ? :ok : :fail);
+        if (ok && admin.get(:pw) != null) {
+            // remembered per repeater only once the repeater has accepted it
+            Application.Storage.setValue("pw_" + admin.get(:prefix), admin.get(:pw));
+        }
+        WatchUi.requestUpdate();
+    }
+
+    function cliReply(prefixHex, text) {
+        if (cli == null || cli.get(:state) != :pending) { return; }
+        cli.put(:text, text);
+        cli.put(:state, :done);
+        WatchUi.requestUpdate();
+    }
+
+    function cliFailed() {
+        if (cli == null) { return; }
+        cli.put(:state, :error);
+        WatchUi.requestUpdate();
     }
 
     function clearMessages() {

@@ -27,14 +27,12 @@ class ChannelView extends WatchUi.View {
     var _tick = -1;           // message index being marqueed, -1 = none
     var _tickOff = 0;
     var _tickW = 0;
-    var _timer;
     var _overlay = null;      // message dict in the overlay, or null
     var _hot = null;          // [x, y, w, h] of the overlay's action hotspot
 
     function initialize(idx) {
         View.initialize();
         _idx = idx;
-        _timer = new Timer.Timer();
         gModel.clearUnread(idx);
     }
 
@@ -67,7 +65,7 @@ class ChannelView extends WatchUi.View {
 
         if (_hist > 0) {
             dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(Draw.X + Draw.W, Draw.HEAD_Y, Draw.FONT, "-" + _hist, Graphics.TEXT_JUSTIFY_RIGHT);
+            dc.drawText(Draw.CX + 60, Draw.HEAD_Y, Draw.FONT, "-" + _hist, Graphics.TEXT_JUSTIFY_RIGHT);
         }
 
         for (var r = 0; r < _shown; r++) {
@@ -258,13 +256,12 @@ class ChannelView extends WatchUi.View {
     function startTicker(i) {
         _tick = i;
         _tickOff = 0;
-        _timer.stop();
-        _timer.start(method(:onTick), 40, true);
+        gSched.every(40, "marquee", method(:onTick));
         WatchUi.requestUpdate();
     }
 
     function stopTicker() {
-        _timer.stop();
+        gSched.cancel("marquee");
         _tick = -1;
         _tickOff = 0;
         WatchUi.requestUpdate();
@@ -275,7 +272,7 @@ class ChannelView extends WatchUi.View {
             _tickOff = 0;       // fits: nothing to scroll
             return;
         }
-        _tickOff += 2;
+        _tickOff += 6;   // 3x the original speed
         if (_tickOff > _tickW + TICK_GAP) {
             _tickOff = 0;
         }
@@ -391,6 +388,8 @@ class ChannelView extends WatchUi.View {
         if (_overlay != null) { return; }
         if (_sel >= 0 && _sel < n) {
             openOverlay(gModel.messagesFor(_idx)[_sel]);
+        } else if (_sel == n) {
+            openCanned("");   // bar highlighted: straight to the canned list
         }
     }
 
@@ -452,7 +451,14 @@ class ChannelDelegate extends WatchUi.BehaviorDelegate {
 
     function onNextPage() { _v.move(1); return true; }
     function onPreviousPage() { _v.move(-1); return true; }
-    function onSelect() { _v.select(); return true; }
+    // Start key read directly: claiming onSelect would also swallow screen taps.
+    function onKey(evt) {
+        if (evt.getKey() == WatchUi.KEY_ENTER) {
+            _v.select();
+            return true;
+        }
+        return false;
+    }
     function onMenu() { _v.menu(); return true; }
 
     function onBack() {

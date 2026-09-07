@@ -13,12 +13,10 @@ class DiscoverView extends WatchUi.View {
     var _rows = 1;
     var _y0 = 50;
     var _rowH = 18;
-    var _timer;
     var _started = false;
 
     function initialize() {
         View.initialize();
-        _timer = new Timer.Timer();
     }
 
     function onShow() {
@@ -26,11 +24,11 @@ class DiscoverView extends WatchUi.View {
             _started = true;
             gLink.discoverStart();
         }
-        _timer.start(method(:tick), 1000, true);
+        gSched.every(1000, "discover", method(:tick));
     }
 
     function onHide() {
-        _timer.stop();
+        gSched.cancel("discover");
     }
 
     function tick() {

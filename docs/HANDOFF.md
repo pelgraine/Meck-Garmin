@@ -86,6 +86,10 @@ Codes (commands from 0x70, responses from 0x60; standard responses stop at
     CMD_MECK_GET_SCOPE       0x73  [idx]  -> RESP_MECK_SCOPE 0x64 [idx][name]
     CMD_MECK_DISCOVER_START  0x74         -> OK   (node's startDiscovery(), 30 s)
     CMD_MECK_DISCOVER_GET    0x75  [n]    -> RESP_MECK_DISCOVER 0x65 [n][active][count] (+ [type][snr*4][path_len][known][pubkey:2][name] if n < count)
+    CMD_MECK_GET_FAV         0x76  [n]    -> RESP_MECK_FAV 0x66 [n][count] (+ [type][last_advert:4][pubkey:32][name] if n < count)
+    CMD_MECK_RESOLVE         0x77  [plen][prefix] -> RESP_MECK_RESOLVE 0x67 [plen][prefix][name] (empty = unknown)
+    CMD_MECK_DISCOVER_START  0x74         -> OK   (node's startDiscovery(), 30 s)
+    CMD_MECK_DISCOVER_GET    0x75  [n]    -> RESP_MECK_DISCOVER 0x65 [n][active][count] (+ [type][snr*4][path_len][known][pubkey:2][name] if n < count)
     RESP_MECK_CHANNEL_MSG    0x63  [snr*4][scope_idx][path_len][channel_idx][txt_type][timestamp:4][path bytes][text]
 
 Behaviour:
@@ -100,6 +104,18 @@ Behaviour:
 - Sent-track reads the existing `_sent_track[]` (companion sends are
   recorded there by `sendFloodScoped`), same 10-minute expiry as the
   node's Heard-by.
+- Favourites = contacts with flags bit 0; the resolve command uses
+  `lookupContactByPubKey` on a prefix.
+
+### `examples/companion_radio/DataStore.cpp` (unflagged, all builds)
+
+Per-channel region names were never written to `/channels2` (68-byte
+records: 4 unused, name, secret), so they vanished on every reboot; the
+August persistence commit covered only the device default region. Fix: a
+companion file `/channels2.scope`, one 31-byte name per channel in the
+same order, written after the main file commits and read in lockstep by
+the loader. Main file format unchanged; a missing companion file leaves
+regions blank as before.
 
 ## 3. Standard protocol facts used by the app (from MyMesh.cpp)
 
@@ -112,6 +128,13 @@ Behaviour:
 - `CMD_SEND_CHANNEL_TXT_MSG 3 [txt_type=0][ch][ts:4][text]` -> OK/ERR.
 - `CMD_SEND_TRACE_PATH 36 [tag:4][auth:4][flags][path bytes]`; flags & 3 = hash width code (0 = 1 byte, 1 = 2 bytes). Reply `RESP_CODE_SENT 6`. Result `PUSH_CODE_TRACE_DATA 0x89 [res][path_len][flags][tag:4][auth:4][hashes][snr per hop][final snr]`.
 - `CMD_GET_BATT_AND_STORAGE 20` -> `12 [mV:2][used:4][total:4]`.
+- Repeater admin: `CMD_SEND_LOGIN 26 [pubkey:32][password]` -> RESP_SENT,
+  result as `PUSH_CODE_LOGIN_SUCCESS 0x85` / `LOGIN_FAIL 0x86`. CLI commands
+  are `CMD_SEND_TXT_MSG 2 [txt_type=1][attempt][ts:4][pubkey prefix:6][text]`;
+  replies arrive as contact messages (16/7) with txt_type 1 through the
+  normal sync loop. Neighbour list lines are `hex:timestamp:snr*4`.
+  `discover.neighbors` replies "OK - Discover sent"; results land in the
+  repeater's table over ~60 s.
 - Hash byte order in typed paths: as written ("3601" = 0x36 0x01).
 - Region scope on sends: the node keeps `send_scope`, set by phone apps via
   `CMD_SET_FLOOD_SCOPE_KEY 54`, which outranks the channel's own region and
@@ -190,10 +213,31 @@ Screens and controls (fenix 7S, touch + five buttons):
   Storage; results list per-hop hash and SNR, "Here" final SNR, elapsed
   ms; 30 s timeout.
 - Settings: node name, firmware, link, counts; Reconnect; Clear messages.
+- Favourites (fifth tile, purple, Down from Trace scrolls the grid to it):
+  favourite contacts with type letter and last-heard age; selecting a
+  repeater/room logs in (password typed once on the keyboard, remembered
+  per repeater only after a successful login; hold Up on a row forgets
+  it and asks again). Admin screen: View Neighbours (parsed to
+  "(xxxx) Name  SNR  age" rows, names resolved by the node, marquee on
+  the highlighted row), Discover Neighbours, Clock Sync, Send Advert; a
+  reply auto-opens once, Back returns to the menu, hold Up reopens it;
+  Start after a failed login re-asks for the password. 30 s timeouts.
+- Home header: clock in the top gap (medium font, largest on screen);
+  node name, node volts (dark blue), watch battery (green) beneath; day
+  and month numerals in the left and right margins (small font).
+- All screen headers sit in the top gap with a clear band below the rule
+  so emoji glyphs cannot touch it; no "<" glyph (Back does it).
 - Toasts: "Sent!", then "Heard by N" as echoes arrive (re-checked 4 s and
   10 s after a send).
 
 ## 6. Decisions made
+
+- Region scope: node persists per-channel regions (DataStore change);
+  the app clears the phone-set scope (CMD 54) at session start and
+  before each send so node rules apply.
+- Favourites tile added (fifth, scrolled); passwords remembered per
+  repeater after success only.
+- Rotated date text abandoned (too small); day/month numerals instead.
 
 - Marquee for long lines (not expand-in-place).
 - v1 scope: channels only. No DMs, no contacts, no emoji picker.
@@ -205,6 +249,15 @@ Screens and controls (fenix 7S, touch + five buttons):
 - Node battery refresh every 10 minutes on the home screen.
 
 ## 7. Open items and next steps
+
+- T1000-E (branch `nrf-garmin` on pelgraine/MeshCore): nRF52
+  `src/helpers/nrf52/SerialBLEInterface.{cpp,h}` needs JUST_WORKS and
+  slicing; Bluefruit's UART is a stream, so the slice format gains a
+  length byte ([tag][len][payload]) on the Max, the watch and nRF52 at
+  once. New env `t1000e_companion_radio_ble_garmin` with the two flags
+  and 500 contacts (`MAX_CONTACTS=500` plus `CONTACTS_SRAM_FALLBACK=500`
+  on nRF52), 8 channels, `OFFLINE_QUEUE_SIZE=128`. App gains a
+  standard-only fallback when the watch hello is refused.
 
 - Persistence: cache channels, canned slots and message history in
   `Application.Storage` so launches after the first are instant and

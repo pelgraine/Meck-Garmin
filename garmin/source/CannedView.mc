@@ -96,7 +96,14 @@ class CannedDelegate extends WatchUi.BehaviorDelegate {
 
     function onNextPage() { _v.move(1); return true; }
     function onPreviousPage() { _v.move(-1); return true; }
-    function onSelect() { _v.send(); return true; }
+    // Start key read directly: claiming onSelect would also swallow screen taps.
+    function onKey(evt) {
+        if (evt.getKey() == WatchUi.KEY_ENTER) {
+            _v.send();
+            return true;
+        }
+        return false;
+    }
 
     function onBack() {
         WatchUi.popView(WatchUi.SLIDE_DOWN);

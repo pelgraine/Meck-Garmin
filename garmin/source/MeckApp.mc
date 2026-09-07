@@ -4,6 +4,7 @@ using Toybox.WatchUi;
 // Globals shared by the link and the views.
 var gModel = null;   // Model
 var gLink = null;    // NodeLink
+var gSched = null;   // Sched (the app's one timer)
 
 class MeckApp extends Application.AppBase {
 
@@ -12,6 +13,7 @@ class MeckApp extends Application.AppBase {
     }
 
     function onStart(state) {
+        gSched = new Sched();
         gModel = new Model();
         gLink = new NodeLink();
         gLink.start();

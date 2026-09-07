@@ -11,7 +11,9 @@ class ComposeView extends WatchUi.View {
     const KH = 36;
     const R1_X = 20;  const R1_W = 20;   // 10 keys, y 58..94
     const R2_X = 21;  const R2_W = 22;   // 9 keys,  y 96..132
-    const R3_X = 21;  const R3_W = 22;   // mode + 7 keys + delete, y 134..170
+    const R3_X = 21;  const R3_W = 22;   // 7 letter keys, y 134..170 (x 43..197)
+    const MODE_X = 13; const MODE_W = 30; // mode key, widened out to the circle edge
+    const DEL_X = 197; const DEL_W = 30;  // delete key, likewise
     const R1_Y = 58;
     const R2_Y = 96;
     const R3_Y = 134;
@@ -26,6 +28,8 @@ class ComposeView extends WatchUi.View {
     var _prefix;
     var _text;
     var _mode = 0;        // 0 lower, 1 upper, 2 symbols
+    var onDone = null;    // when set, Send hands the text to this Method instead of the channel
+    var title = null;     // when set, shown instead of the channel name
     var _rows;
 
     function initialize(idx, prefix) {
@@ -49,7 +53,8 @@ class ComposeView extends WatchUi.View {
 
         // channel name, top of the circle
         dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(Draw.CX, 8, Draw.FONT, Draw.fitTo(dc, gModel.channelName(_idx), 84), Graphics.TEXT_JUSTIFY_CENTER);
+        var ttl = (title != null) ? title : gModel.channelName(_idx);
+        dc.drawText(Draw.CX, 8, Draw.FONT, Draw.fitTo(dc, ttl, 84), Graphics.TEXT_JUSTIFY_CENTER);
 
         // draft box: tail of the text, cursor at the end
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
@@ -63,9 +68,9 @@ class ComposeView extends WatchUi.View {
         drawRow(dc, r[0], R1_X, R1_Y, R1_W);
         drawRow(dc, r[1], R2_X, R2_Y, R2_W);
         var modeLabel = (_mode == 0) ? "ABC" : ((_mode == 1) ? "123" : "abc");
-        drawKey(dc, R3_X, R3_Y, R3_W, KH, modeLabel, Draw.FONT, false);
+        drawKey(dc, MODE_X, R3_Y, MODE_W, KH, modeLabel, Draw.FONT, false);
         drawRow(dc, r[2], R3_X + R3_W, R3_Y, R3_W);
-        drawKey(dc, R3_X + 8 * R3_W, R3_Y, R3_W, KH, "<", KFONT, false);
+        drawKey(dc, DEL_X, R3_Y, DEL_W, KH, "<", KFONT, false);
 
         // bottom: Canned + space
         drawKey(dc, CND_X, BOT_Y, CND_W, BOT_H, "Cnd", Draw.FONT, false);
@@ -127,10 +132,10 @@ class ComposeView extends WatchUi.View {
         } else if (y >= R2_Y && y < R2_Y + KH) {
             keyIn(r[1], R2_X, R2_W, x);
         } else if (y >= R3_Y && y < R3_Y + KH) {
-            if (x >= R3_X && x < R3_X + R3_W) {
+            if (x >= MODE_X && x < MODE_X + MODE_W) {
                 _mode = (_mode + 1) % 3;
                 WatchUi.requestUpdate();
-            } else if (x >= R3_X + 8 * R3_W && x < R3_X + 9 * R3_W) {
+            } else if (x >= DEL_X && x < DEL_X + DEL_W) {
                 backspace();
             } else {
                 keyIn(r[2], R3_X + R3_W, R3_W, x);
@@ -166,6 +171,12 @@ class ComposeView extends WatchUi.View {
             gModel.showToast("Nothing to send");
             return;
         }
+        if (onDone != null) {
+            var t = _text;
+            WatchUi.popView(WatchUi.SLIDE_DOWN);
+            onDone.invoke(t);
+            return;
+        }
         gLink.sendChannelText(_idx, _text);
         WatchUi.popView(WatchUi.SLIDE_DOWN);
     }
@@ -192,7 +203,17 @@ class ComposeDelegate extends WatchUi.BehaviorDelegate {
         return true;
     }
 
-    function onSelect() { _v.send(); return true; }
+    // Start key read directly: claiming onSelect would also swallow screen taps.
+    function onKey(evt) {
+        if (evt.getKey() == WatchUi.KEY_ENTER) {
+            _v.send();
+            return true;
+        }
+        return false;
+    }
+
+    function onPreviousPage() { _v.openCanned(); return true; }
+    function onNextPage() { _v.append(" "); return true; }
 
     function onBack() {
         WatchUi.popView(WatchUi.SLIDE_DOWN);

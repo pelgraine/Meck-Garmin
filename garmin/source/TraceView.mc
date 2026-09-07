@@ -16,12 +16,10 @@ class TraceView extends WatchUi.View {
 
     var _path = "";
     var _keys;            // 5 rows x 4 columns; "Run" spans the last two cells
-    var _timer;
     var _showResults = false;
 
     function initialize() {
         View.initialize();
-        _timer = new Timer.Timer();
         _keys = [
             ["1", "2", "3", "a"],
             ["4", "5", "6", "b"],
@@ -36,11 +34,11 @@ class TraceView extends WatchUi.View {
     }
 
     function onShow() {
-        _timer.start(method(:tick), 500, true);
+        gSched.every(500, "trace", method(:tick));
     }
 
     function onHide() {
-        _timer.stop();
+        gSched.cancel("trace");
     }
 
     function tick() {
@@ -288,7 +286,14 @@ class TraceDelegate extends WatchUi.BehaviorDelegate {
         return true;
     }
 
-    function onSelect() { _v.select(); return true; }
+    // Start key read directly: claiming onSelect would also swallow screen taps.
+    function onKey(evt) {
+        if (evt.getKey() == WatchUi.KEY_ENTER) {
+            _v.select();
+            return true;
+        }
+        return false;
+    }
 
     function onBack() {
         if (_v.back()) {

@@ -8,21 +8,19 @@ module Draw {
     const FONT      = Graphics.FONT_XTINY;
     const X         = 32;    // content left edge
     const W         = 176;   // content width (x 32..208)
-    const HEAD_Y    = 20;    // header text top
+    const HEAD_Y    = 8;     // header text top (in the circle's top gap)
     const CX        = 120;   // screen centre
 
-    // Meck Watch header: "<" at the left, centred title, rule underneath.
-    // Returns the y where content may start.
+    // Header: centred title in the top gap, rule underneath, then a clear
+    // band before the first row so tall emoji glyphs cannot touch the rule.
+    // (No "<" glyph: the circle is too narrow at this height; Back does it.)
     function header(dc, title, showBack) {
         var fh = dc.getFontHeight(FONT);
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        if (showBack) {
-            dc.drawText(X + 4, HEAD_Y, FONT, "<", Graphics.TEXT_JUSTIFY_LEFT);
-        }
-        dc.drawText(CX, HEAD_Y, FONT, fitTo(dc, title, W - 40), Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(CX, HEAD_Y, FONT, fitTo(dc, title, 90), Graphics.TEXT_JUSTIFY_CENTER);
         var ruleY = HEAD_Y + fh + 2;
         dc.drawLine(X, ruleY, X + W, ruleY);
-        return ruleY + 4;
+        return ruleY + 10;
     }
 
     // One-line footer near the bottom of the circle.
@@ -67,6 +65,19 @@ module Draw {
 
     // Rows are spaced by the taller of the text font and the system emoji
     // font, so a line with an emoji cannot spill into the next row.
+    // Draw s at (x, y) clipped to w, offset for a marquee with a trailing
+    // second copy. Returns the text width so the caller can wrap the offset.
+    function marqueeRow(dc, s, x, y, w, rowH, off, gap) {
+        var tw = dc.getTextWidthInPixels(s, FONT);
+        dc.setClip(x, y, w, rowH);
+        dc.drawText(x - off, y, FONT, s, Graphics.TEXT_JUSTIFY_LEFT);
+        if (tw > w) {
+            dc.drawText(x - off + tw + gap, y, FONT, s, Graphics.TEXT_JUSTIFY_LEFT);
+        }
+        dc.clearClip();
+        return tw;
+    }
+
     function rowHeight(dc) {
         var th = dc.getFontHeight(FONT);
         if (_emojiH < 0) {

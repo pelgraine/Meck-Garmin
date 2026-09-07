@@ -10,27 +10,34 @@ using Toybox.Math;
 // extensions (MECK_WATCH_EXT). All layouts verified against Meck's MyMesh.cpp.
 module Proto {
     const CMD_APP_START            = 1;
+    const CMD_SEND_TXT_MSG         = 2;
     const CMD_SEND_CHANNEL_TXT_MSG = 3;
     const CMD_SYNC_NEXT_MESSAGE    = 10;
     const CMD_GET_BATT_AND_STORAGE = 20;
     const CMD_DEVICE_QUERY         = 22;
+    const CMD_SEND_LOGIN           = 26;
     const CMD_GET_CHANNEL          = 31;
     const CMD_SEND_TRACE_PATH      = 36;
+    const CMD_SET_FLOOD_SCOPE_KEY  = 54;
     const CMD_MECK_HELLO           = 0x70;
     const CMD_MECK_GET_CANNED      = 0x71;
     const CMD_MECK_GET_SENT_TRACK  = 0x72;
     const CMD_MECK_GET_SCOPE       = 0x73;
     const CMD_MECK_DISCOVER_START  = 0x74;
     const CMD_MECK_DISCOVER_GET    = 0x75;
+    const CMD_MECK_GET_FAV         = 0x76;
+    const CMD_MECK_RESOLVE         = 0x77;
 
     const RESP_OK                  = 0;
     const RESP_ERR                 = 1;
     const RESP_SELF_INFO           = 5;
     const RESP_SENT                = 6;
+    const RESP_CONTACT_MSG         = 7;
     const RESP_CHANNEL_MSG         = 8;
     const RESP_NO_MORE_MESSAGES    = 10;
     const RESP_BATT_AND_STORAGE    = 12;
     const RESP_DEVICE_INFO         = 13;
+    const RESP_CONTACT_MSG_V3      = 16;
     const RESP_CHANNEL_MSG_V3      = 17;
     const RESP_CHANNEL_INFO        = 18;
     const RESP_MECK_INFO           = 0x60;
@@ -39,7 +46,12 @@ module Proto {
     const RESP_MECK_CHANNEL_MSG    = 0x63;
     const RESP_MECK_SCOPE          = 0x64;
     const RESP_MECK_DISCOVER       = 0x65;
+    const RESP_MECK_FAV            = 0x66;
+    const RESP_MECK_RESOLVE        = 0x67;
     const PUSH_MSG_WAITING         = 0x83;
+    const PUSH_LOGIN_SUCCESS       = 0x85;
+    const PUSH_LOGIN_FAIL          = 0x86;
+    const TXT_TYPE_CLI             = 1;
     const PUSH_TRACE_DATA          = 0x89;
 
     const SLICE_MAX                = 19;   // payload bytes per 20-byte packet after the tag
@@ -67,20 +79,12 @@ class NodeLink extends Ble.BleDelegate {
     var _awaitEnc = false;    // write refused for security; retry after encryption
     var _syncPending = false; // node signalled messages waiting
     var _scopeReq = {};       // scope idx -> true once requested
-    var _timeout = null;      // reply timeout timer
-    var _heard1 = null;       // Heard-by follow-up timers after a send
-    var _heard2 = null;
-    var _rescan = null;       // reconnect timer
 
     function initialize() {
         BleDelegate.initialize();
         _svcUuid = Ble.stringToUuid("6E400001-B5A3-F393-E0A9-E50E24DCCA9E");
         _rxUuid  = Ble.stringToUuid("6E400002-B5A3-F393-E0A9-E50E24DCCA9E");
         _txUuid  = Ble.stringToUuid("6E400003-B5A3-F393-E0A9-E50E24DCCA9E");
-        _timeout = new Timer.Timer();
-        _rescan = new Timer.Timer();
-        _heard1 = new Timer.Timer();
-        _heard2 = new Timer.Timer();
     }
 
     // ---------------------------------------------------------------- lifecycle
@@ -102,10 +106,10 @@ class NodeLink extends Ble.BleDelegate {
     }
 
     function shutdown() {
-        _timeout.stop();
-        _rescan.stop();
-        _heard1.stop();
-        _heard2.stop();
+        gSched.cancel("timeout");
+        gSched.cancel("rescan");
+        gSched.cancel("heard1");
+        gSched.cancel("heard2");
         Ble.setScanState(Ble.SCAN_STATE_OFF);
         if (_device != null) {
             Ble.unpairDevice(_device);
@@ -178,8 +182,8 @@ class NodeLink extends Ble.BleDelegate {
             _awaitEnc = false;
             _q = [];
             _rxBuf = null;
-            _timeout.stop();
-            _rescan.start(method(:startScan), 2000, false);
+            gSched.cancel("timeout");
+            gSched.after(2000, "rescan", method(:startScan));
         } else {
             gModel.setStatus("Conn state " + state);
         }
@@ -252,6 +256,9 @@ class NodeLink extends Ble.BleDelegate {
         enqueue([Proto.CMD_APP_START, 0, 0, 0, 0, 0, 0, 0,
                  0x4D, 0x65, 0x63, 0x6B, 0x57, 0x61, 0x74, 0x63, 0x68]b);
         enqueue([Proto.CMD_MECK_HELLO, 1]b);
+        // Clear any scope a phone app left set on the node, so watch sends use
+        // the channel's own region (then the device default) like node-typed ones.
+        enqueue([Proto.CMD_SET_FLOOD_SCOPE_KEY, 0]b);
         pump();
     }
 
@@ -276,8 +283,7 @@ class NodeLink extends Ble.BleDelegate {
         _inflight = _q[0];
         _q = _q.slice(1, _q.size());
         writeFrame(_inflight);
-        _timeout.stop();
-        _timeout.start(method(:onTimeout), 5000, false);
+        gSched.after(5000, "timeout", method(:onTimeout));
     }
 
     function onTimeout() {
@@ -351,7 +357,7 @@ class NodeLink extends Ble.BleDelegate {
         System.println("[link] write status " + status);
         _inflight = null;
         _txSlices = null;
-        _timeout.stop();
+        gSched.cancel("timeout");
         pump();
     }
 
@@ -392,11 +398,15 @@ class NodeLink extends Ble.BleDelegate {
                 pump();
             } else if (code == Proto.PUSH_TRACE_DATA) {
                 parseTraceResult(f);
+            } else if (code == Proto.PUSH_LOGIN_SUCCESS) {
+                gModel.adminResult(true);
+            } else if (code == Proto.PUSH_LOGIN_FAIL) {
+                gModel.adminResult(false);
             }
             return;   // other pushes ignored
         }
         // A reply: it completes whatever is in flight.
-        _timeout.stop();
+        gSched.cancel("timeout");
         var cmd = (_inflight != null) ? _inflight[0] : -1;
         _inflight = null;
 
@@ -450,6 +460,21 @@ class NodeLink extends Ble.BleDelegate {
                    || code == Proto.RESP_CHANNEL_MSG) {
             parseChannelMsg(f, code);
             _syncPending = true;   // ask for the next one
+        } else if (code == Proto.RESP_CONTACT_MSG_V3 || code == Proto.RESP_CONTACT_MSG) {
+            parseContactMsg(f, code);
+            _syncPending = true;   // keep draining the queue past DMs
+        } else if (code == Proto.RESP_MECK_FAV) {
+            parseFav(f);
+        } else if (code == Proto.RESP_MECK_RESOLVE) {
+            // [plen][prefix][name]
+            if (f.size() >= 2) {
+                var plen = f[1];
+                if (f.size() >= 2 + plen) {
+                    var key = hexOf(f.slice(2, 2 + plen));
+                    var nm = (f.size() > 2 + plen) ? bytesToString(f, 2 + plen, f.size() - 2 - plen) : "";
+                    gModel.names.put(key, nm);
+                }
+            }
         } else if (code == Proto.RESP_NO_MORE_MESSAGES) {
             _syncPending = false;
             gModel.setStatus("Synced");
@@ -467,13 +492,16 @@ class NodeLink extends Ble.BleDelegate {
                 gModel.showToast("Sent!");
                 _q.add([Proto.CMD_MECK_GET_SENT_TRACK, 0]b);   // learn the fingerprint
                 // Echoes from repeaters arrive over the next few seconds.
-                _heard1.stop();
-                _heard1.start(method(:refreshSentTrack), 4000, false);
-                _heard2.stop();
-                _heard2.start(method(:refreshSentTrack), 10000, false);
+                gSched.after(4000, "heard1", method(:refreshSentTrack));
+                gSched.after(10000, "heard2", method(:refreshSentTrack));
             }
         } else if (code == Proto.RESP_ERR) {
             System.println("[link] err " + ((f.size() > 1) ? f[1] : 0) + " for cmd " + cmd);
+            if (cmd == Proto.CMD_SEND_LOGIN) {
+                gModel.adminResult(false);
+            } else if (cmd == Proto.CMD_SEND_TXT_MSG) {
+                gModel.cliFailed();
+            }
         }
         WatchUi.requestUpdate();
         pump();
@@ -623,12 +651,13 @@ class NodeLink extends Ble.BleDelegate {
             :sent => true, :fp => null, :heard => null, :rx => ts
         };
         gModel.addMessage(chIdx, m, false);
+        _q.add([Proto.CMD_SET_FLOOD_SCOPE_KEY, 0]b);   // node picks channel region / default
         enqueue(frame);
     }
 
     // Drop the link and start again (Settings > Reconnect).
     function reconnect() {
-        _rescan.stop();
+        gSched.cancel("rescan");
         Ble.setScanState(Ble.SCAN_STATE_OFF);
         if (_device != null) {
             Ble.unpairDevice(_device);   // triggers onConnectedStateChanged(DISCONNECTED) -> rescan
@@ -642,6 +671,119 @@ class NodeLink extends Ble.BleDelegate {
         if (_ready) {
             enqueue([Proto.CMD_GET_BATT_AND_STORAGE]b);
         }
+    }
+
+    // ---- Contact messages (DMs and CLI replies) ----
+    // V3 (16): [snr*4][res][res][prefix:6][path_len][txt_type][ts:4][text]
+    // V1 (7):  [prefix:6][path_len][txt_type][ts:4][text]
+    function parseContactMsg(f, code) {
+        var prefix;
+        var txt;
+        var off;
+        if (code == Proto.RESP_CONTACT_MSG_V3) {
+            if (f.size() < 16) { return; }
+            prefix = f.slice(4, 10);
+            txt = f[11];
+            off = 16;
+        } else {
+            if (f.size() < 13) { return; }
+            prefix = f.slice(1, 7);
+            txt = f[8];
+            off = 13;
+        }
+        if (txt != Proto.TXT_TYPE_CLI) {
+            return;   // plain DMs are out of scope for v1
+        }
+        var text = (off < f.size()) ? bytesToString(f, off, f.size() - off) : "";
+        gModel.cliReply(hexOf(prefix), text);
+    }
+
+    // ---- Favourites ----
+    var _favBusy = false;
+
+    function favsFetch() {
+        if (!_ready || _favBusy) {
+            return;
+        }
+        gModel.favs = [];
+        _favBusy = true;
+        enqueue([Proto.CMD_MECK_GET_FAV, 0]b);
+    }
+
+    // 0x66: [n][count] then, if n < count: [type][last_advert:4][pubkey:32][name]
+    function parseFav(f) {
+        if (f.size() < 3) { _favBusy = false; return; }
+        var n = f[1];
+        var count = f[2];
+        gModel.favCount = count;
+        if (n < count && f.size() >= 40) {
+            var e = {
+                :type => f[3], :last => u32le(f, 4), :pubkey => f.slice(8, 40),
+                :name => (f.size() > 40) ? bytesToString(f, 40, f.size() - 40) : ""
+            };
+            while (gModel.favs.size() <= n) {
+                gModel.favs.add(null);
+            }
+            gModel.favs[n] = e;
+        }
+        if (n + 1 < count) {
+            _q.add([Proto.CMD_MECK_GET_FAV, n + 1]b);
+        } else {
+            _favBusy = false;
+        }
+        WatchUi.requestUpdate();
+    }
+
+    // Ask the node for the contact name behind a pubkey prefix (once each).
+    var _resolveReq = {};
+
+    function resolve(prefixBytes) {
+        var key = hexOf(prefixBytes);
+        if (!_ready || gModel.names.hasKey(key) || _resolveReq.hasKey(key)) {
+            return;
+        }
+        _resolveReq.put(key, true);
+        var frame = [Proto.CMD_MECK_RESOLVE, prefixBytes.size()]b;
+        frame = frame.addAll(prefixBytes);
+        enqueue(frame);
+    }
+
+    // ---- Repeater admin ----
+    // Standard login: [26][pubkey:32][password]. Result arrives as a push.
+    function login(pubkey, password) {
+        if (!_ready) {
+            gModel.setStatus("Not connected");
+            return false;
+        }
+        var frame = [Proto.CMD_SEND_LOGIN]b;
+        frame = frame.addAll(pubkey);
+        frame = frame.addAll(stringToBytes(password));
+        enqueue(frame);
+        return true;
+    }
+
+    // CLI command to a logged-in repeater: standard text send, type 1.
+    // [2][txt_type=1][attempt=0][ts:4][pubkey prefix:6][text]
+    function sendCli(pubkey, text) {
+        if (!_ready) {
+            gModel.setStatus("Not connected");
+            return false;
+        }
+        var ts = Time.now().value();
+        var frame = [Proto.CMD_SEND_TXT_MSG, Proto.TXT_TYPE_CLI, 0, 0, 0, 0, 0]b;
+        frame.encodeNumber(ts, Lang.NUMBER_FORMAT_UINT32, {:offset => 3, :endianness => Lang.ENDIAN_LITTLE});
+        frame = frame.addAll(pubkey.slice(0, 6));
+        frame = frame.addAll(stringToBytes(text));
+        enqueue(frame);
+        return true;
+    }
+
+    function hexOf(ba) {
+        var s = "";
+        for (var i = 0; i < ba.size(); i++) {
+            s = s + ba[i].format("%02x");
+        }
+        return s;
     }
 
     // ---- Discover ----
