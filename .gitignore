@@ -1,7 +1,7 @@
 # Connect IQ build output
-garmin/bin/
-garmin/*.prg
-garmin/*.prg.debug.xml
+meckgarmin/bin/
+meckgarmin/*.prg
+meckgarmin/*.prg.debug.xml
 spike/bin/
 spike/*.prg
 spike/*.prg.debug.xml

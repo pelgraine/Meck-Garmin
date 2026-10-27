@@ -22,8 +22,9 @@ It carries the Meck name because it was designed first for the Meck T-Deck Max c
 - A MeshCore companion node running one of the Garmin builds below. A stock
   MeshCore node will not work: Garmin watches cannot enter a Bluetooth PIN,
   so the node has to be built to accept a pairing without one.
-- A computer with VS Code and the Connect IQ SDK to build the app, or a
-  `meckgarmin.prg` from the Releases page to copy straight onto the watch.
+- A computer with VS Code and the Connect IQ SDK to build the app (Garmin
+  publishes the SDK for Windows, macOS and Linux), or a `meckgarmin.prg`
+  from the Releases page to copy straight onto the watch.
 
 ## Node firmware
 
@@ -64,7 +65,9 @@ build it yourself. Both end with copying the file onto the watch.
 
 ### Copying the app onto the watch
 
-The fenix 7S is an MTP device; it does not appear in the Mac's Finder.
+The fenix 7S connects as an MTP device. These are the Mac steps, which is
+how the app has been installed so far; on a Mac the watch does not appear
+in Finder, so a separate MTP app is needed.
 
 1. Quit Garmin Express completely (check Activity Monitor for its service).
 2. Open OpenMTP (openmtp.ganeshrvel.com) with the watch on its cable.
@@ -78,28 +81,32 @@ The fenix 7S is an MTP device; it does not appear in the Mac's Finder.
 
 ### Building it yourself
 
-One-time setup on a Mac:
+One-time setup (written from a Mac; the SDK Manager is also published for
+Windows and Linux, and the steps are the same apart from the installers):
 
 1. Install VS Code.
-2. Install Java (adoptium.net, macOS installer for your chip).
+2. Install Java (adoptium.net, the installer for your system and chip).
 3. Garmin Connect IQ SDK Manager (developer.garmin.com/connect-iq/sdk/):
    sign in, download the latest SDK and make it active, download the
    fenix 7S device files.
 4. In VS Code install the "Monkey C" extension by Garmin. Restart.
-5. Cmd+Shift+P, "Monkey C: Verify Installation".
+5. Open the command palette (Cmd+Shift+P on a Mac, Ctrl+Shift+P elsewhere)
+   and run "Monkey C: Verify Installation".
 
 Then, each build:
 
-1. File > Open Folder and pick the `garmin` folder inside this repository,
-   not the repository's top folder. The Monkey C extension looks for
-   `monkey.jungle` in the folder you opened; opening the top folder gives
-   "Connect IQ project not found. Be sure your project has a jungle file".
-2. Cmd+Shift+P, "Monkey C: Build for Device". The manifest lists only the
-   fenix 7S, so it goes straight to the output folder; accept it. The first
-   build generates a developer key; keep it.
+1. File > Open Folder and pick the `meckgarmin` folder inside this
+   repository, not the repository's top folder. The Monkey C extension
+   looks for `monkey.jungle` in the folder you opened; opening the top
+   folder gives "Connect IQ project not found. Be sure your project has a
+   jungle file".
+2. From the command palette run "Monkey C: Build for Device". The manifest
+   lists only the fenix 7S, so it goes straight to the output folder; accept
+   it. The first build generates a developer key; keep it.
 3. Expect a long list of "Cannot determine if container access is using
    container type" warnings and no ERROR lines. The `.prg` lands in the
-   project folder as `meckgarmin.prg`.
+   project folder, named after the folder: `meckgarmin.prg`. Keep that name
+   if you want the optional log file (`MECKGARMIN.TXT`) to match.
 
 ## Pairing your node
 
@@ -224,7 +231,7 @@ either.
 
 ## Repository layout
 
-- `garmin/`: the app (Monkey C). Build from this folder.
+- `meckgarmin/`: the app (Monkey C). Build from this folder.
 - `docs/HANDOFF.md`: the project record: what was proven on hardware, the
   protocol facts the app relies on, decisions, open items.
 - `firmware/meck/`: reference copies of the Meck files that carry the
