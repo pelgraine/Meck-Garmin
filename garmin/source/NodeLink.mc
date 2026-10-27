@@ -12,6 +12,7 @@ module Proto {
     const CMD_APP_START            = 1;
     const CMD_SEND_TXT_MSG         = 2;
     const CMD_SEND_CHANNEL_TXT_MSG = 3;
+    const CMD_ADD_UPDATE_CONTACT   = 9;
     const CMD_SYNC_NEXT_MESSAGE    = 10;
     const CMD_GET_BATT_AND_STORAGE = 20;
     const CMD_DEVICE_QUERY         = 22;
@@ -51,10 +52,12 @@ module Proto {
     const PUSH_MSG_WAITING         = 0x83;
     const PUSH_LOGIN_SUCCESS       = 0x85;
     const PUSH_LOGIN_FAIL          = 0x86;
+    const PUSH_NEW_ADVERT          = 0x8A;
+    const ADV_TYPE_REPEATER        = 2;
     const TXT_TYPE_CLI             = 1;
     const PUSH_TRACE_DATA          = 0x89;
 
-    const SLICE_MAX                = 19;   // payload bytes per 20-byte packet after the tag
+    const SLICE_MAX                = 18;   // payload bytes per 20-byte packet after tag + length
 }
 
 // Owns the Bluetooth connection to the node and speaks the companion
@@ -190,8 +193,10 @@ class NodeLink extends Ble.BleDelegate {
     }
 
     function onEncryptionStatus(device, status) {
+        System.println("[link] encryption status " + status);
         if (status == Ble.STATUS_SUCCESS) {
             if (!_ready) {
+                _awaitEnc = false;   // the probe write set it; the session restarts from subscribe()
                 subscribe();
             } else if (_awaitEnc && _inflight != null) {
                 _awaitEnc = false;
@@ -235,12 +240,23 @@ class NodeLink extends Ble.BleDelegate {
 
     function onDescriptorWrite(descriptor, status) {
         _subscribing = false;
+        System.println("[link] notify enable status " + status);
         if (status == Ble.STATUS_SUCCESS) {
             _ready = true;
             gModel.connected = true;
             beginSession();
+        } else if (status == 18 || status == 19) {
+            // The node wants an encrypted link before it will turn notifications
+            // on (nRF52 nodes guard this descriptor; ESP32 nodes leave it open).
+            // The watch is not seen to pair after a refused descriptor write, but
+            // it does pair after a refused command write, so send one now. Its
+            // reply (18) lands in onCharacteristicWrite, which waits for
+            // onEncryptionStatus; that then re-runs subscribe() while _ready is
+            // still false, and the notify-enable succeeds on the encrypted link.
+            gModel.setStatus("Pairing...");
+            _txSlices = null;
+            writeChunk([Proto.CMD_DEVICE_QUERY, 3]b);
         } else {
-            // 18/19 = needs pairing; onEncryptionStatus will retry subscribe()
             gModel.setStatus("Pairing...");
         }
     }
@@ -259,6 +275,20 @@ class NodeLink extends Ble.BleDelegate {
         // Clear any scope a phone app left set on the node, so watch sends use
         // the channel's own region (then the device default) like node-typed ones.
         enqueue([Proto.CMD_SET_FLOOD_SCOPE_KEY, 0]b);
+        pump();
+    }
+
+    // Channels (count from device info), canned slots (Meck only), battery,
+    // then the message sync.
+    function finishHandshake(cannedSlots) {
+        for (var c = 0; c < gModel.maxChannels; c++) {
+            _q.add([Proto.CMD_GET_CHANNEL, c]b);
+        }
+        for (var s = 0; s < cannedSlots; s++) {
+            _q.add([Proto.CMD_MECK_GET_CANNED, s]b);
+        }
+        _q.add([Proto.CMD_GET_BATT_AND_STORAGE]b);
+        _syncPending = true;   // runs after the queue drains
         pump();
     }
 
@@ -314,7 +344,7 @@ class NodeLink extends Ble.BleDelegate {
             }
             var last = (off + n >= frame.size());
             var tag = (off == 0) ? 0xF0 : (last ? 0xF2 : 0xF1);
-            var chunk = [tag]b;
+            var chunk = [tag, n]b;
             chunk = chunk.addAll(frame.slice(off, off + n));
             if (first == null) {
                 first = chunk;
@@ -349,6 +379,7 @@ class NodeLink extends Ble.BleDelegate {
         }
         if (status == 18 || status == 19) {
             // Not yet encrypted: the watch pairs now; retry after onEncryptionStatus.
+            System.println("[link] write status " + status + ", waiting for encryption");
             _awaitEnc = true;
             _txSlices = null;
             gModel.setStatus("Pairing...");
@@ -373,10 +404,12 @@ class NodeLink extends Ble.BleDelegate {
                 if (tag == 0xF0 || tag == 0xF3) {
                     _rxBuf = []b;
                 }
-                if (_rxBuf == null) {
+                if (_rxBuf == null || value.size() < 2) {
                     return;
                 }
-                _rxBuf = _rxBuf.addAll(value.slice(1, value.size()));
+                var n = value[1];
+                if (n > value.size() - 2) { n = value.size() - 2; }
+                _rxBuf = _rxBuf.addAll(value.slice(2, 2 + n));
                 if (tag == 0xF2 || tag == 0xF3) {
                     var frame = _rxBuf;
                     _rxBuf = null;
@@ -402,6 +435,17 @@ class NodeLink extends Ble.BleDelegate {
                 gModel.adminResult(true);
             } else if (code == Proto.PUSH_LOGIN_FAIL) {
                 gModel.adminResult(false);
+            } else if (code == Proto.PUSH_NEW_ADVERT) {
+                // A Meck node applies its own auto-add settings; nothing to do.
+                // A standard node expects the app to decide: add repeaters only,
+                // by sending the pushed contact back as an add-contact command
+                // (the two frames share the same body).
+                if (!gModel.meckExt && f.size() >= 34 && f[33] == Proto.ADV_TYPE_REPEATER) {
+                    var add = [Proto.CMD_ADD_UPDATE_CONTACT]b;
+                    add = add.addAll(f.slice(1, f.size()));
+                    enqueue(add);
+                    gModel.showToast("Added repeater");
+                }
             }
             return;   // other pushes ignored
         }
@@ -427,18 +471,12 @@ class NodeLink extends Ble.BleDelegate {
             }
             gModel.setStatus("Node: " + gModel.nodeName);
         } else if (code == Proto.RESP_MECK_INFO) {
+            gModel.meckExt = true;
             var slots = (f.size() > 2) ? f[2] : 10;
             if (f.size() > 3) {
                 gModel.bph = f[3];
             }
-            for (var c = 0; c < gModel.maxChannels; c++) {
-                _q.add([Proto.CMD_GET_CHANNEL, c]b);
-            }
-            for (var s = 0; s < slots; s++) {
-                _q.add([Proto.CMD_MECK_GET_CANNED, s]b);
-            }
-            _q.add([Proto.CMD_GET_BATT_AND_STORAGE]b);
-            _syncPending = true;   // runs after the queue drains
+            finishHandshake(slots);
         } else if (code == Proto.RESP_CHANNEL_INFO) {
             if (f.size() >= 34) {
                 var nm = bytesToString(f, 2, 32);
@@ -490,6 +528,7 @@ class NodeLink extends Ble.BleDelegate {
         } else if (code == Proto.RESP_OK) {
             if (cmd == Proto.CMD_SEND_CHANNEL_TXT_MSG) {
                 gModel.showToast("Sent!");
+                if (!gModel.meckExt) { WatchUi.requestUpdate(); pump(); return; }
                 _q.add([Proto.CMD_MECK_GET_SENT_TRACK, 0]b);   // learn the fingerprint
                 // Echoes from repeaters arrive over the next few seconds.
                 gSched.after(4000, "heard1", method(:refreshSentTrack));
@@ -497,7 +536,12 @@ class NodeLink extends Ble.BleDelegate {
             }
         } else if (code == Proto.RESP_ERR) {
             System.println("[link] err " + ((f.size() > 1) ? f[1] : 0) + " for cmd " + cmd);
-            if (cmd == Proto.CMD_SEND_LOGIN) {
+            if (cmd == Proto.CMD_MECK_HELLO) {
+                // Not a Meck node: standard companion protocol only.
+                gModel.meckExt = false;
+                gModel.setStatus("Standard node");
+                finishHandshake(0);
+            } else if (cmd == Proto.CMD_SEND_LOGIN) {
                 gModel.adminResult(false);
             } else if (cmd == Proto.CMD_SEND_TXT_MSG) {
                 gModel.cliFailed();
@@ -561,7 +605,7 @@ class NodeLink extends Ble.BleDelegate {
             :rx => Time.now().value()
         };
         gModel.addMessage(ch, m, !sent);
-        if (scope < 0xFE && !gModel.scopes.hasKey(scope) && !_scopeReq.hasKey(scope)) {
+        if (gModel.meckExt && scope < 0xFE && !gModel.scopes.hasKey(scope) && !_scopeReq.hasKey(scope)) {
             _scopeReq.put(scope, true);
             _q.add([Proto.CMD_MECK_GET_SCOPE, scope]b);
         }
@@ -650,6 +694,9 @@ class NodeLink extends Ble.BleDelegate {
             :hops => 0xFF, :path => null, :snr => 0, :scope => 0xFF,
             :sent => true, :fp => null, :heard => null, :rx => ts
         };
+        if (!gModel.meckExt) {
+            m.put(:fp, []b);   // no sent-track on a standard node; leave Heard-by blank
+        }
         gModel.addMessage(chIdx, m, false);
         _q.add([Proto.CMD_SET_FLOOD_SCOPE_KEY, 0]b);   // node picks channel region / default
         enqueue(frame);
@@ -739,7 +786,7 @@ class NodeLink extends Ble.BleDelegate {
 
     function resolve(prefixBytes) {
         var key = hexOf(prefixBytes);
-        if (!_ready || gModel.names.hasKey(key) || _resolveReq.hasKey(key)) {
+        if (!_ready || !gModel.meckExt || gModel.names.hasKey(key) || _resolveReq.hasKey(key)) {
             return;
         }
         _resolveReq.put(key, true);
@@ -890,9 +937,17 @@ class NodeLink extends Ble.BleDelegate {
         WatchUi.requestUpdate();
     }
 
+    // Ask the node for any queued messages now (called on wake).
+    function syncNow() {
+        if (_ready) {
+            _syncPending = true;
+            pump();
+        }
+    }
+
     // Refresh Heard-by for recent sends (tracking slots 0..3).
     function refreshSentTrack() {
-        if (!_ready) {
+        if (!_ready || !gModel.meckExt) {
             return;
         }
         for (var n = 0; n < 4; n++) {

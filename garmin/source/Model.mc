@@ -9,6 +9,7 @@ class Model {
 
     var status = "Starting";     // one-line link status shown in footers
     var connected = false;
+    var meckExt = true;          // false after a node refuses the watch hello (standard MeshCore)
     var nodeName = "";
     var fwVersion = "";
     var nodeMv = 0;              // node battery, millivolts (0 = unknown)

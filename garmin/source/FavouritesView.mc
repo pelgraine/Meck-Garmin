@@ -15,6 +15,7 @@ class FavouritesView extends WatchUi.View {
     var _rowH = 18;
     var _tickOff = 0;
     var _tickW = 0;
+    var _tickLoops = 0;
     var _fetched = false;
 
     function initialize() {
@@ -41,6 +42,10 @@ class FavouritesView extends WatchUi.View {
         _tickOff += 6;
         if (_tickOff > _tickW + 24) {
             _tickOff = 0;
+            _tickLoops++;
+            if (_tickLoops >= 3) {
+                gSched.cancel("marquee");   // rest after three passes
+            }
         }
         WatchUi.requestUpdate();
     }
@@ -115,6 +120,8 @@ class FavouritesView extends WatchUi.View {
         if (_sel < 0) { _sel = n - 1; }
         if (_sel >= n) { _sel = 0; }
         _tickOff = 0;
+        _tickLoops = 0;
+        gSched.every(40, "marquee", method(:onTick));
         WatchUi.requestUpdate();
     }
 
@@ -240,6 +247,7 @@ class AdminView extends WatchUi.View {
     var _respTop = 0;
     var _tickOff = 0;
     var _tickW = 0;
+    var _tickLoops = 0;
     var _menu;
 
     function initialize() {
@@ -270,6 +278,10 @@ class AdminView extends WatchUi.View {
         _tickOff += 6;
         if (_tickOff > _tickW + 24) {
             _tickOff = 0;
+            _tickLoops++;
+            if (_tickLoops >= 3) {
+                gSched.cancel("marquee");   // rest after three passes
+            }
         }
         WatchUi.requestUpdate();
     }
@@ -478,6 +490,8 @@ class AdminView extends WatchUi.View {
             if (_respSel < 0) { _respSel = 0; }
             if (_respSel >= n) { _respSel = n - 1; }
             _tickOff = 0;
+            _tickLoops = 0;
+            gSched.every(40, "marquee", method(:onTick));
         } else {
             _sel = (_sel + d + _menu.size()) % _menu.size();
         }

@@ -27,6 +27,7 @@ class ChannelView extends WatchUi.View {
     var _tick = -1;           // message index being marqueed, -1 = none
     var _tickOff = 0;
     var _tickW = 0;
+    var _tickLoops = 0;       // full passes completed; rests after 3 to save power
     var _overlay = null;      // message dict in the overlay, or null
     var _hot = null;          // [x, y, w, h] of the overlay's action hotspot
 
@@ -42,6 +43,15 @@ class ChannelView extends WatchUi.View {
 
     function onHide() {
         stopTicker();
+    }
+
+    function onEnterSleep() {
+        stopTicker();
+    }
+
+    function onExitSleep() {
+        gLink.syncNow();
+        WatchUi.requestUpdate();
     }
 
     // ---------------------------------------------------------------- drawing
@@ -256,6 +266,7 @@ class ChannelView extends WatchUi.View {
     function startTicker(i) {
         _tick = i;
         _tickOff = 0;
+        _tickLoops = 0;
         gSched.every(40, "marquee", method(:onTick));
         WatchUi.requestUpdate();
     }
@@ -275,6 +286,11 @@ class ChannelView extends WatchUi.View {
         _tickOff += 6;   // 3x the original speed
         if (_tickOff > _tickW + TICK_GAP) {
             _tickOff = 0;
+            _tickLoops++;
+            if (_tickLoops >= 3) {
+                gSched.cancel("marquee");   // rest; Start or a tap restarts it
+                _tick = -1;
+            }
         }
         WatchUi.requestUpdate();
     }
