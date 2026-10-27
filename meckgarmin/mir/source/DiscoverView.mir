@@ -1,0 +1,1439 @@
+[ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 1; @symbol_usingdef<0> = [Toybox,1,6,12]; @symbol_usingdef<1> = [WatchUi,1,13,20]; ]
+using Toybox.WatchUi;
+[ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 2; @symbol_usingdef<0> = [Toybox,2,6,12]; @symbol_usingdef<1> = [Graphics,2,13,21]; ]
+using Toybox.Graphics;
+[ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 3; @symbol_usingdef<0> = [Toybox,3,6,12]; @symbol_usingdef<1> = [Timer,3,13,18]; ]
+using Toybox.Timer;
+[ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 9; @symbol_classdef = [DiscoverView,9,6,18]; @symbol_extends<0> = [WatchUi,9,27,34]; @symbol_extends<1> = [View,9,35,39]; ]
+class DiscoverView extends WatchUi.View {
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 9; ]
+    <init> {
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 9; ]
+    static
+    <init> {
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 11; @position = 8; @symbol_vardef = [_sel,11,8,12]; ]
+    var _sel = 0;
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 12; @position = 8; @symbol_vardef = [_top,12,8,12]; ]
+    var _top = 0;
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 13; @position = 8; @symbol_vardef = [_rows,13,8,13]; ]
+    var _rows = 1;
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 14; @position = 8; @symbol_vardef = [_y0,14,8,11]; ]
+    var _y0 = 50;
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 15; @position = 8; @symbol_vardef = [_rowH,15,8,13]; ]
+    var _rowH = 18;
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 16; @position = 8; @symbol_vardef = [_started,16,8,16]; ]
+    var _started = false;
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 18; @symbol_functiondef = [initialize,18,13,23]; ]
+    function initialize() as Void {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_18_26_20_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 19 8 ]
+        symbol [ View %tmp.2 19 8 12 ];
+        %tmp.2 = getv ? :View;
+        symbol [ initialize %tmp.3 19 13 23 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_18_26_20_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 22; @symbol_functiondef = [onShow,22,13,19]; ]
+    function onShow() {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_22_22_28_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 23 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_23_8_26_8_if_stmt:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_23_12_23_66_begin:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_23_12_23_53_begin:
+        symbol [ _started %tmp.2 23 13 21 ];
+        %tmp.2 = getv ? :_started;
+        %tmp.3 = not %tmp.2;
+        bf %tmp.3 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_23_8_26_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_23_25_23_53_true:
+        symbol [ gModel %tmp.5 23 25 31 ];
+        %tmp.5 = getv ? :gModel;
+        symbol [ discovered %tmp.6 23 32 42 ];
+        %tmp.6 = getv %tmp.5 :discovered;
+        symbol [ size %tmp.7 23 43 47 ];
+        %tmp.7 = getv function %tmp.6 :size;
+        %tmp.8 = invoke %tmp.6 %tmp.7();
+        %tmp.9 = 0;
+        %tmp.10 = eq %tmp.8 %tmp.9;
+        push %tmp.10;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_23_25_23_53_end:
+        %tmp.11 = phi [%tmp.3 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_23_12_23_53_begin] [%tmp.10 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_23_25_23_53_true] [%tmp.11 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_23_25_23_53_end];
+        bf %tmp.11 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_23_8_26_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_23_58_23_66_true:
+        symbol [ gModel %tmp.13 23 59 65 ];
+        %tmp.13 = getv ? :gModel;
+        symbol [ discoverActive %tmp.14 23 66 80 ];
+        %tmp.14 = getv %tmp.13 :discoverActive;
+        %tmp.15 = not %tmp.14;
+        push %tmp.15;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_23_58_23_66_end:
+        %tmp.16 = phi [%tmp.11 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_23_12_23_66_begin] [%tmp.15 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_23_58_23_66_true] [%tmp.16 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_23_58_23_66_end];
+        bf %tmp.16 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_23_8_26_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_23_8_26_8_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_23_82_26_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 24 12 ]
+        %tmp.17 = true;
+        symbol [ _started ? 24 12 20 ];
+        putv self :_started %tmp.17;
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 25 12 ]
+        symbol [ gLink %tmp.19 25 12 17 ];
+        %tmp.19 = getv ? :gLink;
+        symbol [ discoverStart %tmp.20 25 18 31 ];
+        %tmp.20 = getv function %tmp.19 :discoverStart;
+        invoke %tmp.19 %tmp.20();
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_23_82_26_8_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_23_8_26_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_23_8_26_8_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 27 8 ]
+        symbol [ gSched %tmp.22 27 8 14 ];
+        %tmp.22 = getv ? :gSched;
+        symbol [ every %tmp.23 27 15 20 ];
+        %tmp.23 = getv function %tmp.22 :every;
+        %tmp.24 = 1000;
+        %tmp.25 = "discover";
+        %tmp.26 = self;
+        symbol [ method %tmp.27 27 39 45 ];
+        %tmp.27 = getv function %tmp.26 :method;
+        %tmp.29 = const :tick;
+        symbol [ tick %tmp.29 27 47 51 const ];
+        %tmp.30 = invoke %tmp.26 %tmp.27(%tmp.29);
+        invoke %tmp.22 %tmp.23(%tmp.24, %tmp.25, %tmp.30);
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_22_22_28_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 30; @symbol_functiondef = [onHide,30,13,19]; ]
+    function onHide() {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_30_22_32_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 31 8 ]
+        symbol [ gSched %tmp.2 31 8 14 ];
+        %tmp.2 = getv ? :gSched;
+        symbol [ cancel %tmp.3 31 15 21 ];
+        %tmp.3 = getv function %tmp.2 :cancel;
+        %tmp.4 = "discover";
+        invoke %tmp.2 %tmp.3(%tmp.4);
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_30_22_32_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 34; @symbol_functiondef = [tick,34,13,17]; ]
+    function tick() {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_34_20_39_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 35 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_35_8_37_8_if_stmt:
+        symbol [ gModel %tmp.2 35 12 18 ];
+        %tmp.2 = getv ? :gModel;
+        symbol [ discoverActive %tmp.3 35 19 33 ];
+        %tmp.3 = getv %tmp.2 :discoverActive;
+        bf %tmp.3 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_35_8_37_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_35_8_37_8_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_35_35_37_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 36 12 ]
+        symbol [ gLink %tmp.5 36 12 17 ];
+        %tmp.5 = getv ? :gLink;
+        symbol [ discoverPoll %tmp.6 36 18 30 ];
+        %tmp.6 = getv function %tmp.5 :discoverPoll;
+        invoke %tmp.5 %tmp.6();
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_35_35_37_8_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_35_8_37_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_35_8_37_8_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 38 8 ]
+        symbol [ WatchUi %tmp.7 38 8 15 ];
+        %tmp.7 = getm $.Toybox.WatchUi;
+        symbol [ requestUpdate %tmp.8 38 16 29 ];
+        %tmp.8 = getv function %tmp.7 :requestUpdate;
+        invoke %tmp.7 %tmp.8();
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_34_20_39_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 41; @symbol_functiondef = [rescan,41,13,19]; ]
+    function rescan() {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_41_22_46_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 42 8 ]
+        %tmp.1 = 0;
+        symbol [ _sel ? 42 8 12 ];
+        putv self :_sel %tmp.1;
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 43 8 ]
+        %tmp.2 = 0;
+        symbol [ _top ? 43 8 12 ];
+        putv self :_top %tmp.2;
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 44 8 ]
+        symbol [ gLink %tmp.4 44 8 13 ];
+        %tmp.4 = getv ? :gLink;
+        symbol [ discoverStart %tmp.5 44 14 27 ];
+        %tmp.5 = getv function %tmp.4 :discoverStart;
+        invoke %tmp.4 %tmp.5();
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 45 8 ]
+        symbol [ WatchUi %tmp.6 45 8 15 ];
+        %tmp.6 = getm $.Toybox.WatchUi;
+        symbol [ requestUpdate %tmp.7 45 16 29 ];
+        %tmp.7 = getv function %tmp.6 :requestUpdate;
+        invoke %tmp.6 %tmp.7();
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_41_22_46_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 48; @symbol_functiondef = [typeChar,48,20,28]; @symbol_param<0> = [t,48,29,30]; ]
+    static
+    function typeChar(t) {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_48_32_54_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 49 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_49_8_49_34_if_stmt:
+        %tmp.1 = lgetv %t;
+        symbol [ t %tmp.1 49 12 13 ];
+        %tmp.2 = 1;
+        %tmp.3 = eq %tmp.1 %tmp.2;
+        bf %tmp.3 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_49_8_49_34_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_49_8_49_34_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_49_20_49_34_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 49 22 ]
+        %tmp.4 = "C";
+        ret %tmp.4;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_49_20_49_34_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_49_8_49_34_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_49_8_49_34_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 50 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_50_8_50_34_if_stmt:
+        %tmp.5 = lgetv %t;
+        symbol [ t %tmp.5 50 12 13 ];
+        %tmp.6 = 2;
+        %tmp.7 = eq %tmp.5 %tmp.6;
+        bf %tmp.7 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_50_8_50_34_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_50_8_50_34_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_50_20_50_34_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 50 22 ]
+        %tmp.8 = "R";
+        ret %tmp.8;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_50_20_50_34_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_50_8_50_34_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_50_8_50_34_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 51 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_51_8_51_34_if_stmt:
+        %tmp.9 = lgetv %t;
+        symbol [ t %tmp.9 51 12 13 ];
+        %tmp.10 = 3;
+        %tmp.11 = eq %tmp.9 %tmp.10;
+        bf %tmp.11 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_51_8_51_34_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_51_8_51_34_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_51_20_51_34_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 51 22 ]
+        %tmp.12 = "S";
+        ret %tmp.12;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_51_20_51_34_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_51_8_51_34_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_51_8_51_34_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 52 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_52_8_52_34_if_stmt:
+        %tmp.13 = lgetv %t;
+        symbol [ t %tmp.13 52 12 13 ];
+        %tmp.14 = 4;
+        %tmp.15 = eq %tmp.13 %tmp.14;
+        bf %tmp.15 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_52_8_52_34_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_52_8_52_34_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_52_20_52_34_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 52 22 ]
+        %tmp.16 = "N";
+        ret %tmp.16;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_52_20_52_34_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_52_8_52_34_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_52_8_52_34_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 53 8 ]
+        %tmp.17 = "?";
+        ret %tmp.17;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_48_32_54_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 56; @symbol_functiondef = [onUpdate,56,13,21]; @symbol_param<0> = [dc,56,22,24]; ]
+    function onUpdate(dc) {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_56_26_119_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 57 8 ]
+        %tmp.1 = lgetv %dc;
+        symbol [ dc %tmp.1 57 8 10 ];
+        symbol [ setColor %tmp.2 57 11 19 ];
+        %tmp.2 = getv function %tmp.1 :setColor;
+        symbol [ Graphics %tmp.3 57 20 28 ];
+        %tmp.3 = getm $.Toybox.Graphics;
+        symbol [ COLOR_WHITE %tmp.4 57 29 40 ];
+        %tmp.4 = getv %tmp.3 :COLOR_WHITE;
+        symbol [ Graphics %tmp.5 57 42 50 ];
+        %tmp.5 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.6 57 51 62 ];
+        %tmp.6 = getv %tmp.5 :COLOR_BLACK;
+        invoke %tmp.1 %tmp.2(%tmp.4, %tmp.6);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 58 8 ]
+        %tmp.7 = lgetv %dc;
+        symbol [ dc %tmp.7 58 8 10 ];
+        symbol [ clear %tmp.8 58 11 16 ];
+        %tmp.8 = getv function %tmp.7 :clear;
+        invoke %tmp.7 %tmp.8();
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 59 8 ]
+        symbol [ Draw %tmp.10 59 14 18 ];
+        %tmp.10 = getv ? :Draw;
+        symbol [ header %tmp.11 59 19 25 ];
+        %tmp.11 = getv function %tmp.10 :header;
+        %tmp.12 = lgetv %dc;
+        symbol [ dc %tmp.12 59 26 28 ];
+        %tmp.13 = "Discover";
+        %tmp.14 = true;
+        %tmp.15 = invoke %tmp.10 %tmp.11(%tmp.12, %tmp.13, %tmp.14);
+        symbol [ _y0 ? 59 8 11 ];
+        putv self :_y0 %tmp.15;
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 60 8 ]
+        symbol [ Draw %tmp.17 60 16 20 ];
+        %tmp.17 = getv ? :Draw;
+        symbol [ rowHeight %tmp.18 60 21 30 ];
+        %tmp.18 = getv function %tmp.17 :rowHeight;
+        %tmp.19 = lgetv %dc;
+        symbol [ dc %tmp.19 60 31 33 ];
+        %tmp.20 = invoke %tmp.17 %tmp.18(%tmp.19);
+        symbol [ _rowH ? 60 8 13 ];
+        putv self :_rowH %tmp.20;
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 63 8 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_56_26_119_4_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_56_26_119_4_stop" ]
+        %n.1 = local;
+        symbol [ n %n.1 63 12 13 ];
+        symbol [ gModel %tmp.22 63 16 22 ];
+        %tmp.22 = getv ? :gModel;
+        symbol [ discoverCount %tmp.23 63 23 36 ];
+        %tmp.23 = getv %tmp.22 :discoverCount;
+        lputv %n.1 %tmp.23;
+        symbol [ n %n.1 63 12 13 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 64 8 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_56_26_119_4_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_56_26_119_4_stop" ]
+        %st.2 = local;
+        symbol [ st %st.2 64 12 14 ];
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_64_17_64_104_begin:
+        symbol [ gModel %tmp.25 64 17 23 ];
+        %tmp.25 = getv ? :gModel;
+        symbol [ discoverActive %tmp.26 64 24 38 ];
+        %tmp.26 = getv %tmp.25 :discoverActive;
+        bf %tmp.26 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_64_17_64_104_else_false;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_64_17_64_104_true:
+        %tmp.27 = "Scanning... ";
+        %tmp.28 = lgetv %n.1;
+        symbol [ n %tmp.28 64 59 60 ];
+        %tmp.29 = add %tmp.27 %tmp.28;
+        %tmp.30 = " found";
+        %tmp.31 = add %tmp.29 %tmp.30;
+        push %tmp.31;
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_64_17_64_104_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_64_17_64_104_else_false:
+        %tmp.32 = "Scan done: ";
+        %tmp.33 = lgetv %n.1;
+        symbol [ n %tmp.33 64 92 93 ];
+        %tmp.34 = add %tmp.32 %tmp.33;
+        %tmp.35 = " found";
+        %tmp.36 = add %tmp.34 %tmp.35;
+        push %tmp.36;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_64_17_64_104_end:
+        %tmp.37 = phi [%tmp.26 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_64_17_64_104_begin] [%tmp.31 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_64_17_64_104_true] [%tmp.36 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_64_17_64_104_else_false] [%tmp.37 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_64_17_64_104_end];
+        lputv %st.2 %tmp.37;
+        symbol [ st %st.2 64 12 14 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 65 8 ]
+        %tmp.38 = lgetv %dc;
+        symbol [ dc %tmp.38 65 8 10 ];
+        symbol [ setColor %tmp.39 65 11 19 ];
+        %tmp.39 = getv function %tmp.38 :setColor;
+        symbol [ Graphics %tmp.40 65 20 28 ];
+        %tmp.40 = getm $.Toybox.Graphics;
+        symbol [ COLOR_GREEN %tmp.41 65 29 40 ];
+        %tmp.41 = getv %tmp.40 :COLOR_GREEN;
+        symbol [ Graphics %tmp.42 65 42 50 ];
+        %tmp.42 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.43 65 51 68 ];
+        %tmp.43 = getv %tmp.42 :COLOR_TRANSPARENT;
+        invoke %tmp.38 %tmp.39(%tmp.41, %tmp.43);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 66 8 ]
+        %tmp.44 = lgetv %dc;
+        symbol [ dc %tmp.44 66 8 10 ];
+        symbol [ drawText %tmp.45 66 11 19 ];
+        %tmp.45 = getv function %tmp.44 :drawText;
+        symbol [ Draw %tmp.47 66 20 24 ];
+        %tmp.47 = getv ? :Draw;
+        symbol [ X %tmp.48 66 25 26 ];
+        %tmp.48 = getv %tmp.47 :X;
+        symbol [ _y0 %tmp.50 66 28 31 ];
+        %tmp.50 = getv ? :_y0;
+        symbol [ Draw %tmp.52 66 33 37 ];
+        %tmp.52 = getv ? :Draw;
+        symbol [ FONT %tmp.53 66 38 42 ];
+        %tmp.53 = getv %tmp.52 :FONT;
+        symbol [ Draw %tmp.55 66 44 48 ];
+        %tmp.55 = getv ? :Draw;
+        symbol [ fitTo %tmp.56 66 49 54 ];
+        %tmp.56 = getv function %tmp.55 :fitTo;
+        %tmp.57 = lgetv %dc;
+        symbol [ dc %tmp.57 66 55 57 ];
+        %tmp.58 = lgetv %st.2;
+        symbol [ st %tmp.58 66 59 61 ];
+        symbol [ Draw %tmp.60 66 63 67 ];
+        %tmp.60 = getv ? :Draw;
+        symbol [ W %tmp.61 66 68 69 ];
+        %tmp.61 = getv %tmp.60 :W;
+        %tmp.62 = invoke %tmp.55 %tmp.56(%tmp.57, %tmp.58, %tmp.61);
+        symbol [ Graphics %tmp.63 66 72 80 ];
+        %tmp.63 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_LEFT %tmp.64 66 81 98 ];
+        %tmp.64 = getv %tmp.63 :TEXT_JUSTIFY_LEFT;
+        invoke %tmp.44 %tmp.45(%tmp.48, %tmp.50, %tmp.53, %tmp.62, %tmp.64);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 67 8 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_56_26_119_4_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_56_26_119_4_stop" ]
+        %listY.3 = local;
+        symbol [ listY %listY.3 67 12 17 ];
+        symbol [ _y0 %tmp.66 67 20 23 ];
+        %tmp.66 = getv ? :_y0;
+        symbol [ _rowH %tmp.68 67 26 31 ];
+        %tmp.68 = getv ? :_rowH;
+        %tmp.69 = add %tmp.66 %tmp.68;
+        lputv %listY.3 %tmp.69;
+        symbol [ listY %listY.3 67 12 17 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 68 8 ]
+        %tmp.70 = 196;
+        %tmp.71 = lgetv %listY.3;
+        symbol [ listY %tmp.71 68 23 28 ];
+        %tmp.72 = sub %tmp.70 %tmp.71;
+        symbol [ _rowH %tmp.74 68 32 37 ];
+        %tmp.74 = getv ? :_rowH;
+        %tmp.75 = div %tmp.72 %tmp.74;
+        symbol [ _rows ? 68 8 13 ];
+        putv self :_rows %tmp.75;
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 69 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_69_8_69_36_if_stmt:
+        symbol [ _rows %tmp.77 69 12 17 ];
+        %tmp.77 = getv ? :_rows;
+        %tmp.78 = 1;
+        %tmp.79 = lt %tmp.77 %tmp.78;
+        bf %tmp.79 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_69_8_69_36_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_69_8_69_36_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_69_23_69_36_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 69 25 ]
+        %tmp.80 = 1;
+        symbol [ _rows ? 69 25 30 ];
+        putv self :_rows %tmp.80;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_69_23_69_36_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_69_8_69_36_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_69_8_69_36_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 71 8 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_56_26_119_4_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_56_26_119_4_stop" ]
+        %list.4 = local;
+        symbol [ list %list.4 71 12 16 ];
+        symbol [ gModel %tmp.82 71 19 25 ];
+        %tmp.82 = getv ? :gModel;
+        symbol [ discovered %tmp.83 71 26 36 ];
+        %tmp.83 = getv %tmp.82 :discovered;
+        lputv %list.4 %tmp.83;
+        symbol [ list %list.4 71 12 16 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 72 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_72_8_78_8_if_stmt:
+        %tmp.84 = lgetv %list.4;
+        symbol [ list %tmp.84 72 12 16 ];
+        symbol [ size %tmp.85 72 17 21 ];
+        %tmp.85 = getv function %tmp.84 :size;
+        %tmp.86 = invoke %tmp.84 %tmp.85();
+        %tmp.87 = 0;
+        %tmp.88 = eq %tmp.86 %tmp.87;
+        bf %tmp.88 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_72_8_78_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_72_8_78_8_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_72_30_78_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 73 12 ]
+        %tmp.89 = lgetv %dc;
+        symbol [ dc %tmp.89 73 12 14 ];
+        symbol [ setColor %tmp.90 73 15 23 ];
+        %tmp.90 = getv function %tmp.89 :setColor;
+        symbol [ Graphics %tmp.91 73 24 32 ];
+        %tmp.91 = getm $.Toybox.Graphics;
+        symbol [ COLOR_LT_GRAY %tmp.92 73 33 46 ];
+        %tmp.92 = getv %tmp.91 :COLOR_LT_GRAY;
+        symbol [ Graphics %tmp.93 73 48 56 ];
+        %tmp.93 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.94 73 57 74 ];
+        %tmp.94 = getv %tmp.93 :COLOR_TRANSPARENT;
+        invoke %tmp.89 %tmp.90(%tmp.92, %tmp.94);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 74 12 ]
+        %tmp.95 = lgetv %dc;
+        symbol [ dc %tmp.95 74 12 14 ];
+        symbol [ drawText %tmp.96 74 15 23 ];
+        %tmp.96 = getv function %tmp.95 :drawText;
+        symbol [ Draw %tmp.98 74 24 28 ];
+        %tmp.98 = getv ? :Draw;
+        symbol [ CX %tmp.99 74 29 31 ];
+        %tmp.99 = getv %tmp.98 :CX;
+        %tmp.100 = lgetv %listY.3;
+        symbol [ listY %tmp.100 74 33 38 ];
+        %tmp.101 = 12;
+        %tmp.102 = add %tmp.100 %tmp.101;
+        symbol [ Draw %tmp.104 74 45 49 ];
+        %tmp.104 = getv ? :Draw;
+        symbol [ FONT %tmp.105 74 50 54 ];
+        %tmp.105 = getv %tmp.104 :FONT;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_74_56_74_98_begin:
+        symbol [ gModel %tmp.107 74 56 62 ];
+        %tmp.107 = getv ? :gModel;
+        symbol [ discoverActive %tmp.108 74 63 77 ];
+        %tmp.108 = getv %tmp.107 :discoverActive;
+        bf %tmp.108 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_74_56_74_98_else_false;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_74_56_74_98_true:
+        %tmp.109 = "Listening for";
+        push %tmp.109;
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_74_56_74_98_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_74_56_74_98_else_false:
+        %tmp.110 = "No nodes found";
+        push %tmp.110;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_74_56_74_98_end:
+        %tmp.111 = phi [%tmp.108 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_74_56_74_98_begin] [%tmp.109 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_74_56_74_98_true] [%tmp.110 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_74_56_74_98_else_false] [%tmp.111 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_74_56_74_98_end];
+        symbol [ Graphics %tmp.112 74 116 124 ];
+        %tmp.112 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.113 74 125 144 ];
+        %tmp.113 = getv %tmp.112 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.95 %tmp.96(%tmp.99, %tmp.102, %tmp.105, %tmp.111, %tmp.113);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 75 12 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_75_12_77_12_if_stmt:
+        symbol [ gModel %tmp.115 75 16 22 ];
+        %tmp.115 = getv ? :gModel;
+        symbol [ discoverActive %tmp.116 75 23 37 ];
+        %tmp.116 = getv %tmp.115 :discoverActive;
+        bf %tmp.116 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_75_12_77_12_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_75_12_77_12_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_75_39_77_12_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 76 16 ]
+        %tmp.117 = lgetv %dc;
+        symbol [ dc %tmp.117 76 16 18 ];
+        symbol [ drawText %tmp.118 76 19 27 ];
+        %tmp.118 = getv function %tmp.117 :drawText;
+        symbol [ Draw %tmp.120 76 28 32 ];
+        %tmp.120 = getv ? :Draw;
+        symbol [ CX %tmp.121 76 33 35 ];
+        %tmp.121 = getv %tmp.120 :CX;
+        %tmp.122 = lgetv %listY.3;
+        symbol [ listY %tmp.122 76 37 42 ];
+        %tmp.123 = 12;
+        %tmp.124 = add %tmp.122 %tmp.123;
+        symbol [ _rowH %tmp.126 76 50 55 ];
+        %tmp.126 = getv ? :_rowH;
+        %tmp.127 = add %tmp.124 %tmp.126;
+        symbol [ Draw %tmp.129 76 57 61 ];
+        %tmp.129 = getv ? :Draw;
+        symbol [ FONT %tmp.130 76 62 66 ];
+        %tmp.130 = getv %tmp.129 :FONT;
+        %tmp.131 = "adverts...";
+        symbol [ Graphics %tmp.132 76 82 90 ];
+        %tmp.132 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.133 76 91 110 ];
+        %tmp.133 = getv %tmp.132 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.117 %tmp.118(%tmp.121, %tmp.127, %tmp.130, %tmp.131, %tmp.133);
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_75_39_77_12_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_75_12_77_12_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_75_12_77_12_if_end:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_72_30_78_8_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_72_8_78_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_72_8_78_8_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 79 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_79_8_79_83_if_stmt:
+        symbol [ _sel %tmp.135 79 12 16 ];
+        %tmp.135 = getv ? :_sel;
+        %tmp.136 = lgetv %list.4;
+        symbol [ list %tmp.136 79 20 24 ];
+        symbol [ size %tmp.137 79 25 29 ];
+        %tmp.137 = getv function %tmp.136 :size;
+        %tmp.138 = invoke %tmp.136 %tmp.137();
+        %tmp.139 = gte %tmp.135 %tmp.138;
+        bf %tmp.139 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_79_8_79_83_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_79_8_79_83_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_79_33_79_83_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 79 35 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_79_42_79_80_begin:
+        %tmp.140 = lgetv %list.4;
+        symbol [ list %tmp.140 79 43 47 ];
+        symbol [ size %tmp.141 79 48 52 ];
+        %tmp.141 = getv function %tmp.140 :size;
+        %tmp.142 = invoke %tmp.140 %tmp.141();
+        %tmp.143 = 0;
+        %tmp.144 = gt %tmp.142 %tmp.143;
+        bf %tmp.144 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_79_42_79_80_else_false;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_79_42_79_80_true:
+        %tmp.145 = lgetv %list.4;
+        symbol [ list %tmp.145 79 62 66 ];
+        symbol [ size %tmp.146 79 67 71 ];
+        %tmp.146 = getv function %tmp.145 :size;
+        %tmp.147 = invoke %tmp.145 %tmp.146();
+        %tmp.148 = 1;
+        %tmp.149 = sub %tmp.147 %tmp.148;
+        push %tmp.149;
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_79_42_79_80_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_79_42_79_80_else_false:
+        %tmp.150 = 0;
+        push %tmp.150;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_79_42_79_80_end:
+        %tmp.151 = phi [%tmp.144 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_79_42_79_80_begin] [%tmp.149 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_79_42_79_80_true] [%tmp.150 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_79_42_79_80_else_false] [%tmp.151 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_79_42_79_80_end];
+        symbol [ _sel ? 79 35 39 ];
+        putv self :_sel %tmp.151;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_79_33_79_83_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_79_8_79_83_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_79_8_79_83_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 80 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_80_8_80_40_if_stmt:
+        symbol [ _sel %tmp.153 80 12 16 ];
+        %tmp.153 = getv ? :_sel;
+        symbol [ _top %tmp.155 80 19 23 ];
+        %tmp.155 = getv ? :_top;
+        %tmp.156 = lt %tmp.153 %tmp.155;
+        bf %tmp.156 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_80_8_80_40_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_80_8_80_40_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_80_25_80_40_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 80 27 ]
+        symbol [ _sel %tmp.158 80 34 38 ];
+        %tmp.158 = getv ? :_sel;
+        symbol [ _top ? 80 27 31 ];
+        putv self :_top %tmp.158;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_80_25_80_40_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_80_8_80_40_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_80_8_80_40_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 81 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_81_8_81_61_if_stmt:
+        symbol [ _sel %tmp.160 81 12 16 ];
+        %tmp.160 = getv ? :_sel;
+        symbol [ _top %tmp.162 81 20 24 ];
+        %tmp.162 = getv ? :_top;
+        symbol [ _rows %tmp.164 81 27 32 ];
+        %tmp.164 = getv ? :_rows;
+        %tmp.165 = add %tmp.162 %tmp.164;
+        %tmp.166 = gte %tmp.160 %tmp.165;
+        bf %tmp.166 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_81_8_81_61_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_81_8_81_61_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_81_34_81_61_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 81 36 ]
+        symbol [ _sel %tmp.168 81 43 47 ];
+        %tmp.168 = getv ? :_sel;
+        symbol [ _rows %tmp.170 81 50 55 ];
+        %tmp.170 = getv ? :_rows;
+        %tmp.171 = sub %tmp.168 %tmp.170;
+        %tmp.172 = 1;
+        %tmp.173 = add %tmp.171 %tmp.172;
+        symbol [ _top ? 81 36 40 ];
+        putv self :_top %tmp.173;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_81_34_81_61_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_81_8_81_61_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_81_8_81_61_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 83 8 ]
+        for @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_8_112_8_for_test @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_8_112_8_for_incr @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_8_112_8_for_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_8_112_8_for_init:
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_8_112_8_for_begin" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_8_112_8_for_end" ]
+        %r.5 = local;
+        symbol [ r %r.5 83 17 18 ];
+        %tmp.174 = 0;
+        lputv %r.5 %tmp.174;
+        symbol [ r %r.5 83 17 18 ];
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_8_112_8_for_test:
+        %tmp.175 = lgetv %r.5;
+        symbol [ r %tmp.175 83 24 25 ];
+        symbol [ _rows %tmp.177 83 28 33 ];
+        %tmp.177 = getv ? :_rows;
+        %tmp.178 = lt %tmp.175 %tmp.177;
+        bf %tmp.178 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_8_112_8_for_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_8_112_8_for_begin:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_40_112_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 84 12 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_40_112_8_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_40_112_8_stop" ]
+        %i.6 = local;
+        symbol [ i %i.6 84 16 17 ];
+        symbol [ _top %tmp.180 84 20 24 ];
+        %tmp.180 = getv ? :_top;
+        %tmp.181 = lgetv %r.5;
+        symbol [ r %tmp.181 84 27 28 ];
+        %tmp.182 = add %tmp.180 %tmp.181;
+        lputv %i.6 %tmp.182;
+        symbol [ i %i.6 84 16 17 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 85 12 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_85_12_85_43_if_stmt:
+        %tmp.183 = lgetv %i.6;
+        symbol [ i %tmp.183 85 16 17 ];
+        %tmp.184 = lgetv %list.4;
+        symbol [ list %tmp.184 85 21 25 ];
+        symbol [ size %tmp.185 85 26 30 ];
+        %tmp.185 = getv function %tmp.184 :size;
+        %tmp.186 = invoke %tmp.184 %tmp.185();
+        %tmp.187 = gte %tmp.183 %tmp.186;
+        bf %tmp.187 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_85_12_85_43_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_85_12_85_43_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_85_34_85_43_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 85 36 ]
+        goto break @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_8_112_8_for_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_85_34_85_43_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_85_12_85_43_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_85_12_85_43_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 86 12 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_40_112_8_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_40_112_8_stop" ]
+        %e.7 = local;
+        symbol [ e %e.7 86 16 17 ];
+        %tmp.188 = lgetv %list.4;
+        symbol [ list %tmp.188 86 20 24 ];
+        %tmp.189 = lgetv %i.6;
+        symbol [ i %tmp.189 86 25 26 ];
+        %tmp.190 = agetv %tmp.188 %tmp.189;
+        lputv %e.7 %tmp.190;
+        symbol [ e %e.7 86 16 17 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 87 12 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_87_12_87_39_if_stmt:
+        %tmp.191 = lgetv %e.7;
+        symbol [ e %tmp.191 87 16 17 ];
+        %tmp.192 = null;
+        %tmp.193 = eq %tmp.191 %tmp.192;
+        bf %tmp.193 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_87_12_87_39_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_87_12_87_39_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_87_27_87_39_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 87 29 ]
+        goto break @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_8_112_8_for_incr;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_87_27_87_39_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_87_12_87_39_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_87_12_87_39_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 88 12 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_40_112_8_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_40_112_8_stop" ]
+        %y.8 = local;
+        symbol [ y %y.8 88 16 17 ];
+        %tmp.194 = lgetv %listY.3;
+        symbol [ listY %tmp.194 88 20 25 ];
+        %tmp.195 = lgetv %r.5;
+        symbol [ r %tmp.195 88 28 29 ];
+        symbol [ _rowH %tmp.197 88 32 37 ];
+        %tmp.197 = getv ? :_rowH;
+        %tmp.198 = mul %tmp.195 %tmp.197;
+        %tmp.199 = add %tmp.194 %tmp.198;
+        lputv %y.8 %tmp.199;
+        symbol [ y %y.8 88 16 17 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 89 12 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_40_112_8_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_40_112_8_stop" ]
+        %selected.9 = local;
+        symbol [ selected %selected.9 89 16 24 ];
+        %tmp.200 = lgetv %i.6;
+        symbol [ i %tmp.200 89 28 29 ];
+        symbol [ _sel %tmp.202 89 33 37 ];
+        %tmp.202 = getv ? :_sel;
+        %tmp.203 = eq %tmp.200 %tmp.202;
+        lputv %selected.9 %tmp.203;
+        symbol [ selected %selected.9 89 16 24 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 90 12 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_90_12_96_12_if_stmt:
+        %tmp.204 = lgetv %selected.9;
+        symbol [ selected %tmp.204 90 16 24 ];
+        bf %tmp.204 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_90_12_96_12_if_else_false;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_90_12_96_12_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_90_26_94_12_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 91 16 ]
+        %tmp.205 = lgetv %dc;
+        symbol [ dc %tmp.205 91 16 18 ];
+        symbol [ setColor %tmp.206 91 19 27 ];
+        %tmp.206 = getv function %tmp.205 :setColor;
+        symbol [ Graphics %tmp.207 91 28 36 ];
+        %tmp.207 = getm $.Toybox.Graphics;
+        symbol [ COLOR_WHITE %tmp.208 91 37 48 ];
+        %tmp.208 = getv %tmp.207 :COLOR_WHITE;
+        symbol [ Graphics %tmp.209 91 50 58 ];
+        %tmp.209 = getm $.Toybox.Graphics;
+        symbol [ COLOR_WHITE %tmp.210 91 59 70 ];
+        %tmp.210 = getv %tmp.209 :COLOR_WHITE;
+        invoke %tmp.205 %tmp.206(%tmp.208, %tmp.210);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 92 16 ]
+        %tmp.211 = lgetv %dc;
+        symbol [ dc %tmp.211 92 16 18 ];
+        symbol [ fillRectangle %tmp.212 92 19 32 ];
+        %tmp.212 = getv function %tmp.211 :fillRectangle;
+        symbol [ Draw %tmp.214 92 33 37 ];
+        %tmp.214 = getv ? :Draw;
+        symbol [ X %tmp.215 92 38 39 ];
+        %tmp.215 = getv %tmp.214 :X;
+        %tmp.216 = lgetv %y.8;
+        symbol [ y %tmp.216 92 41 42 ];
+        symbol [ Draw %tmp.218 92 44 48 ];
+        %tmp.218 = getv ? :Draw;
+        symbol [ W %tmp.219 92 49 50 ];
+        %tmp.219 = getv %tmp.218 :W;
+        symbol [ _rowH %tmp.221 92 52 57 ];
+        %tmp.221 = getv ? :_rowH;
+        invoke %tmp.211 %tmp.212(%tmp.215, %tmp.216, %tmp.219, %tmp.221);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 93 16 ]
+        %tmp.222 = lgetv %dc;
+        symbol [ dc %tmp.222 93 16 18 ];
+        symbol [ setColor %tmp.223 93 19 27 ];
+        %tmp.223 = getv function %tmp.222 :setColor;
+        symbol [ Graphics %tmp.224 93 28 36 ];
+        %tmp.224 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.225 93 37 48 ];
+        %tmp.225 = getv %tmp.224 :COLOR_BLACK;
+        symbol [ Graphics %tmp.226 93 50 58 ];
+        %tmp.226 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.227 93 59 76 ];
+        %tmp.227 = getv %tmp.226 :COLOR_TRANSPARENT;
+        invoke %tmp.222 %tmp.223(%tmp.225, %tmp.227);
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_90_26_94_12_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_90_12_96_12_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_90_12_96_12_if_else_false:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_94_19_96_12_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 95 16 ]
+        %tmp.228 = lgetv %dc;
+        symbol [ dc %tmp.228 95 16 18 ];
+        symbol [ setColor %tmp.229 95 19 27 ];
+        %tmp.229 = getv function %tmp.228 :setColor;
+        symbol [ Graphics %tmp.230 95 28 36 ];
+        %tmp.230 = getm $.Toybox.Graphics;
+        symbol [ COLOR_WHITE %tmp.231 95 37 48 ];
+        %tmp.231 = getv %tmp.230 :COLOR_WHITE;
+        symbol [ Graphics %tmp.232 95 50 58 ];
+        %tmp.232 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.233 95 59 76 ];
+        %tmp.233 = getv %tmp.232 :COLOR_TRANSPARENT;
+        invoke %tmp.228 %tmp.229(%tmp.231, %tmp.233);
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_94_19_96_12_stop:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_90_12_96_12_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 97 12 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_40_112_8_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_40_112_8_stop" ]
+        %prefix.10 = local;
+        symbol [ prefix %prefix.10 97 16 22 ];
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_97_26_97_43_begin:
+        %tmp.234 = lgetv %selected.9;
+        symbol [ selected %tmp.234 97 26 34 ];
+        bf %tmp.234 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_97_26_97_43_else_false;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_97_26_97_43_true:
+        %tmp.235 = ">";
+        push %tmp.235;
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_97_26_97_43_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_97_26_97_43_else_false:
+        %tmp.236 = " ";
+        push %tmp.236;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_97_26_97_43_end:
+        %tmp.237 = phi [%tmp.234 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_97_26_97_43_begin] [%tmp.235 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_97_26_97_43_true] [%tmp.236 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_97_26_97_43_else_false] [%tmp.237 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_97_26_97_43_end];
+        %tmp.238 = self;
+        symbol [ typeChar %tmp.239 97 50 58 ];
+        %tmp.239 = getv function %tmp.238 :typeChar;
+        %tmp.240 = lgetv %e.7;
+        symbol [ e %tmp.240 97 59 60 ];
+        symbol [ get %tmp.241 97 61 64 ];
+        %tmp.241 = getv function %tmp.240 :get;
+        %tmp.243 = const :type;
+        symbol [ type %tmp.243 97 66 70 const ];
+        %tmp.244 = invoke %tmp.240 %tmp.241(%tmp.243);
+        %tmp.245 = invoke %tmp.238 %tmp.239(%tmp.244);
+        %tmp.246 = add %tmp.237 %tmp.245;
+        %tmp.247 = " ";
+        %tmp.248 = add %tmp.246 %tmp.247;
+        lputv %prefix.10 %tmp.248;
+        symbol [ prefix %prefix.10 97 16 22 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 98 12 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_40_112_8_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_40_112_8_stop" ]
+        %right.11 = local;
+        symbol [ right %right.11 98 16 21 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 99 12 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_99_12_103_12_if_stmt:
+        %tmp.249 = lgetv %e.7;
+        symbol [ e %tmp.249 99 16 17 ];
+        symbol [ get %tmp.250 99 18 21 ];
+        %tmp.250 = getv function %tmp.249 :get;
+        %tmp.252 = const :snr;
+        symbol [ snr %tmp.252 99 23 26 const ];
+        %tmp.253 = invoke %tmp.249 %tmp.250(%tmp.252);
+        %tmp.254 = 0;
+        %tmp.255 = ne %tmp.253 %tmp.254;
+        bf %tmp.255 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_99_12_103_12_if_else_false;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_99_12_103_12_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_99_34_101_12_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 100 16 ]
+        %tmp.256 = "";
+        %tmp.257 = lgetv %e.7;
+        symbol [ e %tmp.257 100 30 31 ];
+        symbol [ get %tmp.258 100 32 35 ];
+        %tmp.258 = getv function %tmp.257 :get;
+        %tmp.260 = const :snr;
+        symbol [ snr %tmp.260 100 37 40 const ];
+        %tmp.261 = invoke %tmp.257 %tmp.258(%tmp.260);
+        %tmp.262 = 4;
+        %tmp.263 = div %tmp.261 %tmp.262;
+        %tmp.264 = add %tmp.256 %tmp.263;
+        %tmp.265 = "dB";
+        %tmp.266 = add %tmp.264 %tmp.265;
+        lputv %right.11 %tmp.266;
+        symbol [ right %right.11 100 16 21 ];
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_99_34_101_12_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_99_12_103_12_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_99_12_103_12_if_else_false:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_101_19_103_12_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 102 16 ]
+        %tmp.267 = "";
+        %tmp.268 = lgetv %e.7;
+        symbol [ e %tmp.268 102 30 31 ];
+        symbol [ get %tmp.269 102 32 35 ];
+        %tmp.269 = getv function %tmp.268 :get;
+        %tmp.271 = const :hops;
+        symbol [ hops %tmp.271 102 37 41 const ];
+        %tmp.272 = invoke %tmp.268 %tmp.269(%tmp.271);
+        %tmp.273 = 63;
+        %tmp.274 = bitand %tmp.272 %tmp.273;
+        %tmp.275 = add %tmp.267 %tmp.274;
+        %tmp.276 = "h";
+        %tmp.277 = add %tmp.275 %tmp.276;
+        lputv %right.11 %tmp.277;
+        symbol [ right %right.11 102 16 21 ];
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_101_19_103_12_stop:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_99_12_103_12_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 104 12 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_104_12_106_12_if_stmt:
+        %tmp.278 = lgetv %e.7;
+        symbol [ e %tmp.278 104 16 17 ];
+        symbol [ get %tmp.279 104 18 21 ];
+        %tmp.279 = getv function %tmp.278 :get;
+        %tmp.281 = const :known;
+        symbol [ known %tmp.281 104 23 28 const ];
+        %tmp.282 = invoke %tmp.278 %tmp.279(%tmp.281);
+        bf %tmp.282 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_104_12_106_12_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_104_12_106_12_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_104_31_106_12_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 105 16 ]
+        %tmp.283 = lgetv %right.11;
+        symbol [ right %tmp.283 105 24 29 ];
+        %tmp.284 = " [+]";
+        %tmp.285 = add %tmp.283 %tmp.284;
+        lputv %right.11 %tmp.285;
+        symbol [ right %right.11 105 16 21 ];
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_104_31_106_12_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_104_12_106_12_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_104_12_106_12_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 107 12 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_40_112_8_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_40_112_8_stop" ]
+        %rw.12 = local;
+        symbol [ rw %rw.12 107 16 18 ];
+        %tmp.286 = lgetv %dc;
+        symbol [ dc %tmp.286 107 21 23 ];
+        symbol [ getTextWidthInPixels %tmp.287 107 24 44 ];
+        %tmp.287 = getv function %tmp.286 :getTextWidthInPixels;
+        %tmp.288 = lgetv %right.11;
+        symbol [ right %tmp.288 107 45 50 ];
+        symbol [ Draw %tmp.290 107 52 56 ];
+        %tmp.290 = getv ? :Draw;
+        symbol [ FONT %tmp.291 107 57 61 ];
+        %tmp.291 = getv %tmp.290 :FONT;
+        %tmp.292 = invoke %tmp.286 %tmp.287(%tmp.288, %tmp.291);
+        %tmp.293 = 4;
+        %tmp.294 = add %tmp.292 %tmp.293;
+        lputv %rw.12 %tmp.294;
+        symbol [ rw %rw.12 107 16 18 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 108 12 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_40_112_8_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_40_112_8_stop" ]
+        %pw.13 = local;
+        symbol [ pw %pw.13 108 16 18 ];
+        %tmp.295 = lgetv %dc;
+        symbol [ dc %tmp.295 108 21 23 ];
+        symbol [ getTextWidthInPixels %tmp.296 108 24 44 ];
+        %tmp.296 = getv function %tmp.295 :getTextWidthInPixels;
+        %tmp.297 = lgetv %prefix.10;
+        symbol [ prefix %tmp.297 108 45 51 ];
+        symbol [ Draw %tmp.299 108 53 57 ];
+        %tmp.299 = getv ? :Draw;
+        symbol [ FONT %tmp.300 108 58 62 ];
+        %tmp.300 = getv %tmp.299 :FONT;
+        %tmp.301 = invoke %tmp.295 %tmp.296(%tmp.297, %tmp.300);
+        lputv %pw.13 %tmp.301;
+        symbol [ pw %pw.13 108 16 18 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 109 12 ]
+        %tmp.302 = lgetv %dc;
+        symbol [ dc %tmp.302 109 12 14 ];
+        symbol [ drawText %tmp.303 109 15 23 ];
+        %tmp.303 = getv function %tmp.302 :drawText;
+        symbol [ Draw %tmp.305 109 24 28 ];
+        %tmp.305 = getv ? :Draw;
+        symbol [ X %tmp.306 109 29 30 ];
+        %tmp.306 = getv %tmp.305 :X;
+        %tmp.307 = lgetv %y.8;
+        symbol [ y %tmp.307 109 32 33 ];
+        symbol [ Draw %tmp.309 109 35 39 ];
+        %tmp.309 = getv ? :Draw;
+        symbol [ FONT %tmp.310 109 40 44 ];
+        %tmp.310 = getv %tmp.309 :FONT;
+        %tmp.311 = lgetv %prefix.10;
+        symbol [ prefix %tmp.311 109 46 52 ];
+        symbol [ Graphics %tmp.312 109 54 62 ];
+        %tmp.312 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_LEFT %tmp.313 109 63 80 ];
+        %tmp.313 = getv %tmp.312 :TEXT_JUSTIFY_LEFT;
+        invoke %tmp.302 %tmp.303(%tmp.306, %tmp.307, %tmp.310, %tmp.311, %tmp.313);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 110 12 ]
+        %tmp.314 = lgetv %dc;
+        symbol [ dc %tmp.314 110 12 14 ];
+        symbol [ drawText %tmp.315 110 15 23 ];
+        %tmp.315 = getv function %tmp.314 :drawText;
+        symbol [ Draw %tmp.317 110 24 28 ];
+        %tmp.317 = getv ? :Draw;
+        symbol [ X %tmp.318 110 29 30 ];
+        %tmp.318 = getv %tmp.317 :X;
+        %tmp.319 = lgetv %pw.13;
+        symbol [ pw %tmp.319 110 33 35 ];
+        %tmp.320 = add %tmp.318 %tmp.319;
+        %tmp.321 = lgetv %y.8;
+        symbol [ y %tmp.321 110 37 38 ];
+        symbol [ Draw %tmp.323 110 40 44 ];
+        %tmp.323 = getv ? :Draw;
+        symbol [ FONT %tmp.324 110 45 49 ];
+        %tmp.324 = getv %tmp.323 :FONT;
+        symbol [ Draw %tmp.326 110 51 55 ];
+        %tmp.326 = getv ? :Draw;
+        symbol [ ellipsize %tmp.327 110 56 65 ];
+        %tmp.327 = getv function %tmp.326 :ellipsize;
+        %tmp.328 = lgetv %dc;
+        symbol [ dc %tmp.328 110 66 68 ];
+        %tmp.329 = lgetv %e.7;
+        symbol [ e %tmp.329 110 70 71 ];
+        symbol [ get %tmp.330 110 72 75 ];
+        %tmp.330 = getv function %tmp.329 :get;
+        %tmp.332 = const :name;
+        symbol [ name %tmp.332 110 77 81 const ];
+        %tmp.333 = invoke %tmp.329 %tmp.330(%tmp.332);
+        symbol [ Draw %tmp.335 110 84 88 ];
+        %tmp.335 = getv ? :Draw;
+        symbol [ W %tmp.336 110 89 90 ];
+        %tmp.336 = getv %tmp.335 :W;
+        %tmp.337 = lgetv %pw.13;
+        symbol [ pw %tmp.337 110 93 95 ];
+        %tmp.338 = sub %tmp.336 %tmp.337;
+        %tmp.339 = lgetv %rw.12;
+        symbol [ rw %tmp.339 110 98 100 ];
+        %tmp.340 = sub %tmp.338 %tmp.339;
+        %tmp.341 = invoke %tmp.326 %tmp.327(%tmp.328, %tmp.333, %tmp.340);
+        symbol [ Graphics %tmp.342 110 103 111 ];
+        %tmp.342 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_LEFT %tmp.343 110 112 129 ];
+        %tmp.343 = getv %tmp.342 :TEXT_JUSTIFY_LEFT;
+        invoke %tmp.314 %tmp.315(%tmp.320, %tmp.321, %tmp.324, %tmp.341, %tmp.343);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 111 12 ]
+        %tmp.344 = lgetv %dc;
+        symbol [ dc %tmp.344 111 12 14 ];
+        symbol [ drawText %tmp.345 111 15 23 ];
+        %tmp.345 = getv function %tmp.344 :drawText;
+        symbol [ Draw %tmp.347 111 24 28 ];
+        %tmp.347 = getv ? :Draw;
+        symbol [ X %tmp.348 111 29 30 ];
+        %tmp.348 = getv %tmp.347 :X;
+        symbol [ Draw %tmp.350 111 33 37 ];
+        %tmp.350 = getv ? :Draw;
+        symbol [ W %tmp.351 111 38 39 ];
+        %tmp.351 = getv %tmp.350 :W;
+        %tmp.352 = add %tmp.348 %tmp.351;
+        %tmp.353 = lgetv %y.8;
+        symbol [ y %tmp.353 111 41 42 ];
+        symbol [ Draw %tmp.355 111 44 48 ];
+        %tmp.355 = getv ? :Draw;
+        symbol [ FONT %tmp.356 111 49 53 ];
+        %tmp.356 = getv %tmp.355 :FONT;
+        %tmp.357 = lgetv %right.11;
+        symbol [ right %tmp.357 111 55 60 ];
+        symbol [ Graphics %tmp.358 111 62 70 ];
+        %tmp.358 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_RIGHT %tmp.359 111 71 89 ];
+        %tmp.359 = getv %tmp.358 :TEXT_JUSTIFY_RIGHT;
+        invoke %tmp.344 %tmp.345(%tmp.352, %tmp.353, %tmp.356, %tmp.357, %tmp.359);
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_40_112_8_stop:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_8_112_8_for_incr:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 83 ]
+        %tmp.362 = lgetv %r.5;
+        symbol [ r %tmp.362 83 35 36 ];
+        %tmp.363 = add %tmp.362 1;
+        lputv %r.5 %tmp.363;
+        symbol [ r %r.5 83 35 36 ];
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_8_112_8_for_test;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_83_8_112_8_for_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 114 8 ]
+        %tmp.364 = lgetv %dc;
+        symbol [ dc %tmp.364 114 8 10 ];
+        symbol [ setColor %tmp.365 114 11 19 ];
+        %tmp.365 = getv function %tmp.364 :setColor;
+        symbol [ Graphics %tmp.366 114 20 28 ];
+        %tmp.366 = getm $.Toybox.Graphics;
+        symbol [ COLOR_YELLOW %tmp.367 114 29 41 ];
+        %tmp.367 = getv %tmp.366 :COLOR_YELLOW;
+        symbol [ Graphics %tmp.368 114 43 51 ];
+        %tmp.368 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.369 114 52 69 ];
+        %tmp.369 = getv %tmp.368 :COLOR_TRANSPARENT;
+        invoke %tmp.364 %tmp.365(%tmp.367, %tmp.369);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 115 8 ]
+        %tmp.370 = lgetv %dc;
+        symbol [ dc %tmp.370 115 8 10 ];
+        symbol [ drawText %tmp.371 115 11 19 ];
+        %tmp.371 = getv function %tmp.370 :drawText;
+        symbol [ Draw %tmp.373 115 20 24 ];
+        %tmp.373 = getv ? :Draw;
+        symbol [ CX %tmp.374 115 25 27 ];
+        %tmp.374 = getv %tmp.373 :CX;
+        %tmp.375 = 208;
+        symbol [ Draw %tmp.377 115 34 38 ];
+        %tmp.377 = getv ? :Draw;
+        symbol [ FONT %tmp.378 115 39 43 ];
+        %tmp.378 = getv %tmp.377 :FONT;
+        %tmp.379 = "Hold: Rescan";
+        symbol [ Graphics %tmp.380 115 61 69 ];
+        %tmp.380 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.381 115 70 89 ];
+        %tmp.381 = getv %tmp.380 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.370 %tmp.371(%tmp.374, %tmp.375, %tmp.378, %tmp.379, %tmp.381);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 116 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_116_8_118_8_if_stmt:
+        symbol [ gModel %tmp.383 116 12 18 ];
+        %tmp.383 = getv ? :gModel;
+        symbol [ toast %tmp.384 116 19 24 ];
+        %tmp.384 = getv %tmp.383 :toast;
+        %tmp.385 = null;
+        %tmp.386 = ne %tmp.384 %tmp.385;
+        bf %tmp.386 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_116_8_118_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_116_8_118_8_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_116_34_118_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 117 12 ]
+        symbol [ ChannelView %tmp.388 117 12 23 ];
+        %tmp.388 = getv ? :ChannelView;
+        symbol [ drawToastStatic %tmp.389 117 24 39 ];
+        %tmp.389 = getv function %tmp.388 :drawToastStatic;
+        %tmp.390 = lgetv %dc;
+        symbol [ dc %tmp.390 117 40 42 ];
+        symbol [ gModel %tmp.392 117 44 50 ];
+        %tmp.392 = getv ? :gModel;
+        symbol [ toast %tmp.393 117 51 56 ];
+        %tmp.393 = getv %tmp.392 :toast;
+        invoke %tmp.388 %tmp.389(%tmp.390, %tmp.393);
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_116_34_118_8_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_116_8_118_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_116_8_118_8_if_end:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_56_26_119_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 121; @symbol_functiondef = [move,121,13,17]; @symbol_param<0> = [d,121,18,19]; ]
+    function move(d) {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_121_21_128_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 122 8 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_121_21_128_4_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_121_21_128_4_stop" ]
+        %n.1 = local;
+        symbol [ n %n.1 122 12 13 ];
+        symbol [ gModel %tmp.2 122 16 22 ];
+        %tmp.2 = getv ? :gModel;
+        symbol [ discovered %tmp.3 122 23 33 ];
+        %tmp.3 = getv %tmp.2 :discovered;
+        symbol [ size %tmp.4 122 34 38 ];
+        %tmp.4 = getv function %tmp.3 :size;
+        %tmp.5 = invoke %tmp.3 %tmp.4();
+        lputv %n.1 %tmp.5;
+        symbol [ n %n.1 122 12 13 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 123 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_123_8_123_30_if_stmt:
+        %tmp.6 = lgetv %n.1;
+        symbol [ n %tmp.6 123 12 13 ];
+        %tmp.7 = 0;
+        %tmp.8 = eq %tmp.6 %tmp.7;
+        bf %tmp.8 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_123_8_123_30_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_123_8_123_30_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_123_20_123_30_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 123 22 ]
+        ret ?;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_123_20_123_30_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_123_8_123_30_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_123_8_123_30_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 124 8 ]
+        symbol [ _sel %tmp.10 124 15 19 ];
+        %tmp.10 = getv ? :_sel;
+        %tmp.11 = lgetv %d;
+        symbol [ d %tmp.11 124 22 23 ];
+        %tmp.12 = add %tmp.10 %tmp.11;
+        symbol [ _sel ? 124 8 12 ];
+        putv self :_sel %tmp.12;
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 125 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_125_8_125_34_if_stmt:
+        symbol [ _sel %tmp.14 125 12 16 ];
+        %tmp.14 = getv ? :_sel;
+        %tmp.15 = 0;
+        %tmp.16 = lt %tmp.14 %tmp.15;
+        bf %tmp.16 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_125_8_125_34_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_125_8_125_34_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_125_22_125_34_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 125 24 ]
+        %tmp.17 = 0;
+        symbol [ _sel ? 125 24 28 ];
+        putv self :_sel %tmp.17;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_125_22_125_34_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_125_8_125_34_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_125_8_125_34_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 126 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_126_8_126_42_if_stmt:
+        symbol [ _sel %tmp.19 126 12 16 ];
+        %tmp.19 = getv ? :_sel;
+        %tmp.20 = lgetv %n.1;
+        symbol [ n %tmp.20 126 19 20 ];
+        %tmp.21 = 1;
+        %tmp.22 = sub %tmp.20 %tmp.21;
+        %tmp.23 = gt %tmp.19 %tmp.22;
+        bf %tmp.23 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_126_8_126_42_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_126_8_126_42_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_126_26_126_42_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 126 28 ]
+        %tmp.24 = lgetv %n.1;
+        symbol [ n %tmp.24 126 35 36 ];
+        %tmp.25 = 1;
+        %tmp.26 = sub %tmp.24 %tmp.25;
+        symbol [ _sel ? 126 28 32 ];
+        putv self :_sel %tmp.26;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_126_26_126_42_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_126_8_126_42_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_126_8_126_42_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 127 8 ]
+        symbol [ WatchUi %tmp.27 127 8 15 ];
+        %tmp.27 = getm $.Toybox.WatchUi;
+        symbol [ requestUpdate %tmp.28 127 16 29 ];
+        %tmp.28 = getv function %tmp.27 :requestUpdate;
+        invoke %tmp.27 %tmp.28();
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_121_21_128_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 130; @symbol_functiondef = [rowAt,130,13,18]; @symbol_param<0> = [y,130,19,20]; ]
+    function rowAt(y) {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_130_22_137_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 131 8 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_130_22_137_4_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_130_22_137_4_stop" ]
+        %listY.1 = local;
+        symbol [ listY %listY.1 131 12 17 ];
+        symbol [ _y0 %tmp.2 131 20 23 ];
+        %tmp.2 = getv ? :_y0;
+        symbol [ _rowH %tmp.4 131 26 31 ];
+        %tmp.4 = getv ? :_rowH;
+        %tmp.5 = add %tmp.2 %tmp.4;
+        lputv %listY.1 %tmp.5;
+        symbol [ listY %listY.1 131 12 17 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 132 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_132_8_132_36_if_stmt:
+        %tmp.6 = lgetv %y;
+        symbol [ y %tmp.6 132 12 13 ];
+        %tmp.7 = lgetv %listY.1;
+        symbol [ listY %tmp.7 132 16 21 ];
+        %tmp.8 = lt %tmp.6 %tmp.7;
+        bf %tmp.8 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_132_8_132_36_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_132_8_132_36_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_132_23_132_36_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 132 25 ]
+        %tmp.9 = -1;
+        ret %tmp.9;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_132_23_132_36_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_132_8_132_36_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_132_8_132_36_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 133 8 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_130_22_137_4_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_130_22_137_4_stop" ]
+        %r.2 = local;
+        symbol [ r %r.2 133 12 13 ];
+        %tmp.10 = lgetv %y;
+        symbol [ y %tmp.10 133 17 18 ];
+        %tmp.11 = lgetv %listY.1;
+        symbol [ listY %tmp.11 133 21 26 ];
+        %tmp.12 = sub %tmp.10 %tmp.11;
+        symbol [ _rowH %tmp.14 133 30 35 ];
+        %tmp.14 = getv ? :_rowH;
+        %tmp.15 = div %tmp.12 %tmp.14;
+        lputv %r.2 %tmp.15;
+        symbol [ r %r.2 133 12 13 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 134 8 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_130_22_137_4_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_130_22_137_4_stop" ]
+        %i.3 = local;
+        symbol [ i %i.3 134 12 13 ];
+        symbol [ _top %tmp.17 134 16 20 ];
+        %tmp.17 = getv ? :_top;
+        %tmp.18 = lgetv %r.2;
+        symbol [ r %tmp.18 134 23 24 ];
+        %tmp.19 = add %tmp.17 %tmp.18;
+        lputv %i.3 %tmp.19;
+        symbol [ i %i.3 134 12 13 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 135 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_135_8_135_70_if_stmt:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_135_12_135_54_begin:
+        %tmp.20 = lgetv %r.2;
+        symbol [ r %tmp.20 135 12 13 ];
+        symbol [ _rows %tmp.22 135 17 22 ];
+        %tmp.22 = getv ? :_rows;
+        %tmp.23 = gte %tmp.20 %tmp.22;
+        bt %tmp.23 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_135_8_135_70_if_true;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_135_26_135_54_false:
+        %tmp.24 = lgetv %i.3;
+        symbol [ i %tmp.24 135 26 27 ];
+        symbol [ gModel %tmp.26 135 31 37 ];
+        %tmp.26 = getv ? :gModel;
+        symbol [ discovered %tmp.27 135 38 48 ];
+        %tmp.27 = getv %tmp.26 :discovered;
+        symbol [ size %tmp.28 135 49 53 ];
+        %tmp.28 = getv function %tmp.27 :size;
+        %tmp.29 = invoke %tmp.27 %tmp.28();
+        %tmp.30 = gte %tmp.24 %tmp.29;
+        push %tmp.30;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_135_26_135_54_end:
+        %tmp.31 = phi [%tmp.23 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_135_12_135_54_begin] [%tmp.30 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_135_26_135_54_false] [%tmp.31 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_135_26_135_54_end];
+        bf %tmp.31 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_135_8_135_70_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_135_8_135_70_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_135_57_135_70_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 135 59 ]
+        %tmp.32 = -1;
+        ret %tmp.32;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_135_57_135_70_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_135_8_135_70_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_135_8_135_70_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 136 8 ]
+        %tmp.33 = lgetv %i.3;
+        symbol [ i %tmp.33 136 15 16 ];
+        ret %tmp.33;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_130_22_137_4_stop:
+    }
+}
+[ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 140; @symbol_classdef = [DiscoverDelegate,140,6,22]; @symbol_extends<0> = [WatchUi,140,31,38]; @symbol_extends<1> = [BehaviorDelegate,140,39,55]; ]
+class DiscoverDelegate extends WatchUi.BehaviorDelegate {
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 140; ]
+    <init> {
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 140; ]
+    static
+    <init> {
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 141; @position = 8; @symbol_vardef = [_v,141,8,10]; ]
+    var _v;
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 143; @symbol_functiondef = [initialize,143,13,23]; @symbol_param<0> = [v,143,24,25]; ]
+    function initialize(v) as Void {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_143_27_146_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 144 8 ]
+        symbol [ BehaviorDelegate %tmp.2 144 8 24 ];
+        %tmp.2 = getv ? :BehaviorDelegate;
+        symbol [ initialize %tmp.3 144 25 35 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 145 8 ]
+        %tmp.4 = lgetv %v;
+        symbol [ v %tmp.4 145 13 14 ];
+        symbol [ _v ? 145 8 10 ];
+        putv self :_v %tmp.4;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_143_27_146_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 148; @symbol_functiondef = [onNextPage,148,13,23]; ]
+    function onNextPage() {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_148_26_148_53_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 148 28 ]
+        symbol [ _v %tmp.2 148 28 30 ];
+        %tmp.2 = getv ? :_v;
+        symbol [ move %tmp.3 148 31 35 ];
+        %tmp.3 = getv function %tmp.2 :move;
+        %tmp.4 = 1;
+        invoke %tmp.2 %tmp.3(%tmp.4);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 148 40 ]
+        %tmp.5 = true;
+        ret %tmp.5;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_148_26_148_53_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 149; @symbol_functiondef = [onPreviousPage,149,13,27]; ]
+    function onPreviousPage() {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_149_30_149_58_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 149 32 ]
+        symbol [ _v %tmp.2 149 32 34 ];
+        %tmp.2 = getv ? :_v;
+        symbol [ move %tmp.3 149 35 39 ];
+        %tmp.3 = getv function %tmp.2 :move;
+        %tmp.4 = -1;
+        invoke %tmp.2 %tmp.3(%tmp.4);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 149 45 ]
+        %tmp.5 = true;
+        ret %tmp.5;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_149_30_149_58_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 150; @symbol_functiondef = [onMenu,150,13,19]; ]
+    function onMenu() {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_150_22_150_50_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 150 24 ]
+        symbol [ _v %tmp.2 150 24 26 ];
+        %tmp.2 = getv ? :_v;
+        symbol [ rescan %tmp.3 150 27 33 ];
+        %tmp.3 = getv function %tmp.2 :rescan;
+        invoke %tmp.2 %tmp.3();
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 150 37 ]
+        %tmp.4 = true;
+        ret %tmp.4;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_150_22_150_50_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 152; @symbol_functiondef = [onBack,152,13,19]; ]
+    function onBack() {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_152_22_155_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 153 8 ]
+        symbol [ WatchUi %tmp.1 153 8 15 ];
+        %tmp.1 = getm $.Toybox.WatchUi;
+        symbol [ popView %tmp.2 153 16 23 ];
+        %tmp.2 = getv function %tmp.1 :popView;
+        symbol [ WatchUi %tmp.3 153 24 31 ];
+        %tmp.3 = getm $.Toybox.WatchUi;
+        symbol [ SLIDE_RIGHT %tmp.4 153 32 43 ];
+        %tmp.4 = getv %tmp.3 :SLIDE_RIGHT;
+        invoke %tmp.1 %tmp.2(%tmp.4);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 154 8 ]
+        %tmp.5 = true;
+        ret %tmp.5;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_152_22_155_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 157; @symbol_functiondef = [onTap,157,13,18]; @symbol_param<0> = [evt,157,19,22]; ]
+    function onTap(evt) {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_157_24_165_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 158 8 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_157_24_165_4_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_157_24_165_4_stop" ]
+        %c.1 = local;
+        symbol [ c %c.1 158 12 13 ];
+        %tmp.1 = lgetv %evt;
+        symbol [ evt %tmp.1 158 16 19 ];
+        symbol [ getCoordinates %tmp.2 158 20 34 ];
+        %tmp.2 = getv function %tmp.1 :getCoordinates;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        lputv %c.1 %tmp.3;
+        symbol [ c %c.1 158 12 13 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 159 8 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_157_24_165_4_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_157_24_165_4_stop" ]
+        %i.2 = local;
+        symbol [ i %i.2 159 12 13 ];
+        symbol [ _v %tmp.5 159 16 18 ];
+        %tmp.5 = getv ? :_v;
+        symbol [ rowAt %tmp.6 159 19 24 ];
+        %tmp.6 = getv function %tmp.5 :rowAt;
+        %tmp.7 = lgetv %c.1;
+        symbol [ c %tmp.7 159 25 26 ];
+        %tmp.8 = 1;
+        %tmp.9 = agetv %tmp.7 %tmp.8;
+        %tmp.10 = invoke %tmp.5 %tmp.6(%tmp.9);
+        lputv %i.2 %tmp.10;
+        symbol [ i %i.2 159 12 13 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 160 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_160_8_163_8_if_stmt:
+        %tmp.11 = lgetv %i.2;
+        symbol [ i %tmp.11 160 12 13 ];
+        %tmp.12 = 0;
+        %tmp.13 = gte %tmp.11 %tmp.12;
+        bf %tmp.13 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_160_8_163_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_160_8_163_8_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_160_20_163_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 161 12 ]
+        symbol [ _v %tmp.14 161 12 14 ];
+        %tmp.14 = getv self :_v;
+        %tmp.15 = lgetv %i.2;
+        symbol [ i %tmp.15 161 22 23 ];
+        symbol [ _sel ? 161 15 19 ];
+        putv %tmp.14 :_sel %tmp.15;
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 162 12 ]
+        symbol [ WatchUi %tmp.16 162 12 19 ];
+        %tmp.16 = getm $.Toybox.WatchUi;
+        symbol [ requestUpdate %tmp.17 162 20 33 ];
+        %tmp.17 = getv function %tmp.16 :requestUpdate;
+        invoke %tmp.16 %tmp.17();
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_160_20_163_8_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_160_8_163_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_160_8_163_8_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 164 8 ]
+        %tmp.18 = true;
+        ret %tmp.18;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_157_24_165_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 167; @symbol_functiondef = [onHold,167,13,19]; @symbol_param<0> = [evt,167,20,23]; ]
+    function onHold(evt) {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_167_25_170_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 168 8 ]
+        symbol [ _v %tmp.2 168 8 10 ];
+        %tmp.2 = getv ? :_v;
+        symbol [ rescan %tmp.3 168 11 17 ];
+        %tmp.3 = getv function %tmp.2 :rescan;
+        invoke %tmp.2 %tmp.3();
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc" 169 8 ]
+        %tmp.4 = true;
+        ret %tmp.4;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_DiscoverView_mc_167_25_170_4_stop:
+    }
+}
+[ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/DiscoverView.mc"; @line = 1; ]
+<init> {
+}

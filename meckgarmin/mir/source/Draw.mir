@@ -1,0 +1,623 @@
+[ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc"; @line = 1; @symbol_usingdef<0> = [Toybox,1,6,12]; @symbol_usingdef<1> = [Graphics,1,13,21]; ]
+using Toybox.Graphics;
+[ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc"; @line = 2; @symbol_usingdef<0> = [Toybox,2,6,12]; @symbol_usingdef<1> = [WatchUi,2,13,20]; ]
+using Toybox.WatchUi;
+[ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc"; @line = 3; @symbol_usingdef<0> = [Toybox,3,6,12]; @symbol_usingdef<1> = [StringUtil,3,13,23]; ]
+using Toybox.StringUtil;
+[ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc"; @line = 7; @symbol_moduledef = [Draw,7,7,11]; ]
+module Draw {
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc"; @line = 7; ]
+    <init> {
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 8 10 ]
+        symbol [ Graphics %tmp.1 8 22 30 ];
+        %tmp.1 = getm $.Toybox.Graphics;
+        symbol [ FONT_XTINY %tmp.2 8 31 41 ];
+        %tmp.2 = getv %tmp.1 :FONT_XTINY;
+        putv self :FONT %tmp.2;
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc"; @line = 8; @position = 10; @symbol_constdef = [FONT,8,10,14]; ]
+    const FONT;
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc"; @line = 9; @position = 10; @symbol_constdef = [X,9,10,11]; ]
+    const X = 32;
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc"; @line = 10; @position = 10; @symbol_constdef = [W,10,10,11]; ]
+    const W = 176;
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc"; @line = 11; @position = 10; @symbol_constdef = [HEAD_Y,11,10,16]; ]
+    const HEAD_Y = 8;
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc"; @line = 12; @position = 10; @symbol_constdef = [CX,12,10,12]; ]
+    const CX = 120;
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc"; @line = 17; @symbol_functiondef = [header,17,13,19]; @symbol_param<0> = [dc,17,20,22]; @symbol_param<1> = [title,17,24,29]; @symbol_param<2> = [showBack,17,31,39]; ]
+    function header(dc, title, showBack) {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_17_41_24_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 18 8 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_17_41_24_4_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_17_41_24_4_stop" ]
+        %fh.1 = local;
+        symbol [ fh %fh.1 18 12 14 ];
+        %tmp.1 = lgetv %dc;
+        symbol [ dc %tmp.1 18 17 19 ];
+        symbol [ getFontHeight %tmp.2 18 20 33 ];
+        %tmp.2 = getv function %tmp.1 :getFontHeight;
+        symbol [ FONT %tmp.4 18 34 38 ];
+        %tmp.4 = getv ? :FONT;
+        %tmp.5 = invoke %tmp.1 %tmp.2(%tmp.4);
+        lputv %fh.1 %tmp.5;
+        symbol [ fh %fh.1 18 12 14 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 19 8 ]
+        %tmp.6 = lgetv %dc;
+        symbol [ dc %tmp.6 19 8 10 ];
+        symbol [ setColor %tmp.7 19 11 19 ];
+        %tmp.7 = getv function %tmp.6 :setColor;
+        symbol [ Graphics %tmp.8 19 20 28 ];
+        %tmp.8 = getm $.Toybox.Graphics;
+        symbol [ COLOR_WHITE %tmp.9 19 29 40 ];
+        %tmp.9 = getv %tmp.8 :COLOR_WHITE;
+        symbol [ Graphics %tmp.10 19 42 50 ];
+        %tmp.10 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.11 19 51 68 ];
+        %tmp.11 = getv %tmp.10 :COLOR_TRANSPARENT;
+        invoke %tmp.6 %tmp.7(%tmp.9, %tmp.11);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 20 8 ]
+        %tmp.12 = lgetv %dc;
+        symbol [ dc %tmp.12 20 8 10 ];
+        symbol [ drawText %tmp.13 20 11 19 ];
+        %tmp.13 = getv function %tmp.12 :drawText;
+        symbol [ CX %tmp.15 20 20 22 ];
+        %tmp.15 = getv ? :CX;
+        symbol [ HEAD_Y %tmp.17 20 24 30 ];
+        %tmp.17 = getv ? :HEAD_Y;
+        symbol [ FONT %tmp.19 20 32 36 ];
+        %tmp.19 = getv ? :FONT;
+        %tmp.20 = self;
+        symbol [ fitTo %tmp.21 20 38 43 ];
+        %tmp.21 = getv function %tmp.20 :fitTo;
+        %tmp.22 = lgetv %dc;
+        symbol [ dc %tmp.22 20 44 46 ];
+        %tmp.23 = lgetv %title;
+        symbol [ title %tmp.23 20 48 53 ];
+        %tmp.24 = 90;
+        %tmp.25 = invoke %tmp.20 %tmp.21(%tmp.22, %tmp.23, %tmp.24);
+        symbol [ Graphics %tmp.26 20 60 68 ];
+        %tmp.26 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.27 20 69 88 ];
+        %tmp.27 = getv %tmp.26 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.12 %tmp.13(%tmp.15, %tmp.17, %tmp.19, %tmp.25, %tmp.27);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 21 8 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_17_41_24_4_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_17_41_24_4_stop" ]
+        %ruleY.2 = local;
+        symbol [ ruleY %ruleY.2 21 12 17 ];
+        symbol [ HEAD_Y %tmp.29 21 20 26 ];
+        %tmp.29 = getv ? :HEAD_Y;
+        %tmp.30 = lgetv %fh.1;
+        symbol [ fh %tmp.30 21 29 31 ];
+        %tmp.31 = add %tmp.29 %tmp.30;
+        %tmp.32 = 2;
+        %tmp.33 = add %tmp.31 %tmp.32;
+        lputv %ruleY.2 %tmp.33;
+        symbol [ ruleY %ruleY.2 21 12 17 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 22 8 ]
+        %tmp.34 = lgetv %dc;
+        symbol [ dc %tmp.34 22 8 10 ];
+        symbol [ drawLine %tmp.35 22 11 19 ];
+        %tmp.35 = getv function %tmp.34 :drawLine;
+        symbol [ X %tmp.37 22 20 21 ];
+        %tmp.37 = getv ? :X;
+        %tmp.38 = lgetv %ruleY.2;
+        symbol [ ruleY %tmp.38 22 23 28 ];
+        symbol [ X %tmp.40 22 30 31 ];
+        %tmp.40 = getv ? :X;
+        symbol [ W %tmp.42 22 34 35 ];
+        %tmp.42 = getv ? :W;
+        %tmp.43 = add %tmp.40 %tmp.42;
+        %tmp.44 = lgetv %ruleY.2;
+        symbol [ ruleY %tmp.44 22 37 42 ];
+        invoke %tmp.34 %tmp.35(%tmp.37, %tmp.38, %tmp.43, %tmp.44);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 23 8 ]
+        %tmp.45 = lgetv %ruleY.2;
+        symbol [ ruleY %tmp.45 23 15 20 ];
+        %tmp.46 = 10;
+        %tmp.47 = add %tmp.45 %tmp.46;
+        ret %tmp.47;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_17_41_24_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc"; @line = 27; @symbol_functiondef = [footer,27,13,19]; @symbol_param<0> = [dc,27,20,22]; @symbol_param<1> = [text,27,24,28]; ]
+    function footer(dc, text) {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_27_30_30_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 28 8 ]
+        %tmp.1 = lgetv %dc;
+        symbol [ dc %tmp.1 28 8 10 ];
+        symbol [ setColor %tmp.2 28 11 19 ];
+        %tmp.2 = getv function %tmp.1 :setColor;
+        symbol [ Graphics %tmp.3 28 20 28 ];
+        %tmp.3 = getm $.Toybox.Graphics;
+        symbol [ COLOR_LT_GRAY %tmp.4 28 29 42 ];
+        %tmp.4 = getv %tmp.3 :COLOR_LT_GRAY;
+        symbol [ Graphics %tmp.5 28 44 52 ];
+        %tmp.5 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.6 28 53 70 ];
+        %tmp.6 = getv %tmp.5 :COLOR_TRANSPARENT;
+        invoke %tmp.1 %tmp.2(%tmp.4, %tmp.6);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 29 8 ]
+        %tmp.7 = lgetv %dc;
+        symbol [ dc %tmp.7 29 8 10 ];
+        symbol [ drawText %tmp.8 29 11 19 ];
+        %tmp.8 = getv function %tmp.7 :drawText;
+        symbol [ CX %tmp.10 29 20 22 ];
+        %tmp.10 = getv ? :CX;
+        %tmp.11 = 208;
+        symbol [ FONT %tmp.13 29 29 33 ];
+        %tmp.13 = getv ? :FONT;
+        %tmp.14 = self;
+        symbol [ fitTo %tmp.15 29 35 40 ];
+        %tmp.15 = getv function %tmp.14 :fitTo;
+        %tmp.16 = lgetv %dc;
+        symbol [ dc %tmp.16 29 41 43 ];
+        %tmp.17 = lgetv %text;
+        symbol [ text %tmp.17 29 45 49 ];
+        %tmp.18 = 120;
+        %tmp.19 = invoke %tmp.14 %tmp.15(%tmp.16, %tmp.17, %tmp.18);
+        symbol [ Graphics %tmp.20 29 57 65 ];
+        %tmp.20 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.21 29 66 85 ];
+        %tmp.21 = getv %tmp.20 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.7 %tmp.8(%tmp.10, %tmp.11, %tmp.13, %tmp.19, %tmp.21);
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_27_30_30_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc"; @line = 33; @symbol_functiondef = [fitTo,33,13,18]; @symbol_param<0> = [dc,33,19,21]; @symbol_param<1> = [s,33,23,24]; @symbol_param<2> = [w,33,26,27]; ]
+    function fitTo(dc, s, w) {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_33_29_46_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 34 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_34_8_36_8_if_stmt:
+        %tmp.1 = lgetv %dc;
+        symbol [ dc %tmp.1 34 12 14 ];
+        symbol [ getTextWidthInPixels %tmp.2 34 15 35 ];
+        %tmp.2 = getv function %tmp.1 :getTextWidthInPixels;
+        %tmp.3 = lgetv %s;
+        symbol [ s %tmp.3 34 36 37 ];
+        symbol [ FONT %tmp.5 34 39 43 ];
+        %tmp.5 = getv ? :FONT;
+        %tmp.6 = invoke %tmp.1 %tmp.2(%tmp.3, %tmp.5);
+        %tmp.7 = lgetv %w;
+        symbol [ w %tmp.7 34 48 49 ];
+        %tmp.8 = lte %tmp.6 %tmp.7;
+        bf %tmp.8 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_34_8_36_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_34_8_36_8_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_34_51_36_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 35 12 ]
+        %tmp.9 = lgetv %s;
+        symbol [ s %tmp.9 35 19 20 ];
+        ret %tmp.9;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_34_51_36_8_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_34_8_36_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_34_8_36_8_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 37 8 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_33_29_46_4_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_33_29_46_4_stop" ]
+        %n.1 = local;
+        symbol [ n %n.1 37 12 13 ];
+        %tmp.10 = lgetv %s;
+        symbol [ s %tmp.10 37 16 17 ];
+        symbol [ length %tmp.11 37 18 24 ];
+        %tmp.11 = getv function %tmp.10 :length;
+        %tmp.12 = invoke %tmp.10 %tmp.11();
+        lputv %n.1 %tmp.12;
+        symbol [ n %n.1 37 12 13 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 38 8 ]
+        while @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_38_8_44_8_while_test @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_38_8_44_8_while_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_38_8_44_8_while_test:
+        %tmp.13 = lgetv %n.1;
+        symbol [ n %tmp.13 38 15 16 ];
+        %tmp.14 = 0;
+        %tmp.15 = gt %tmp.13 %tmp.14;
+        bf %tmp.15 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_38_8_44_8_while_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_38_8_44_8_while_begin:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_38_22_44_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 39 12 ]
+        %tmp.18 = lgetv %n.1;
+        symbol [ n %tmp.18 39 12 13 ];
+        %tmp.19 = sub %tmp.18 1;
+        lputv %n.1 %tmp.19;
+        symbol [ n %n.1 39 12 13 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 40 12 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_38_22_44_8_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_38_22_44_8_stop" ]
+        %t.2 = local;
+        symbol [ t %t.2 40 16 17 ];
+        %tmp.20 = lgetv %s;
+        symbol [ s %tmp.20 40 20 21 ];
+        symbol [ substring %tmp.21 40 22 31 ];
+        %tmp.21 = getv function %tmp.20 :substring;
+        %tmp.22 = 0;
+        %tmp.23 = lgetv %n.1;
+        symbol [ n %tmp.23 40 35 36 ];
+        %tmp.24 = invoke %tmp.20 %tmp.21(%tmp.22, %tmp.23);
+        lputv %t.2 %tmp.24;
+        symbol [ t %t.2 40 16 17 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 41 12 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_41_12_43_12_if_stmt:
+        %tmp.25 = lgetv %dc;
+        symbol [ dc %tmp.25 41 16 18 ];
+        symbol [ getTextWidthInPixels %tmp.26 41 19 39 ];
+        %tmp.26 = getv function %tmp.25 :getTextWidthInPixels;
+        %tmp.27 = lgetv %t.2;
+        symbol [ t %tmp.27 41 40 41 ];
+        symbol [ FONT %tmp.29 41 43 47 ];
+        %tmp.29 = getv ? :FONT;
+        %tmp.30 = invoke %tmp.25 %tmp.26(%tmp.27, %tmp.29);
+        %tmp.31 = lgetv %w;
+        symbol [ w %tmp.31 41 52 53 ];
+        %tmp.32 = lte %tmp.30 %tmp.31;
+        bf %tmp.32 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_41_12_43_12_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_41_12_43_12_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_41_55_43_12_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 42 16 ]
+        %tmp.33 = lgetv %t.2;
+        symbol [ t %tmp.33 42 23 24 ];
+        ret %tmp.33;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_41_55_43_12_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_41_12_43_12_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_41_12_43_12_if_end:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_38_22_44_8_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_38_8_44_8_while_test;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_38_8_44_8_while_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 45 8 ]
+        %tmp.34 = "";
+        ret %tmp.34;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_33_29_46_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc"; @line = 49; @symbol_functiondef = [ellipsize,49,13,22]; @symbol_param<0> = [dc,49,23,25]; @symbol_param<1> = [s,49,27,28]; @symbol_param<2> = [w,49,30,31]; ]
+    function ellipsize(dc, s, w) {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_49_33_62_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 50 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_50_8_52_8_if_stmt:
+        %tmp.1 = lgetv %dc;
+        symbol [ dc %tmp.1 50 12 14 ];
+        symbol [ getTextWidthInPixels %tmp.2 50 15 35 ];
+        %tmp.2 = getv function %tmp.1 :getTextWidthInPixels;
+        %tmp.3 = lgetv %s;
+        symbol [ s %tmp.3 50 36 37 ];
+        symbol [ FONT %tmp.5 50 39 43 ];
+        %tmp.5 = getv ? :FONT;
+        %tmp.6 = invoke %tmp.1 %tmp.2(%tmp.3, %tmp.5);
+        %tmp.7 = lgetv %w;
+        symbol [ w %tmp.7 50 48 49 ];
+        %tmp.8 = lte %tmp.6 %tmp.7;
+        bf %tmp.8 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_50_8_52_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_50_8_52_8_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_50_51_52_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 51 12 ]
+        %tmp.9 = lgetv %s;
+        symbol [ s %tmp.9 51 19 20 ];
+        ret %tmp.9;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_50_51_52_8_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_50_8_52_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_50_8_52_8_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 53 8 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_49_33_62_4_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_49_33_62_4_stop" ]
+        %n.1 = local;
+        symbol [ n %n.1 53 12 13 ];
+        %tmp.10 = lgetv %s;
+        symbol [ s %tmp.10 53 16 17 ];
+        symbol [ length %tmp.11 53 18 24 ];
+        %tmp.11 = getv function %tmp.10 :length;
+        %tmp.12 = invoke %tmp.10 %tmp.11();
+        lputv %n.1 %tmp.12;
+        symbol [ n %n.1 53 12 13 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 54 8 ]
+        while @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_54_8_60_8_while_test @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_54_8_60_8_while_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_54_8_60_8_while_test:
+        %tmp.13 = lgetv %n.1;
+        symbol [ n %tmp.13 54 15 16 ];
+        %tmp.14 = 0;
+        %tmp.15 = gt %tmp.13 %tmp.14;
+        bf %tmp.15 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_54_8_60_8_while_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_54_8_60_8_while_begin:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_54_22_60_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 55 12 ]
+        %tmp.18 = lgetv %n.1;
+        symbol [ n %tmp.18 55 12 13 ];
+        %tmp.19 = sub %tmp.18 1;
+        lputv %n.1 %tmp.19;
+        symbol [ n %n.1 55 12 13 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 56 12 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_54_22_60_8_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_54_22_60_8_stop" ]
+        %t.2 = local;
+        symbol [ t %t.2 56 16 17 ];
+        %tmp.20 = lgetv %s;
+        symbol [ s %tmp.20 56 20 21 ];
+        symbol [ substring %tmp.21 56 22 31 ];
+        %tmp.21 = getv function %tmp.20 :substring;
+        %tmp.22 = 0;
+        %tmp.23 = lgetv %n.1;
+        symbol [ n %tmp.23 56 35 36 ];
+        %tmp.24 = invoke %tmp.20 %tmp.21(%tmp.22, %tmp.23);
+        %tmp.25 = "...";
+        %tmp.26 = add %tmp.24 %tmp.25;
+        lputv %t.2 %tmp.26;
+        symbol [ t %t.2 56 16 17 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 57 12 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_57_12_59_12_if_stmt:
+        %tmp.27 = lgetv %dc;
+        symbol [ dc %tmp.27 57 16 18 ];
+        symbol [ getTextWidthInPixels %tmp.28 57 19 39 ];
+        %tmp.28 = getv function %tmp.27 :getTextWidthInPixels;
+        %tmp.29 = lgetv %t.2;
+        symbol [ t %tmp.29 57 40 41 ];
+        symbol [ FONT %tmp.31 57 43 47 ];
+        %tmp.31 = getv ? :FONT;
+        %tmp.32 = invoke %tmp.27 %tmp.28(%tmp.29, %tmp.31);
+        %tmp.33 = lgetv %w;
+        symbol [ w %tmp.33 57 52 53 ];
+        %tmp.34 = lte %tmp.32 %tmp.33;
+        bf %tmp.34 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_57_12_59_12_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_57_12_59_12_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_57_55_59_12_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 58 16 ]
+        %tmp.35 = lgetv %t.2;
+        symbol [ t %tmp.35 58 23 24 ];
+        ret %tmp.35;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_57_55_59_12_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_57_12_59_12_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_57_12_59_12_if_end:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_54_22_60_8_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_54_8_60_8_while_test;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_54_8_60_8_while_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 61 8 ]
+        %tmp.36 = "...";
+        ret %tmp.36;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_49_33_62_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc"; @line = 64; @position = 8; @symbol_vardef = [_emojiH,64,8,15]; ]
+    var _emojiH = -1;
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc"; @line = 70; @symbol_functiondef = [marqueeRow,70,13,23]; @symbol_param<0> = [dc,70,24,26]; @symbol_param<1> = [s,70,28,29]; @symbol_param<2> = [x,70,31,32]; @symbol_param<3> = [y,70,34,35]; @symbol_param<4> = [w,70,37,38]; @symbol_param<5> = [rowH,70,40,44]; @symbol_param<6> = [off,70,46,49]; @symbol_param<7> = [gap,70,51,54]; ]
+    function marqueeRow(dc, s, x, y, w, rowH, off, gap) {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_70_56_79_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 71 8 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_70_56_79_4_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_70_56_79_4_stop" ]
+        %tw.1 = local;
+        symbol [ tw %tw.1 71 12 14 ];
+        %tmp.1 = lgetv %dc;
+        symbol [ dc %tmp.1 71 17 19 ];
+        symbol [ getTextWidthInPixels %tmp.2 71 20 40 ];
+        %tmp.2 = getv function %tmp.1 :getTextWidthInPixels;
+        %tmp.3 = lgetv %s;
+        symbol [ s %tmp.3 71 41 42 ];
+        symbol [ FONT %tmp.5 71 44 48 ];
+        %tmp.5 = getv ? :FONT;
+        %tmp.6 = invoke %tmp.1 %tmp.2(%tmp.3, %tmp.5);
+        lputv %tw.1 %tmp.6;
+        symbol [ tw %tw.1 71 12 14 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 72 8 ]
+        %tmp.7 = lgetv %dc;
+        symbol [ dc %tmp.7 72 8 10 ];
+        symbol [ setClip %tmp.8 72 11 18 ];
+        %tmp.8 = getv function %tmp.7 :setClip;
+        %tmp.9 = lgetv %x;
+        symbol [ x %tmp.9 72 19 20 ];
+        %tmp.10 = lgetv %y;
+        symbol [ y %tmp.10 72 22 23 ];
+        %tmp.11 = lgetv %w;
+        symbol [ w %tmp.11 72 25 26 ];
+        %tmp.12 = lgetv %rowH;
+        symbol [ rowH %tmp.12 72 28 32 ];
+        invoke %tmp.7 %tmp.8(%tmp.9, %tmp.10, %tmp.11, %tmp.12);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 73 8 ]
+        %tmp.13 = lgetv %dc;
+        symbol [ dc %tmp.13 73 8 10 ];
+        symbol [ drawText %tmp.14 73 11 19 ];
+        %tmp.14 = getv function %tmp.13 :drawText;
+        %tmp.15 = lgetv %x;
+        symbol [ x %tmp.15 73 20 21 ];
+        %tmp.16 = lgetv %off;
+        symbol [ off %tmp.16 73 24 27 ];
+        %tmp.17 = sub %tmp.15 %tmp.16;
+        %tmp.18 = lgetv %y;
+        symbol [ y %tmp.18 73 29 30 ];
+        symbol [ FONT %tmp.20 73 32 36 ];
+        %tmp.20 = getv ? :FONT;
+        %tmp.21 = lgetv %s;
+        symbol [ s %tmp.21 73 38 39 ];
+        symbol [ Graphics %tmp.22 73 41 49 ];
+        %tmp.22 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_LEFT %tmp.23 73 50 67 ];
+        %tmp.23 = getv %tmp.22 :TEXT_JUSTIFY_LEFT;
+        invoke %tmp.13 %tmp.14(%tmp.17, %tmp.18, %tmp.20, %tmp.21, %tmp.23);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 74 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_74_8_76_8_if_stmt:
+        %tmp.24 = lgetv %tw.1;
+        symbol [ tw %tmp.24 74 12 14 ];
+        %tmp.25 = lgetv %w;
+        symbol [ w %tmp.25 74 17 18 ];
+        %tmp.26 = gt %tmp.24 %tmp.25;
+        bf %tmp.26 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_74_8_76_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_74_8_76_8_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_74_20_76_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 75 12 ]
+        %tmp.27 = lgetv %dc;
+        symbol [ dc %tmp.27 75 12 14 ];
+        symbol [ drawText %tmp.28 75 15 23 ];
+        %tmp.28 = getv function %tmp.27 :drawText;
+        %tmp.29 = lgetv %x;
+        symbol [ x %tmp.29 75 24 25 ];
+        %tmp.30 = lgetv %off;
+        symbol [ off %tmp.30 75 28 31 ];
+        %tmp.31 = sub %tmp.29 %tmp.30;
+        %tmp.32 = lgetv %tw.1;
+        symbol [ tw %tmp.32 75 34 36 ];
+        %tmp.33 = add %tmp.31 %tmp.32;
+        %tmp.34 = lgetv %gap;
+        symbol [ gap %tmp.34 75 39 42 ];
+        %tmp.35 = add %tmp.33 %tmp.34;
+        %tmp.36 = lgetv %y;
+        symbol [ y %tmp.36 75 44 45 ];
+        symbol [ FONT %tmp.38 75 47 51 ];
+        %tmp.38 = getv ? :FONT;
+        %tmp.39 = lgetv %s;
+        symbol [ s %tmp.39 75 53 54 ];
+        symbol [ Graphics %tmp.40 75 56 64 ];
+        %tmp.40 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_LEFT %tmp.41 75 65 82 ];
+        %tmp.41 = getv %tmp.40 :TEXT_JUSTIFY_LEFT;
+        invoke %tmp.27 %tmp.28(%tmp.35, %tmp.36, %tmp.38, %tmp.39, %tmp.41);
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_74_20_76_8_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_74_8_76_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_74_8_76_8_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 77 8 ]
+        %tmp.42 = lgetv %dc;
+        symbol [ dc %tmp.42 77 8 10 ];
+        symbol [ clearClip %tmp.43 77 11 20 ];
+        %tmp.43 = getv function %tmp.42 :clearClip;
+        invoke %tmp.42 %tmp.43();
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 78 8 ]
+        %tmp.44 = lgetv %tw.1;
+        symbol [ tw %tmp.44 78 15 17 ];
+        ret %tmp.44;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_70_56_79_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc"; @line = 81; @symbol_functiondef = [rowHeight,81,13,22]; @symbol_param<0> = [dc,81,23,25]; ]
+    function rowHeight(dc) {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_81_27_96_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 82 8 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_81_27_96_4_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_81_27_96_4_stop" ]
+        %th.1 = local;
+        symbol [ th %th.1 82 12 14 ];
+        %tmp.1 = lgetv %dc;
+        symbol [ dc %tmp.1 82 17 19 ];
+        symbol [ getFontHeight %tmp.2 82 20 33 ];
+        %tmp.2 = getv function %tmp.1 :getFontHeight;
+        symbol [ FONT %tmp.4 82 34 38 ];
+        %tmp.4 = getv ? :FONT;
+        %tmp.5 = invoke %tmp.1 %tmp.2(%tmp.4);
+        lputv %th.1 %tmp.5;
+        symbol [ th %th.1 82 12 14 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 83 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_83_8_94_8_if_stmt:
+        symbol [ _emojiH %tmp.7 83 12 19 ];
+        %tmp.7 = getv ? :_emojiH;
+        %tmp.8 = 0;
+        %tmp.9 = lt %tmp.7 %tmp.8;
+        bf %tmp.9 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_83_8_94_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_83_8_94_8_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_83_25_94_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 84 12 ]
+        %tmp.10 = lgetv %th.1;
+        symbol [ th %tmp.10 84 22 24 ];
+        symbol [ _emojiH ? 84 12 19 ];
+        putv self :_emojiH %tmp.10;
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 85 12 ]
+        try @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_85_12_93_12_beginTry @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_85_12_93_12_endTry @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_85_12_93_12_catch @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_85_12_93_12_finally;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_85_12_93_12_beginTry:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_85_16_92_12_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 86 16 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_85_16_92_12_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_85_16_92_12_stop" ]
+        %sample.2 = local;
+        symbol [ sample %sample.2 86 20 26 ];
+        symbol [ StringUtil %tmp.11 86 29 39 ];
+        %tmp.11 = getm $.Toybox.StringUtil;
+        symbol [ convertEncodedString %tmp.12 86 40 60 ];
+        %tmp.12 = getv function %tmp.11 :convertEncodedString;
+        %tmp.13 = newba 4;
+        %tmp.14 = 0xF0;
+        %tmp.15 = dup %tmp.13;
+        %tmp.16 = aputv %tmp.15 0 %tmp.14;
+        %tmp.17 = 0x9F;
+        %tmp.18 = dup %tmp.16;
+        %tmp.19 = aputv %tmp.18 1 %tmp.17;
+        %tmp.20 = 0x8C;
+        %tmp.21 = dup %tmp.19;
+        %tmp.22 = aputv %tmp.21 2 %tmp.20;
+        %tmp.23 = 0xB1;
+        %tmp.24 = dup %tmp.22;
+        %tmp.25 = aputv %tmp.24 3 %tmp.23;
+        %tmp.26 = newd 2;
+        %tmp.28 = const :fromRepresentation;
+        symbol [ fromRepresentation %tmp.28 87 21 39 const ];
+        symbol [ StringUtil %tmp.29 87 43 53 ];
+        %tmp.29 = getm $.Toybox.StringUtil;
+        symbol [ REPRESENTATION_BYTE_ARRAY %tmp.30 87 54 79 ];
+        %tmp.30 = getv %tmp.29 :REPRESENTATION_BYTE_ARRAY;
+        %tmp.31 = dup %tmp.26;
+        %tmp.32 = aputv %tmp.31 %tmp.28 %tmp.30;
+        %tmp.34 = const :toRepresentation;
+        symbol [ toRepresentation %tmp.34 88 21 37 const ];
+        symbol [ StringUtil %tmp.35 88 41 51 ];
+        %tmp.35 = getm $.Toybox.StringUtil;
+        symbol [ REPRESENTATION_STRING_PLAIN_TEXT %tmp.36 88 52 84 ];
+        %tmp.36 = getv %tmp.35 :REPRESENTATION_STRING_PLAIN_TEXT;
+        %tmp.37 = dup %tmp.32;
+        %tmp.38 = aputv %tmp.37 %tmp.34 %tmp.36;
+        %tmp.39 = invoke %tmp.11 %tmp.12(%tmp.25, %tmp.38);
+        lputv %sample.2 %tmp.39;
+        symbol [ sample %sample.2 86 20 26 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 90 16 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_85_16_92_12_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_85_16_92_12_stop" ]
+        %dim.3 = local;
+        symbol [ dim %dim.3 90 20 23 ];
+        %tmp.40 = lgetv %dc;
+        symbol [ dc %tmp.40 90 26 28 ];
+        symbol [ getTextDimensions %tmp.41 90 29 46 ];
+        %tmp.41 = getv function %tmp.40 :getTextDimensions;
+        %tmp.42 = lgetv %sample.2;
+        symbol [ sample %tmp.42 90 47 53 ];
+        symbol [ FONT %tmp.44 90 55 59 ];
+        %tmp.44 = getv ? :FONT;
+        %tmp.45 = invoke %tmp.40 %tmp.41(%tmp.42, %tmp.44);
+        lputv %dim.3 %tmp.45;
+        symbol [ dim %dim.3 90 20 23 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 91 16 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_91_16_91_58_if_stmt:
+        %tmp.46 = lgetv %dim.3;
+        symbol [ dim %tmp.46 91 20 23 ];
+        %tmp.47 = 1;
+        %tmp.48 = agetv %tmp.46 %tmp.47;
+        symbol [ _emojiH %tmp.50 91 29 36 ];
+        %tmp.50 = getv ? :_emojiH;
+        %tmp.51 = gt %tmp.48 %tmp.50;
+        bf %tmp.51 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_91_16_91_58_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_91_16_91_58_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_91_38_91_58_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 91 40 ]
+        %tmp.52 = lgetv %dim.3;
+        symbol [ dim %tmp.52 91 50 53 ];
+        %tmp.53 = 1;
+        %tmp.54 = agetv %tmp.52 %tmp.53;
+        symbol [ _emojiH ? 91 40 47 ];
+        putv self :_emojiH %tmp.54;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_91_38_91_58_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_91_16_91_58_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_91_16_91_58_if_end:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_85_16_92_12_stop:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_85_12_93_12_endTry:
+        jsr @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_85_12_93_12_finally;
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_85_12_93_12_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_85_12_93_12_catch:
+        %tmp.55 = exception;
+        push %tmp.55;
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 92 14 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_85_12_93_12_catch" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_92_14_93_12_end" ]
+        %ex.4 = local;
+        symbol [ ex %ex.4 92 21 23 ];
+        %tmp.56 = dup %tmp.55;
+        lputv %ex.4 %tmp.56;
+        symbol [ ex %ex.4 92 21 23 ];
+        jsr @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_85_12_93_12_finally;
+        pop;
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_85_12_93_12_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_92_14_93_12_end:
+        try @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_85_12_93_12_catch @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_92_14_93_12_end @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_92_14_93_12_end @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_85_12_93_12_finally;
+        jsr @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_85_12_93_12_finally;
+        throw %tmp.55;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_85_12_93_12_finally:
+        jsrret;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_85_12_93_12_end:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_83_25_94_8_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_83_8_94_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_83_8_94_8_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc" 95 8 ]
+        symbol [ _emojiH %tmp.58 95 15 22 ];
+        %tmp.58 = getv ? :_emojiH;
+        %tmp.59 = 2;
+        %tmp.60 = add %tmp.58 %tmp.59;
+        ret %tmp.60;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_Draw_mc_81_27_96_4_stop:
+    }
+}
+[ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/Draw.mc"; @line = 1; ]
+<init> {
+}
