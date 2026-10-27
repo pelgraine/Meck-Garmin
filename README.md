@@ -9,9 +9,11 @@ channels on your wrist.
   <img src="images/mockups/06-home-synced.svg" width="220" alt="Meck home screen on the fenix 7S: ring menu, clock, node name, link status Synced">
 </p>
 
-The look follows Meck Watch and Meck-P4: a ring menu on the home screen,
-one line per message with a marquee for long ones, and the same path
-overlay (hops, Heard-by, region) as the Meck firmware family.
+It carries the Meck name because it was designed first for the Meck T-Deck Max companion BLE Garmin build, and because it keeps the same multicolour theme as Meck-P4. It also works with the standard MeshCore Garmin builds listed below.
+
+<p align="center">
+<img width="324" height="432" alt="IMG_4438" src="https://github.com/user-attachments/assets/16176626-facd-4757-a9e6-2ff974ecb639" />
+</p>
 
 ## What you need
 
@@ -20,7 +22,7 @@ overlay (hops, Heard-by, region) as the Meck firmware family.
 - A MeshCore companion node running one of the Garmin builds below. A stock
   MeshCore node will not work: Garmin watches cannot enter a Bluetooth PIN,
   so the node has to be built to accept a pairing without one.
-- A Mac with VS Code and the Connect IQ SDK to build the app, or a
+- A computer with VS Code and the Connect IQ SDK to build the app, or a
   `meckgarmin.prg` from the Releases page to copy straight onto the watch.
 
 ## Node firmware
