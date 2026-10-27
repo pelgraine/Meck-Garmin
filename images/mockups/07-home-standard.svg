@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="260" height="260" viewBox="0 0 260 260">
+<title>Meck Garmin home screen on a standard MeshCore node: Discover selected, 10:05</title>
+<defs><clipPath id="c07"><circle cx="120" cy="120" r="120"/></clipPath></defs>
+<circle cx="130" cy="130" r="130" fill="#3a3a3a"/>
+<circle cx="130" cy="130" r="124" fill="none" stroke="#1c1c1c" stroke-width="2"/>
+<circle cx="130" cy="130" r="120" fill="#000000"/>
+<g transform="translate(10,10)" clip-path="url(#c07)" font-family="Roboto, Helvetica Neue, Arial, sans-serif">
+<path d="M64.00 23.01A112 112 0 0 1 176.00 23.01" fill="none" stroke="#555555" stroke-width="3" stroke-linecap="butt"/>
+<path d="M194.94 36.77A112 112 0 0 1 229.55 143.29" fill="none" stroke="#555555" stroke-width="3" stroke-linecap="butt"/>
+<path d="M222.32 165.55A112 112 0 0 1 131.71 231.39" fill="none" stroke="#00AA55" stroke-width="8" stroke-linecap="butt"/>
+<path d="M108.29 231.39A112 112 0 0 1 17.68 165.55" fill="none" stroke="#555555" stroke-width="3" stroke-linecap="butt"/>
+<path d="M10.45 143.29A112 112 0 0 1 45.06 36.77" fill="none" stroke="#555555" stroke-width="3" stroke-linecap="butt"/>
+<text x="44" y="63" font-size="13" font-weight="600" fill="#FFFFFF">C7D7EC39</text>
+<text x="196" y="63" font-size="14" font-weight="600" text-anchor="end"><tspan fill="#3F51B5">4.12v</tspan><tspan dx="6" fill="#4CAF50">58%</tspan></text>
+<text x="120" y="137" font-family="Roboto Condensed, Arial Narrow, Helvetica Neue, Arial, sans-serif" font-size="76" font-weight="700" fill="#FFFFFF" text-anchor="middle" textLength="194" lengthAdjust="spacingAndGlyphs">10:05</text>
+<text x="120" y="169" font-size="20" font-weight="600" fill="#FFFFFF" text-anchor="middle">Tue 27 Oct</text>
+<text x="120" y="191" font-size="20" font-weight="600" fill="#00AA55" text-anchor="middle" xml:space="preserve" style="white-space:pre">Discover</text>
+<text x="120" y="210" font-size="14" font-weight="600" fill="#AAAAAA" text-anchor="middle">Standard node</text>
+</g>
+</svg>
