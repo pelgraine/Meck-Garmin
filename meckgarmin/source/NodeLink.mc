@@ -5,6 +5,7 @@ using Toybox.Timer;
 using Toybox.Time;
 using Toybox.StringUtil;
 using Toybox.Math;
+using Toybox.Cryptography;
 
 // Protocol codes. Standard MeshCore companion codes plus the Meck watch
 // extensions (MECK_WATCH_EXT). All layouts verified against Meck's MyMesh.cpp.
@@ -452,6 +453,7 @@ class NodeLink extends Ble.BleDelegate {
         // A reply: it completes whatever is in flight.
         gSched.cancel("timeout");
         var cmd = (_inflight != null) ? _inflight[0] : -1;
+        var sub = (_inflight != null && _inflight.size() > 1) ? _inflight[1] : -1;
         _inflight = null;
 
         if (code == Proto.RESP_DEVICE_INFO) {
@@ -466,6 +468,11 @@ class NodeLink extends Ble.BleDelegate {
                 gModel.fwVersion = bytesToString(f, 60, 20);
             }
         } else if (code == Proto.RESP_SELF_INFO) {
+            // [5][type][tx_pwr][max_tx][pubkey:32][lat:4][lon:4][...][name from 58]
+            if (f.size() >= 36) {
+                gModel.nodeKey = hexOf(f.slice(4, 10));
+                gModel.loadRegions();
+            }
             if (f.size() > 58) {
                 gModel.nodeName = bytesToString(f, 58, f.size() - 58);
             }
@@ -543,6 +550,14 @@ class NodeLink extends Ble.BleDelegate {
                 finishHandshake(0);
             } else if (cmd == Proto.CMD_SEND_LOGIN) {
                 gModel.adminResult(false);
+            } else if (cmd == Proto.CMD_SET_FLOOD_SCOPE_KEY && sub == 1) {
+                // Standard firmware before v12 has no "all regions" sub-command.
+                // Clear the override instead, so the node sends on its own
+                // default; the channel message is still queued behind it.
+                gModel.showToast("No all-regions on node");
+                var nq = [[Proto.CMD_SET_FLOOD_SCOPE_KEY, 0]b];
+                for (var i = 0; i < _q.size(); i++) { nq.add(_q[i]); }
+                _q = nq;
             } else if (cmd == Proto.CMD_SEND_TXT_MSG) {
                 gModel.cliFailed();
             }
@@ -698,8 +713,40 @@ class NodeLink extends Ble.BleDelegate {
             m.put(:fp, []b);   // no sent-track on a standard node; leave Heard-by blank
         }
         gModel.addMessage(chIdx, m, false);
-        _q.add([Proto.CMD_SET_FLOOD_SCOPE_KEY, 0]b);   // node picks channel region / default
+        _q.add(scopeFrameFor(chIdx));
         enqueue(frame);
+    }
+
+    // Command 54 frame sent ahead of every channel message. A Meck node keeps
+    // its own per-channel regions, so the override is just cleared (sub-command
+    // 0, no key) and the node applies its channel region or device default; a
+    // standard node has no per-channel region, so the watch's own setting is
+    // applied: node default = clear, all regions = sub-command 1 (firmware
+    // v12+), a named region = sub-command 0 plus the region's 16-byte key.
+    function scopeFrameFor(chIdx) {
+        if (!gModel.meckExt) {
+            var r = gModel.regionFor(chIdx);
+            if (r != null) {
+                if ("*".equals(r)) {
+                    return [Proto.CMD_SET_FLOOD_SCOPE_KEY, 1]b;
+                }
+                var frame = [Proto.CMD_SET_FLOOD_SCOPE_KEY, 0]b;
+                return frame.addAll(regionKey(r));
+            }
+        }
+        return [Proto.CMD_SET_FLOOD_SCOPE_KEY, 0]b;
+    }
+
+    // Transport key for a public region: the first 16 bytes of SHA-256 over
+    // "#" + name (TransportKeyStore::getAutoKeyFor on the node; the phone
+    // apps derive it the same way). A name already starting with "#" is used
+    // as typed.
+    function regionKey(name) {
+        var tagged = name.substring(0, 1).equals("#") ? name : ("#" + name);
+        var h = new Cryptography.Hash({:algorithm => Cryptography.HASH_SHA256});
+        h.update(stringToBytes(tagged));
+        var d = h.digest();
+        return d.slice(0, 16);
     }
 
     // Drop the link and start again (Settings > Reconnect).

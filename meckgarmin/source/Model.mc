@@ -2,6 +2,7 @@ using Toybox.WatchUi;
 using Toybox.System;
 using Toybox.Timer;
 using Toybox.Application;
+using Toybox.Lang;
 
 // Everything the screens draw comes from here. The link fills it in; the
 // views read it. Messages are kept per channel, oldest first, capped.
@@ -12,6 +13,8 @@ class Model {
     var meckExt = true;          // false after a node refuses the watch hello (standard MeshCore)
     var nodeName = "";
     var fwVersion = "";
+    var nodeKey = "";            // hex of the node's public key prefix; keys the per-node region store
+    var regions = {};            // channel name -> send region ("*" = all regions, else a region name)
     var nodeMv = 0;              // node battery, millivolts (0 = unknown)
     var manufacturer = "";
     var maxChannels = 0;
@@ -130,6 +133,51 @@ class Model {
         msgs = {};
         unread = {};
         WatchUi.requestUpdate();
+    }
+
+    // ---- per-channel send regions (standard nodes) ----
+    // A standard node keeps no per-channel region, so the watch keeps its
+    // own, per node and channel name, in Storage: absent = node default,
+    // "*" = all regions (unscoped), anything else = a region name.
+
+    function loadRegions() {
+        regions = {};
+        if (nodeKey.length() == 0) { return; }
+        try {
+            var v = Application.Storage.getValue("reg_" + nodeKey);
+            if (v instanceof Lang.Dictionary) { regions = v; }
+        } catch (ex) {
+        }
+    }
+
+    // null = node default, "*" = all regions, else the region name.
+    function regionFor(idx) {
+        var nm = channelName(idx);
+        return regions.hasKey(nm) ? regions.get(nm) : null;
+    }
+
+    function setRegion(idx, value) {
+        var nm = channelName(idx);
+        if (value == null) {
+            regions.remove(nm);
+        } else {
+            regions.put(nm, value);
+        }
+        if (nodeKey.length() > 0) {
+            try {
+                Application.Storage.setValue("reg_" + nodeKey, regions);
+            } catch (ex) {
+            }
+        }
+        WatchUi.requestUpdate();
+    }
+
+    // Short form for lists: "default", "all", or the name.
+    function regionLabel(idx) {
+        var r = regionFor(idx);
+        if (r == null) { return "default"; }
+        if ("*".equals(r)) { return "all"; }
+        return r;
     }
 
     function unreadFor(idx) {

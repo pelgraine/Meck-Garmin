@@ -1,0 +1,1988 @@
+[ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 1; @symbol_usingdef<0> = [Toybox,1,6,12]; @symbol_usingdef<1> = [WatchUi,1,13,20]; ]
+using Toybox.WatchUi;
+[ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 2; @symbol_usingdef<0> = [Toybox,2,6,12]; @symbol_usingdef<1> = [Graphics,2,13,21]; ]
+using Toybox.Graphics;
+[ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 9; @symbol_classdef = [RegionView,9,6,16]; @symbol_extends<0> = [WatchUi,9,25,32]; @symbol_extends<1> = [View,9,33,37]; ]
+class RegionView extends WatchUi.View {
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 9; ]
+    <init> {
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 9; ]
+    static
+    <init> {
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 11; @position = 8; @symbol_vardef = [_sel,11,8,12]; ]
+    var _sel = 0;
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 12; @position = 8; @symbol_vardef = [_top,12,8,12]; ]
+    var _top = 0;
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 13; @position = 8; @symbol_vardef = [_rows,13,8,13]; ]
+    var _rows = 1;
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 14; @position = 8; @symbol_vardef = [_y0,14,8,11]; ]
+    var _y0 = 50;
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 15; @position = 8; @symbol_vardef = [_rowH,15,8,13]; ]
+    var _rowH = 18;
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 17; @symbol_functiondef = [initialize,17,13,23]; ]
+    function initialize() as Void {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_17_26_19_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 18 8 ]
+        symbol [ View %tmp.2 18 8 12 ];
+        %tmp.2 = getv ? :View;
+        symbol [ initialize %tmp.3 18 13 23 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_17_26_19_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 21; @symbol_functiondef = [onUpdate,21,13,21]; @symbol_param<0> = [dc,21,22,24]; ]
+    function onUpdate(dc) {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_21_26_64_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 22 8 ]
+        %tmp.1 = lgetv %dc;
+        symbol [ dc %tmp.1 22 8 10 ];
+        symbol [ setColor %tmp.2 22 11 19 ];
+        %tmp.2 = getv function %tmp.1 :setColor;
+        symbol [ Graphics %tmp.3 22 20 28 ];
+        %tmp.3 = getm $.Toybox.Graphics;
+        symbol [ COLOR_WHITE %tmp.4 22 29 40 ];
+        %tmp.4 = getv %tmp.3 :COLOR_WHITE;
+        symbol [ Graphics %tmp.5 22 42 50 ];
+        %tmp.5 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.6 22 51 62 ];
+        %tmp.6 = getv %tmp.5 :COLOR_BLACK;
+        invoke %tmp.1 %tmp.2(%tmp.4, %tmp.6);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 23 8 ]
+        %tmp.7 = lgetv %dc;
+        symbol [ dc %tmp.7 23 8 10 ];
+        symbol [ clear %tmp.8 23 11 16 ];
+        %tmp.8 = getv function %tmp.7 :clear;
+        invoke %tmp.7 %tmp.8();
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 24 8 ]
+        symbol [ Draw %tmp.10 24 14 18 ];
+        %tmp.10 = getv ? :Draw;
+        symbol [ header %tmp.11 24 19 25 ];
+        %tmp.11 = getv function %tmp.10 :header;
+        %tmp.12 = lgetv %dc;
+        symbol [ dc %tmp.12 24 26 28 ];
+        %tmp.13 = "Channel regions";
+        %tmp.14 = true;
+        %tmp.15 = invoke %tmp.10 %tmp.11(%tmp.12, %tmp.13, %tmp.14);
+        symbol [ _y0 ? 24 8 11 ];
+        putv self :_y0 %tmp.15;
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 25 8 ]
+        symbol [ Draw %tmp.17 25 16 20 ];
+        %tmp.17 = getv ? :Draw;
+        symbol [ rowHeight %tmp.18 25 21 30 ];
+        %tmp.18 = getv function %tmp.17 :rowHeight;
+        %tmp.19 = lgetv %dc;
+        symbol [ dc %tmp.19 25 31 33 ];
+        %tmp.20 = invoke %tmp.17 %tmp.18(%tmp.19);
+        symbol [ _rowH ? 25 8 13 ];
+        putv self :_rowH %tmp.20;
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 26 8 ]
+        %tmp.21 = 196;
+        symbol [ _y0 %tmp.23 26 23 26 ];
+        %tmp.23 = getv ? :_y0;
+        %tmp.24 = sub %tmp.21 %tmp.23;
+        symbol [ _rowH %tmp.26 26 30 35 ];
+        %tmp.26 = getv ? :_rowH;
+        %tmp.27 = div %tmp.24 %tmp.26;
+        symbol [ _rows ? 26 8 13 ];
+        putv self :_rows %tmp.27;
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 27 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_27_8_27_36_if_stmt:
+        symbol [ _rows %tmp.29 27 12 17 ];
+        %tmp.29 = getv ? :_rows;
+        %tmp.30 = 1;
+        %tmp.31 = lt %tmp.29 %tmp.30;
+        bf %tmp.31 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_27_8_27_36_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_27_8_27_36_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_27_23_27_36_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 27 25 ]
+        %tmp.32 = 1;
+        symbol [ _rows ? 27 25 30 ];
+        putv self :_rows %tmp.32;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_27_23_27_36_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_27_8_27_36_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_27_8_27_36_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 29 8 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_21_26_64_4_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_21_26_64_4_stop" ]
+        %chans.1 = local;
+        symbol [ chans %chans.1 29 12 17 ];
+        symbol [ gModel %tmp.34 29 20 26 ];
+        %tmp.34 = getv ? :gModel;
+        symbol [ channels %tmp.35 29 27 35 ];
+        %tmp.35 = getv %tmp.34 :channels;
+        lputv %chans.1 %tmp.35;
+        symbol [ chans %chans.1 29 12 17 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 30 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_30_8_33_8_if_stmt:
+        %tmp.36 = lgetv %chans.1;
+        symbol [ chans %tmp.36 30 12 17 ];
+        symbol [ size %tmp.37 30 18 22 ];
+        %tmp.37 = getv function %tmp.36 :size;
+        %tmp.38 = invoke %tmp.36 %tmp.37();
+        %tmp.39 = 0;
+        %tmp.40 = eq %tmp.38 %tmp.39;
+        bf %tmp.40 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_30_8_33_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_30_8_33_8_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_30_31_33_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 31 12 ]
+        %tmp.41 = lgetv %dc;
+        symbol [ dc %tmp.41 31 12 14 ];
+        symbol [ setColor %tmp.42 31 15 23 ];
+        %tmp.42 = getv function %tmp.41 :setColor;
+        symbol [ Graphics %tmp.43 31 24 32 ];
+        %tmp.43 = getm $.Toybox.Graphics;
+        symbol [ COLOR_LT_GRAY %tmp.44 31 33 46 ];
+        %tmp.44 = getv %tmp.43 :COLOR_LT_GRAY;
+        symbol [ Graphics %tmp.45 31 48 56 ];
+        %tmp.45 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.46 31 57 74 ];
+        %tmp.46 = getv %tmp.45 :COLOR_TRANSPARENT;
+        invoke %tmp.41 %tmp.42(%tmp.44, %tmp.46);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 32 12 ]
+        %tmp.47 = lgetv %dc;
+        symbol [ dc %tmp.47 32 12 14 ];
+        symbol [ drawText %tmp.48 32 15 23 ];
+        %tmp.48 = getv function %tmp.47 :drawText;
+        symbol [ Draw %tmp.50 32 24 28 ];
+        %tmp.50 = getv ? :Draw;
+        symbol [ CX %tmp.51 32 29 31 ];
+        %tmp.51 = getv %tmp.50 :CX;
+        symbol [ _y0 %tmp.53 32 33 36 ];
+        %tmp.53 = getv ? :_y0;
+        %tmp.54 = 20;
+        %tmp.55 = add %tmp.53 %tmp.54;
+        symbol [ Draw %tmp.57 32 43 47 ];
+        %tmp.57 = getv ? :Draw;
+        symbol [ FONT %tmp.58 32 48 52 ];
+        %tmp.58 = getv %tmp.57 :FONT;
+        %tmp.59 = "No channels";
+        symbol [ Graphics %tmp.60 32 69 77 ];
+        %tmp.60 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.61 32 78 97 ];
+        %tmp.61 = getv %tmp.60 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.47 %tmp.48(%tmp.51, %tmp.55, %tmp.58, %tmp.59, %tmp.61);
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_30_31_33_8_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_30_8_33_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_30_8_33_8_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 34 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_34_8_34_86_if_stmt:
+        symbol [ _sel %tmp.63 34 12 16 ];
+        %tmp.63 = getv ? :_sel;
+        %tmp.64 = lgetv %chans.1;
+        symbol [ chans %tmp.64 34 20 25 ];
+        symbol [ size %tmp.65 34 26 30 ];
+        %tmp.65 = getv function %tmp.64 :size;
+        %tmp.66 = invoke %tmp.64 %tmp.65();
+        %tmp.67 = gte %tmp.63 %tmp.66;
+        bf %tmp.67 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_34_8_34_86_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_34_8_34_86_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_34_34_34_86_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 34 36 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_34_43_34_83_begin:
+        %tmp.68 = lgetv %chans.1;
+        symbol [ chans %tmp.68 34 44 49 ];
+        symbol [ size %tmp.69 34 50 54 ];
+        %tmp.69 = getv function %tmp.68 :size;
+        %tmp.70 = invoke %tmp.68 %tmp.69();
+        %tmp.71 = 0;
+        %tmp.72 = gt %tmp.70 %tmp.71;
+        bf %tmp.72 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_34_43_34_83_else_false;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_34_43_34_83_true:
+        %tmp.73 = lgetv %chans.1;
+        symbol [ chans %tmp.73 34 64 69 ];
+        symbol [ size %tmp.74 34 70 74 ];
+        %tmp.74 = getv function %tmp.73 :size;
+        %tmp.75 = invoke %tmp.73 %tmp.74();
+        %tmp.76 = 1;
+        %tmp.77 = sub %tmp.75 %tmp.76;
+        push %tmp.77;
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_34_43_34_83_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_34_43_34_83_else_false:
+        %tmp.78 = 0;
+        push %tmp.78;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_34_43_34_83_end:
+        %tmp.79 = phi [%tmp.72 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_34_43_34_83_begin] [%tmp.77 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_34_43_34_83_true] [%tmp.78 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_34_43_34_83_else_false] [%tmp.79 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_34_43_34_83_end];
+        symbol [ _sel ? 34 36 40 ];
+        putv self :_sel %tmp.79;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_34_34_34_86_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_34_8_34_86_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_34_8_34_86_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 35 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_35_8_35_40_if_stmt:
+        symbol [ _sel %tmp.81 35 12 16 ];
+        %tmp.81 = getv ? :_sel;
+        symbol [ _top %tmp.83 35 19 23 ];
+        %tmp.83 = getv ? :_top;
+        %tmp.84 = lt %tmp.81 %tmp.83;
+        bf %tmp.84 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_35_8_35_40_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_35_8_35_40_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_35_25_35_40_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 35 27 ]
+        symbol [ _sel %tmp.86 35 34 38 ];
+        %tmp.86 = getv ? :_sel;
+        symbol [ _top ? 35 27 31 ];
+        putv self :_top %tmp.86;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_35_25_35_40_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_35_8_35_40_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_35_8_35_40_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 36 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_36_8_36_61_if_stmt:
+        symbol [ _sel %tmp.88 36 12 16 ];
+        %tmp.88 = getv ? :_sel;
+        symbol [ _top %tmp.90 36 20 24 ];
+        %tmp.90 = getv ? :_top;
+        symbol [ _rows %tmp.92 36 27 32 ];
+        %tmp.92 = getv ? :_rows;
+        %tmp.93 = add %tmp.90 %tmp.92;
+        %tmp.94 = gte %tmp.88 %tmp.93;
+        bf %tmp.94 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_36_8_36_61_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_36_8_36_61_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_36_34_36_61_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 36 36 ]
+        symbol [ _sel %tmp.96 36 43 47 ];
+        %tmp.96 = getv ? :_sel;
+        symbol [ _rows %tmp.98 36 50 55 ];
+        %tmp.98 = getv ? :_rows;
+        %tmp.99 = sub %tmp.96 %tmp.98;
+        %tmp.100 = 1;
+        %tmp.101 = add %tmp.99 %tmp.100;
+        symbol [ _top ? 36 36 40 ];
+        putv self :_top %tmp.101;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_36_34_36_61_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_36_8_36_61_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_36_8_36_61_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 38 8 ]
+        for @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_38_8_59_8_for_test @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_38_8_59_8_for_incr @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_38_8_59_8_for_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_38_8_59_8_for_init:
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_38_8_59_8_for_begin" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_38_8_59_8_for_end" ]
+        %r.2 = local;
+        symbol [ r %r.2 38 17 18 ];
+        %tmp.102 = 0;
+        lputv %r.2 %tmp.102;
+        symbol [ r %r.2 38 17 18 ];
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_38_8_59_8_for_test:
+        %tmp.103 = lgetv %r.2;
+        symbol [ r %tmp.103 38 24 25 ];
+        symbol [ _rows %tmp.105 38 28 33 ];
+        %tmp.105 = getv ? :_rows;
+        %tmp.106 = lt %tmp.103 %tmp.105;
+        bf %tmp.106 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_38_8_59_8_for_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_38_8_59_8_for_begin:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_38_40_59_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 39 12 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_38_40_59_8_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_38_40_59_8_stop" ]
+        %i.3 = local;
+        symbol [ i %i.3 39 16 17 ];
+        symbol [ _top %tmp.108 39 20 24 ];
+        %tmp.108 = getv ? :_top;
+        %tmp.109 = lgetv %r.2;
+        symbol [ r %tmp.109 39 27 28 ];
+        %tmp.110 = add %tmp.108 %tmp.109;
+        lputv %i.3 %tmp.110;
+        symbol [ i %i.3 39 16 17 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 40 12 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_40_12_40_44_if_stmt:
+        %tmp.111 = lgetv %i.3;
+        symbol [ i %tmp.111 40 16 17 ];
+        %tmp.112 = lgetv %chans.1;
+        symbol [ chans %tmp.112 40 21 26 ];
+        symbol [ size %tmp.113 40 27 31 ];
+        %tmp.113 = getv function %tmp.112 :size;
+        %tmp.114 = invoke %tmp.112 %tmp.113();
+        %tmp.115 = gte %tmp.111 %tmp.114;
+        bf %tmp.115 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_40_12_40_44_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_40_12_40_44_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_40_35_40_44_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 40 37 ]
+        goto break @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_38_8_59_8_for_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_40_35_40_44_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_40_12_40_44_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_40_12_40_44_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 41 12 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_38_40_59_8_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_38_40_59_8_stop" ]
+        %y.4 = local;
+        symbol [ y %y.4 41 16 17 ];
+        symbol [ _y0 %tmp.117 41 20 23 ];
+        %tmp.117 = getv ? :_y0;
+        %tmp.118 = lgetv %r.2;
+        symbol [ r %tmp.118 41 26 27 ];
+        symbol [ _rowH %tmp.120 41 30 35 ];
+        %tmp.120 = getv ? :_rowH;
+        %tmp.121 = mul %tmp.118 %tmp.120;
+        %tmp.122 = add %tmp.117 %tmp.121;
+        lputv %y.4 %tmp.122;
+        symbol [ y %y.4 41 16 17 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 42 12 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_38_40_59_8_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_38_40_59_8_stop" ]
+        %name.5 = local;
+        symbol [ name %name.5 42 16 20 ];
+        %tmp.123 = lgetv %chans.1;
+        symbol [ chans %tmp.123 42 23 28 ];
+        %tmp.124 = lgetv %i.3;
+        symbol [ i %tmp.124 42 29 30 ];
+        %tmp.125 = agetv %tmp.123 %tmp.124;
+        symbol [ get %tmp.126 42 32 35 ];
+        %tmp.126 = getv function %tmp.125 :get;
+        %tmp.128 = const :name;
+        symbol [ name %tmp.128 42 37 41 const ];
+        %tmp.129 = invoke %tmp.125 %tmp.126(%tmp.128);
+        lputv %name.5 %tmp.129;
+        symbol [ name %name.5 42 16 20 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 43 12 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_38_40_59_8_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_38_40_59_8_stop" ]
+        %label.6 = local;
+        symbol [ label %label.6 43 16 21 ];
+        symbol [ gModel %tmp.131 43 24 30 ];
+        %tmp.131 = getv ? :gModel;
+        symbol [ regionLabel %tmp.132 43 31 42 ];
+        %tmp.132 = getv function %tmp.131 :regionLabel;
+        %tmp.133 = lgetv %chans.1;
+        symbol [ chans %tmp.133 43 43 48 ];
+        %tmp.134 = lgetv %i.3;
+        symbol [ i %tmp.134 43 49 50 ];
+        %tmp.135 = agetv %tmp.133 %tmp.134;
+        symbol [ get %tmp.136 43 52 55 ];
+        %tmp.136 = getv function %tmp.135 :get;
+        %tmp.138 = const :idx;
+        symbol [ idx %tmp.138 43 57 60 const ];
+        %tmp.139 = invoke %tmp.135 %tmp.136(%tmp.138);
+        %tmp.140 = invoke %tmp.131 %tmp.132(%tmp.139);
+        lputv %label.6 %tmp.140;
+        symbol [ label %label.6 43 16 21 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 44 12 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_38_40_59_8_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_38_40_59_8_stop" ]
+        %labelW.7 = local;
+        symbol [ labelW %labelW.7 44 16 22 ];
+        %tmp.141 = lgetv %dc;
+        symbol [ dc %tmp.141 44 25 27 ];
+        symbol [ getTextWidthInPixels %tmp.142 44 28 48 ];
+        %tmp.142 = getv function %tmp.141 :getTextWidthInPixels;
+        %tmp.143 = lgetv %label.6;
+        symbol [ label %tmp.143 44 49 54 ];
+        symbol [ Draw %tmp.145 44 56 60 ];
+        %tmp.145 = getv ? :Draw;
+        symbol [ FONT %tmp.146 44 61 65 ];
+        %tmp.146 = getv %tmp.145 :FONT;
+        %tmp.147 = invoke %tmp.141 %tmp.142(%tmp.143, %tmp.146);
+        %tmp.148 = 6;
+        %tmp.149 = add %tmp.147 %tmp.148;
+        lputv %labelW.7 %tmp.149;
+        symbol [ labelW %labelW.7 44 16 22 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 45 12 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_45_12_48_12_if_stmt:
+        %tmp.150 = lgetv %labelW.7;
+        symbol [ labelW %tmp.150 45 16 22 ];
+        symbol [ Draw %tmp.152 45 25 29 ];
+        %tmp.152 = getv ? :Draw;
+        symbol [ W %tmp.153 45 30 31 ];
+        %tmp.153 = getv %tmp.152 :W;
+        %tmp.154 = 2;
+        %tmp.155 = div %tmp.153 %tmp.154;
+        %tmp.156 = gt %tmp.150 %tmp.155;
+        bf %tmp.156 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_45_12_48_12_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_45_12_48_12_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_45_37_48_12_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 46 16 ]
+        symbol [ Draw %tmp.158 46 24 28 ];
+        %tmp.158 = getv ? :Draw;
+        symbol [ ellipsize %tmp.159 46 29 38 ];
+        %tmp.159 = getv function %tmp.158 :ellipsize;
+        %tmp.160 = lgetv %dc;
+        symbol [ dc %tmp.160 46 39 41 ];
+        %tmp.161 = lgetv %label.6;
+        symbol [ label %tmp.161 46 43 48 ];
+        symbol [ Draw %tmp.163 46 50 54 ];
+        %tmp.163 = getv ? :Draw;
+        symbol [ W %tmp.164 46 55 56 ];
+        %tmp.164 = getv %tmp.163 :W;
+        %tmp.165 = 2;
+        %tmp.166 = div %tmp.164 %tmp.165;
+        %tmp.167 = 6;
+        %tmp.168 = sub %tmp.166 %tmp.167;
+        %tmp.169 = invoke %tmp.158 %tmp.159(%tmp.160, %tmp.161, %tmp.168);
+        lputv %label.6 %tmp.169;
+        symbol [ label %label.6 46 16 21 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 47 16 ]
+        %tmp.170 = lgetv %dc;
+        symbol [ dc %tmp.170 47 25 27 ];
+        symbol [ getTextWidthInPixels %tmp.171 47 28 48 ];
+        %tmp.171 = getv function %tmp.170 :getTextWidthInPixels;
+        %tmp.172 = lgetv %label.6;
+        symbol [ label %tmp.172 47 49 54 ];
+        symbol [ Draw %tmp.174 47 56 60 ];
+        %tmp.174 = getv ? :Draw;
+        symbol [ FONT %tmp.175 47 61 65 ];
+        %tmp.175 = getv %tmp.174 :FONT;
+        %tmp.176 = invoke %tmp.170 %tmp.171(%tmp.172, %tmp.175);
+        %tmp.177 = 6;
+        %tmp.178 = add %tmp.176 %tmp.177;
+        lputv %labelW.7 %tmp.178;
+        symbol [ labelW %labelW.7 47 16 22 ];
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_45_37_48_12_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_45_12_48_12_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_45_12_48_12_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 49 12 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_49_12_55_12_if_stmt:
+        %tmp.179 = lgetv %i.3;
+        symbol [ i %tmp.179 49 16 17 ];
+        symbol [ _sel %tmp.181 49 21 25 ];
+        %tmp.181 = getv ? :_sel;
+        %tmp.182 = eq %tmp.179 %tmp.181;
+        bf %tmp.182 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_49_12_55_12_if_else_false;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_49_12_55_12_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_49_27_53_12_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 50 16 ]
+        %tmp.183 = lgetv %dc;
+        symbol [ dc %tmp.183 50 16 18 ];
+        symbol [ setColor %tmp.184 50 19 27 ];
+        %tmp.184 = getv function %tmp.183 :setColor;
+        symbol [ Graphics %tmp.185 50 28 36 ];
+        %tmp.185 = getm $.Toybox.Graphics;
+        symbol [ COLOR_WHITE %tmp.186 50 37 48 ];
+        %tmp.186 = getv %tmp.185 :COLOR_WHITE;
+        symbol [ Graphics %tmp.187 50 50 58 ];
+        %tmp.187 = getm $.Toybox.Graphics;
+        symbol [ COLOR_WHITE %tmp.188 50 59 70 ];
+        %tmp.188 = getv %tmp.187 :COLOR_WHITE;
+        invoke %tmp.183 %tmp.184(%tmp.186, %tmp.188);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 51 16 ]
+        %tmp.189 = lgetv %dc;
+        symbol [ dc %tmp.189 51 16 18 ];
+        symbol [ fillRectangle %tmp.190 51 19 32 ];
+        %tmp.190 = getv function %tmp.189 :fillRectangle;
+        symbol [ Draw %tmp.192 51 33 37 ];
+        %tmp.192 = getv ? :Draw;
+        symbol [ X %tmp.193 51 38 39 ];
+        %tmp.193 = getv %tmp.192 :X;
+        %tmp.194 = lgetv %y.4;
+        symbol [ y %tmp.194 51 41 42 ];
+        symbol [ Draw %tmp.196 51 44 48 ];
+        %tmp.196 = getv ? :Draw;
+        symbol [ W %tmp.197 51 49 50 ];
+        %tmp.197 = getv %tmp.196 :W;
+        symbol [ _rowH %tmp.199 51 52 57 ];
+        %tmp.199 = getv ? :_rowH;
+        invoke %tmp.189 %tmp.190(%tmp.193, %tmp.194, %tmp.197, %tmp.199);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 52 16 ]
+        %tmp.200 = lgetv %dc;
+        symbol [ dc %tmp.200 52 16 18 ];
+        symbol [ setColor %tmp.201 52 19 27 ];
+        %tmp.201 = getv function %tmp.200 :setColor;
+        symbol [ Graphics %tmp.202 52 28 36 ];
+        %tmp.202 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.203 52 37 48 ];
+        %tmp.203 = getv %tmp.202 :COLOR_BLACK;
+        symbol [ Graphics %tmp.204 52 50 58 ];
+        %tmp.204 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.205 52 59 76 ];
+        %tmp.205 = getv %tmp.204 :COLOR_TRANSPARENT;
+        invoke %tmp.200 %tmp.201(%tmp.203, %tmp.205);
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_49_27_53_12_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_49_12_55_12_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_49_12_55_12_if_else_false:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_53_19_55_12_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 54 16 ]
+        %tmp.206 = lgetv %dc;
+        symbol [ dc %tmp.206 54 16 18 ];
+        symbol [ setColor %tmp.207 54 19 27 ];
+        %tmp.207 = getv function %tmp.206 :setColor;
+        symbol [ Graphics %tmp.208 54 28 36 ];
+        %tmp.208 = getm $.Toybox.Graphics;
+        symbol [ COLOR_WHITE %tmp.209 54 37 48 ];
+        %tmp.209 = getv %tmp.208 :COLOR_WHITE;
+        symbol [ Graphics %tmp.210 54 50 58 ];
+        %tmp.210 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.211 54 59 76 ];
+        %tmp.211 = getv %tmp.210 :COLOR_TRANSPARENT;
+        invoke %tmp.206 %tmp.207(%tmp.209, %tmp.211);
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_53_19_55_12_stop:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_49_12_55_12_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 56 12 ]
+        %tmp.212 = lgetv %dc;
+        symbol [ dc %tmp.212 56 12 14 ];
+        symbol [ drawText %tmp.213 56 15 23 ];
+        %tmp.213 = getv function %tmp.212 :drawText;
+        symbol [ Draw %tmp.215 56 24 28 ];
+        %tmp.215 = getv ? :Draw;
+        symbol [ X %tmp.216 56 29 30 ];
+        %tmp.216 = getv %tmp.215 :X;
+        %tmp.217 = 2;
+        %tmp.218 = add %tmp.216 %tmp.217;
+        %tmp.219 = lgetv %y.4;
+        symbol [ y %tmp.219 56 36 37 ];
+        symbol [ Draw %tmp.221 56 39 43 ];
+        %tmp.221 = getv ? :Draw;
+        symbol [ FONT %tmp.222 56 44 48 ];
+        %tmp.222 = getv %tmp.221 :FONT;
+        symbol [ Draw %tmp.224 56 50 54 ];
+        %tmp.224 = getv ? :Draw;
+        symbol [ ellipsize %tmp.225 56 55 64 ];
+        %tmp.225 = getv function %tmp.224 :ellipsize;
+        %tmp.226 = lgetv %dc;
+        symbol [ dc %tmp.226 56 65 67 ];
+        %tmp.227 = lgetv %name.5;
+        symbol [ name %tmp.227 56 69 73 ];
+        symbol [ Draw %tmp.229 56 75 79 ];
+        %tmp.229 = getv ? :Draw;
+        symbol [ W %tmp.230 56 80 81 ];
+        %tmp.230 = getv %tmp.229 :W;
+        %tmp.231 = 4;
+        %tmp.232 = sub %tmp.230 %tmp.231;
+        %tmp.233 = lgetv %labelW.7;
+        symbol [ labelW %tmp.233 56 88 94 ];
+        %tmp.234 = sub %tmp.232 %tmp.233;
+        %tmp.235 = invoke %tmp.224 %tmp.225(%tmp.226, %tmp.227, %tmp.234);
+        symbol [ Graphics %tmp.236 56 97 105 ];
+        %tmp.236 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_LEFT %tmp.237 56 106 123 ];
+        %tmp.237 = getv %tmp.236 :TEXT_JUSTIFY_LEFT;
+        invoke %tmp.212 %tmp.213(%tmp.218, %tmp.219, %tmp.222, %tmp.235, %tmp.237);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 57 12 ]
+        %tmp.238 = lgetv %dc;
+        symbol [ dc %tmp.238 57 12 14 ];
+        symbol [ setColor %tmp.239 57 15 23 ];
+        %tmp.239 = getv function %tmp.238 :setColor;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_57_24_57_70_begin:
+        %tmp.240 = lgetv %i.3;
+        symbol [ i %tmp.240 57 25 26 ];
+        symbol [ _sel %tmp.242 57 30 34 ];
+        %tmp.242 = getv ? :_sel;
+        %tmp.243 = eq %tmp.240 %tmp.242;
+        bf %tmp.243 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_57_24_57_70_else_false;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_57_24_57_70_true:
+        symbol [ Graphics %tmp.244 57 38 46 ];
+        %tmp.244 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.245 57 47 58 ];
+        %tmp.245 = getv %tmp.244 :COLOR_BLACK;
+        push %tmp.245;
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_57_24_57_70_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_57_24_57_70_else_false:
+        symbol [ Graphics %tmp.246 57 61 69 ];
+        %tmp.246 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLUE %tmp.247 57 70 80 ];
+        %tmp.247 = getv %tmp.246 :COLOR_BLUE;
+        push %tmp.247;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_57_24_57_70_end:
+        %tmp.248 = phi [%tmp.243 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_57_24_57_70_begin] [%tmp.245 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_57_24_57_70_true] [%tmp.247 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_57_24_57_70_else_false] [%tmp.248 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_57_24_57_70_end];
+        symbol [ Graphics %tmp.249 57 82 90 ];
+        %tmp.249 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.250 57 91 108 ];
+        %tmp.250 = getv %tmp.249 :COLOR_TRANSPARENT;
+        invoke %tmp.238 %tmp.239(%tmp.248, %tmp.250);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 58 12 ]
+        %tmp.251 = lgetv %dc;
+        symbol [ dc %tmp.251 58 12 14 ];
+        symbol [ drawText %tmp.252 58 15 23 ];
+        %tmp.252 = getv function %tmp.251 :drawText;
+        symbol [ Draw %tmp.254 58 24 28 ];
+        %tmp.254 = getv ? :Draw;
+        symbol [ X %tmp.255 58 29 30 ];
+        %tmp.255 = getv %tmp.254 :X;
+        symbol [ Draw %tmp.257 58 33 37 ];
+        %tmp.257 = getv ? :Draw;
+        symbol [ W %tmp.258 58 38 39 ];
+        %tmp.258 = getv %tmp.257 :W;
+        %tmp.259 = add %tmp.255 %tmp.258;
+        %tmp.260 = 2;
+        %tmp.261 = sub %tmp.259 %tmp.260;
+        %tmp.262 = lgetv %y.4;
+        symbol [ y %tmp.262 58 45 46 ];
+        symbol [ Draw %tmp.264 58 48 52 ];
+        %tmp.264 = getv ? :Draw;
+        symbol [ FONT %tmp.265 58 53 57 ];
+        %tmp.265 = getv %tmp.264 :FONT;
+        %tmp.266 = lgetv %label.6;
+        symbol [ label %tmp.266 58 59 64 ];
+        symbol [ Graphics %tmp.267 58 66 74 ];
+        %tmp.267 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_RIGHT %tmp.268 58 75 93 ];
+        %tmp.268 = getv %tmp.267 :TEXT_JUSTIFY_RIGHT;
+        invoke %tmp.251 %tmp.252(%tmp.261, %tmp.262, %tmp.265, %tmp.266, %tmp.268);
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_38_40_59_8_stop:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_38_8_59_8_for_incr:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 38 ]
+        %tmp.271 = lgetv %r.2;
+        symbol [ r %tmp.271 38 35 36 ];
+        %tmp.272 = add %tmp.271 1;
+        lputv %r.2 %tmp.272;
+        symbol [ r %r.2 38 35 36 ];
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_38_8_59_8_for_test;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_38_8_59_8_for_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 60 8 ]
+        symbol [ Draw %tmp.274 60 8 12 ];
+        %tmp.274 = getv ? :Draw;
+        symbol [ footer %tmp.275 60 13 19 ];
+        %tmp.275 = getv function %tmp.274 :footer;
+        %tmp.276 = lgetv %dc;
+        symbol [ dc %tmp.276 60 20 22 ];
+        %tmp.277 = "Start: change";
+        invoke %tmp.274 %tmp.275(%tmp.276, %tmp.277);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 61 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_61_8_63_8_if_stmt:
+        symbol [ gModel %tmp.279 61 12 18 ];
+        %tmp.279 = getv ? :gModel;
+        symbol [ toast %tmp.280 61 19 24 ];
+        %tmp.280 = getv %tmp.279 :toast;
+        %tmp.281 = null;
+        %tmp.282 = ne %tmp.280 %tmp.281;
+        bf %tmp.282 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_61_8_63_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_61_8_63_8_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_61_34_63_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 62 12 ]
+        symbol [ ChannelView %tmp.284 62 12 23 ];
+        %tmp.284 = getv ? :ChannelView;
+        symbol [ drawToastStatic %tmp.285 62 24 39 ];
+        %tmp.285 = getv function %tmp.284 :drawToastStatic;
+        %tmp.286 = lgetv %dc;
+        symbol [ dc %tmp.286 62 40 42 ];
+        symbol [ gModel %tmp.288 62 44 50 ];
+        %tmp.288 = getv ? :gModel;
+        symbol [ toast %tmp.289 62 51 56 ];
+        %tmp.289 = getv %tmp.288 :toast;
+        invoke %tmp.284 %tmp.285(%tmp.286, %tmp.289);
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_61_34_63_8_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_61_8_63_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_61_8_63_8_if_end:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_21_26_64_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 66; @symbol_functiondef = [move,66,13,17]; @symbol_param<0> = [d,66,18,19]; ]
+    function move(d) {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_66_21_73_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 67 8 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_66_21_73_4_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_66_21_73_4_stop" ]
+        %n.1 = local;
+        symbol [ n %n.1 67 12 13 ];
+        symbol [ gModel %tmp.2 67 16 22 ];
+        %tmp.2 = getv ? :gModel;
+        symbol [ channels %tmp.3 67 23 31 ];
+        %tmp.3 = getv %tmp.2 :channels;
+        symbol [ size %tmp.4 67 32 36 ];
+        %tmp.4 = getv function %tmp.3 :size;
+        %tmp.5 = invoke %tmp.3 %tmp.4();
+        lputv %n.1 %tmp.5;
+        symbol [ n %n.1 67 12 13 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 68 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_68_8_68_30_if_stmt:
+        %tmp.6 = lgetv %n.1;
+        symbol [ n %tmp.6 68 12 13 ];
+        %tmp.7 = 0;
+        %tmp.8 = eq %tmp.6 %tmp.7;
+        bf %tmp.8 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_68_8_68_30_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_68_8_68_30_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_68_20_68_30_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 68 22 ]
+        ret ?;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_68_20_68_30_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_68_8_68_30_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_68_8_68_30_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 69 8 ]
+        symbol [ _sel %tmp.10 69 15 19 ];
+        %tmp.10 = getv ? :_sel;
+        %tmp.11 = lgetv %d;
+        symbol [ d %tmp.11 69 22 23 ];
+        %tmp.12 = add %tmp.10 %tmp.11;
+        symbol [ _sel ? 69 8 12 ];
+        putv self :_sel %tmp.12;
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 70 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_70_8_70_38_if_stmt:
+        symbol [ _sel %tmp.14 70 12 16 ];
+        %tmp.14 = getv ? :_sel;
+        %tmp.15 = 0;
+        %tmp.16 = lt %tmp.14 %tmp.15;
+        bf %tmp.16 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_70_8_70_38_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_70_8_70_38_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_70_22_70_38_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 70 24 ]
+        %tmp.17 = lgetv %n.1;
+        symbol [ n %tmp.17 70 31 32 ];
+        %tmp.18 = 1;
+        %tmp.19 = sub %tmp.17 %tmp.18;
+        symbol [ _sel ? 70 24 28 ];
+        putv self :_sel %tmp.19;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_70_22_70_38_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_70_8_70_38_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_70_8_70_38_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 71 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_71_8_71_35_if_stmt:
+        symbol [ _sel %tmp.21 71 12 16 ];
+        %tmp.21 = getv ? :_sel;
+        %tmp.22 = lgetv %n.1;
+        symbol [ n %tmp.22 71 20 21 ];
+        %tmp.23 = gte %tmp.21 %tmp.22;
+        bf %tmp.23 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_71_8_71_35_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_71_8_71_35_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_71_23_71_35_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 71 25 ]
+        %tmp.24 = 0;
+        symbol [ _sel ? 71 25 29 ];
+        putv self :_sel %tmp.24;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_71_23_71_35_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_71_8_71_35_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_71_8_71_35_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 72 8 ]
+        symbol [ WatchUi %tmp.25 72 8 15 ];
+        %tmp.25 = getm $.Toybox.WatchUi;
+        symbol [ requestUpdate %tmp.26 72 16 29 ];
+        %tmp.26 = getv function %tmp.25 :requestUpdate;
+        invoke %tmp.25 %tmp.26();
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_66_21_73_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 75; @symbol_functiondef = [rowAt,75,13,18]; @symbol_param<0> = [y,75,19,20]; ]
+    function rowAt(y) {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_75_22_81_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 76 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_76_8_76_34_if_stmt:
+        %tmp.1 = lgetv %y;
+        symbol [ y %tmp.1 76 12 13 ];
+        symbol [ _y0 %tmp.3 76 16 19 ];
+        %tmp.3 = getv ? :_y0;
+        %tmp.4 = lt %tmp.1 %tmp.3;
+        bf %tmp.4 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_76_8_76_34_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_76_8_76_34_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_76_21_76_34_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 76 23 ]
+        %tmp.5 = -1;
+        ret %tmp.5;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_76_21_76_34_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_76_8_76_34_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_76_8_76_34_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 77 8 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_75_22_81_4_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_75_22_81_4_stop" ]
+        %r.1 = local;
+        symbol [ r %r.1 77 12 13 ];
+        %tmp.6 = lgetv %y;
+        symbol [ y %tmp.6 77 17 18 ];
+        symbol [ _y0 %tmp.8 77 21 24 ];
+        %tmp.8 = getv ? :_y0;
+        %tmp.9 = sub %tmp.6 %tmp.8;
+        symbol [ _rowH %tmp.11 77 28 33 ];
+        %tmp.11 = getv ? :_rowH;
+        %tmp.12 = div %tmp.9 %tmp.11;
+        lputv %r.1 %tmp.12;
+        symbol [ r %r.1 77 12 13 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 78 8 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_75_22_81_4_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_75_22_81_4_stop" ]
+        %i.2 = local;
+        symbol [ i %i.2 78 12 13 ];
+        symbol [ _top %tmp.14 78 16 20 ];
+        %tmp.14 = getv ? :_top;
+        %tmp.15 = lgetv %r.1;
+        symbol [ r %tmp.15 78 23 24 ];
+        %tmp.16 = add %tmp.14 %tmp.15;
+        lputv %i.2 %tmp.16;
+        symbol [ i %i.2 78 12 13 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 79 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_79_8_79_68_if_stmt:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_79_12_79_52_begin:
+        %tmp.17 = lgetv %r.1;
+        symbol [ r %tmp.17 79 12 13 ];
+        symbol [ _rows %tmp.19 79 17 22 ];
+        %tmp.19 = getv ? :_rows;
+        %tmp.20 = gte %tmp.17 %tmp.19;
+        bt %tmp.20 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_79_8_79_68_if_true;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_79_26_79_52_false:
+        %tmp.21 = lgetv %i.2;
+        symbol [ i %tmp.21 79 26 27 ];
+        symbol [ gModel %tmp.23 79 31 37 ];
+        %tmp.23 = getv ? :gModel;
+        symbol [ channels %tmp.24 79 38 46 ];
+        %tmp.24 = getv %tmp.23 :channels;
+        symbol [ size %tmp.25 79 47 51 ];
+        %tmp.25 = getv function %tmp.24 :size;
+        %tmp.26 = invoke %tmp.24 %tmp.25();
+        %tmp.27 = gte %tmp.21 %tmp.26;
+        push %tmp.27;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_79_26_79_52_end:
+        %tmp.28 = phi [%tmp.20 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_79_12_79_52_begin] [%tmp.27 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_79_26_79_52_false] [%tmp.28 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_79_26_79_52_end];
+        bf %tmp.28 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_79_8_79_68_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_79_8_79_68_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_79_55_79_68_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 79 57 ]
+        %tmp.29 = -1;
+        ret %tmp.29;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_79_55_79_68_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_79_8_79_68_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_79_8_79_68_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 80 8 ]
+        %tmp.30 = lgetv %i.2;
+        symbol [ i %tmp.30 80 15 16 ];
+        ret %tmp.30;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_75_22_81_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 83; @symbol_functiondef = [open,83,13,17]; ]
+    function open() {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_83_20_89_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 84 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_84_8_88_8_if_stmt:
+        symbol [ _sel %tmp.2 84 12 16 ];
+        %tmp.2 = getv ? :_sel;
+        symbol [ gModel %tmp.4 84 19 25 ];
+        %tmp.4 = getv ? :gModel;
+        symbol [ channels %tmp.5 84 26 34 ];
+        %tmp.5 = getv %tmp.4 :channels;
+        symbol [ size %tmp.6 84 35 39 ];
+        %tmp.6 = getv function %tmp.5 :size;
+        %tmp.7 = invoke %tmp.5 %tmp.6();
+        %tmp.8 = lt %tmp.2 %tmp.7;
+        bf %tmp.8 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_84_8_88_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_84_8_88_8_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_84_43_88_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 85 12 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_84_43_88_8_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_84_43_88_8_stop" ]
+        %idx.1 = local;
+        symbol [ idx %idx.1 85 16 19 ];
+        symbol [ gModel %tmp.10 85 22 28 ];
+        %tmp.10 = getv ? :gModel;
+        symbol [ channels %tmp.11 85 29 37 ];
+        %tmp.11 = getv %tmp.10 :channels;
+        symbol [ _sel %tmp.13 85 38 42 ];
+        %tmp.13 = getv ? :_sel;
+        %tmp.14 = agetv %tmp.11 %tmp.13;
+        symbol [ get %tmp.15 85 44 47 ];
+        %tmp.15 = getv function %tmp.14 :get;
+        %tmp.17 = const :idx;
+        symbol [ idx %tmp.17 85 49 52 const ];
+        %tmp.18 = invoke %tmp.14 %tmp.15(%tmp.17);
+        lputv %idx.1 %tmp.18;
+        symbol [ idx %idx.1 85 16 19 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 86 12 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_84_43_88_8_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_84_43_88_8_stop" ]
+        %v.2 = local;
+        symbol [ v %v.2 86 16 17 ];
+        symbol [ RegionChoiceView %tmp.22 86 24 40 ];
+        %tmp.22 = getv ? :RegionChoiceView;
+        %tmp.23 = lgetv %idx.1;
+        symbol [ idx %tmp.23 86 41 44 ];
+        %tmp.19 = newc %tmp.22 (%tmp.23);
+        lputv %v.2 %tmp.19;
+        symbol [ v %v.2 86 16 17 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 87 12 ]
+        symbol [ WatchUi %tmp.24 87 12 19 ];
+        %tmp.24 = getm $.Toybox.WatchUi;
+        symbol [ pushView %tmp.25 87 20 28 ];
+        %tmp.25 = getv function %tmp.24 :pushView;
+        %tmp.26 = lgetv %v.2;
+        symbol [ v %tmp.26 87 29 30 ];
+        symbol [ RegionChoiceDelegate %tmp.30 87 36 56 ];
+        %tmp.30 = getv ? :RegionChoiceDelegate;
+        %tmp.31 = lgetv %v.2;
+        symbol [ v %tmp.31 87 57 58 ];
+        %tmp.27 = newc %tmp.30 (%tmp.31);
+        symbol [ WatchUi %tmp.32 87 61 68 ];
+        %tmp.32 = getm $.Toybox.WatchUi;
+        symbol [ SLIDE_LEFT %tmp.33 87 69 79 ];
+        %tmp.33 = getv %tmp.32 :SLIDE_LEFT;
+        invoke %tmp.24 %tmp.25(%tmp.26, %tmp.27, %tmp.33);
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_84_43_88_8_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_84_8_88_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_84_8_88_8_if_end:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_83_20_89_4_stop:
+    }
+}
+[ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 92; @symbol_classdef = [RegionDelegate,92,6,20]; @symbol_extends<0> = [WatchUi,92,29,36]; @symbol_extends<1> = [BehaviorDelegate,92,37,53]; ]
+class RegionDelegate extends WatchUi.BehaviorDelegate {
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 92; ]
+    <init> {
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 92; ]
+    static
+    <init> {
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 93; @position = 8; @symbol_vardef = [_v,93,8,10]; ]
+    var _v;
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 95; @symbol_functiondef = [initialize,95,13,23]; @symbol_param<0> = [v,95,24,25]; ]
+    function initialize(v) as Void {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_95_27_98_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 96 8 ]
+        symbol [ BehaviorDelegate %tmp.2 96 8 24 ];
+        %tmp.2 = getv ? :BehaviorDelegate;
+        symbol [ initialize %tmp.3 96 25 35 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 97 8 ]
+        %tmp.4 = lgetv %v;
+        symbol [ v %tmp.4 97 13 14 ];
+        symbol [ _v ? 97 8 10 ];
+        putv self :_v %tmp.4;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_95_27_98_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 100; @symbol_functiondef = [onNextPage,100,13,23]; ]
+    function onNextPage() {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_100_26_100_53_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 100 28 ]
+        symbol [ _v %tmp.2 100 28 30 ];
+        %tmp.2 = getv ? :_v;
+        symbol [ move %tmp.3 100 31 35 ];
+        %tmp.3 = getv function %tmp.2 :move;
+        %tmp.4 = 1;
+        invoke %tmp.2 %tmp.3(%tmp.4);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 100 40 ]
+        %tmp.5 = true;
+        ret %tmp.5;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_100_26_100_53_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 101; @symbol_functiondef = [onPreviousPage,101,13,27]; ]
+    function onPreviousPage() {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_101_30_101_58_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 101 32 ]
+        symbol [ _v %tmp.2 101 32 34 ];
+        %tmp.2 = getv ? :_v;
+        symbol [ move %tmp.3 101 35 39 ];
+        %tmp.3 = getv function %tmp.2 :move;
+        %tmp.4 = -1;
+        invoke %tmp.2 %tmp.3(%tmp.4);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 101 45 ]
+        %tmp.5 = true;
+        ret %tmp.5;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_101_30_101_58_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 103; @symbol_functiondef = [onKey,103,13,18]; @symbol_param<0> = [evt,103,19,22]; ]
+    function onKey(evt) {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_103_24_109_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 104 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_104_8_107_8_if_stmt:
+        %tmp.1 = lgetv %evt;
+        symbol [ evt %tmp.1 104 12 15 ];
+        symbol [ getKey %tmp.2 104 16 22 ];
+        %tmp.2 = getv function %tmp.1 :getKey;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        symbol [ WatchUi %tmp.4 104 28 35 ];
+        %tmp.4 = getm $.Toybox.WatchUi;
+        symbol [ KEY_ENTER %tmp.5 104 36 45 ];
+        %tmp.5 = getv %tmp.4 :KEY_ENTER;
+        %tmp.6 = eq %tmp.3 %tmp.5;
+        bf %tmp.6 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_104_8_107_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_104_8_107_8_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_104_47_107_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 105 12 ]
+        symbol [ _v %tmp.8 105 12 14 ];
+        %tmp.8 = getv ? :_v;
+        symbol [ open %tmp.9 105 15 19 ];
+        %tmp.9 = getv function %tmp.8 :open;
+        invoke %tmp.8 %tmp.9();
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 106 12 ]
+        %tmp.10 = true;
+        ret %tmp.10;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_104_47_107_8_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_104_8_107_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_104_8_107_8_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 108 8 ]
+        %tmp.11 = false;
+        ret %tmp.11;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_103_24_109_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 111; @symbol_functiondef = [onBack,111,13,19]; ]
+    function onBack() {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_111_22_114_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 112 8 ]
+        symbol [ WatchUi %tmp.1 112 8 15 ];
+        %tmp.1 = getm $.Toybox.WatchUi;
+        symbol [ popView %tmp.2 112 16 23 ];
+        %tmp.2 = getv function %tmp.1 :popView;
+        symbol [ WatchUi %tmp.3 112 24 31 ];
+        %tmp.3 = getm $.Toybox.WatchUi;
+        symbol [ SLIDE_RIGHT %tmp.4 112 32 43 ];
+        %tmp.4 = getv %tmp.3 :SLIDE_RIGHT;
+        invoke %tmp.1 %tmp.2(%tmp.4);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 113 8 ]
+        %tmp.5 = true;
+        ret %tmp.5;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_111_22_114_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 116; @symbol_functiondef = [onTap,116,13,18]; @symbol_param<0> = [evt,116,19,22]; ]
+    function onTap(evt) {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_116_24_124_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 117 8 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_116_24_124_4_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_116_24_124_4_stop" ]
+        %c.1 = local;
+        symbol [ c %c.1 117 12 13 ];
+        %tmp.1 = lgetv %evt;
+        symbol [ evt %tmp.1 117 16 19 ];
+        symbol [ getCoordinates %tmp.2 117 20 34 ];
+        %tmp.2 = getv function %tmp.1 :getCoordinates;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        lputv %c.1 %tmp.3;
+        symbol [ c %c.1 117 12 13 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 118 8 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_116_24_124_4_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_116_24_124_4_stop" ]
+        %i.2 = local;
+        symbol [ i %i.2 118 12 13 ];
+        symbol [ _v %tmp.5 118 16 18 ];
+        %tmp.5 = getv ? :_v;
+        symbol [ rowAt %tmp.6 118 19 24 ];
+        %tmp.6 = getv function %tmp.5 :rowAt;
+        %tmp.7 = lgetv %c.1;
+        symbol [ c %tmp.7 118 25 26 ];
+        %tmp.8 = 1;
+        %tmp.9 = agetv %tmp.7 %tmp.8;
+        %tmp.10 = invoke %tmp.5 %tmp.6(%tmp.9);
+        lputv %i.2 %tmp.10;
+        symbol [ i %i.2 118 12 13 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 119 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_119_8_122_8_if_stmt:
+        %tmp.11 = lgetv %i.2;
+        symbol [ i %tmp.11 119 12 13 ];
+        %tmp.12 = 0;
+        %tmp.13 = gte %tmp.11 %tmp.12;
+        bf %tmp.13 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_119_8_122_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_119_8_122_8_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_119_20_122_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 120 12 ]
+        symbol [ _v %tmp.14 120 12 14 ];
+        %tmp.14 = getv self :_v;
+        %tmp.15 = lgetv %i.2;
+        symbol [ i %tmp.15 120 22 23 ];
+        symbol [ _sel ? 120 15 19 ];
+        putv %tmp.14 :_sel %tmp.15;
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 121 12 ]
+        symbol [ _v %tmp.17 121 12 14 ];
+        %tmp.17 = getv ? :_v;
+        symbol [ open %tmp.18 121 15 19 ];
+        %tmp.18 = getv function %tmp.17 :open;
+        invoke %tmp.17 %tmp.18();
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_119_20_122_8_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_119_8_122_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_119_8_122_8_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 123 8 ]
+        %tmp.19 = true;
+        ret %tmp.19;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_116_24_124_4_stop:
+    }
+}
+[ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 131; @symbol_classdef = [RegionChoiceView,131,6,22]; @symbol_extends<0> = [WatchUi,131,31,38]; @symbol_extends<1> = [View,131,39,43]; ]
+class RegionChoiceView extends WatchUi.View {
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 131; ]
+    <init> {
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 131; ]
+    static
+    <init> {
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 133; @position = 8; @symbol_vardef = [_idx,133,8,12]; ]
+    var _idx;
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 134; @position = 8; @symbol_vardef = [_sel,134,8,12]; ]
+    var _sel = 0;
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 135; @position = 8; @symbol_vardef = [_y0,135,8,11]; ]
+    var _y0 = 50;
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 136; @position = 8; @symbol_vardef = [_rowH,136,8,13]; ]
+    var _rowH = 18;
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 137; @position = 8; @symbol_vardef = [_items,137,8,14]; ]
+    var _items;
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 139; @symbol_functiondef = [initialize,139,13,23]; @symbol_param<0> = [idx,139,24,27]; ]
+    function initialize(idx) as Void {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_139_29_147_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 140 8 ]
+        symbol [ View %tmp.2 140 8 12 ];
+        %tmp.2 = getv ? :View;
+        symbol [ initialize %tmp.3 140 13 23 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 141 8 ]
+        %tmp.4 = lgetv %idx;
+        symbol [ idx %tmp.4 141 15 18 ];
+        symbol [ _idx ? 141 8 12 ];
+        putv self :_idx %tmp.4;
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 142 8 ]
+        %tmp.5 = newa 3;
+        %tmp.6 = "Node default";
+        %tmp.7 = dup %tmp.5;
+        %tmp.8 = aputv %tmp.7 0 %tmp.6;
+        %tmp.9 = "All regions";
+        %tmp.10 = dup %tmp.8;
+        %tmp.11 = aputv %tmp.10 1 %tmp.9;
+        %tmp.12 = "Type a name";
+        %tmp.13 = dup %tmp.11;
+        %tmp.14 = aputv %tmp.13 2 %tmp.12;
+        symbol [ _items ? 142 8 14 ];
+        putv self :_items %tmp.14;
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 143 8 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_139_29_147_4_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_139_29_147_4_stop" ]
+        %r.1 = local;
+        symbol [ r %r.1 143 12 13 ];
+        symbol [ gModel %tmp.16 143 16 22 ];
+        %tmp.16 = getv ? :gModel;
+        symbol [ regionFor %tmp.17 143 23 32 ];
+        %tmp.17 = getv function %tmp.16 :regionFor;
+        %tmp.18 = lgetv %idx;
+        symbol [ idx %tmp.18 143 33 36 ];
+        %tmp.19 = invoke %tmp.16 %tmp.17(%tmp.18);
+        lputv %r.1 %tmp.19;
+        symbol [ r %r.1 143 12 13 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 144 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_144_8_146_8_if_stmt:
+        %tmp.20 = lgetv %r.1;
+        symbol [ r %tmp.20 144 12 13 ];
+        %tmp.21 = null;
+        %tmp.22 = ne %tmp.20 %tmp.21;
+        bf %tmp.22 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_144_8_146_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_144_8_146_8_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_144_23_146_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 145 12 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_145_19_145_39_begin:
+        %tmp.23 = "*";
+        symbol [ equals %tmp.24 145 23 29 ];
+        %tmp.24 = getv function %tmp.23 :equals;
+        %tmp.25 = lgetv %r.1;
+        symbol [ r %tmp.25 145 30 31 ];
+        %tmp.26 = as %tmp.25 { (!Null) };
+        %tmp.27 = invoke %tmp.23 %tmp.24(%tmp.26);
+        bf %tmp.27 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_145_19_145_39_else_false;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_145_19_145_39_true:
+        %tmp.28 = 1;
+        push %tmp.28;
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_145_19_145_39_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_145_19_145_39_else_false:
+        %tmp.29 = 2;
+        push %tmp.29;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_145_19_145_39_end:
+        %tmp.30 = phi [%tmp.27 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_145_19_145_39_begin] [%tmp.28 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_145_19_145_39_true] [%tmp.29 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_145_19_145_39_else_false] [%tmp.30 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_145_19_145_39_end];
+        symbol [ _sel ? 145 12 16 ];
+        putv self :_sel %tmp.30;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_144_23_146_8_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_144_8_146_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_144_8_146_8_if_end:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_139_29_147_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 149; @symbol_functiondef = [onUpdate,149,13,21]; @symbol_param<0> = [dc,149,22,24]; ]
+    function onUpdate(dc) {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_149_26_169_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 150 8 ]
+        %tmp.1 = lgetv %dc;
+        symbol [ dc %tmp.1 150 8 10 ];
+        symbol [ setColor %tmp.2 150 11 19 ];
+        %tmp.2 = getv function %tmp.1 :setColor;
+        symbol [ Graphics %tmp.3 150 20 28 ];
+        %tmp.3 = getm $.Toybox.Graphics;
+        symbol [ COLOR_WHITE %tmp.4 150 29 40 ];
+        %tmp.4 = getv %tmp.3 :COLOR_WHITE;
+        symbol [ Graphics %tmp.5 150 42 50 ];
+        %tmp.5 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.6 150 51 62 ];
+        %tmp.6 = getv %tmp.5 :COLOR_BLACK;
+        invoke %tmp.1 %tmp.2(%tmp.4, %tmp.6);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 151 8 ]
+        %tmp.7 = lgetv %dc;
+        symbol [ dc %tmp.7 151 8 10 ];
+        symbol [ clear %tmp.8 151 11 16 ];
+        %tmp.8 = getv function %tmp.7 :clear;
+        invoke %tmp.7 %tmp.8();
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 152 8 ]
+        symbol [ Draw %tmp.10 152 14 18 ];
+        %tmp.10 = getv ? :Draw;
+        symbol [ header %tmp.11 152 19 25 ];
+        %tmp.11 = getv function %tmp.10 :header;
+        %tmp.12 = lgetv %dc;
+        symbol [ dc %tmp.12 152 26 28 ];
+        symbol [ gModel %tmp.14 152 30 36 ];
+        %tmp.14 = getv ? :gModel;
+        symbol [ channelName %tmp.15 152 37 48 ];
+        %tmp.15 = getv function %tmp.14 :channelName;
+        symbol [ _idx %tmp.17 152 49 53 ];
+        %tmp.17 = getv ? :_idx;
+        %tmp.18 = invoke %tmp.14 %tmp.15(%tmp.17);
+        %tmp.19 = true;
+        %tmp.20 = invoke %tmp.10 %tmp.11(%tmp.12, %tmp.18, %tmp.19);
+        symbol [ _y0 ? 152 8 11 ];
+        putv self :_y0 %tmp.20;
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 153 8 ]
+        symbol [ Draw %tmp.22 153 16 20 ];
+        %tmp.22 = getv ? :Draw;
+        symbol [ rowHeight %tmp.23 153 21 30 ];
+        %tmp.23 = getv function %tmp.22 :rowHeight;
+        %tmp.24 = lgetv %dc;
+        symbol [ dc %tmp.24 153 31 33 ];
+        %tmp.25 = invoke %tmp.22 %tmp.23(%tmp.24);
+        symbol [ _rowH ? 153 8 13 ];
+        putv self :_rowH %tmp.25;
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 154 8 ]
+        for @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_154_8_164_8_for_test @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_154_8_164_8_for_incr @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_154_8_164_8_for_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_154_8_164_8_for_init:
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_154_8_164_8_for_begin" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_154_8_164_8_for_end" ]
+        %i.1 = local;
+        symbol [ i %i.1 154 17 18 ];
+        %tmp.26 = 0;
+        lputv %i.1 %tmp.26;
+        symbol [ i %i.1 154 17 18 ];
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_154_8_164_8_for_test:
+        %tmp.27 = lgetv %i.1;
+        symbol [ i %tmp.27 154 24 25 ];
+        symbol [ _items %tmp.29 154 28 34 ];
+        %tmp.29 = getv ? :_items;
+        symbol [ size %tmp.30 154 35 39 ];
+        %tmp.30 = getv function %tmp.29 :size;
+        %tmp.31 = invoke %tmp.29 %tmp.30();
+        %tmp.32 = lt %tmp.27 %tmp.31;
+        bf %tmp.32 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_154_8_164_8_for_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_154_8_164_8_for_begin:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_154_48_164_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 155 12 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_154_48_164_8_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_154_48_164_8_stop" ]
+        %y.2 = local;
+        symbol [ y %y.2 155 16 17 ];
+        symbol [ _y0 %tmp.34 155 20 23 ];
+        %tmp.34 = getv ? :_y0;
+        %tmp.35 = lgetv %i.1;
+        symbol [ i %tmp.35 155 26 27 ];
+        symbol [ _rowH %tmp.37 155 30 35 ];
+        %tmp.37 = getv ? :_rowH;
+        %tmp.38 = mul %tmp.35 %tmp.37;
+        %tmp.39 = add %tmp.34 %tmp.38;
+        lputv %y.2 %tmp.39;
+        symbol [ y %y.2 155 16 17 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 156 12 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_156_12_162_12_if_stmt:
+        %tmp.40 = lgetv %i.1;
+        symbol [ i %tmp.40 156 16 17 ];
+        symbol [ _sel %tmp.42 156 21 25 ];
+        %tmp.42 = getv ? :_sel;
+        %tmp.43 = eq %tmp.40 %tmp.42;
+        bf %tmp.43 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_156_12_162_12_if_else_false;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_156_12_162_12_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_156_27_160_12_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 157 16 ]
+        %tmp.44 = lgetv %dc;
+        symbol [ dc %tmp.44 157 16 18 ];
+        symbol [ setColor %tmp.45 157 19 27 ];
+        %tmp.45 = getv function %tmp.44 :setColor;
+        symbol [ Graphics %tmp.46 157 28 36 ];
+        %tmp.46 = getm $.Toybox.Graphics;
+        symbol [ COLOR_WHITE %tmp.47 157 37 48 ];
+        %tmp.47 = getv %tmp.46 :COLOR_WHITE;
+        symbol [ Graphics %tmp.48 157 50 58 ];
+        %tmp.48 = getm $.Toybox.Graphics;
+        symbol [ COLOR_WHITE %tmp.49 157 59 70 ];
+        %tmp.49 = getv %tmp.48 :COLOR_WHITE;
+        invoke %tmp.44 %tmp.45(%tmp.47, %tmp.49);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 158 16 ]
+        %tmp.50 = lgetv %dc;
+        symbol [ dc %tmp.50 158 16 18 ];
+        symbol [ fillRectangle %tmp.51 158 19 32 ];
+        %tmp.51 = getv function %tmp.50 :fillRectangle;
+        symbol [ Draw %tmp.53 158 33 37 ];
+        %tmp.53 = getv ? :Draw;
+        symbol [ X %tmp.54 158 38 39 ];
+        %tmp.54 = getv %tmp.53 :X;
+        %tmp.55 = lgetv %y.2;
+        symbol [ y %tmp.55 158 41 42 ];
+        symbol [ Draw %tmp.57 158 44 48 ];
+        %tmp.57 = getv ? :Draw;
+        symbol [ W %tmp.58 158 49 50 ];
+        %tmp.58 = getv %tmp.57 :W;
+        symbol [ _rowH %tmp.60 158 52 57 ];
+        %tmp.60 = getv ? :_rowH;
+        invoke %tmp.50 %tmp.51(%tmp.54, %tmp.55, %tmp.58, %tmp.60);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 159 16 ]
+        %tmp.61 = lgetv %dc;
+        symbol [ dc %tmp.61 159 16 18 ];
+        symbol [ setColor %tmp.62 159 19 27 ];
+        %tmp.62 = getv function %tmp.61 :setColor;
+        symbol [ Graphics %tmp.63 159 28 36 ];
+        %tmp.63 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.64 159 37 48 ];
+        %tmp.64 = getv %tmp.63 :COLOR_BLACK;
+        symbol [ Graphics %tmp.65 159 50 58 ];
+        %tmp.65 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.66 159 59 76 ];
+        %tmp.66 = getv %tmp.65 :COLOR_TRANSPARENT;
+        invoke %tmp.61 %tmp.62(%tmp.64, %tmp.66);
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_156_27_160_12_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_156_12_162_12_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_156_12_162_12_if_else_false:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_160_19_162_12_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 161 16 ]
+        %tmp.67 = lgetv %dc;
+        symbol [ dc %tmp.67 161 16 18 ];
+        symbol [ setColor %tmp.68 161 19 27 ];
+        %tmp.68 = getv function %tmp.67 :setColor;
+        symbol [ Graphics %tmp.69 161 28 36 ];
+        %tmp.69 = getm $.Toybox.Graphics;
+        symbol [ COLOR_WHITE %tmp.70 161 37 48 ];
+        %tmp.70 = getv %tmp.69 :COLOR_WHITE;
+        symbol [ Graphics %tmp.71 161 50 58 ];
+        %tmp.71 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.72 161 59 76 ];
+        %tmp.72 = getv %tmp.71 :COLOR_TRANSPARENT;
+        invoke %tmp.67 %tmp.68(%tmp.70, %tmp.72);
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_160_19_162_12_stop:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_156_12_162_12_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 163 12 ]
+        %tmp.73 = lgetv %dc;
+        symbol [ dc %tmp.73 163 12 14 ];
+        symbol [ drawText %tmp.74 163 15 23 ];
+        %tmp.74 = getv function %tmp.73 :drawText;
+        symbol [ Draw %tmp.76 163 24 28 ];
+        %tmp.76 = getv ? :Draw;
+        symbol [ X %tmp.77 163 29 30 ];
+        %tmp.77 = getv %tmp.76 :X;
+        %tmp.78 = 2;
+        %tmp.79 = add %tmp.77 %tmp.78;
+        %tmp.80 = lgetv %y.2;
+        symbol [ y %tmp.80 163 36 37 ];
+        symbol [ Draw %tmp.82 163 39 43 ];
+        %tmp.82 = getv ? :Draw;
+        symbol [ FONT %tmp.83 163 44 48 ];
+        %tmp.83 = getv %tmp.82 :FONT;
+        symbol [ _items %tmp.85 163 50 56 ];
+        %tmp.85 = getv ? :_items;
+        %tmp.86 = lgetv %i.1;
+        symbol [ i %tmp.86 163 57 58 ];
+        %tmp.87 = agetv %tmp.85 %tmp.86;
+        symbol [ Graphics %tmp.88 163 61 69 ];
+        %tmp.88 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_LEFT %tmp.89 163 70 87 ];
+        %tmp.89 = getv %tmp.88 :TEXT_JUSTIFY_LEFT;
+        invoke %tmp.73 %tmp.74(%tmp.79, %tmp.80, %tmp.83, %tmp.87, %tmp.89);
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_154_48_164_8_stop:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_154_8_164_8_for_incr:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 154 ]
+        %tmp.92 = lgetv %i.1;
+        symbol [ i %tmp.92 154 43 44 ];
+        %tmp.93 = add %tmp.92 1;
+        lputv %i.1 %tmp.93;
+        symbol [ i %i.1 154 43 44 ];
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_154_8_164_8_for_test;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_154_8_164_8_for_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 165 8 ]
+        symbol [ Draw %tmp.95 165 8 12 ];
+        %tmp.95 = getv ? :Draw;
+        symbol [ footer %tmp.96 165 13 19 ];
+        %tmp.96 = getv function %tmp.95 :footer;
+        %tmp.97 = lgetv %dc;
+        symbol [ dc %tmp.97 165 20 22 ];
+        %tmp.98 = "Now: ";
+        symbol [ gModel %tmp.100 165 34 40 ];
+        %tmp.100 = getv ? :gModel;
+        symbol [ regionLabel %tmp.101 165 41 52 ];
+        %tmp.101 = getv function %tmp.100 :regionLabel;
+        symbol [ _idx %tmp.103 165 53 57 ];
+        %tmp.103 = getv ? :_idx;
+        %tmp.104 = invoke %tmp.100 %tmp.101(%tmp.103);
+        %tmp.105 = add %tmp.98 %tmp.104;
+        invoke %tmp.95 %tmp.96(%tmp.97, %tmp.105);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 166 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_166_8_168_8_if_stmt:
+        symbol [ gModel %tmp.107 166 12 18 ];
+        %tmp.107 = getv ? :gModel;
+        symbol [ toast %tmp.108 166 19 24 ];
+        %tmp.108 = getv %tmp.107 :toast;
+        %tmp.109 = null;
+        %tmp.110 = ne %tmp.108 %tmp.109;
+        bf %tmp.110 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_166_8_168_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_166_8_168_8_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_166_34_168_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 167 12 ]
+        symbol [ ChannelView %tmp.112 167 12 23 ];
+        %tmp.112 = getv ? :ChannelView;
+        symbol [ drawToastStatic %tmp.113 167 24 39 ];
+        %tmp.113 = getv function %tmp.112 :drawToastStatic;
+        %tmp.114 = lgetv %dc;
+        symbol [ dc %tmp.114 167 40 42 ];
+        symbol [ gModel %tmp.116 167 44 50 ];
+        %tmp.116 = getv ? :gModel;
+        symbol [ toast %tmp.117 167 51 56 ];
+        %tmp.117 = getv %tmp.116 :toast;
+        invoke %tmp.112 %tmp.113(%tmp.114, %tmp.117);
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_166_34_168_8_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_166_8_168_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_166_8_168_8_if_end:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_149_26_169_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 171; @symbol_functiondef = [move,171,13,17]; @symbol_param<0> = [d,171,18,19]; ]
+    function move(d) {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_171_21_174_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 172 8 ]
+        symbol [ _sel %tmp.2 172 16 20 ];
+        %tmp.2 = getv ? :_sel;
+        %tmp.3 = lgetv %d;
+        symbol [ d %tmp.3 172 23 24 ];
+        %tmp.4 = add %tmp.2 %tmp.3;
+        symbol [ _items %tmp.6 172 27 33 ];
+        %tmp.6 = getv ? :_items;
+        symbol [ size %tmp.7 172 34 38 ];
+        %tmp.7 = getv function %tmp.6 :size;
+        %tmp.8 = invoke %tmp.6 %tmp.7();
+        %tmp.9 = add %tmp.4 %tmp.8;
+        symbol [ _items %tmp.11 172 44 50 ];
+        %tmp.11 = getv ? :_items;
+        symbol [ size %tmp.12 172 51 55 ];
+        %tmp.12 = getv function %tmp.11 :size;
+        %tmp.13 = invoke %tmp.11 %tmp.12();
+        %tmp.14 = mod %tmp.9 %tmp.13;
+        symbol [ _sel ? 172 8 12 ];
+        putv self :_sel %tmp.14;
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 173 8 ]
+        symbol [ WatchUi %tmp.15 173 8 15 ];
+        %tmp.15 = getm $.Toybox.WatchUi;
+        symbol [ requestUpdate %tmp.16 173 16 29 ];
+        %tmp.16 = getv function %tmp.15 :requestUpdate;
+        invoke %tmp.15 %tmp.16();
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_171_21_174_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 176; @symbol_functiondef = [rowAt,176,13,18]; @symbol_param<0> = [y,176,19,20]; ]
+    function rowAt(y) {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_176_22_180_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 177 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_177_8_177_34_if_stmt:
+        %tmp.1 = lgetv %y;
+        symbol [ y %tmp.1 177 12 13 ];
+        symbol [ _y0 %tmp.3 177 16 19 ];
+        %tmp.3 = getv ? :_y0;
+        %tmp.4 = lt %tmp.1 %tmp.3;
+        bf %tmp.4 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_177_8_177_34_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_177_8_177_34_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_177_21_177_34_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 177 23 ]
+        %tmp.5 = -1;
+        ret %tmp.5;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_177_21_177_34_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_177_8_177_34_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_177_8_177_34_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 178 8 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_176_22_180_4_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_176_22_180_4_stop" ]
+        %i.1 = local;
+        symbol [ i %i.1 178 12 13 ];
+        %tmp.6 = lgetv %y;
+        symbol [ y %tmp.6 178 17 18 ];
+        symbol [ _y0 %tmp.8 178 21 24 ];
+        %tmp.8 = getv ? :_y0;
+        %tmp.9 = sub %tmp.6 %tmp.8;
+        symbol [ _rowH %tmp.11 178 28 33 ];
+        %tmp.11 = getv ? :_rowH;
+        %tmp.12 = div %tmp.9 %tmp.11;
+        lputv %i.1 %tmp.12;
+        symbol [ i %i.1 178 12 13 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 179 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_179_15_179_42_begin:
+        %tmp.13 = lgetv %i.1;
+        symbol [ i %tmp.13 179 16 17 ];
+        symbol [ _items %tmp.15 179 20 26 ];
+        %tmp.15 = getv ? :_items;
+        symbol [ size %tmp.16 179 27 31 ];
+        %tmp.16 = getv function %tmp.15 :size;
+        %tmp.17 = invoke %tmp.15 %tmp.16();
+        %tmp.18 = lt %tmp.13 %tmp.17;
+        bf %tmp.18 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_179_15_179_42_else_false;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_179_15_179_42_true:
+        %tmp.19 = lgetv %i.1;
+        symbol [ i %tmp.19 179 37 38 ];
+        push %tmp.19;
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_179_15_179_42_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_179_15_179_42_else_false:
+        %tmp.20 = -1;
+        push %tmp.20;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_179_15_179_42_end:
+        %tmp.21 = phi [%tmp.18 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_179_15_179_42_begin] [%tmp.19 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_179_15_179_42_true] [%tmp.20 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_179_15_179_42_else_false] [%tmp.21 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_179_15_179_42_end];
+        ret %tmp.21;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_176_22_180_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 182; @symbol_functiondef = [activate,182,13,21]; ]
+    function activate() {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_182_24_198_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 183 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_183_8_197_8_if_stmt:
+        symbol [ _sel %tmp.2 183 12 16 ];
+        %tmp.2 = getv ? :_sel;
+        %tmp.3 = 0;
+        %tmp.4 = eq %tmp.2 %tmp.3;
+        bf %tmp.4 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_183_8_197_8_if_false;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_183_8_197_8_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_183_23_186_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 184 12 ]
+        symbol [ gModel %tmp.6 184 12 18 ];
+        %tmp.6 = getv ? :gModel;
+        symbol [ setRegion %tmp.7 184 19 28 ];
+        %tmp.7 = getv function %tmp.6 :setRegion;
+        symbol [ _idx %tmp.9 184 29 33 ];
+        %tmp.9 = getv ? :_idx;
+        %tmp.10 = null;
+        invoke %tmp.6 %tmp.7(%tmp.9, %tmp.10);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 185 12 ]
+        symbol [ WatchUi %tmp.11 185 12 19 ];
+        %tmp.11 = getm $.Toybox.WatchUi;
+        symbol [ popView %tmp.12 185 20 27 ];
+        %tmp.12 = getv function %tmp.11 :popView;
+        symbol [ WatchUi %tmp.13 185 28 35 ];
+        %tmp.13 = getm $.Toybox.WatchUi;
+        symbol [ SLIDE_RIGHT %tmp.14 185 36 47 ];
+        %tmp.14 = getv %tmp.13 :SLIDE_RIGHT;
+        invoke %tmp.11 %tmp.12(%tmp.14);
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_183_23_186_8_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_183_8_197_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_183_8_197_8_if_false:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 186 15 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_186_15_197_8_if_stmt:
+        symbol [ _sel %tmp.16 186 19 23 ];
+        %tmp.16 = getv ? :_sel;
+        %tmp.17 = 1;
+        %tmp.18 = eq %tmp.16 %tmp.17;
+        bf %tmp.18 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_186_15_197_8_if_else_false;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_186_15_197_8_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_186_30_189_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 187 12 ]
+        symbol [ gModel %tmp.20 187 12 18 ];
+        %tmp.20 = getv ? :gModel;
+        symbol [ setRegion %tmp.21 187 19 28 ];
+        %tmp.21 = getv function %tmp.20 :setRegion;
+        symbol [ _idx %tmp.23 187 29 33 ];
+        %tmp.23 = getv ? :_idx;
+        %tmp.24 = "*";
+        invoke %tmp.20 %tmp.21(%tmp.23, %tmp.24);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 188 12 ]
+        symbol [ WatchUi %tmp.25 188 12 19 ];
+        %tmp.25 = getm $.Toybox.WatchUi;
+        symbol [ popView %tmp.26 188 20 27 ];
+        %tmp.26 = getv function %tmp.25 :popView;
+        symbol [ WatchUi %tmp.27 188 28 35 ];
+        %tmp.27 = getm $.Toybox.WatchUi;
+        symbol [ SLIDE_RIGHT %tmp.28 188 36 47 ];
+        %tmp.28 = getv %tmp.27 :SLIDE_RIGHT;
+        invoke %tmp.25 %tmp.26(%tmp.28);
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_186_30_189_8_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_186_15_197_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_186_15_197_8_if_else_false:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_189_15_197_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 190 12 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_189_15_197_8_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_189_15_197_8_stop" ]
+        %r.1 = local;
+        symbol [ r %r.1 190 16 17 ];
+        symbol [ gModel %tmp.30 190 20 26 ];
+        %tmp.30 = getv ? :gModel;
+        symbol [ regionFor %tmp.31 190 27 36 ];
+        %tmp.31 = getv function %tmp.30 :regionFor;
+        symbol [ _idx %tmp.33 190 37 41 ];
+        %tmp.33 = getv ? :_idx;
+        %tmp.34 = invoke %tmp.30 %tmp.31(%tmp.33);
+        lputv %r.1 %tmp.34;
+        symbol [ r %r.1 190 16 17 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 191 12 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_189_15_197_8_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_189_15_197_8_stop" ]
+        %cv.2 = local;
+        symbol [ cv %cv.2 191 16 18 ];
+        symbol [ ComposeView %tmp.38 191 25 36 ];
+        %tmp.38 = getv ? :ComposeView;
+        %tmp.39 = -1;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_191_41_191_77_begin:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_191_42_191_68_begin:
+        %tmp.40 = lgetv %r.1;
+        symbol [ r %tmp.40 191 42 43 ];
+        %tmp.41 = null;
+        %tmp.42 = ne %tmp.40 %tmp.41;
+        bf %tmp.42 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_191_41_191_77_else_false;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_191_55_191_68_true:
+        %tmp.43 = "*";
+        symbol [ equals %tmp.44 191 60 66 ];
+        %tmp.44 = getv function %tmp.43 :equals;
+        %tmp.45 = lgetv %r.1;
+        symbol [ r %tmp.45 191 67 68 ];
+        %tmp.46 = as %tmp.45 { (!Null) };
+        %tmp.47 = invoke %tmp.43 %tmp.44(%tmp.46);
+        %tmp.48 = not %tmp.47;
+        push %tmp.48;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_191_55_191_68_end:
+        %tmp.49 = phi [%tmp.42 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_191_42_191_68_begin] [%tmp.48 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_191_55_191_68_true] [%tmp.49 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_191_55_191_68_end];
+        bf %tmp.49 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_191_41_191_77_else_false;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_191_41_191_77_true:
+        %tmp.50 = lgetv %r.1;
+        symbol [ r %tmp.50 191 73 74 ];
+        %tmp.51 = as %tmp.50 { (!Null) };
+        push %tmp.51;
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_191_41_191_77_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_191_41_191_77_else_false:
+        %tmp.52 = "";
+        push %tmp.52;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_191_41_191_77_end:
+        %tmp.53 = phi [%tmp.49 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_191_41_191_77_begin] [%tmp.51 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_191_41_191_77_true] [%tmp.52 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_191_41_191_77_else_false] [%tmp.53 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_191_41_191_77_end];
+        %tmp.35 = newc %tmp.38 (%tmp.39, %tmp.53);
+        lputv %cv.2 %tmp.35;
+        symbol [ cv %cv.2 191 16 18 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 192 12 ]
+        %tmp.54 = lgetv %cv.2;
+        symbol [ cv %tmp.54 192 12 14 ];
+        %tmp.55 = "Region";
+        symbol [ title ? 192 15 20 ];
+        putv %tmp.54 :title %tmp.55;
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 193 12 ]
+        %tmp.56 = lgetv %cv.2;
+        symbol [ cv %tmp.56 193 12 14 ];
+        %tmp.57 = self;
+        symbol [ method %tmp.58 193 24 30 ];
+        %tmp.58 = getv function %tmp.57 :method;
+        %tmp.60 = const :gotName;
+        symbol [ gotName %tmp.60 193 32 39 const ];
+        %tmp.61 = invoke %tmp.57 %tmp.58(%tmp.60);
+        symbol [ onDone ? 193 15 21 ];
+        putv %tmp.56 :onDone %tmp.61;
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 196 12 ]
+        symbol [ WatchUi %tmp.62 196 12 19 ];
+        %tmp.62 = getm $.Toybox.WatchUi;
+        symbol [ switchToView %tmp.63 196 20 32 ];
+        %tmp.63 = getv function %tmp.62 :switchToView;
+        %tmp.64 = lgetv %cv.2;
+        symbol [ cv %tmp.64 196 33 35 ];
+        symbol [ ComposeDelegate %tmp.68 196 41 56 ];
+        %tmp.68 = getv ? :ComposeDelegate;
+        %tmp.69 = lgetv %cv.2;
+        symbol [ cv %tmp.69 196 57 59 ];
+        %tmp.65 = newc %tmp.68 (%tmp.69);
+        symbol [ WatchUi %tmp.70 196 62 69 ];
+        %tmp.70 = getm $.Toybox.WatchUi;
+        symbol [ SLIDE_UP %tmp.71 196 70 78 ];
+        %tmp.71 = getv %tmp.70 :SLIDE_UP;
+        invoke %tmp.62 %tmp.63(%tmp.64, %tmp.65, %tmp.71);
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_189_15_197_8_stop:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_186_15_197_8_if_end:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_183_8_197_8_if_end:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_182_24_198_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 203; @symbol_functiondef = [gotName,203,13,20]; @symbol_param<0> = [t,203,21,22]; ]
+    function gotName(t) {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_203_24_219_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 204 8 ]
+        while @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_204_8_206_8_while_test @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_204_8_206_8_while_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_204_8_206_8_while_test:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_204_15_204_61_begin:
+        %tmp.1 = lgetv %t;
+        symbol [ t %tmp.1 204 15 16 ];
+        symbol [ length %tmp.2 204 17 23 ];
+        %tmp.2 = getv function %tmp.1 :length;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        %tmp.4 = 0;
+        %tmp.5 = gt %tmp.3 %tmp.4;
+        %tmp.6 = dup %tmp.5;
+        bf %tmp.6 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_204_33_204_61_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_204_33_204_61_true:
+        %tmp.7 = lgetv %t;
+        symbol [ t %tmp.7 204 33 34 ];
+        symbol [ substring %tmp.8 204 35 44 ];
+        %tmp.8 = getv function %tmp.7 :substring;
+        %tmp.9 = 0;
+        %tmp.10 = 1;
+        %tmp.11 = invoke %tmp.7 %tmp.8(%tmp.9, %tmp.10);
+        symbol [ equals %tmp.12 204 51 57 ];
+        %tmp.12 = getv function %tmp.11 :equals;
+        %tmp.13 = " ";
+        %tmp.14 = invoke %tmp.11 %tmp.12(%tmp.13);
+        %tmp.15 = and %tmp.5 %tmp.14;
+        push %tmp.15;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_204_33_204_61_end:
+        %tmp.16 = phi [%tmp.6 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_204_15_204_61_begin] [%tmp.15 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_204_33_204_61_true] [%tmp.16 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_204_33_204_61_end];
+        bf %tmp.16 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_204_8_206_8_while_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_204_8_206_8_while_begin:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_204_64_206_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 205 12 ]
+        %tmp.17 = lgetv %t;
+        symbol [ t %tmp.17 205 16 17 ];
+        symbol [ substring %tmp.18 205 18 27 ];
+        %tmp.18 = getv function %tmp.17 :substring;
+        %tmp.19 = 1;
+        %tmp.20 = lgetv %t;
+        symbol [ t %tmp.20 205 31 32 ];
+        symbol [ length %tmp.21 205 33 39 ];
+        %tmp.21 = getv function %tmp.20 :length;
+        %tmp.22 = invoke %tmp.20 %tmp.21();
+        %tmp.23 = invoke %tmp.17 %tmp.18(%tmp.19, %tmp.22);
+        lputv %t %tmp.23;
+        symbol [ t %t 205 12 13 ];
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_204_64_206_8_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_204_8_206_8_while_test;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_204_8_206_8_while_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 207 8 ]
+        while @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_207_8_209_8_while_test @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_207_8_209_8_while_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_207_8_209_8_while_test:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_207_15_207_83_begin:
+        %tmp.24 = lgetv %t;
+        symbol [ t %tmp.24 207 15 16 ];
+        symbol [ length %tmp.25 207 17 23 ];
+        %tmp.25 = getv function %tmp.24 :length;
+        %tmp.26 = invoke %tmp.24 %tmp.25();
+        %tmp.27 = 0;
+        %tmp.28 = gt %tmp.26 %tmp.27;
+        %tmp.29 = dup %tmp.28;
+        bf %tmp.29 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_207_33_207_83_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_207_33_207_83_true:
+        %tmp.30 = lgetv %t;
+        symbol [ t %tmp.30 207 33 34 ];
+        symbol [ substring %tmp.31 207 35 44 ];
+        %tmp.31 = getv function %tmp.30 :substring;
+        %tmp.32 = lgetv %t;
+        symbol [ t %tmp.32 207 45 46 ];
+        symbol [ length %tmp.33 207 47 53 ];
+        %tmp.33 = getv function %tmp.32 :length;
+        %tmp.34 = invoke %tmp.32 %tmp.33();
+        %tmp.35 = 1;
+        %tmp.36 = sub %tmp.34 %tmp.35;
+        %tmp.37 = lgetv %t;
+        symbol [ t %tmp.37 207 61 62 ];
+        symbol [ length %tmp.38 207 63 69 ];
+        %tmp.38 = getv function %tmp.37 :length;
+        %tmp.39 = invoke %tmp.37 %tmp.38();
+        %tmp.40 = invoke %tmp.30 %tmp.31(%tmp.36, %tmp.39);
+        symbol [ equals %tmp.41 207 73 79 ];
+        %tmp.41 = getv function %tmp.40 :equals;
+        %tmp.42 = " ";
+        %tmp.43 = invoke %tmp.40 %tmp.41(%tmp.42);
+        %tmp.44 = and %tmp.28 %tmp.43;
+        push %tmp.44;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_207_33_207_83_end:
+        %tmp.45 = phi [%tmp.29 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_207_15_207_83_begin] [%tmp.44 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_207_33_207_83_true] [%tmp.45 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_207_33_207_83_end];
+        bf %tmp.45 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_207_8_209_8_while_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_207_8_209_8_while_begin:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_207_86_209_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 208 12 ]
+        %tmp.46 = lgetv %t;
+        symbol [ t %tmp.46 208 16 17 ];
+        symbol [ substring %tmp.47 208 18 27 ];
+        %tmp.47 = getv function %tmp.46 :substring;
+        %tmp.48 = 0;
+        %tmp.49 = lgetv %t;
+        symbol [ t %tmp.49 208 31 32 ];
+        symbol [ length %tmp.50 208 33 39 ];
+        %tmp.50 = getv function %tmp.49 :length;
+        %tmp.51 = invoke %tmp.49 %tmp.50();
+        %tmp.52 = 1;
+        %tmp.53 = sub %tmp.51 %tmp.52;
+        %tmp.54 = invoke %tmp.46 %tmp.47(%tmp.48, %tmp.53);
+        lputv %t %tmp.54;
+        symbol [ t %t 208 12 13 ];
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_207_86_209_8_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_207_8_209_8_while_test;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_207_8_209_8_while_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 210 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_210_8_213_8_if_stmt:
+        %tmp.55 = lgetv %t;
+        symbol [ t %tmp.55 210 12 13 ];
+        symbol [ length %tmp.56 210 14 20 ];
+        %tmp.56 = getv function %tmp.55 :length;
+        %tmp.57 = invoke %tmp.55 %tmp.56();
+        %tmp.58 = 0;
+        %tmp.59 = eq %tmp.57 %tmp.58;
+        bf %tmp.59 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_210_8_213_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_210_8_213_8_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_210_29_213_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 211 12 ]
+        symbol [ gModel %tmp.61 211 12 18 ];
+        %tmp.61 = getv ? :gModel;
+        symbol [ showToast %tmp.62 211 19 28 ];
+        %tmp.62 = getv function %tmp.61 :showToast;
+        %tmp.63 = "Nothing typed";
+        invoke %tmp.61 %tmp.62(%tmp.63);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 212 12 ]
+        ret ?;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_210_29_213_8_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_210_8_213_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_210_8_213_8_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 214 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_214_8_217_8_if_stmt:
+        %tmp.64 = lgetv %t;
+        symbol [ t %tmp.64 214 12 13 ];
+        symbol [ substring %tmp.65 214 14 23 ];
+        %tmp.65 = getv function %tmp.64 :substring;
+        %tmp.66 = 0;
+        %tmp.67 = 1;
+        %tmp.68 = invoke %tmp.64 %tmp.65(%tmp.66, %tmp.67);
+        symbol [ equals %tmp.69 214 30 36 ];
+        %tmp.69 = getv function %tmp.68 :equals;
+        %tmp.70 = "!";
+        %tmp.71 = invoke %tmp.68 %tmp.69(%tmp.70);
+        bf %tmp.71 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_214_8_217_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_214_8_217_8_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_214_43_217_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 215 12 ]
+        symbol [ gModel %tmp.73 215 12 18 ];
+        %tmp.73 = getv ? :gModel;
+        symbol [ showToast %tmp.74 215 19 28 ];
+        %tmp.74 = getv function %tmp.73 :showToast;
+        %tmp.75 = "Private regions unsupported";
+        invoke %tmp.73 %tmp.74(%tmp.75);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 216 12 ]
+        ret ?;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_214_43_217_8_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_214_8_217_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_214_8_217_8_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 218 8 ]
+        symbol [ gModel %tmp.77 218 8 14 ];
+        %tmp.77 = getv ? :gModel;
+        symbol [ setRegion %tmp.78 218 15 24 ];
+        %tmp.78 = getv function %tmp.77 :setRegion;
+        symbol [ _idx %tmp.80 218 25 29 ];
+        %tmp.80 = getv ? :_idx;
+        %tmp.81 = lgetv %t;
+        symbol [ t %tmp.81 218 31 32 ];
+        invoke %tmp.77 %tmp.78(%tmp.80, %tmp.81);
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_203_24_219_4_stop:
+    }
+}
+[ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 222; @symbol_classdef = [RegionChoiceDelegate,222,6,26]; @symbol_extends<0> = [WatchUi,222,35,42]; @symbol_extends<1> = [BehaviorDelegate,222,43,59]; ]
+class RegionChoiceDelegate extends WatchUi.BehaviorDelegate {
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 222; ]
+    <init> {
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 222; ]
+    static
+    <init> {
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 223; @position = 8; @symbol_vardef = [_v,223,8,10]; ]
+    var _v;
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 225; @symbol_functiondef = [initialize,225,13,23]; @symbol_param<0> = [v,225,24,25]; ]
+    function initialize(v) as Void {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_225_27_228_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 226 8 ]
+        symbol [ BehaviorDelegate %tmp.2 226 8 24 ];
+        %tmp.2 = getv ? :BehaviorDelegate;
+        symbol [ initialize %tmp.3 226 25 35 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 227 8 ]
+        %tmp.4 = lgetv %v;
+        symbol [ v %tmp.4 227 13 14 ];
+        symbol [ _v ? 227 8 10 ];
+        putv self :_v %tmp.4;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_225_27_228_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 230; @symbol_functiondef = [onNextPage,230,13,23]; ]
+    function onNextPage() {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_230_26_230_53_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 230 28 ]
+        symbol [ _v %tmp.2 230 28 30 ];
+        %tmp.2 = getv ? :_v;
+        symbol [ move %tmp.3 230 31 35 ];
+        %tmp.3 = getv function %tmp.2 :move;
+        %tmp.4 = 1;
+        invoke %tmp.2 %tmp.3(%tmp.4);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 230 40 ]
+        %tmp.5 = true;
+        ret %tmp.5;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_230_26_230_53_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 231; @symbol_functiondef = [onPreviousPage,231,13,27]; ]
+    function onPreviousPage() {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_231_30_231_58_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 231 32 ]
+        symbol [ _v %tmp.2 231 32 34 ];
+        %tmp.2 = getv ? :_v;
+        symbol [ move %tmp.3 231 35 39 ];
+        %tmp.3 = getv function %tmp.2 :move;
+        %tmp.4 = -1;
+        invoke %tmp.2 %tmp.3(%tmp.4);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 231 45 ]
+        %tmp.5 = true;
+        ret %tmp.5;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_231_30_231_58_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 232; @symbol_functiondef = [onKey,232,13,18]; @symbol_param<0> = [evt,232,19,22]; ]
+    function onKey(evt) {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_232_24_238_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 233 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_233_8_236_8_if_stmt:
+        %tmp.1 = lgetv %evt;
+        symbol [ evt %tmp.1 233 12 15 ];
+        symbol [ getKey %tmp.2 233 16 22 ];
+        %tmp.2 = getv function %tmp.1 :getKey;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        symbol [ WatchUi %tmp.4 233 28 35 ];
+        %tmp.4 = getm $.Toybox.WatchUi;
+        symbol [ KEY_ENTER %tmp.5 233 36 45 ];
+        %tmp.5 = getv %tmp.4 :KEY_ENTER;
+        %tmp.6 = eq %tmp.3 %tmp.5;
+        bf %tmp.6 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_233_8_236_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_233_8_236_8_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_233_47_236_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 234 12 ]
+        symbol [ _v %tmp.8 234 12 14 ];
+        %tmp.8 = getv ? :_v;
+        symbol [ activate %tmp.9 234 15 23 ];
+        %tmp.9 = getv function %tmp.8 :activate;
+        invoke %tmp.8 %tmp.9();
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 235 12 ]
+        %tmp.10 = true;
+        ret %tmp.10;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_233_47_236_8_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_233_8_236_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_233_8_236_8_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 237 8 ]
+        %tmp.11 = false;
+        ret %tmp.11;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_232_24_238_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 240; @symbol_functiondef = [onBack,240,13,19]; ]
+    function onBack() {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_240_22_243_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 241 8 ]
+        symbol [ WatchUi %tmp.1 241 8 15 ];
+        %tmp.1 = getm $.Toybox.WatchUi;
+        symbol [ popView %tmp.2 241 16 23 ];
+        %tmp.2 = getv function %tmp.1 :popView;
+        symbol [ WatchUi %tmp.3 241 24 31 ];
+        %tmp.3 = getm $.Toybox.WatchUi;
+        symbol [ SLIDE_RIGHT %tmp.4 241 32 43 ];
+        %tmp.4 = getv %tmp.3 :SLIDE_RIGHT;
+        invoke %tmp.1 %tmp.2(%tmp.4);
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 242 8 ]
+        %tmp.5 = true;
+        ret %tmp.5;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_240_22_243_4_stop:
+    }
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 245; @symbol_functiondef = [onTap,245,13,18]; @symbol_param<0> = [evt,245,19,22]; ]
+    function onTap(evt) {
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_245_24_253_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 246 8 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_245_24_253_4_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_245_24_253_4_stop" ]
+        %c.1 = local;
+        symbol [ c %c.1 246 12 13 ];
+        %tmp.1 = lgetv %evt;
+        symbol [ evt %tmp.1 246 16 19 ];
+        symbol [ getCoordinates %tmp.2 246 20 34 ];
+        %tmp.2 = getv function %tmp.1 :getCoordinates;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        lputv %c.1 %tmp.3;
+        symbol [ c %c.1 246 12 13 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 247 8 ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_245_24_253_4_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_245_24_253_4_stop" ]
+        %i.2 = local;
+        symbol [ i %i.2 247 12 13 ];
+        symbol [ _v %tmp.5 247 16 18 ];
+        %tmp.5 = getv ? :_v;
+        symbol [ rowAt %tmp.6 247 19 24 ];
+        %tmp.6 = getv function %tmp.5 :rowAt;
+        %tmp.7 = lgetv %c.1;
+        symbol [ c %tmp.7 247 25 26 ];
+        %tmp.8 = 1;
+        %tmp.9 = agetv %tmp.7 %tmp.8;
+        %tmp.10 = invoke %tmp.5 %tmp.6(%tmp.9);
+        lputv %i.2 %tmp.10;
+        symbol [ i %i.2 247 12 13 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 248 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_248_8_251_8_if_stmt:
+        %tmp.11 = lgetv %i.2;
+        symbol [ i %tmp.11 248 12 13 ];
+        %tmp.12 = 0;
+        %tmp.13 = gte %tmp.11 %tmp.12;
+        bf %tmp.13 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_248_8_251_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_248_8_251_8_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_248_20_251_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 249 12 ]
+        symbol [ _v %tmp.14 249 12 14 ];
+        %tmp.14 = getv self :_v;
+        %tmp.15 = lgetv %i.2;
+        symbol [ i %tmp.15 249 22 23 ];
+        symbol [ _sel ? 249 15 19 ];
+        putv %tmp.14 :_sel %tmp.15;
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 250 12 ]
+        symbol [ _v %tmp.17 250 12 14 ];
+        %tmp.17 = getv ? :_v;
+        symbol [ activate %tmp.18 250 15 23 ];
+        %tmp.18 = getv function %tmp.17 :activate;
+        invoke %tmp.17 %tmp.18();
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_248_20_251_8_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_248_8_251_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_248_8_251_8_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc" 252 8 ]
+        %tmp.19 = true;
+        ret %tmp.19;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_RegionView_mc_245_24_253_4_stop:
+    }
+}
+[ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/RegionView.mc"; @line = 1; ]
+<init> {
+}
