@@ -21,6 +21,7 @@ class Model {
     var bph = 1;                 // bytes per hop in hop lists (from the node)
     var channels = [];           // [{:idx, :name}] in node order, unused slots skipped
     var canned = [];             // canned message strings, unused slots skipped
+    var cannedSlots = null;      // the watch's own five slots (standard nodes), loaded on first use
     var scopes = {};             // scope idx -> name
     var msgs = {};               // channel idx -> array of message dicts
     var unread = {};             // channel idx -> count
@@ -178,6 +179,51 @@ class Model {
         if (r == null) { return "default"; }
         if ("*".equals(r)) { return "all"; }
         return r;
+    }
+
+    // ---- watch-side canned messages (standard nodes) ----
+    // A standard node has no canned slots, so the watch keeps five of its own
+    // in Storage, the same five for every standard node. "" = empty slot.
+
+    const CANNED_SLOTS = 5;
+
+    function slots() {
+        if (cannedSlots == null) {
+            cannedSlots = ["", "", "", "", ""];
+            try {
+                var v = Application.Storage.getValue("canned");
+                if (v instanceof Lang.Array) {
+                    for (var i = 0; i < CANNED_SLOTS && i < v.size(); i++) {
+                        if (v[i] instanceof Lang.String) { cannedSlots[i] = v[i]; }
+                    }
+                }
+            } catch (ex) {
+            }
+        }
+        return cannedSlots;
+    }
+
+    function setSlot(i, text) {
+        var s = slots();
+        s[i] = text;
+        try {
+            Application.Storage.setValue("canned", s);
+        } catch (ex) {
+        }
+        if (connected && !meckExt) {
+            useWatchCanned();
+        }
+        WatchUi.requestUpdate();
+    }
+
+    // On a standard node the canned list is the watch's non-empty slots, in order.
+    function useWatchCanned() {
+        var s = slots();
+        var out = [];
+        for (var i = 0; i < s.size(); i++) {
+            if (s[i].length() > 0) { out.add(s[i]); }
+        }
+        canned = out;
     }
 
     function unreadFor(idx) {

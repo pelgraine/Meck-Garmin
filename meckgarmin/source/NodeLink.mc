@@ -546,6 +546,7 @@ class NodeLink extends Ble.BleDelegate {
             if (cmd == Proto.CMD_MECK_HELLO) {
                 // Not a Meck node: standard companion protocol only.
                 gModel.meckExt = false;
+                gModel.useWatchCanned();   // the watch's own slots stand in for the node's
                 gModel.setStatus("Standard node");
                 finishHandshake(0);
             } else if (cmd == Proto.CMD_SEND_LOGIN) {

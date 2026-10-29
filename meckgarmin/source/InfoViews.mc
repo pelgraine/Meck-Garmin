@@ -59,6 +59,7 @@ class SettingsView extends WatchUi.View {
             "Reconnect",
             "Clear messages",
             "Channel regions",
+            "Canned messages",
             "Meck v0.3"
         ];
         _rows = (196 - _y0) / _rowH;
@@ -111,6 +112,14 @@ class SettingsView extends WatchUi.View {
             } else {
                 var rv = new RegionView();
                 WatchUi.pushView(rv, new RegionDelegate(rv), WatchUi.SLIDE_LEFT);
+            }
+        } else if (_sel == 7) {
+            // Editable without a connection; only a connected Meck node uses its own.
+            if (gModel.connected && gModel.meckExt) {
+                gModel.showToast("Meck node holds canned");
+            } else {
+                var ev = new CannedEditView();
+                WatchUi.pushView(ev, new CannedEditDelegate(ev), WatchUi.SLIDE_LEFT);
             }
         }
     }

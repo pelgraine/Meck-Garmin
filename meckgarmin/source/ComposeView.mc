@@ -29,6 +29,8 @@ class ComposeView extends WatchUi.View {
     var _text;
     var _mode = 0;        // 0 lower, 1 upper, 2 symbols
     var onDone = null;    // when set, Send hands the text to this Method instead of the channel
+    var maxLen;           // length cap for this use (MAX_LEN unless set; canned slots set 40)
+    var allowEmpty = false; // with onDone: Send on an empty draft is allowed (clears a canned slot)
     var title = null;     // when set, shown instead of the channel name
     var _rows;
 
@@ -37,6 +39,7 @@ class ComposeView extends WatchUi.View {
         _idx = idx;
         _prefix = prefix;
         _text = prefix;
+        maxLen = MAX_LEN;
         _rows = [
             ["qwertyuiop", "asdfghjkl", "zxcvbnm"],
             ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"],
@@ -151,8 +154,8 @@ class ComposeView extends WatchUi.View {
     }
 
     function append(s) {
-        if (_text.length() >= MAX_LEN) {
-            gModel.showToast("Max " + MAX_LEN + " chars");
+        if (_text.length() >= maxLen) {
+            gModel.showToast("Max " + maxLen + " chars");
             return;
         }
         _text = _text + s;
@@ -167,7 +170,7 @@ class ComposeView extends WatchUi.View {
     }
 
     function send() {
-        if (_text.length() == 0) {
+        if (_text.length() == 0 && !(allowEmpty && onDone != null)) {
             gModel.showToast("Nothing to send");
             return;
         }
