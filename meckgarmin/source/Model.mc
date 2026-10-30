@@ -35,6 +35,7 @@ class Model {
     var trace = null;            // current trace: {:state, :tag, :sentAt, :bph, :hashes, :snrs, :final, :ms}
     var favs = [];               // favourite contacts: {:type, :last, :pubkey, :name}
     var favCount = 0;
+    var favUnsupported = false;  // node refused the favourites command (firmware without it)
     var names = {};              // pubkey prefix hex -> contact name (resolved by the node)
     var admin = null;            // repeater session: {:pubkey, :prefix, :name, :state, :sentAt}
     var cli = null;              // last CLI command: {:cmd, :label, :state, :text, :sentAt}

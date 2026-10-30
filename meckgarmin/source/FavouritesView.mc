@@ -79,7 +79,9 @@ class FavouritesView extends WatchUi.View {
         var list = gModel.favs;
         if (list.size() == 0) {
             dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(Draw.CX, _y0 + 20, Draw.FONT, gModel.connected ? "Loading..." : "No node yet", Graphics.TEXT_JUSTIFY_CENTER);
+            var msg = gModel.connected ? "Loading..." : "No node yet";
+            if (gModel.favUnsupported) { msg = "Node can't list favourites"; }
+            dc.drawText(Draw.CX, _y0 + 20, Draw.FONT, msg, Graphics.TEXT_JUSTIFY_CENTER);
         }
         if (_sel >= list.size()) { _sel = (list.size() > 0) ? list.size() - 1 : 0; }
         if (_sel < _top) { _top = _sel; }

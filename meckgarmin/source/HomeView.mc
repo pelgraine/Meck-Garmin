@@ -162,8 +162,6 @@ class HomeView extends WatchUi.View {
         } else if (_sel == 1) {
             var sv = new SettingsView();
             WatchUi.pushView(sv, new SettingsDelegate(sv), WatchUi.SLIDE_LEFT);
-        } else if (!gModel.meckExt && _sel >= 2 && _sel != 3) {
-            gModel.showToast("Needs a Meck node");
         } else if (_sel == 2) {
             var dv = new DiscoverView();
             WatchUi.pushView(dv, new DiscoverDelegate(dv), WatchUi.SLIDE_LEFT);

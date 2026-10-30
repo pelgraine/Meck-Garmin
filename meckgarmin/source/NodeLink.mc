@@ -21,6 +21,7 @@ module Proto {
     const CMD_GET_CHANNEL          = 31;
     const CMD_SEND_TRACE_PATH      = 36;
     const CMD_SET_FLOOD_SCOPE_KEY  = 54;
+    const CMD_SEND_CONTROL_DATA    = 55;
     const CMD_MECK_HELLO           = 0x70;
     const CMD_MECK_GET_CANNED      = 0x71;
     const CMD_MECK_GET_SENT_TRACK  = 0x72;
@@ -54,7 +55,11 @@ module Proto {
     const PUSH_LOGIN_SUCCESS       = 0x85;
     const PUSH_LOGIN_FAIL          = 0x86;
     const PUSH_NEW_ADVERT          = 0x8A;
+    const PUSH_CONTROL_DATA        = 0x8E;
+    const CTL_DISCOVER_REQ         = 0x80;
+    const CTL_DISCOVER_RESP        = 0x90;
     const ADV_TYPE_REPEATER        = 2;
+    const ADV_TYPE_ROOM            = 3;
     const TXT_TYPE_CLI             = 1;
     const PUSH_TRACE_DATA          = 0x89;
 
@@ -436,6 +441,8 @@ class NodeLink extends Ble.BleDelegate {
                 gModel.adminResult(true);
             } else if (code == Proto.PUSH_LOGIN_FAIL) {
                 gModel.adminResult(false);
+            } else if (code == Proto.PUSH_CONTROL_DATA) {
+                parseControlData(f);
             } else if (code == Proto.PUSH_NEW_ADVERT) {
                 // A Meck node applies its own auto-add settings; nothing to do.
                 // A standard node expects the app to decide: add repeaters only,
@@ -551,6 +558,10 @@ class NodeLink extends Ble.BleDelegate {
                 finishHandshake(0);
             } else if (cmd == Proto.CMD_SEND_LOGIN) {
                 gModel.adminResult(false);
+            } else if (cmd == Proto.CMD_MECK_GET_FAV) {
+                // Standard node whose firmware has no favourites command.
+                _favBusy = false;
+                gModel.favUnsupported = true;
             } else if (cmd == Proto.CMD_SET_FLOOD_SCOPE_KEY && sub == 1) {
                 // Standard firmware before v12 has no "all regions" sub-command.
                 // Clear the override instead, so the node sends on its own
@@ -801,6 +812,7 @@ class NodeLink extends Ble.BleDelegate {
             return;
         }
         gModel.favs = [];
+        gModel.favUnsupported = false;
         _favBusy = true;
         enqueue([Proto.CMD_MECK_GET_FAV, 0]b);
     }
@@ -834,7 +846,7 @@ class NodeLink extends Ble.BleDelegate {
 
     function resolve(prefixBytes) {
         var key = hexOf(prefixBytes);
-        if (!_ready || !gModel.meckExt || gModel.names.hasKey(key) || _resolveReq.hasKey(key)) {
+        if (!_ready || gModel.names.hasKey(key) || _resolveReq.hasKey(key)) {
             return;
         }
         _resolveReq.put(key, true);
@@ -883,6 +895,7 @@ class NodeLink extends Ble.BleDelegate {
 
     // ---- Discover ----
     var _discBusy = false;    // a poll round (entries 0..count-1) is in progress
+    var _discTag = null;      // standard node: the 4 tag bytes our request carried
 
     function discoverStart() {
         if (!_ready) {
@@ -892,8 +905,87 @@ class NodeLink extends Ble.BleDelegate {
         gModel.discovered = [];
         gModel.discoverCount = 0;
         gModel.discoverActive = true;
+        if (!gModel.meckExt) {
+            // Standard node: send Meck's discovery request ourselves through the
+            // standard control-data command, zero hop, asking repeaters and room
+            // servers: [55][0x80][filter][tag:4][since:4 = 0, any firmware].
+            // Replies come back as 0x8E pushes (parseControlData) for 30 s.
+            var tag = (Math.rand() & 0x7FFFFFFF) | 1;
+            _discTag = [0, 0, 0, 0]b;
+            _discTag.encodeNumber(tag, Lang.NUMBER_FORMAT_UINT32, {:offset => 0, :endianness => Lang.ENDIAN_LITTLE});
+            var frame = [Proto.CMD_SEND_CONTROL_DATA, Proto.CTL_DISCOVER_REQ,
+                         (1 << Proto.ADV_TYPE_REPEATER) | (1 << Proto.ADV_TYPE_ROOM)]b;
+            frame = frame.addAll(_discTag);
+            frame = frame.addAll([0, 0, 0, 0]b);
+            enqueue(frame);
+            gSched.after(30000, "discEnd", method(:discoverEnd));
+            return;
+        }
         _q.add([Proto.CMD_MECK_DISCOVER_START]b);
         discoverPoll();
+    }
+
+    // Standard node, end of the 30 s window. Names are asked for now rather
+    // than as replies arrive, so the lookups do not compete with the replies
+    // for the node's small outgoing queue. A key that had no contact name last
+    // time is asked again, in case the node has added it since.
+    function discoverEnd() {
+        if (gModel.meckExt) {
+            return;
+        }
+        gModel.discoverActive = false;
+        for (var i = 0; i < gModel.discovered.size(); i++) {
+            var e = gModel.discovered[i];
+            if (e == null || e.get(:pubkey) == null) { continue; }   // left from a Meck scan
+            var pk = e.get(:pubkey);
+            var k = hexOf(pk);
+            if (gModel.names.hasKey(k) && gModel.names.get(k).length() == 0) {
+                gModel.names.remove(k);
+                _resolveReq.remove(k);
+            }
+            resolve(pk);
+        }
+        WatchUi.requestUpdate();
+    }
+
+    // 0x8E: [snr*4][rssi][path_len][payload]. A discovery reply's payload is
+    // [0x90 | type][snr*4 the replier heard us at][tag:4][pubkey:32]. Kept
+    // like Meck: our tag only, full keys only, up to 20, a repeat updates SNR,
+    // name shown as the first 4 key bytes in hex until the node resolves it.
+    function parseControlData(f) {
+        if (gModel.meckExt || !gModel.discoverActive || _discTag == null) {
+            return;
+        }
+        if (f.size() < 42 || (f[4] & 0xF0) != Proto.CTL_DISCOVER_RESP) {
+            return;
+        }
+        if (!bytesEqual(f.slice(6, 10), _discTag)) {
+            return;
+        }
+        var pk = f.slice(10, 42);
+        var snr = toSigned(f[5]);
+        for (var i = 0; i < gModel.discovered.size(); i++) {
+            var d = gModel.discovered[i];
+            if (d == null || d.get(:pubkey) == null) { continue; }   // left from a Meck scan
+            if (bytesEqual(d.get(:pubkey), pk)) {
+                d.put(:snr, snr);
+                WatchUi.requestUpdate();
+                return;
+            }
+        }
+        if (gModel.discovered.size() >= 20) {
+            return;
+        }
+        var nm = "";
+        for (var b = 10; b < 14; b++) {
+            nm = nm + f[b].format("%02X");
+        }
+        gModel.discovered.add({
+            :type => f[4] & 0x0F, :snr => snr, :hops => f[3], :known => false,
+            :prefix => f.slice(10, 12), :pubkey => pk, :key => hexOf(pk), :name => nm
+        });
+        gModel.discoverCount = gModel.discovered.size();
+        WatchUi.requestUpdate();
     }
 
     // One round: entry 0 carries active/count; each entry queues the next.

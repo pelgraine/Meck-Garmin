@@ -3,9 +3,10 @@ using Toybox.Graphics;
 using Toybox.Timer;
 
 // Discover: the node's DiscoveryScreen on the watch. Opening it starts a
-// scan if none has run; while the scan is active the list is polled once a
-// second. Rows: type letter, name, then SNR (live response) or hop count
-// (cached) with "[+]" when the node already has it as a contact.
+// scan if none has run; while the scan is active a Meck node's list is polled
+// once a second (a standard node's replies arrive as pushes instead). Rows:
+// type letter, name, then SNR (live response) or hop count (cached) with
+// "[+]" when the node already has it as a contact.
 class DiscoverView extends WatchUi.View {
 
     var _sel = 0;
@@ -32,7 +33,7 @@ class DiscoverView extends WatchUi.View {
     }
 
     function tick() {
-        if (gModel.discoverActive) {
+        if (gModel.discoverActive && gModel.meckExt) {   // a standard node's replies are pushed
             gLink.discoverPoll();
         }
         WatchUi.requestUpdate();
@@ -95,19 +96,27 @@ class DiscoverView extends WatchUi.View {
                 dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
             }
             var prefix = (selected ? ">" : " ") + typeChar(e.get(:type)) + " ";
+            // Standard node: the contact name, once the node has resolved the key.
+            var name = e.get(:name);
+            var known = e.get(:known);
+            var k = e.get(:key);
+            if (k != null && gModel.names.hasKey(k) && gModel.names.get(k).length() > 0) {
+                name = gModel.names.get(k);
+                known = true;
+            }
             var right;
             if (e.get(:snr) != 0) {
                 right = "" + (e.get(:snr) / 4) + "dB";
             } else {
                 right = "" + (e.get(:hops) & 63) + "h";
             }
-            if (e.get(:known)) {
+            if (known) {
                 right = right + " [+]";
             }
             var rw = dc.getTextWidthInPixels(right, Draw.FONT) + 4;
             var pw = dc.getTextWidthInPixels(prefix, Draw.FONT);
             dc.drawText(Draw.X, y, Draw.FONT, prefix, Graphics.TEXT_JUSTIFY_LEFT);
-            dc.drawText(Draw.X + pw, y, Draw.FONT, Draw.ellipsize(dc, e.get(:name), Draw.W - pw - rw), Graphics.TEXT_JUSTIFY_LEFT);
+            dc.drawText(Draw.X + pw, y, Draw.FONT, Draw.ellipsize(dc, name, Draw.W - pw - rw), Graphics.TEXT_JUSTIFY_LEFT);
             dc.drawText(Draw.X + Draw.W, y, Draw.FONT, right, Graphics.TEXT_JUSTIFY_RIGHT);
         }
 

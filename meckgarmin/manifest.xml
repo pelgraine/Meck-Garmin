@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="0.4"?>
 <iq:manifest xmlns:iq="http://www.garmin.com/xml/connectiq" version="3">
     <iq:application entry="MeckApp" id="b106696dd08743b2b37339a4f352ee1a" launcherIcon="@Drawables.LauncherIcon" minApiLevel="3.1.0" name="@Strings.AppName" type="watch-app" version="0.1.0">
         <iq:products>
