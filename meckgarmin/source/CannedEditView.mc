@@ -36,7 +36,7 @@ class CannedEditView extends WatchUi.View {
             } else {
                 dc.setColor(empty ? Graphics.COLOR_LT_GRAY : Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
             }
-            dc.drawText(Draw.X + 2, y, Draw.FONT, Draw.fitTo(dc, text, Draw.W - 4), Graphics.TEXT_JUSTIFY_LEFT);
+            Draw.text(dc, Draw.X + 2, y, Draw.fitTo(dc, text, Draw.W - 4), Graphics.TEXT_JUSTIFY_LEFT);
         }
         Draw.footer(dc, "Start: edit");
         if (gModel.toast != null) {

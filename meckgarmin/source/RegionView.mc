@@ -41,10 +41,10 @@ class RegionView extends WatchUi.View {
             var y = _y0 + r * _rowH;
             var name = chans[i].get(:name);
             var label = gModel.regionLabel(chans[i].get(:idx));
-            var labelW = dc.getTextWidthInPixels(label, Draw.FONT) + 6;
+            var labelW = Draw.width(dc, label) + 6;
             if (labelW > Draw.W / 2) {
                 label = Draw.ellipsize(dc, label, Draw.W / 2 - 6);
-                labelW = dc.getTextWidthInPixels(label, Draw.FONT) + 6;
+                labelW = Draw.width(dc, label) + 6;
             }
             if (i == _sel) {
                 dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_WHITE);
@@ -53,9 +53,9 @@ class RegionView extends WatchUi.View {
             } else {
                 dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
             }
-            dc.drawText(Draw.X + 2, y, Draw.FONT, Draw.ellipsize(dc, name, Draw.W - 4 - labelW), Graphics.TEXT_JUSTIFY_LEFT);
+            Draw.text(dc, Draw.X + 2, y, Draw.ellipsize(dc, name, Draw.W - 4 - labelW), Graphics.TEXT_JUSTIFY_LEFT);
             dc.setColor((i == _sel) ? Graphics.COLOR_BLACK : Graphics.COLOR_BLUE, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(Draw.X + Draw.W - 2, y, Draw.FONT, label, Graphics.TEXT_JUSTIFY_RIGHT);
+            Draw.text(dc, Draw.X + Draw.W - 2, y, label, Graphics.TEXT_JUSTIFY_RIGHT);
         }
         Draw.footer(dc, "Start: change");
         if (gModel.toast != null) {
@@ -160,7 +160,7 @@ class RegionChoiceView extends WatchUi.View {
             } else {
                 dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
             }
-            dc.drawText(Draw.X + 2, y, Draw.FONT, _items[i], Graphics.TEXT_JUSTIFY_LEFT);
+            Draw.text(dc, Draw.X + 2, y, _items[i], Graphics.TEXT_JUSTIFY_LEFT);
         }
         Draw.footer(dc, "Now: " + gModel.regionLabel(_idx));
         if (gModel.toast != null) {

@@ -119,7 +119,7 @@ class HomeView extends WatchUi.View {
         }
         var name = (gModel.nodeName.length() > 0) ? gModel.nodeName : "Meck";
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(INFO_X, INFO_Y, Draw.FONT, Draw.fitTo(dc, name, rightEdge - INFO_X), Graphics.TEXT_JUSTIFY_LEFT);
+        Draw.text(dc, INFO_X, INFO_Y, Draw.fitTo(dc, name, rightEdge - INFO_X), Graphics.TEXT_JUSTIFY_LEFT);
 
         // clock, date, selected option, status: each line is centred on a
         // fixed y (the number font's cell carries padding below the digits,

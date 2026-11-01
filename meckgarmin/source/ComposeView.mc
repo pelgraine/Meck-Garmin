@@ -57,13 +57,13 @@ class ComposeView extends WatchUi.View {
         // channel name, top of the circle
         dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
         var ttl = (title != null) ? title : gModel.channelName(_idx);
-        dc.drawText(Draw.CX, 8, Draw.FONT, Draw.fitTo(dc, ttl, 84), Graphics.TEXT_JUSTIFY_CENTER);
+        Draw.text(dc, Draw.CX, 8, Draw.fitTo(dc, ttl, 84), Graphics.TEXT_JUSTIFY_CENTER);
 
         // draft box: tail of the text, cursor at the end
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
         dc.drawRoundedRectangle(BOX_X, BOX_Y, BOX_W, BOX_H, 4);
         var shown = longestSuffix(dc, _text + "_", BOX_W - 8);
-        dc.drawText(BOX_X + 4, BOX_Y + (BOX_H - fh) / 2, Draw.FONT, shown, Graphics.TEXT_JUSTIFY_LEFT);
+        Draw.text(dc, BOX_X + 4, BOX_Y + (BOX_H - fh) / 2, shown, Graphics.TEXT_JUSTIFY_LEFT);
         drawKey(dc, SEND_X, BOX_Y, SEND_W, BOX_H, "Send", Draw.FONT, true);
 
         // letter rows
@@ -108,7 +108,7 @@ class ComposeView extends WatchUi.View {
     function longestSuffix(dc, s, w) {
         var n = s.length();
         var start = 0;
-        while (start < n && dc.getTextWidthInPixels(s.substring(start, n), Draw.FONT) > w) {
+        while (start < n && Draw.width(dc, s.substring(start, n)) > w) {
             start++;
         }
         return s.substring(start, n);

@@ -47,7 +47,7 @@ class PickerView extends WatchUi.View {
             } else {
                 dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
             }
-            dc.drawText(Draw.X + 2, y, Draw.FONT, Draw.ellipsize(dc, name, Draw.W - 4 - badgeW), Graphics.TEXT_JUSTIFY_LEFT);
+            Draw.text(dc, Draw.X + 2, y, Draw.ellipsize(dc, name, Draw.W - 4 - badgeW), Graphics.TEXT_JUSTIFY_LEFT);
             if (n > 0) {
                 dc.setColor((i == _sel) ? Graphics.COLOR_BLACK : Graphics.COLOR_BLUE, Graphics.COLOR_TRANSPARENT);
                 dc.drawText(Draw.X + Draw.W - 2, y, Draw.FONT, badge, Graphics.TEXT_JUSTIFY_RIGHT);

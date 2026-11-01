@@ -116,7 +116,7 @@ class DiscoverView extends WatchUi.View {
             var rw = dc.getTextWidthInPixels(right, Draw.FONT) + 4;
             var pw = dc.getTextWidthInPixels(prefix, Draw.FONT);
             dc.drawText(Draw.X, y, Draw.FONT, prefix, Graphics.TEXT_JUSTIFY_LEFT);
-            dc.drawText(Draw.X + pw, y, Draw.FONT, Draw.ellipsize(dc, name, Draw.W - pw - rw), Graphics.TEXT_JUSTIFY_LEFT);
+            Draw.text(dc, Draw.X + pw, y, Draw.ellipsize(dc, name, Draw.W - pw - rw), Graphics.TEXT_JUSTIFY_LEFT);
             dc.drawText(Draw.X + Draw.W, y, Draw.FONT, right, Graphics.TEXT_JUSTIFY_RIGHT);
         }
 

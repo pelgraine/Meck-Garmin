@@ -24,7 +24,7 @@ class NodeView extends WatchUi.View {
         ];
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
         for (var i = 0; i < lines.size() && y + rowH <= 206; i++) {
-            dc.drawText(Draw.X + 2, y, Draw.FONT, Draw.fitTo(dc, lines[i], Draw.W - 4), Graphics.TEXT_JUSTIFY_LEFT);
+            Draw.text(dc, Draw.X + 2, y, Draw.fitTo(dc, lines[i], Draw.W - 4), Graphics.TEXT_JUSTIFY_LEFT);
             y += rowH;
         }
     }

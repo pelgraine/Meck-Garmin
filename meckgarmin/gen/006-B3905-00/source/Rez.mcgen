@@ -9,6 +9,10 @@ module Rez {
         (:initialized) var LauncherIcon as ResourceId;
     } // Drawables
 
+    module Fonts {
+        (:initialized) var Florette as ResourceId;
+    } // Fonts
+
     module Strings {
         (:initialized) var AppName as ResourceId;
     } // Strings

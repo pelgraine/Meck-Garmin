@@ -104,7 +104,7 @@ class FavouritesView extends WatchUi.View {
                 _tickW = Draw.marqueeRow(dc, line, Draw.X + 2, y, Draw.W - 4 - rw, _rowH, _tickOff, 24);
             } else {
                 dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-                dc.drawText(Draw.X + 2, y, Draw.FONT, Draw.fitTo(dc, line, Draw.W - 4 - rw), Graphics.TEXT_JUSTIFY_LEFT);
+                Draw.text(dc, Draw.X + 2, y, Draw.fitTo(dc, line, Draw.W - 4 - rw), Graphics.TEXT_JUSTIFY_LEFT);
             }
             dc.setColor(selected ? Graphics.COLOR_BLACK : Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
             dc.drawText(Draw.X + Draw.W - 2, y, Draw.FONT, right, Graphics.TEXT_JUSTIFY_RIGHT);
@@ -342,7 +342,7 @@ class AdminView extends WatchUi.View {
             status = c.get(:label) + ": send failed";
         }
         dc.setColor((st == :ok) ? Graphics.COLOR_GREEN : Graphics.COLOR_YELLOW, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(Draw.X, _y0, Draw.FONT, Draw.fitTo(dc, status, Draw.W), Graphics.TEXT_JUSTIFY_LEFT);
+        Draw.text(dc, Draw.X, _y0, Draw.fitTo(dc, status, Draw.W), Graphics.TEXT_JUSTIFY_LEFT);
         var y = _y0 + _rowH + 2;
         for (var i = 0; i < _menu.size(); i++) {
             if (i == _sel) {
@@ -369,7 +369,7 @@ class AdminView extends WatchUi.View {
         var rows = (200 - _y0) / _rowH;
         if (rows < 1) { rows = 1; }
         dc.setColor(Graphics.COLOR_GREEN, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(Draw.X, _y0, Draw.FONT, Draw.fitTo(dc, (c != null) ? c.get(:label) : "", Draw.W), Graphics.TEXT_JUSTIFY_LEFT);
+        Draw.text(dc, Draw.X, _y0, Draw.fitTo(dc, (c != null) ? c.get(:label) : "", Draw.W), Graphics.TEXT_JUSTIFY_LEFT);
         var listY = _y0 + _rowH;
         rows = rows - 1;
         if (_respSel >= _lines.size()) { _respSel = (_lines.size() > 0) ? _lines.size() - 1 : 0; }
@@ -387,7 +387,7 @@ class AdminView extends WatchUi.View {
                 _tickW = Draw.marqueeRow(dc, line, Draw.X + 2, y, Draw.W - 4, _rowH, _tickOff, 24);
             } else {
                 dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-                dc.drawText(Draw.X + 2, y, Draw.FONT, Draw.fitTo(dc, line, Draw.W - 4), Graphics.TEXT_JUSTIFY_LEFT);
+                Draw.text(dc, Draw.X + 2, y, Draw.fitTo(dc, line, Draw.W - 4), Graphics.TEXT_JUSTIFY_LEFT);
             }
         }
         dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);

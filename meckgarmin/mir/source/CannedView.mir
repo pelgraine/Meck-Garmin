@@ -430,78 +430,76 @@ _Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_CannedView_mc_50_19_52_1
 _Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_CannedView_mc_50_19_52_12_stop:
 _Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_CannedView_mc_46_12_52_12_if_end:
 [ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/CannedView.mc" 53 12 ]
-        %tmp.163 = lgetv %dc;
-        symbol [ dc %tmp.163 53 12 14 ];
-        symbol [ drawText %tmp.164 53 15 23 ];
-        %tmp.164 = getv function %tmp.163 :drawText;
-        symbol [ Draw %tmp.166 53 24 28 ];
-        %tmp.166 = getv ? :Draw;
-        symbol [ X %tmp.167 53 29 30 ];
-        %tmp.167 = getv %tmp.166 :X;
-        %tmp.168 = 2;
-        %tmp.169 = add %tmp.167 %tmp.168;
-        %tmp.170 = lgetv %y.5;
-        symbol [ y %tmp.170 53 36 37 ];
-        symbol [ Draw %tmp.172 53 39 43 ];
-        %tmp.172 = getv ? :Draw;
-        symbol [ FONT %tmp.173 53 44 48 ];
-        %tmp.173 = getv %tmp.172 :FONT;
-        symbol [ Draw %tmp.175 53 50 54 ];
-        %tmp.175 = getv ? :Draw;
-        symbol [ fitTo %tmp.176 53 55 60 ];
-        %tmp.176 = getv function %tmp.175 :fitTo;
-        %tmp.177 = lgetv %dc;
-        symbol [ dc %tmp.177 53 61 63 ];
-        %tmp.178 = lgetv %list.2;
-        symbol [ list %tmp.178 53 65 69 ];
-        %tmp.179 = lgetv %i.4;
-        symbol [ i %tmp.179 53 70 71 ];
-        %tmp.180 = agetv %tmp.178 %tmp.179;
-        symbol [ Draw %tmp.182 53 74 78 ];
-        %tmp.182 = getv ? :Draw;
-        symbol [ W %tmp.183 53 79 80 ];
-        %tmp.183 = getv %tmp.182 :W;
-        %tmp.184 = 4;
-        %tmp.185 = sub %tmp.183 %tmp.184;
-        %tmp.186 = invoke %tmp.175 %tmp.176(%tmp.177, %tmp.180, %tmp.185);
-        symbol [ Graphics %tmp.187 53 87 95 ];
-        %tmp.187 = getm $.Toybox.Graphics;
-        symbol [ TEXT_JUSTIFY_LEFT %tmp.188 53 96 113 ];
-        %tmp.188 = getv %tmp.187 :TEXT_JUSTIFY_LEFT;
-        invoke %tmp.163 %tmp.164(%tmp.169, %tmp.170, %tmp.173, %tmp.186, %tmp.188);
+        symbol [ Draw %tmp.164 53 12 16 ];
+        %tmp.164 = getv ? :Draw;
+        symbol [ text %tmp.165 53 17 21 ];
+        %tmp.165 = getv function %tmp.164 :text;
+        %tmp.166 = lgetv %dc;
+        symbol [ dc %tmp.166 53 22 24 ];
+        symbol [ Draw %tmp.168 53 26 30 ];
+        %tmp.168 = getv ? :Draw;
+        symbol [ X %tmp.169 53 31 32 ];
+        %tmp.169 = getv %tmp.168 :X;
+        %tmp.170 = 2;
+        %tmp.171 = add %tmp.169 %tmp.170;
+        %tmp.172 = lgetv %y.5;
+        symbol [ y %tmp.172 53 38 39 ];
+        symbol [ Draw %tmp.174 53 41 45 ];
+        %tmp.174 = getv ? :Draw;
+        symbol [ fitTo %tmp.175 53 46 51 ];
+        %tmp.175 = getv function %tmp.174 :fitTo;
+        %tmp.176 = lgetv %dc;
+        symbol [ dc %tmp.176 53 52 54 ];
+        %tmp.177 = lgetv %list.2;
+        symbol [ list %tmp.177 53 56 60 ];
+        %tmp.178 = lgetv %i.4;
+        symbol [ i %tmp.178 53 61 62 ];
+        %tmp.179 = agetv %tmp.177 %tmp.178;
+        symbol [ Draw %tmp.181 53 65 69 ];
+        %tmp.181 = getv ? :Draw;
+        symbol [ W %tmp.182 53 70 71 ];
+        %tmp.182 = getv %tmp.181 :W;
+        %tmp.183 = 4;
+        %tmp.184 = sub %tmp.182 %tmp.183;
+        %tmp.185 = invoke %tmp.174 %tmp.175(%tmp.176, %tmp.179, %tmp.184);
+        symbol [ Graphics %tmp.186 53 78 86 ];
+        %tmp.186 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_LEFT %tmp.187 53 87 104 ];
+        %tmp.187 = getv %tmp.186 :TEXT_JUSTIFY_LEFT;
+        invoke %tmp.164 %tmp.165(%tmp.166, %tmp.171, %tmp.172, %tmp.185, %tmp.187);
 _Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_CannedView_mc_42_40_54_8_stop:
 _Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_CannedView_mc_42_8_54_8_for_incr:
 [ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/CannedView.mc" 42 ]
-        %tmp.191 = lgetv %r.3;
-        symbol [ r %tmp.191 42 35 36 ];
-        %tmp.192 = add %tmp.191 1;
-        lputv %r.3 %tmp.192;
+        %tmp.190 = lgetv %r.3;
+        symbol [ r %tmp.190 42 35 36 ];
+        %tmp.191 = add %tmp.190 1;
+        lputv %r.3 %tmp.191;
         symbol [ r %r.3 42 35 36 ];
         goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_CannedView_mc_42_8_54_8_for_test;
 _Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_CannedView_mc_42_8_54_8_for_end:
 [ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/CannedView.mc" 55 8 ]
 _Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_CannedView_mc_55_8_57_8_if_stmt:
-        symbol [ gModel %tmp.194 55 12 18 ];
-        %tmp.194 = getv ? :gModel;
-        symbol [ toast %tmp.195 55 19 24 ];
-        %tmp.195 = getv %tmp.194 :toast;
-        %tmp.196 = null;
-        %tmp.197 = ne %tmp.195 %tmp.196;
-        bf %tmp.197 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_CannedView_mc_55_8_57_8_if_end;
+        symbol [ gModel %tmp.193 55 12 18 ];
+        %tmp.193 = getv ? :gModel;
+        symbol [ toast %tmp.194 55 19 24 ];
+        %tmp.194 = getv %tmp.193 :toast;
+        %tmp.195 = null;
+        %tmp.196 = ne %tmp.194 %tmp.195;
+        bf %tmp.196 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_CannedView_mc_55_8_57_8_if_end;
 _Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_CannedView_mc_55_8_57_8_if_true:
 _Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_CannedView_mc_55_34_57_8_start:
 [ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/CannedView.mc" 56 12 ]
-        symbol [ ChannelView %tmp.199 56 12 23 ];
-        %tmp.199 = getv ? :ChannelView;
-        symbol [ drawToastStatic %tmp.200 56 24 39 ];
-        %tmp.200 = getv function %tmp.199 :drawToastStatic;
-        %tmp.201 = lgetv %dc;
-        symbol [ dc %tmp.201 56 40 42 ];
-        symbol [ gModel %tmp.203 56 44 50 ];
-        %tmp.203 = getv ? :gModel;
-        symbol [ toast %tmp.204 56 51 56 ];
-        %tmp.204 = getv %tmp.203 :toast;
-        invoke %tmp.199 %tmp.200(%tmp.201, %tmp.204);
+        symbol [ ChannelView %tmp.198 56 12 23 ];
+        %tmp.198 = getv ? :ChannelView;
+        symbol [ drawToastStatic %tmp.199 56 24 39 ];
+        %tmp.199 = getv function %tmp.198 :drawToastStatic;
+        %tmp.200 = lgetv %dc;
+        symbol [ dc %tmp.200 56 40 42 ];
+        symbol [ gModel %tmp.202 56 44 50 ];
+        %tmp.202 = getv ? :gModel;
+        symbol [ toast %tmp.203 56 51 56 ];
+        %tmp.203 = getv %tmp.202 :toast;
+        invoke %tmp.198 %tmp.199(%tmp.200, %tmp.203);
 _Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_CannedView_mc_55_34_57_8_stop:
         goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_CannedView_mc_55_8_57_8_if_end;
 _Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_CannedView_mc_55_8_57_8_if_end:

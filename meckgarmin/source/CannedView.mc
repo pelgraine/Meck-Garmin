@@ -50,7 +50,7 @@ class CannedView extends WatchUi.View {
             } else {
                 dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
             }
-            dc.drawText(Draw.X + 2, y, Draw.FONT, Draw.fitTo(dc, list[i], Draw.W - 4), Graphics.TEXT_JUSTIFY_LEFT);
+            Draw.text(dc, Draw.X + 2, y, Draw.fitTo(dc, list[i], Draw.W - 4), Graphics.TEXT_JUSTIFY_LEFT);
         }
         if (gModel.toast != null) {
             ChannelView.drawToastStatic(dc, gModel.toast);

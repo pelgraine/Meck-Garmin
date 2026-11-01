@@ -92,15 +92,15 @@ class ChannelView extends WatchUi.View {
                 dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
             }
             if (i == _tick) {
-                _tickW = dc.getTextWidthInPixels(line, Draw.FONT);
+                _tickW = Draw.width(dc, line);
                 dc.setClip(Draw.X, y, Draw.W, _rowH);
-                dc.drawText(Draw.X - _tickOff, y, Draw.FONT, line, Graphics.TEXT_JUSTIFY_LEFT);
-                dc.drawText(Draw.X - _tickOff + _tickW + TICK_GAP, y, Draw.FONT, line, Graphics.TEXT_JUSTIFY_LEFT);
+                Draw.text(dc, Draw.X - _tickOff, y, line, Graphics.TEXT_JUSTIFY_LEFT);
+                Draw.text(dc, Draw.X - _tickOff + _tickW + TICK_GAP, y, line, Graphics.TEXT_JUSTIFY_LEFT);
                 dc.clearClip();
             } else if (m.get(:sent)) {
-                dc.drawText(Draw.X + Draw.W, y, Draw.FONT, Draw.ellipsize(dc, line, Draw.W), Graphics.TEXT_JUSTIFY_RIGHT);
+                Draw.text(dc, Draw.X + Draw.W, y, Draw.ellipsize(dc, line, Draw.W), Graphics.TEXT_JUSTIFY_RIGHT);
             } else {
-                dc.drawText(Draw.X, y, Draw.FONT, Draw.fitTo(dc, line, Draw.W), Graphics.TEXT_JUSTIFY_LEFT);
+                Draw.text(dc, Draw.X, y, Draw.fitTo(dc, line, Draw.W), Graphics.TEXT_JUSTIFY_LEFT);
             }
         }
 
@@ -236,7 +236,7 @@ class ChannelView extends WatchUi.View {
         var region = gModel.scopeName(m.get(:scope));
         if (region != null) {
             dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(ix, bottomY, Draw.FONT, Draw.fitTo(dc, region, iw - 70), Graphics.TEXT_JUSTIFY_LEFT);
+            Draw.text(dc, ix, bottomY, Draw.fitTo(dc, region, iw - 70), Graphics.TEXT_JUSTIFY_LEFT);
         }
         var action = m.get(:sent) ? "[Again]" : "[Reply]";
         var aw = dc.getTextWidthInPixels(action, Draw.FONT);
