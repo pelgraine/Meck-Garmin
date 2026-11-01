@@ -1129,15 +1129,15 @@ _Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_153_21_156_4
     }
     [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 158; @symbol_functiondef = [open,158,13,17]; ]
     function open() {
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_158_20_177_4_start:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_158_20_175_4_start:
 [ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 159 8 ]
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_159_8_176_8_if_stmt:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_159_8_174_8_if_stmt:
         symbol [ _sel %tmp.2 159 12 16 ];
         %tmp.2 = getv ? :_sel;
         %tmp.3 = 0;
         %tmp.4 = eq %tmp.2 %tmp.3;
-        bf %tmp.4 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_159_8_176_8_if_false;
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_159_8_176_8_if_true:
+        bf %tmp.4 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_159_8_174_8_if_false;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_159_8_174_8_if_true:
 _Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_159_23_162_8_start:
 [ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 160 12 ]
         [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_159_23_162_8_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_159_23_162_8_stop" ]
@@ -1166,16 +1166,16 @@ _Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_159_23_162_8
         %tmp.18 = getv %tmp.17 :SLIDE_LEFT;
         invoke %tmp.9 %tmp.10(%tmp.11, %tmp.12, %tmp.18);
 _Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_159_23_162_8_stop:
-        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_159_8_176_8_if_end;
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_159_8_176_8_if_false:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_159_8_174_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_159_8_174_8_if_false:
 [ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 162 15 ]
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_162_15_176_8_if_stmt:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_162_15_174_8_if_stmt:
         symbol [ _sel %tmp.20 162 19 23 ];
         %tmp.20 = getv ? :_sel;
         %tmp.21 = 1;
         %tmp.22 = eq %tmp.20 %tmp.21;
-        bf %tmp.22 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_162_15_176_8_if_false;
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_162_15_176_8_if_true:
+        bf %tmp.22 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_162_15_174_8_if_false;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_162_15_174_8_if_true:
 _Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_162_30_165_8_start:
 [ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 163 12 ]
         [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_162_30_165_8_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_162_30_165_8_stop" ]
@@ -1204,298 +1204,257 @@ _Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_162_30_165_8
         %tmp.36 = getv %tmp.35 :SLIDE_LEFT;
         invoke %tmp.27 %tmp.28(%tmp.29, %tmp.30, %tmp.36);
 _Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_162_30_165_8_stop:
-        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_162_15_176_8_if_end;
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_162_15_176_8_if_false:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_162_15_174_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_162_15_174_8_if_false:
 [ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 165 15 ]
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_15_176_8_if_stmt:
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_19_165_59_begin:
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_19_165_46_begin:
-        symbol [ gModel %tmp.38 165 20 26 ];
-        %tmp.38 = getv ? :gModel;
-        symbol [ meckExt %tmp.39 165 27 34 ];
-        %tmp.39 = getv %tmp.38 :meckExt;
-        %tmp.40 = not %tmp.39;
-        bf %tmp.40 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_15_176_8_if_false;
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_38_165_46_true:
-        symbol [ _sel %tmp.42 165 38 42 ];
-        %tmp.42 = getv ? :_sel;
-        %tmp.43 = 2;
-        %tmp.44 = gte %tmp.42 %tmp.43;
-        push %tmp.44;
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_38_165_46_end:
-        %tmp.45 = phi [%tmp.40 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_19_165_46_begin] [%tmp.44 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_38_165_46_true] [%tmp.45 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_38_165_46_end];
-        bf %tmp.45 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_15_176_8_if_false;
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_51_165_59_true:
-        symbol [ _sel %tmp.47 165 51 55 ];
-        %tmp.47 = getv ? :_sel;
-        %tmp.48 = 3;
-        %tmp.49 = ne %tmp.47 %tmp.48;
-        push %tmp.49;
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_51_165_59_end:
-        %tmp.50 = phi [%tmp.45 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_19_165_59_begin] [%tmp.49 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_51_165_59_true] [%tmp.50 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_51_165_59_end];
-        bf %tmp.50 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_15_176_8_if_false;
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_15_176_8_if_true:
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_62_167_8_start:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_15_174_8_if_stmt:
+        symbol [ _sel %tmp.38 165 19 23 ];
+        %tmp.38 = getv ? :_sel;
+        %tmp.39 = 2;
+        %tmp.40 = eq %tmp.38 %tmp.39;
+        bf %tmp.40 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_15_174_8_if_false;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_15_174_8_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_30_168_8_start:
 [ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 166 12 ]
-        symbol [ gModel %tmp.52 166 12 18 ];
-        %tmp.52 = getv ? :gModel;
-        symbol [ showToast %tmp.53 166 19 28 ];
-        %tmp.53 = getv function %tmp.52 :showToast;
-        %tmp.54 = "Needs a Meck node";
-        invoke %tmp.52 %tmp.53(%tmp.54);
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_62_167_8_stop:
-        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_15_176_8_if_end;
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_15_176_8_if_false:
-[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 167 15 ]
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_167_15_176_8_if_stmt:
-        symbol [ _sel %tmp.56 167 19 23 ];
-        %tmp.56 = getv ? :_sel;
-        %tmp.57 = 2;
-        %tmp.58 = eq %tmp.56 %tmp.57;
-        bf %tmp.58 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_167_15_176_8_if_false;
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_167_15_176_8_if_true:
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_167_30_170_8_start:
-[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 168 12 ]
-        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_167_30_170_8_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_167_30_170_8_stop" ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_30_168_8_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_30_168_8_stop" ]
         %dv.3 = local;
-        symbol [ dv %dv.3 168 16 18 ];
-        symbol [ DiscoverView %tmp.62 168 25 37 ];
-        %tmp.62 = getv ? :DiscoverView;
-        %tmp.59 = newc %tmp.62 ();
-        lputv %dv.3 %tmp.59;
-        symbol [ dv %dv.3 168 16 18 ];
+        symbol [ dv %dv.3 166 16 18 ];
+        symbol [ DiscoverView %tmp.44 166 25 37 ];
+        %tmp.44 = getv ? :DiscoverView;
+        %tmp.41 = newc %tmp.44 ();
+        lputv %dv.3 %tmp.41;
+        symbol [ dv %dv.3 166 16 18 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 167 12 ]
+        symbol [ WatchUi %tmp.45 167 12 19 ];
+        %tmp.45 = getm $.Toybox.WatchUi;
+        symbol [ pushView %tmp.46 167 20 28 ];
+        %tmp.46 = getv function %tmp.45 :pushView;
+        %tmp.47 = lgetv %dv.3;
+        symbol [ dv %tmp.47 167 29 31 ];
+        symbol [ DiscoverDelegate %tmp.51 167 37 53 ];
+        %tmp.51 = getv ? :DiscoverDelegate;
+        %tmp.52 = lgetv %dv.3;
+        symbol [ dv %tmp.52 167 54 56 ];
+        %tmp.48 = newc %tmp.51 (%tmp.52);
+        symbol [ WatchUi %tmp.53 167 59 66 ];
+        %tmp.53 = getm $.Toybox.WatchUi;
+        symbol [ SLIDE_LEFT %tmp.54 167 67 77 ];
+        %tmp.54 = getv %tmp.53 :SLIDE_LEFT;
+        invoke %tmp.45 %tmp.46(%tmp.47, %tmp.48, %tmp.54);
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_30_168_8_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_15_174_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_15_174_8_if_false:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 168 15 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_168_15_174_8_if_stmt:
+        symbol [ _sel %tmp.56 168 19 23 ];
+        %tmp.56 = getv ? :_sel;
+        %tmp.57 = 3;
+        %tmp.58 = eq %tmp.56 %tmp.57;
+        bf %tmp.58 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_168_15_174_8_if_else_false;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_168_15_174_8_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_168_30_171_8_start:
 [ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 169 12 ]
-        symbol [ WatchUi %tmp.63 169 12 19 ];
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_168_30_171_8_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_168_30_171_8_stop" ]
+        %tv.4 = local;
+        symbol [ tv %tv.4 169 16 18 ];
+        symbol [ TraceView %tmp.62 169 25 34 ];
+        %tmp.62 = getv ? :TraceView;
+        %tmp.59 = newc %tmp.62 ();
+        lputv %tv.4 %tmp.59;
+        symbol [ tv %tv.4 169 16 18 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 170 12 ]
+        symbol [ WatchUi %tmp.63 170 12 19 ];
         %tmp.63 = getm $.Toybox.WatchUi;
-        symbol [ pushView %tmp.64 169 20 28 ];
+        symbol [ pushView %tmp.64 170 20 28 ];
         %tmp.64 = getv function %tmp.63 :pushView;
-        %tmp.65 = lgetv %dv.3;
-        symbol [ dv %tmp.65 169 29 31 ];
-        symbol [ DiscoverDelegate %tmp.69 169 37 53 ];
-        %tmp.69 = getv ? :DiscoverDelegate;
-        %tmp.70 = lgetv %dv.3;
-        symbol [ dv %tmp.70 169 54 56 ];
+        %tmp.65 = lgetv %tv.4;
+        symbol [ tv %tmp.65 170 29 31 ];
+        symbol [ TraceDelegate %tmp.69 170 37 50 ];
+        %tmp.69 = getv ? :TraceDelegate;
+        %tmp.70 = lgetv %tv.4;
+        symbol [ tv %tmp.70 170 51 53 ];
         %tmp.66 = newc %tmp.69 (%tmp.70);
-        symbol [ WatchUi %tmp.71 169 59 66 ];
+        symbol [ WatchUi %tmp.71 170 56 63 ];
         %tmp.71 = getm $.Toybox.WatchUi;
-        symbol [ SLIDE_LEFT %tmp.72 169 67 77 ];
+        symbol [ SLIDE_LEFT %tmp.72 170 64 74 ];
         %tmp.72 = getv %tmp.71 :SLIDE_LEFT;
         invoke %tmp.63 %tmp.64(%tmp.65, %tmp.66, %tmp.72);
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_167_30_170_8_stop:
-        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_167_15_176_8_if_end;
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_167_15_176_8_if_false:
-[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 170 15 ]
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_170_15_176_8_if_stmt:
-        symbol [ _sel %tmp.74 170 19 23 ];
-        %tmp.74 = getv ? :_sel;
-        %tmp.75 = 3;
-        %tmp.76 = eq %tmp.74 %tmp.75;
-        bf %tmp.76 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_170_15_176_8_if_else_false;
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_170_15_176_8_if_true:
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_170_30_173_8_start:
-[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 171 12 ]
-        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_170_30_173_8_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_170_30_173_8_stop" ]
-        %tv.4 = local;
-        symbol [ tv %tv.4 171 16 18 ];
-        symbol [ TraceView %tmp.80 171 25 34 ];
-        %tmp.80 = getv ? :TraceView;
-        %tmp.77 = newc %tmp.80 ();
-        lputv %tv.4 %tmp.77;
-        symbol [ tv %tv.4 171 16 18 ];
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_168_30_171_8_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_168_15_174_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_168_15_174_8_if_else_false:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_171_15_174_8_start:
 [ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 172 12 ]
-        symbol [ WatchUi %tmp.81 172 12 19 ];
-        %tmp.81 = getm $.Toybox.WatchUi;
-        symbol [ pushView %tmp.82 172 20 28 ];
-        %tmp.82 = getv function %tmp.81 :pushView;
-        %tmp.83 = lgetv %tv.4;
-        symbol [ tv %tmp.83 172 29 31 ];
-        symbol [ TraceDelegate %tmp.87 172 37 50 ];
-        %tmp.87 = getv ? :TraceDelegate;
-        %tmp.88 = lgetv %tv.4;
-        symbol [ tv %tmp.88 172 51 53 ];
-        %tmp.84 = newc %tmp.87 (%tmp.88);
-        symbol [ WatchUi %tmp.89 172 56 63 ];
-        %tmp.89 = getm $.Toybox.WatchUi;
-        symbol [ SLIDE_LEFT %tmp.90 172 64 74 ];
-        %tmp.90 = getv %tmp.89 :SLIDE_LEFT;
-        invoke %tmp.81 %tmp.82(%tmp.83, %tmp.84, %tmp.90);
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_170_30_173_8_stop:
-        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_170_15_176_8_if_end;
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_170_15_176_8_if_else_false:
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_173_15_176_8_start:
-[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 174 12 ]
-        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_173_15_176_8_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_173_15_176_8_stop" ]
+        [ "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_171_15_174_8_start" "_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_171_15_174_8_stop" ]
         %fv.5 = local;
-        symbol [ fv %fv.5 174 16 18 ];
-        symbol [ FavouritesView %tmp.94 174 25 39 ];
-        %tmp.94 = getv ? :FavouritesView;
-        %tmp.91 = newc %tmp.94 ();
-        lputv %fv.5 %tmp.91;
-        symbol [ fv %fv.5 174 16 18 ];
-[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 175 12 ]
-        symbol [ WatchUi %tmp.95 175 12 19 ];
-        %tmp.95 = getm $.Toybox.WatchUi;
-        symbol [ pushView %tmp.96 175 20 28 ];
-        %tmp.96 = getv function %tmp.95 :pushView;
-        %tmp.97 = lgetv %fv.5;
-        symbol [ fv %tmp.97 175 29 31 ];
-        symbol [ FavouritesDelegate %tmp.101 175 37 55 ];
-        %tmp.101 = getv ? :FavouritesDelegate;
-        %tmp.102 = lgetv %fv.5;
-        symbol [ fv %tmp.102 175 56 58 ];
-        %tmp.98 = newc %tmp.101 (%tmp.102);
-        symbol [ WatchUi %tmp.103 175 61 68 ];
-        %tmp.103 = getm $.Toybox.WatchUi;
-        symbol [ SLIDE_LEFT %tmp.104 175 69 79 ];
-        %tmp.104 = getv %tmp.103 :SLIDE_LEFT;
-        invoke %tmp.95 %tmp.96(%tmp.97, %tmp.98, %tmp.104);
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_173_15_176_8_stop:
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_170_15_176_8_if_end:
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_167_15_176_8_if_end:
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_15_176_8_if_end:
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_162_15_176_8_if_end:
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_159_8_176_8_if_end:
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_158_20_177_4_stop:
+        symbol [ fv %fv.5 172 16 18 ];
+        symbol [ FavouritesView %tmp.76 172 25 39 ];
+        %tmp.76 = getv ? :FavouritesView;
+        %tmp.73 = newc %tmp.76 ();
+        lputv %fv.5 %tmp.73;
+        symbol [ fv %fv.5 172 16 18 ];
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 173 12 ]
+        symbol [ WatchUi %tmp.77 173 12 19 ];
+        %tmp.77 = getm $.Toybox.WatchUi;
+        symbol [ pushView %tmp.78 173 20 28 ];
+        %tmp.78 = getv function %tmp.77 :pushView;
+        %tmp.79 = lgetv %fv.5;
+        symbol [ fv %tmp.79 173 29 31 ];
+        symbol [ FavouritesDelegate %tmp.83 173 37 55 ];
+        %tmp.83 = getv ? :FavouritesDelegate;
+        %tmp.84 = lgetv %fv.5;
+        symbol [ fv %tmp.84 173 56 58 ];
+        %tmp.80 = newc %tmp.83 (%tmp.84);
+        symbol [ WatchUi %tmp.85 173 61 68 ];
+        %tmp.85 = getm $.Toybox.WatchUi;
+        symbol [ SLIDE_LEFT %tmp.86 173 69 79 ];
+        %tmp.86 = getv %tmp.85 :SLIDE_LEFT;
+        invoke %tmp.77 %tmp.78(%tmp.79, %tmp.80, %tmp.86);
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_171_15_174_8_stop:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_168_15_174_8_if_end:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_165_15_174_8_if_end:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_162_15_174_8_if_end:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_159_8_174_8_if_end:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_158_20_175_4_stop:
     }
 }
-[ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 180; @symbol_classdef = [HomeDelegate,180,6,18]; @symbol_extends<0> = [WatchUi,180,27,34]; @symbol_extends<1> = [BehaviorDelegate,180,35,51]; ]
+[ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 178; @symbol_classdef = [HomeDelegate,178,6,18]; @symbol_extends<0> = [WatchUi,178,27,34]; @symbol_extends<1> = [BehaviorDelegate,178,35,51]; ]
 class HomeDelegate extends WatchUi.BehaviorDelegate {
-    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 180; ]
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 178; ]
     <init> {
     }
-    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 180; ]
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 178; ]
     static
     <init> {
     }
-    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 181; @position = 8; @symbol_vardef = [_v,181,8,10]; ]
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 179; @position = 8; @symbol_vardef = [_v,179,8,10]; ]
     var _v;
-    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 183; @symbol_functiondef = [initialize,183,13,23]; @symbol_param<0> = [v,183,24,25]; ]
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 181; @symbol_functiondef = [initialize,181,13,23]; @symbol_param<0> = [v,181,24,25]; ]
     function initialize(v) as Void {
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_183_27_186_4_start:
-[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 184 8 ]
-        symbol [ BehaviorDelegate %tmp.2 184 8 24 ];
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_181_27_184_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 182 8 ]
+        symbol [ BehaviorDelegate %tmp.2 182 8 24 ];
         %tmp.2 = getv ? :BehaviorDelegate;
-        symbol [ initialize %tmp.3 184 25 35 ];
+        symbol [ initialize %tmp.3 182 25 35 ];
         %tmp.3 = getv function %tmp.2 :initialize;
         invoke %tmp.2 %tmp.3();
-[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 185 8 ]
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 183 8 ]
         %tmp.4 = lgetv %v;
-        symbol [ v %tmp.4 185 13 14 ];
-        symbol [ _v ? 185 8 10 ];
+        symbol [ v %tmp.4 183 13 14 ];
+        symbol [ _v ? 183 8 10 ];
         putv self :_v %tmp.4;
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_183_27_186_4_stop:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_181_27_184_4_stop:
     }
-    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 188; @symbol_functiondef = [onNextPage,188,13,23]; ]
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 186; @symbol_functiondef = [onNextPage,186,13,23]; ]
     function onNextPage() {
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_188_26_188_53_start:
-[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 188 28 ]
-        symbol [ _v %tmp.2 188 28 30 ];
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_186_26_186_53_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 186 28 ]
+        symbol [ _v %tmp.2 186 28 30 ];
         %tmp.2 = getv ? :_v;
-        symbol [ move %tmp.3 188 31 35 ];
+        symbol [ move %tmp.3 186 31 35 ];
         %tmp.3 = getv function %tmp.2 :move;
         %tmp.4 = 1;
         invoke %tmp.2 %tmp.3(%tmp.4);
-[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 188 40 ]
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 186 40 ]
         %tmp.5 = true;
         ret %tmp.5;
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_188_26_188_53_stop:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_186_26_186_53_stop:
     }
-    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 189; @symbol_functiondef = [onPreviousPage,189,13,27]; ]
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 187; @symbol_functiondef = [onPreviousPage,187,13,27]; ]
     function onPreviousPage() {
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_189_30_189_58_start:
-[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 189 32 ]
-        symbol [ _v %tmp.2 189 32 34 ];
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_187_30_187_58_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 187 32 ]
+        symbol [ _v %tmp.2 187 32 34 ];
         %tmp.2 = getv ? :_v;
-        symbol [ move %tmp.3 189 35 39 ];
+        symbol [ move %tmp.3 187 35 39 ];
         %tmp.3 = getv function %tmp.2 :move;
         %tmp.4 = -1;
         invoke %tmp.2 %tmp.3(%tmp.4);
-[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 189 45 ]
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 187 45 ]
         %tmp.5 = true;
         ret %tmp.5;
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_189_30_189_58_stop:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_187_30_187_58_stop:
     }
-    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 191; @symbol_functiondef = [onKey,191,13,18]; @symbol_param<0> = [evt,191,19,22]; ]
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 189; @symbol_functiondef = [onKey,189,13,18]; @symbol_param<0> = [evt,189,19,22]; ]
     function onKey(evt) {
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_191_24_197_4_start:
-[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 192 8 ]
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_192_8_195_8_if_stmt:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_189_24_195_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 190 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_190_8_193_8_if_stmt:
         %tmp.1 = lgetv %evt;
-        symbol [ evt %tmp.1 192 12 15 ];
-        symbol [ getKey %tmp.2 192 16 22 ];
+        symbol [ evt %tmp.1 190 12 15 ];
+        symbol [ getKey %tmp.2 190 16 22 ];
         %tmp.2 = getv function %tmp.1 :getKey;
         %tmp.3 = invoke %tmp.1 %tmp.2();
-        symbol [ WatchUi %tmp.4 192 28 35 ];
+        symbol [ WatchUi %tmp.4 190 28 35 ];
         %tmp.4 = getm $.Toybox.WatchUi;
-        symbol [ KEY_ENTER %tmp.5 192 36 45 ];
+        symbol [ KEY_ENTER %tmp.5 190 36 45 ];
         %tmp.5 = getv %tmp.4 :KEY_ENTER;
         %tmp.6 = eq %tmp.3 %tmp.5;
-        bf %tmp.6 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_192_8_195_8_if_end;
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_192_8_195_8_if_true:
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_192_47_195_8_start:
-[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 193 12 ]
-        symbol [ _v %tmp.8 193 12 14 ];
+        bf %tmp.6 @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_190_8_193_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_190_8_193_8_if_true:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_190_47_193_8_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 191 12 ]
+        symbol [ _v %tmp.8 191 12 14 ];
         %tmp.8 = getv ? :_v;
-        symbol [ open %tmp.9 193 15 19 ];
+        symbol [ open %tmp.9 191 15 19 ];
         %tmp.9 = getv function %tmp.8 :open;
         invoke %tmp.8 %tmp.9();
-[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 194 12 ]
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 192 12 ]
         %tmp.10 = true;
         ret %tmp.10;
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_192_47_195_8_stop:
-        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_192_8_195_8_if_end;
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_192_8_195_8_if_end:
-[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 196 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_190_47_193_8_stop:
+        goto @_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_190_8_193_8_if_end;
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_190_8_193_8_if_end:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 194 8 ]
         %tmp.11 = false;
         ret %tmp.11;
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_191_24_197_4_stop:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_189_24_195_4_stop:
     }
-    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 200; @symbol_functiondef = [onTap,200,13,18]; @symbol_param<0> = [evt,200,19,22]; ]
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 198; @symbol_functiondef = [onTap,198,13,18]; @symbol_param<0> = [evt,198,19,22]; ]
     function onTap(evt) {
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_200_24_202_4_start:
-[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 201 8 ]
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_198_24_200_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 199 8 ]
         %tmp.1 = true;
         ret %tmp.1;
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_200_24_202_4_stop:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_198_24_200_4_stop:
     }
 }
-[ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 206; @symbol_classdef = [SimpleBackDelegate,206,6,24]; @symbol_extends<0> = [WatchUi,206,33,40]; @symbol_extends<1> = [BehaviorDelegate,206,41,57]; ]
+[ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 204; @symbol_classdef = [SimpleBackDelegate,204,6,24]; @symbol_extends<0> = [WatchUi,204,33,40]; @symbol_extends<1> = [BehaviorDelegate,204,41,57]; ]
 class SimpleBackDelegate extends WatchUi.BehaviorDelegate {
-    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 206; ]
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 204; ]
     <init> {
     }
-    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 206; ]
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 204; ]
     static
     <init> {
     }
-    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 207; @symbol_functiondef = [initialize,207,13,23]; ]
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 205; @symbol_functiondef = [initialize,205,13,23]; ]
     function initialize() as Void {
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_207_26_209_4_start:
-[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 208 8 ]
-        symbol [ BehaviorDelegate %tmp.2 208 8 24 ];
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_205_26_207_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 206 8 ]
+        symbol [ BehaviorDelegate %tmp.2 206 8 24 ];
         %tmp.2 = getv ? :BehaviorDelegate;
-        symbol [ initialize %tmp.3 208 25 35 ];
+        symbol [ initialize %tmp.3 206 25 35 ];
         %tmp.3 = getv function %tmp.2 :initialize;
         invoke %tmp.2 %tmp.3();
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_207_26_209_4_stop:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_205_26_207_4_stop:
     }
-    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 211; @symbol_functiondef = [onBack,211,13,19]; ]
+    [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 209; @symbol_functiondef = [onBack,209,13,19]; ]
     function onBack() {
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_211_22_214_4_start:
-[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 212 8 ]
-        symbol [ WatchUi %tmp.1 212 8 15 ];
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_209_22_212_4_start:
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 210 8 ]
+        symbol [ WatchUi %tmp.1 210 8 15 ];
         %tmp.1 = getm $.Toybox.WatchUi;
-        symbol [ popView %tmp.2 212 16 23 ];
+        symbol [ popView %tmp.2 210 16 23 ];
         %tmp.2 = getv function %tmp.1 :popView;
-        symbol [ WatchUi %tmp.3 212 24 31 ];
+        symbol [ WatchUi %tmp.3 210 24 31 ];
         %tmp.3 = getm $.Toybox.WatchUi;
-        symbol [ SLIDE_RIGHT %tmp.4 212 32 43 ];
+        symbol [ SLIDE_RIGHT %tmp.4 210 32 43 ];
         %tmp.4 = getv %tmp.3 :SLIDE_RIGHT;
         invoke %tmp.1 %tmp.2(%tmp.4);
-[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 213 8 ]
+[ "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc" 211 8 ]
         %tmp.5 = true;
         ret %tmp.5;
-_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_211_22_214_4_stop:
+_Users_elizabethseabrooke_Meck_Garmin_meckgarmin_source_HomeView_mc_209_22_212_4_stop:
     }
 }
 [ @file = "/Users/elizabethseabrooke/Meck-Garmin/meckgarmin/source/HomeView.mc"; @line = 1; ]
