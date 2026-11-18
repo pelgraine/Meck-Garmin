@@ -5,7 +5,8 @@ using Toybox.Application;
 
 // Favourites: the node's favourite contacts. Selecting a repeater or room
 // logs in (password remembered per repeater in the watch's storage, typed
-// on the keyboard the first time) and opens the admin screen.
+// on the keyboard the first time) and opens the admin screen. Selecting a
+// sensor opens its telemetry screen.
 class FavouritesView extends WatchUi.View {
 
     var _sel = 0;
@@ -141,6 +142,12 @@ class FavouritesView extends WatchUi.View {
         if (_sel < 0 || _sel >= list.size() || list[_sel] == null) { return; }
         var e = list[_sel];
         var t = e.get(:type);
+        if (t == 4) {
+            // Sensor: telemetry screen, no login.
+            var sv = new SensorView(e);
+            WatchUi.pushView(sv, new SensorDelegate(sv), WatchUi.SLIDE_LEFT);
+            return;
+        }
         if (t != 2 && t != 3) {
             gModel.showToast("Not a repeater");
             return;

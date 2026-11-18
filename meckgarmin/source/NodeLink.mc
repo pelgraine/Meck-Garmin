@@ -17,6 +17,7 @@ module Proto {
     const CMD_SYNC_NEXT_MESSAGE    = 10;
     const CMD_SET_RADIO_PARAMS     = 11;
     const CMD_SET_RADIO_TX_POWER   = 12;
+    const CMD_SEND_TELEMETRY_REQ   = 39;
     const CMD_GET_BATT_AND_STORAGE = 20;
     const CMD_DEVICE_QUERY         = 22;
     const CMD_SEND_LOGIN           = 26;
@@ -57,6 +58,7 @@ module Proto {
     const PUSH_LOGIN_SUCCESS       = 0x85;
     const PUSH_LOGIN_FAIL          = 0x86;
     const PUSH_NEW_ADVERT          = 0x8A;
+    const PUSH_TELEMETRY_RESPONSE  = 0x8B;
     const PUSH_CONTROL_DATA        = 0x8E;
     const CTL_DISCOVER_REQ         = 0x80;
     const CTL_DISCOVER_RESP        = 0x90;
@@ -500,6 +502,8 @@ class NodeLink extends Ble.BleDelegate {
                 gModel.adminResult(false);
             } else if (code == Proto.PUSH_CONTROL_DATA) {
                 parseControlData(f);
+            } else if (code == Proto.PUSH_TELEMETRY_RESPONSE) {
+                parseTelemetry(f);
             } else if (code == Proto.PUSH_NEW_ADVERT) {
                 // A Meck node applies its own auto-add settings; nothing to do.
                 // A standard node expects the app to decide: add repeaters only,
@@ -606,6 +610,14 @@ class NodeLink extends Ble.BleDelegate {
             if (f.size() >= 3) {
                 gModel.nodeMv = f.decodeNumber(Lang.NUMBER_FORMAT_UINT16, {:offset => 1, :endianness => Lang.ENDIAN_LITTLE});
             }
+        } else if (code == Proto.RESP_SENT && cmd == Proto.CMD_SEND_TELEMETRY_REQ) {
+            // [6][flood][tag:4][est timeout ms:4]: wait that long plus 5 s.
+            var t = gModel.telem;
+            if (t != null && t.get(:state) == :pending && f.size() >= 10) {
+                var est = u32le(f, 6);
+                t.put(:waitS, est / 1000 + 5);
+                t.put(:sentAt, Time.now().value());
+            }
         } else if (code == Proto.RESP_OK) {
             if (cmd == Proto.CMD_SET_RADIO_PARAMS && _radioPending != null) {
                 var p = _radioPending;
@@ -650,6 +662,9 @@ class NodeLink extends Ble.BleDelegate {
                 _q = nq;
             } else if (cmd == Proto.CMD_SEND_TXT_MSG) {
                 gModel.cliFailed();
+            } else if (cmd == Proto.CMD_SEND_TELEMETRY_REQ) {
+                var t = gModel.telem;
+                if (t != null) { t.put(:state, :error); }
             } else if (cmd == Proto.CMD_SET_RADIO_PARAMS || cmd == Proto.CMD_SET_RADIO_TX_POWER) {
                 // Refused: drop a queued power command so nothing half-applies.
                 var nq = [];
@@ -975,6 +990,82 @@ class NodeLink extends Ble.BleDelegate {
 
     // CLI command to a logged-in repeater: standard text send, type 1.
     // [2][txt_type=1][attempt=0][ts:4][pubkey prefix:6][text]
+    // Sensor telemetry: [39][3 reserved][pubkey:32]. The node answers with
+    // a "sent" reply, then the sensor's data arrives later as a push.
+    function requestTelemetry(pubkey) {
+        if (!_ready) {
+            gModel.setStatus("Not connected");
+            return false;
+        }
+        var frame = [Proto.CMD_SEND_TELEMETRY_REQ, 0, 0, 0]b;
+        frame = frame.addAll(pubkey);
+        enqueue(frame);
+        return true;
+    }
+
+    // Push 0x8B: [0x8B][0][pubkey prefix:6][CayenneLPP records]. Each record
+    // is [channel][type][value, big-endian]. Channel 1 (the sensor's own
+    // battery and chip temperature) is left out. Decoding stops at a type
+    // whose size isn't known.
+    function parseTelemetry(f) {
+        var t = gModel.telem;
+        if (t == null || f.size() < 8) { return; }
+        if (!bytesEqual(f.slice(2, 8), t.get(:pubkey).slice(0, 6))) { return; }
+        var rows = [];
+        var i = 8;
+        while (i + 2 <= f.size()) {
+            var ch = f[i];
+            var type = f[i + 1];
+            var sz = lppSize(type);
+            if (sz <= 0 || i + 2 + sz > f.size()) { break; }
+            var raw = 0;
+            for (var k = 0; k < sz; k++) {
+                raw = raw * 256 + f[i + 2 + k];
+            }
+            if (ch != 1) {
+                rows.add("Ch " + ch + ": " + lppText(type, raw, sz));
+            }
+            i += 2 + sz;
+        }
+        if (rows.size() == 0) { rows.add("(no readings)"); }
+        t.put(:rows, rows);
+        t.put(:state, :ok);
+        t.put(:at, Time.now().value());
+        WatchUi.requestUpdate();
+    }
+
+    // Value sizes in bytes, from MeshCore's LPPDataHelpers.h.
+    function lppSize(type) {
+        if (type == 0 || type == 1 || type == 102 || type == 104 || type == 120 || type == 142) { return 1; }
+        if (type == 2 || type == 3 || type == 101 || type == 103 || type == 115 || type == 116
+            || type == 117 || type == 121 || type == 125 || type == 128 || type == 132) { return 2; }
+        if (type == 135) { return 3; }
+        if (type == 100 || type == 118 || type == 130 || type == 131 || type == 133) { return 4; }
+        if (type == 113 || type == 134) { return 6; }
+        if (type == 136) { return 9; }
+        return 0;
+    }
+
+    function lppSigned(raw, sz) {
+        var top = 1;
+        for (var k = 0; k < sz; k++) { top = top * 256; }
+        return (raw >= top / 2) ? raw - top : raw;
+    }
+
+    function lppText(type, raw, sz) {
+        if (type == 116) { return (raw / 100.0).format("%.2f") + " V"; }
+        if (type == 117) { return (raw / 1000.0).format("%.2f") + " A"; }
+        if (type == 120) { return raw + "%"; }
+        if (type == 103) { return (lppSigned(raw, 2) / 10.0).format("%.1f") + " C"; }
+        if (type == 128) { return raw + " W"; }
+        if (type == 131) { return (raw / 1000.0).format("%.3f") + " kWh"; }
+        if (type == 104) { return (raw / 2.0).format("%.1f") + "% RH"; }
+        if (type == 115) { return (raw / 10.0).format("%.1f") + " hPa"; }
+        if (type == 2 || type == 3) { return (lppSigned(raw, 2) / 100.0).format("%.2f"); }
+        if (type == 121) { return lppSigned(raw, 2) + " m"; }
+        return "" + raw;   // other types: the raw number
+    }
+
     function sendCli(pubkey, text) {
         if (!_ready) {
             gModel.setStatus("Not connected");

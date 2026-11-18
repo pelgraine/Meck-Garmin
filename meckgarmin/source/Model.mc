@@ -44,6 +44,7 @@ class Model {
     var names = {};              // pubkey prefix hex -> contact name (resolved by the node)
     var admin = null;            // repeater session: {:pubkey, :prefix, :name, :state, :sentAt}
     var cli = null;              // last CLI command: {:cmd, :label, :state, :text, :sentAt}
+    var telem = null;            // sensor telemetry: {:pubkey, :name, :state, :rows, :at, :sentAt, :waitS}
 
     // Meck-style toast: shown centred for 2.5 seconds.
     function showToast(t) {
