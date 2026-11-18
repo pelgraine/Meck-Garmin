@@ -25,8 +25,9 @@ class MeckApp extends Application.AppBase {
         }
     }
 
+    // Opens on the node list; picking a node goes on to Home.
     function getInitialView() {
-        var v = new HomeView();
-        return [v, new HomeDelegate(v)];
+        var v = new NodeListView(true);
+        return [v, new NodeListDelegate(v)];
     }
 }

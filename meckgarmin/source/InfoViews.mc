@@ -57,11 +57,15 @@ class SettingsView extends WatchUi.View {
             "Link: " + gModel.status,
             "Ch " + gModel.channels.size() + "  Cnd " + gModel.canned.size() + "  Msg " + gModel.messageCount(),
             "Reconnect",
+            "Switch node",
             "Clear messages",
             "Channel regions",
-            "Canned messages",
-            "Meck v0.3"
+            "Canned messages"
         ];
+        if (gModel.isP4()) {
+            _items.add("Radio");   // index 9, Meck-P4 only
+        }
+        _items.add("Meck v0.3");
         _rows = (196 - _y0) / _rowH;
         if (_rows < 1) { _rows = 1; }
         if (_sel < _top) { _top = _sel; }
@@ -102,9 +106,13 @@ class SettingsView extends WatchUi.View {
             gModel.showToast("Reconnecting");
             gLink.reconnect();
         } else if (_sel == 5) {
+            gLink.switchNode();
+            var nv = new NodeListView(false);
+            WatchUi.pushView(nv, new NodeListDelegate(nv), WatchUi.SLIDE_LEFT);
+        } else if (_sel == 6) {
             gModel.clearMessages();
             gModel.showToast("Messages cleared");
-        } else if (_sel == 6) {
+        } else if (_sel == 7) {
             if (!gModel.connected) {
                 gModel.showToast("Not connected");
             } else if (gModel.meckExt) {
@@ -113,7 +121,7 @@ class SettingsView extends WatchUi.View {
                 var rv = new RegionView();
                 WatchUi.pushView(rv, new RegionDelegate(rv), WatchUi.SLIDE_LEFT);
             }
-        } else if (_sel == 7) {
+        } else if (_sel == 8) {
             // Editable without a connection; only a connected Meck node uses its own.
             if (gModel.connected && gModel.meckExt) {
                 gModel.showToast("Meck node holds canned");
@@ -121,6 +129,9 @@ class SettingsView extends WatchUi.View {
                 var ev = new CannedEditView();
                 WatchUi.pushView(ev, new CannedEditDelegate(ev), WatchUi.SLIDE_LEFT);
             }
+        } else if (_sel == 9 && gModel.isP4()) {
+            var rv = new RadioView();
+            WatchUi.pushView(rv, new RadioDelegate(rv), WatchUi.SLIDE_LEFT);
         }
     }
 }

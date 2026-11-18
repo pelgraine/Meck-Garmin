@@ -15,6 +15,8 @@ module Proto {
     const CMD_SEND_CHANNEL_TXT_MSG = 3;
     const CMD_ADD_UPDATE_CONTACT   = 9;
     const CMD_SYNC_NEXT_MESSAGE    = 10;
+    const CMD_SET_RADIO_PARAMS     = 11;
+    const CMD_SET_RADIO_TX_POWER   = 12;
     const CMD_GET_BATT_AND_STORAGE = 20;
     const CMD_DEVICE_QUERY         = 22;
     const CMD_SEND_LOGIN           = 26;
@@ -88,6 +90,9 @@ class NodeLink extends Ble.BleDelegate {
     var _awaitEnc = false;    // write refused for security; retry after encryption
     var _syncPending = false; // node signalled messages waiting
     var _scopeReq = {};       // scope idx -> true once requested
+    var _radioPending = null; // preset being applied (Settings > Radio)
+    var _target = null;       // ScanResult of the node picked from the list
+    var _found = [];          // ScanResults of nodes seen while picking
 
     function initialize() {
         BleDelegate.initialize();
@@ -134,28 +139,80 @@ class NodeLink extends Ble.BleDelegate {
     }
 
     function startScan() {
-        gModel.setStatus("Scanning...");
+        gModel.setStatus((_target == null) ? "Pick a node" : "Scanning...");
         Ble.setScanState(Ble.SCAN_STATE_SCANNING);
     }
 
+    // With no node picked yet, matching nodes go into the list (one entry
+    // per device, latest advert kept). Once one is picked, only that node is
+    // connected to, including after a dropped link or Reconnect.
     function onScanResults(scanResults) {
         if (_device != null) {
             return;
         }
         for (var r = scanResults.next(); r != null; r = scanResults.next()) {
             var sr = r as Ble.ScanResult;
-            if (matches(sr)) {
-                var nm = sr.getDeviceName();
-                gModel.setStatus("Found " + (nm == null ? "node" : nm));
-                Ble.setScanState(Ble.SCAN_STATE_OFF);
-                try {
-                    _device = Ble.pairDevice(sr);
-                } catch (ex) {
-                    gModel.setStatus("Connect failed");
+            if (!matches(sr)) {
+                continue;
+            }
+            if (_target != null) {
+                if (_target.isSameDevice(sr)) {
+                    connectTo(sr);
+                    return;
                 }
-                return;
+                continue;
+            }
+            var known = false;
+            for (var i = 0; i < _found.size(); i++) {
+                if (_found[i].isSameDevice(sr)) {
+                    _found[i] = sr;
+                    known = true;
+                    break;
+                }
+            }
+            if (!known) {
+                _found.add(sr);
+                WatchUi.requestUpdate();
             }
         }
+    }
+
+    function connectTo(sr) {
+        var nm = sr.getDeviceName();
+        gModel.setStatus("Found " + (nm == null ? "node" : nm));
+        Ble.setScanState(Ble.SCAN_STATE_OFF);
+        try {
+            _device = Ble.pairDevice(sr);
+        } catch (ex) {
+            gModel.setStatus("Connect failed");
+        }
+    }
+
+    // ---- node list (start-up and Settings > Switch node) ----
+
+    function foundNodes() {
+        return _found;
+    }
+
+    function pickNode(sr) {
+        _target = sr;
+        connectTo(sr);
+    }
+
+    // List's "Scan again": empty the list and restart the scan.
+    function rescanList() {
+        _found = [];
+        Ble.setScanState(Ble.SCAN_STATE_OFF);
+        startScan();
+        WatchUi.requestUpdate();
+    }
+
+    // Settings > Switch node: forget the picked node, drop the link and
+    // scan into the list again.
+    function switchNode() {
+        _target = null;
+        _found = [];
+        reconnect();
     }
 
     function matches(r) {
@@ -474,11 +531,21 @@ class NodeLink extends Ble.BleDelegate {
             if (f.size() >= 80) {
                 gModel.fwVersion = bytesToString(f, 60, 20);
             }
+            if (f.size() > 80) {
+                gModel.clientRepeat = (f[80] != 0);
+            }
         } else if (code == Proto.RESP_SELF_INFO) {
             // [5][type][tx_pwr][max_tx][pubkey:32][lat:4][lon:4][...][name from 58]
             if (f.size() >= 36) {
                 gModel.nodeKey = hexOf(f.slice(4, 10));
                 gModel.loadRegions();
+            }
+            // [48 freq kHz:4][52 bw Hz:4][56 sf][57 cr]
+            if (f.size() >= 58) {
+                gModel.radioFreqKhz = u32le(f, 48);
+                gModel.radioBwHz = u32le(f, 52);
+                gModel.radioSf = f[56];
+                gModel.radioCr = f[57];
             }
             if (f.size() > 58) {
                 gModel.nodeName = bytesToString(f, 58, f.size() - 58);
@@ -540,6 +607,17 @@ class NodeLink extends Ble.BleDelegate {
                 gModel.nodeMv = f.decodeNumber(Lang.NUMBER_FORMAT_UINT16, {:offset => 1, :endianness => Lang.ENDIAN_LITTLE});
             }
         } else if (code == Proto.RESP_OK) {
+            if (cmd == Proto.CMD_SET_RADIO_PARAMS && _radioPending != null) {
+                var p = _radioPending;
+                gModel.radioFreqKhz = p.get(:freq);
+                gModel.radioBwHz = p.get(:bw);
+                gModel.radioSf = p.get(:sf);
+                gModel.radioCr = p.get(:cr);
+                gModel.clientRepeat = p.get(:repeat);
+            } else if (cmd == Proto.CMD_SET_RADIO_TX_POWER && _radioPending != null) {
+                gModel.showToast("Radio set");
+                _radioPending = null;
+            }
             if (cmd == Proto.CMD_SEND_CHANNEL_TXT_MSG) {
                 gModel.showToast("Sent!");
                 if (!gModel.meckExt) { WatchUi.requestUpdate(); pump(); return; }
@@ -572,6 +650,15 @@ class NodeLink extends Ble.BleDelegate {
                 _q = nq;
             } else if (cmd == Proto.CMD_SEND_TXT_MSG) {
                 gModel.cliFailed();
+            } else if (cmd == Proto.CMD_SET_RADIO_PARAMS || cmd == Proto.CMD_SET_RADIO_TX_POWER) {
+                // Refused: drop a queued power command so nothing half-applies.
+                var nq = [];
+                for (var i = 0; i < _q.size(); i++) {
+                    if (_q[i][0] != Proto.CMD_SET_RADIO_TX_POWER) { nq.add(_q[i]); }
+                }
+                _q = nq;
+                _radioPending = null;
+                gModel.showToast("Node refused radio");
             }
         }
         WatchUi.requestUpdate();
@@ -759,6 +846,23 @@ class NodeLink extends Ble.BleDelegate {
         h.update(stringToBytes(tagged));
         var d = h.digest();
         return d.slice(0, 16);
+    }
+
+    // Settings > Radio: switch the node to preset p, as the P4's own preset
+    // picker does (radio settings, then that preset's TX power). Client
+    // repeat stays as it is where the frequency allows it (2400-2500 MHz
+    // here), otherwise it is turned off.
+    function setRadio(p) {
+        var f = p.get(:freq);
+        var repeat = gModel.clientRepeat && f >= 2400000 && f <= 2500000;
+        p.put(:repeat, repeat);
+        _radioPending = p;
+        var frame = [Proto.CMD_SET_RADIO_PARAMS, 0, 0, 0, 0, 0, 0, 0, 0,
+                     p.get(:sf), p.get(:cr), repeat ? 1 : 0]b;
+        frame.encodeNumber(f, Lang.NUMBER_FORMAT_UINT32, {:offset => 1, :endianness => Lang.ENDIAN_LITTLE});
+        frame.encodeNumber(p.get(:bw), Lang.NUMBER_FORMAT_UINT32, {:offset => 5, :endianness => Lang.ENDIAN_LITTLE});
+        _q.add(frame);
+        enqueue([Proto.CMD_SET_RADIO_TX_POWER, p.get(:tx)]b);
     }
 
     // Drop the link and start again (Settings > Reconnect).

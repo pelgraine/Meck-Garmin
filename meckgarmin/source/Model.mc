@@ -17,6 +17,11 @@ class Model {
     var regions = {};            // channel name -> send region ("*" = all regions, else a region name)
     var nodeMv = 0;              // node battery, millivolts (0 = unknown)
     var manufacturer = "";
+    var radioFreqKhz = 0;        // node radio from self info (0 = unknown)
+    var radioBwHz = 0;
+    var radioSf = 0;
+    var radioCr = 0;
+    var clientRepeat = false;    // from device info
     var maxChannels = 0;
     var bph = 1;                 // bytes per hop in hop lists (from the node)
     var channels = [];           // [{:idx, :name}] in node order, unused slots skipped
@@ -225,6 +230,28 @@ class Model {
             if (s[i].length() > 0) { out.add(s[i]); }
         }
         canned = out;
+    }
+
+    // ---- radio presets (Meck-P4 only) ----
+    // Same values as the P4's own preset list (MeckUI.cpp RADIO_PRESETS).
+    function radioPresets() {
+        return [
+            {:name => "Australia (Mid)", :freq => 915075,  :bw => 125000, :sf => 9,  :cr => 5, :tx => 22},
+            {:name => "2.4GHz Sydney",   :freq => 2483000, :bw => 406250, :sf => 11, :cr => 5, :tx => 12}
+        ];
+    }
+
+    function isP4() {
+        return connected && "T-Display P4".equals(manufacturer);
+    }
+
+    // True when the node's current radio matches preset p (a little slack
+    // for the node's float-to-integer rounding).
+    function radioIs(p) {
+        var df = radioFreqKhz - p.get(:freq);
+        var db = radioBwHz - p.get(:bw);
+        return df >= -1 && df <= 1 && db >= -1000 && db <= 1000
+            && radioSf == p.get(:sf) && radioCr == p.get(:cr);
     }
 
     function unreadFor(idx) {
